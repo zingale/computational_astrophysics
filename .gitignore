@@ -1,0 +1,7 @@
+_build
+*~
+\#*
+
+.ipynb_checkpoints
+
+__pycache__

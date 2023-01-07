@@ -1,0 +1,22 @@
+Nuclear Reactions
+=================
+
+Reaction Rates
+--------------
+
+Nuclear experiments provide us with reaction rates of the form (for a 2-body reaction):
+
+$$r = \frac{n_A n_B}{1 + \delta_{AB}} \langle \sigma v \rangle$$
+
+where $n_A$ is the number density of species A and $n_B$ is the number
+density of species B.  The denominator ensures that we don't double
+count for a species reacting with itself.  The term $\langle \sigma v
+\rangle$ is the average of the cross section and velocity over the
+distribution of velocities in the frame of the reaction.  This is what is
+measured by experiements.
+
+Here the rate, $r$, has units of reactions / time / volume.
+
+
+Reaction databases (like ReacLib) often provide $N_A \langle \sigma v
+\rangle$, where $N_A$ is Avogadro's number.
