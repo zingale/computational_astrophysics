@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: AST 390: Computational Astrophysics
+title: "AST 390: Computational Astrophysics"
 author: <a href="https://zingale.github.io">Michael Zingale</a>
 logo: rt_small.png
 copyright: "2021"
