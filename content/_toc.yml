@@ -29,24 +29,17 @@ parts:
       sections:
       - file: basics/linear-algebra/la-basics
 
-  - caption: Advection and Hydrodynamics
+  - caption: Advection
     chapters:
-    - file: advection_euler/advection/advection
+    - file: advection/advection/advection
       sections:
-      - file: advection_euler/advection/advection-partI
-      - file: advection_euler/advection/advection-partII
-      - file: advection_euler/advection/advection-partIII
+      - file: advection/advection/advection-partI
+      - file: advection/advection/advection-partII
+      - file: advection/advection/advection-partIII
     - file: advection_euler/burgers/burgers
       sections:
-      - file: advection_euler/burgers/burgers-methods
-      - file: advection_euler/burgers/exercises
-    - file: advection_euler/euler/euler
-      sections:
-      - file: advection_euler/euler/euler-eigen
-      - file: advection_euler/euler/euler-riemann
-      - file: advection_euler/euler/euler-riemann-sampling
-      - file: advection_euler/euler/euler-solver
-    - file: advection_euler/projects/projects.md
+      - file: advection/burgers/burgers-methods
+      - file: advection/burgers/exercises
 
   - caption: Elliptic Problems and Multigrid
     chapters:
