@@ -5,6 +5,7 @@ parts:
     chapters:
     - file: basics/floating-point/floating-point
       sections:
+      - file: basics/floating-point/floating-point-details
       - file: basics/floating-point/numerical_error
     - file: basics/diff-int/diff-int
       sections:
