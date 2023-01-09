@@ -1,5 +1,5 @@
-About Python
-============
+Python Basics
+=============
 
 Python differs from C++ or Fortran in several ways:
 
