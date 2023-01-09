@@ -20,7 +20,7 @@ parts:
     - file: python/numpy-basics.ipynb
     - file: python/matplotlib-basics.ipynb
 
-  - caption: Basics
+  - caption: Core Numerical Methods
     chapters:
     - file: basics/floating-point/floating-point
       sections:
@@ -33,6 +33,9 @@ parts:
       - file: basics/diff-int/exercises
       - file: basics/diff-int/going-further
     - file: basics/roots/root-finding
+    - file: basics/linear-algebra/la-overview
+      sections:
+      - file: basics/linear-algebra/la-basics
 
   - caption: Ordinary Differential Equations
     chapters:
@@ -43,13 +46,7 @@ parts:
       - file: ODEs/boundary-value-problems
       - file: ODEs/exercises
 
-  - caption: Linear Algebra
-    chapters:
-    - file: basics/linear-algebra/la-overview
-      sections:
-      - file: basics/linear-algebra/la-basics
-
-  - caption: Advection
+  - caption: Partial Differential Equations
     chapters:
     - file: advection/advection/advection
       sections:
@@ -60,12 +57,9 @@ parts:
       sections:
       - file: advection/burgers/burgers-methods
       - file: advection/burgers/exercises
-
-  - caption: Elliptic Problems and Multigrid
-    chapters:
     - file: elliptic_multigrid/intro/elliptic-problems
-    - file: elliptic_multigrid/relaxation/relaxation
       sections:
+      - file: elliptic_multigrid/relaxation/relaxation
       - file: elliptic_multigrid/relaxation/elliptic-relaxation
       - file: elliptic_multigrid/relaxation/elliptic-residual
       - file: elliptic_multigrid/relaxation/elliptic-modes
@@ -75,20 +69,16 @@ parts:
       - file: elliptic_multigrid/multigrid/multigrid-two-grid
       - file: elliptic_multigrid/multigrid/multigrid-vcycles
 
-  - caption: Stars
+  - caption: Stiff ODEs
     chapters:
-    - file: stars/stars
-    - file: stars/lane-emden
-
-  - caption: Integrating Stiff Reaction Networks
-    chapters:
-    - file: reaction_networks/reactions
     - file: reaction_networks/stiff-ODEs
       sections:
       - file: reaction_networks/ODEs-implicit
       - file: reaction_networks/ODEs-implicit-systems
       - file: reaction_networks/ODEs-implicit-nonlinear-systems
-    - file: reaction_networks/integration-example
+    - file: reaction_networks/reactions
+      sections:
+      - file: reaction_networks/integration-example
 
   - caption: Machine Learning
     chapters:
