@@ -70,4 +70,9 @@ parts:
       - file: reaction_networks/ODEs-implicit-nonlinear-systems
     - file: reaction_networks/integration-example
 
+  - caption: Machine Learning
+    chapters:
+    - file: machine-learning/machine-learning
+      sections:
+      - file: machine-learning/machine-learning-basics.ipynb
 
