@@ -12,6 +12,7 @@ parts:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
       - file: basics/diff-int/exercises
+      - file: basics/diff-int/going-further
     - file: basics/roots/root-finding
 
   - caption: Ordinary Differential Equations

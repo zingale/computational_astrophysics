@@ -24,7 +24,7 @@ jobs:
 
     - name: Build book HTML
       run: |
-        jupyter-book build ./content
+        jupyter-book build --all ./content
 
     - name: Push _build/html to gh-pages
       run: |
