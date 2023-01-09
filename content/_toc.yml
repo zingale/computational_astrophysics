@@ -36,7 +36,7 @@ parts:
       - file: advection/advection/advection-partI
       - file: advection/advection/advection-partII
       - file: advection/advection/advection-partIII
-    - file: advection_euler/burgers/burgers
+    - file: advection/burgers/burgers
       sections:
       - file: advection/burgers/burgers-methods
       - file: advection/burgers/exercises

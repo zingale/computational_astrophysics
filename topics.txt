@@ -1,0 +1,45 @@
+* few body problem
+
+  * energy conservation
+  * sympletic integrators / Leap frog
+  * close encounters / softening
+
+* reaction networks
+
+  * stiff ODEs
+
+* stellar structure
+
+   * ODEs
+   * shooting
+
+* self-gravity
+
+  * multipole method
+
+* hydro
+
+  * subgrid modeling with Burgers equation
+
+* bayesian
+
+  see https://bayesiancomputationbook.com/welcome.html
+
+* machine learning
+
+  sample dataset: 
+
+     * galaxies: https://zenodo.org/record/4288837#.YYTamy2l1Z0
+
+     * GZ2, GZ-DECaLs (Galaxy Zoo):
+
+       * https://zenodo.org/record/3565489
+
+       * https://zenodo.org/record/4573248
+
+     See also: https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research#Astronomy
+
+  hello universe:
+
+    https://archive.stsci.edu/hello-universe
+
