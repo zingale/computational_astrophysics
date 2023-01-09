@@ -1,6 +1,10 @@
 format: jb-book
 root: intro
 parts:
+  - caption: Logistics and Overview
+    chapters:
+    - file: overview/intro
+
   - caption: Basics
     chapters:
     - file: basics/floating-point/floating-point
