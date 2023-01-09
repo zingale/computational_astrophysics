@@ -5,6 +5,17 @@ parts:
     chapters:
     - file: overview/intro
 
+  - caption: Tour of Python
+    chapters:
+    - file: python/jupyter
+    - file: python/python-datatypes.ipynb
+    - file: python/python-advanced-datatypes.ipynb
+    - file: python/python-control-flow.ipynb
+    - file: python/python-functions.ipynb
+    - file: python/python-classes.ipynb
+    - file: python/numpy-basics.ipynb
+    - file: python/matplotlib-basics.ipynb
+
   - caption: Basics
     chapters:
     - file: basics/floating-point/floating-point
