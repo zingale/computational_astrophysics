@@ -1,0 +1,97 @@
+format: jb-book
+root: intro
+parts:
+  - caption: Logistics and Overview
+    chapters:
+    - file: overview/intro
+
+  - caption: Tour of Python
+    chapters:
+    - file: python/jupyter
+    - file: python/python-basics
+      sections:
+      - file: python/python-datatypes.ipynb
+      - file: python/python-advanced-datatypes.ipynb
+      - file: python/python-control-flow.ipynb
+    - file: python/python-functions-classes
+      sections:
+      - file: python/python-functions.ipynb
+      - file: python/python-classes.ipynb
+    - file: python/numpy-basics.ipynb
+    - file: python/matplotlib-basics.ipynb
+
+  - caption: Core Numerical Methods
+    chapters:
+    - file: basics/floating-point/floating-point
+      sections:
+      - file: basics/floating-point/floating-point-details
+      - file: basics/floating-point/numerical_error
+    - file: basics/diff-int/diff-int
+      sections:
+      - file: basics/diff-int/differentiation
+      - file: basics/diff-int/integration
+      - file: basics/diff-int/exercises
+      - file: basics/diff-int/going-further
+    - file: basics/roots/root-finding
+    - file: basics/linear-algebra/la-overview
+      sections:
+      - file: basics/linear-algebra/la-basics
+
+  - caption: Ordinary Differential Equations
+    chapters:
+    - file: ODEs/ODEs
+      sections:
+      - file: ODEs/ODEs-partI
+      - file: ODEs/ODEs-partII
+    - file: ODEs/boundary-value-problems
+    - file: ODEs/exercises
+    - file: stars/lane-emden
+
+  - caption: Partial Differential Equations
+    chapters:
+    - file: advection/advection/advection
+      sections:
+      - file: advection/advection/advection-partI
+      - file: advection/advection/advection-partII
+      - file: advection/advection/advection-partIII
+    - file: advection/burgers/burgers
+      sections:
+      - file: advection/burgers/burgers-methods
+      - file: advection/burgers/exercises
+    - file: elliptic_multigrid/intro/elliptic-problems
+      sections:
+      - file: elliptic_multigrid/relaxation/relaxation
+      - file: elliptic_multigrid/relaxation/elliptic-relaxation
+      - file: elliptic_multigrid/relaxation/elliptic-residual
+      - file: elliptic_multigrid/relaxation/elliptic-modes
+    - file: elliptic_multigrid/multigrid/multigrid
+      sections:
+      - file: elliptic_multigrid/multigrid/multigrid-restrict-prolong
+      - file: elliptic_multigrid/multigrid/multigrid-two-grid
+      - file: elliptic_multigrid/multigrid/multigrid-vcycles
+
+  - caption: Hydrodynamics
+    chapters:
+    - file: euler/euler
+    - file: euler/euler-eigen
+    - file: euler/euler-riemann
+    - file: euler/euler-riemann-sampling
+    - file: euler/euler-solver
+
+  - caption: Stiff ODEs
+    chapters:
+    - file: reaction_networks/stiff-ODEs
+      sections:
+      - file: reaction_networks/ODEs-implicit
+      - file: reaction_networks/ODEs-implicit-systems
+      - file: reaction_networks/ODEs-implicit-nonlinear-systems
+    - file: reaction_networks/reactions
+      sections:
+      - file: reaction_networks/integration-example
+
+  - caption: Machine Learning
+    chapters:
+    - file: machine-learning/machine-learning
+      sections:
+      - file: machine-learning/machine-learning-basics.ipynb
+
