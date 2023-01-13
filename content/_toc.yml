@@ -30,7 +30,7 @@ parts:
       sections:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
-      - file: basics/diff-int/exercises
+      - file: basics/diff-int/integration-applications
       - file: basics/diff-int/going-further
     - file: basics/roots/root-finding
     - file: basics/linear-algebra/la-overview
