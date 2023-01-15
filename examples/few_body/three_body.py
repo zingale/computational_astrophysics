@@ -73,16 +73,20 @@ class ThreeBody(object):
 
         for n in range(self.npts()):
 
-            for i in range(self.N):
-                E[n] += 0.5 * self.M[i] * (self.stars[i].u[n]**2 +
-                                           self.stars[i].v[n]**2)
+            # kinetic energy
 
-                for j in range(self.N):
-                    if i == j:
-                        continue
-                    # the factor of 1/2 here avoids double counting for (i, j) and (j, i)
-                    E[n] -= 0.5 * self.G * self.M[i] * self.M[j] / np.sqrt((self.stars[i].x[n] - self.stars[j].x[n])**2 +
-                                                                     (self.stars[i].y[n] - self.stars[j].y[n])**2)
+            KE = [0.5 * self.M[i] * (self.stars[i].u[n]**2 +
+                                     self.stars[i].v[n]**2)
+                  for i in range(self.N)]
+
+            # potential energy -- we need all pairs, but order doesn't matter
+
+            PE = [-self.G * self.M[i] * self.M[j] /
+                  np.sqrt((self.stars[i].x[n] - self.stars[j].x[n])**2 +
+                          (self.stars[i].y[n] - self.stars[j].y[n])**2)
+                  for i in range(self.N) for j in range(self.N) if i > j]
+
+            E[n] = sum(KE) + sum(PE)
 
         return E
 
