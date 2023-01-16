@@ -93,12 +93,12 @@ public:
         // loop over time and compute the center of mass of the state
         // and store it
 
-        for (int n = 0; n < this->npts(); ++n) {
+        for (auto& state : stars) {
             std::vector<double> scm(2, 0.0);
 
             for (int istar = 0; istar < N; ++istar) {
-                scm[0] += masses[istar] * stars[n][istar].x;
-                scm[1] += masses[istar] * stars[n][istar].y;
+                scm[0] += masses[istar] * state[istar].x;
+                scm[1] += masses[istar] * state[istar].y;
             }
             scm[0] /= Mtot;
             scm[1] /= Mtot;
@@ -114,15 +114,15 @@ public:
 
         std::vector<double> E;
 
-        for (int n = 0; n < this->npts(); ++n) {
+        for (auto& state: stars) {
 
             // kinetic energy
 
             double KE = 0.0;
             for (int istar = 0; istar < N; ++istar) {
                 KE += 0.5 * masses[istar] *
-                    (std::pow(stars[n][istar].u, 2) +
-                     std::pow(stars[n][istar].v, 2));
+                    (std::pow(state[istar].u, 2) +
+                     std::pow(state[istar].v, 2));
             }
 
             // potential energy -- we need all pairs, but order doesn't matter
@@ -131,8 +131,8 @@ public:
             for (int istar = 0; istar < N; ++istar) {
                 for (int jstar = 0; jstar < istar; ++jstar) {
                     PE += -G * masses[istar] * masses[jstar] /
-                        std::sqrt(std::pow(stars[n][istar].x - stars[n][jstar].x, 2) +
-                                  std::pow(stars[n][istar].y - stars[n][jstar].y, 2));
+                        std::sqrt(std::pow(state[istar].x - state[jstar].x, 2) +
+                                  std::pow(state[istar].y - state[jstar].y, 2));
                 }
             }
 
