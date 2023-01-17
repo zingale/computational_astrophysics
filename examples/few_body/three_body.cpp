@@ -4,6 +4,7 @@
 #include <cmath>
 #include <numeric>
 #include <limits>
+#include <fstream>
 
 const double G = 1.0;
 const int N = 3;
@@ -17,12 +18,12 @@ struct State {
 };
 
 std::ostream& operator<< (std::ostream& os, const State& s) {
-    os << std::setprecision(4);
+    os.precision(6);
 
-    os << std::setw(12) << s.x
-       << std::setw(12) << s.y
-       << std::setw(12) << s.u
-       << std::setw(12) << s.v;
+    os << std::setw(14) << s.x
+       << std::setw(14) << s.y
+       << std::setw(14) << s.u
+       << std::setw(14) << s.v;
 
     return os;
 }
@@ -78,68 +79,62 @@ public:
         return stars.size();
     }
 
+    double get_time(const int n) {
+        // return the physical time for step n
+        return time[n];
+    }
+
     std::vector<State>& get_state(const int n) {
         // return a referece to the state at time index n
         return stars[n];
     }
 
-    std::vector<std::vector<double>> center_of_mass() {
-        // return the center of mass of the system at all time points
+    std::pair<double, double> center_of_mass(const int n) {
+        // return the center of mass of the system at time n
 
         auto Mtot = std::accumulate(masses.cbegin(), masses.cend(), 0.0);
 
-        std::vector<std::vector<double>> cm;
+        auto& state = stars[n];
 
-        // loop over time and compute the center of mass of the state
-        // and store it
+        double xcm{};
+        double ycm{};
 
-        for (auto& state : stars) {
-            std::vector<double> scm(2, 0.0);
-
-            for (int istar = 0; istar < N; ++istar) {
-                scm[0] += masses[istar] * state[istar].x;
-                scm[1] += masses[istar] * state[istar].y;
-            }
-            scm[0] /= Mtot;
-            scm[1] /= Mtot;
-
-            cm.push_back(scm);
+        for (int istar = 0; istar < N; ++istar) {
+            xcm += masses[istar] * state[istar].x;
+            ycm += masses[istar] * state[istar].y;
         }
+        xcm /= Mtot;
+        ycm /= Mtot;
 
-        return cm;
+        return {xcm, ycm};
     }
 
-    std::vector<double> energy() {
-        // return the energy of the system vs time
+    double energy(const int n) {
+        // return the energy of the system for timestep n
 
-        std::vector<double> E;
+        auto& state = stars[n];
 
-        for (auto& state: stars) {
+        // kinetic energy
 
-            // kinetic energy
-
-            double KE = 0.0;
-            for (int istar = 0; istar < N; ++istar) {
-                KE += 0.5 * masses[istar] *
-                    (std::pow(state[istar].u, 2) +
-                     std::pow(state[istar].v, 2));
-            }
-
-            // potential energy -- we need all pairs, but order doesn't matter
-
-            double PE = 0.0;
-            for (int istar = 0; istar < N; ++istar) {
-                for (int jstar = 0; jstar < istar; ++jstar) {
-                    PE += -G * masses[istar] * masses[jstar] /
-                        std::sqrt(std::pow(state[istar].x - state[jstar].x, 2) +
-                                  std::pow(state[istar].y - state[jstar].y, 2));
-                }
-            }
-
-            E.push_back(KE + PE);
+        double KE = 0.0;
+        for (int istar = 0; istar < N; ++istar) {
+            KE += 0.5 * masses[istar] *
+                (std::pow(state[istar].u, 2) +
+                 std::pow(state[istar].v, 2));
         }
 
-        return E;
+        // potential energy -- we need all pairs, but order doesn't matter
+
+        double PE = 0.0;
+        for (int istar = 0; istar < N; ++istar) {
+            for (int jstar = 0; jstar < istar; ++jstar) {
+                PE += -G * masses[istar] * masses[jstar] /
+                    std::sqrt(std::pow(state[istar].x - state[jstar].x, 2) +
+                              std::pow(state[istar].y - state[jstar].y, 2));
+            }
+        }
+
+        return KE + PE;
     }
 
     std::vector<State> rhs(std::vector<State>& star_states) {
@@ -350,13 +345,32 @@ int main() {
     ThreeBody tb(M0, pos0, M1, pos1, M2, pos2);
     tb.integrate(0.05, 1.e-8, 2.0);
 
+    std::ofstream of("three_body.dat");
+
     for (int n = 0; n < tb.npts(); ++n) {
         auto& state = tb.get_state(n);
 
-        for (int istar = 0; istar < N; ++istar) {
-            std::cout << state[istar];
+        of << std::setw(14) << tb.get_time(n);
+
+        // first the positions and velocities
+
+        for (auto& star : state) {
+            of << star;
         }
-        std::cout << std::endl;
+
+        // now the energy
+
+        of.precision(10);
+
+        of << std::setw(18) << tb.energy(n);
+
+        // and the center of mass
+
+        auto [xcm, ycm] = tb.center_of_mass(n);
+
+        of << std::setw(18) << xcm << std::setw(18) << ycm;
+
+        of << std::endl;
     }
 
 }
