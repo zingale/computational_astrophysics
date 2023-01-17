@@ -43,8 +43,8 @@ parts:
       sections:
       - file: ODEs/ODEs-partI
       - file: ODEs/ODEs-partII
-      - file: ODEs/boundary-value-problems
-      - file: ODEs/exercises
+    - file: ODEs/boundary-value-problems
+    - file: ODEs/exercises
 
   - caption: Partial Differential Equations
     chapters:
