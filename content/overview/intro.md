@@ -35,6 +35,11 @@ demonstrations primarily in python and I will provide C++
 implementations of all of the main algorithms we discuss in class.
 ```
 
+```{warning}
+I will use C++17.  For the GNU compilers, you can specify this
+via `--std=c++17`.
+```
+
 The second goal of this class is to get everyone more comfortable
 with programming, so you should ask questions about programming as
 they arise during the semester.
