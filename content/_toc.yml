@@ -43,6 +43,8 @@ parts:
       sections:
       - file: ODEs/ODEs-partI
       - file: ODEs/ODEs-partII
+    - file: ODEs/adaptive_stepping
+    - file: ODEs/applications
     - file: ODEs/boundary-value-problems
     - file: ODEs/exercises
 
