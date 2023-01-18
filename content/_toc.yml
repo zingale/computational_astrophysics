@@ -48,6 +48,10 @@ parts:
     - file: ODEs/boundary-value-problems
     - file: ODEs/exercises
 
+  - caption: Fitting and Interpolation of Data
+    chapters:
+    - file: fitting/least_squares
+
   - caption: Partial Differential Equations
     chapters:
     - file: advection/advection/advection
