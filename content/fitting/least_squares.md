@@ -31,4 +31,27 @@ $\sigma_i$ &mdash; this ensures that points that we are least certain
 of has less influence in the fit.  Minimizing $\chi^2$ with respect to
 the fit parameters, ${a_j}$ is called _least squares minimization_.
 
+The minimization procedure involves setting the derivatives of $\chi^2$ with respect to each of the ${a_j}$
+to zero and solving the resulting system.
 
+For _linear least squares_, all of the ${a_j}$ enter into $Y(x; {a_j})$ linearly, e.g., as:
+
+$$Y(x; {a_j}) = a_1 + a_2 x + a_3 x^2$$
+
+And the minimization process results in a linear system that can be
+solved using the techniques we learned when we discussed linear
+algebra.
+
+```{note}
+Even though this polynomial $Y$ here is nonlinear in $x$, it is linear in $a_j$,
+which means that this is still a case of _linear least squares_.
+```
+
+The special case of fitting a line:
+
+$$Y(x; {a_j}) = a_1 + a_2 x$$
+
+is called _linear regression_.
+
+For _nonlinear least squares_, the parameters can enter in a nonlinear
+fashion, and the solution methodology is considerably more complex.
