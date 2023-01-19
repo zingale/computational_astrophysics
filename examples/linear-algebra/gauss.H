@@ -7,6 +7,7 @@
 #include <iostream>
 #include <iomanip>
 
+inline
 void print_Ab(const Array& A, const std::vector<double>& b) {
 
     // printout the matrix A and vector b in a pretty fashion.  We don't use the
@@ -46,6 +47,7 @@ void print_Ab(const Array& A, const std::vector<double>& b) {
     std::cout << std::endl;
 }
 
+inline
 std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
                                const bool quiet=false) {
 

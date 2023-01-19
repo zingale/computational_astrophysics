@@ -4,6 +4,7 @@
 #include <vector>
 #include <array.H>
 
+inline
 std::vector<double> matmul(const Array& A, const std::vector<double>& x) {
 
     assert (A.ncols() == static_cast<double>(x.size()));
