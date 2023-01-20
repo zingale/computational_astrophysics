@@ -1,8 +1,15 @@
 Going Further
 =============
 
-Spare Matrices
+Determinant
+-----------
+
+
+Matrix Inverse
 --------------
+
+Sparse Matrices
+---------------
 
 
 
