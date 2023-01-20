@@ -36,6 +36,7 @@ parts:
     - file: basics/linear-algebra/la-overview
       sections:
       - file: basics/linear-algebra/la-basics
+      - file: basics/linear-algebra/linear-system-example
 
   - caption: Ordinary Differential Equations
     chapters:
