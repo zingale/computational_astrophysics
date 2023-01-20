@@ -38,6 +38,7 @@ parts:
       - file: basics/linear-algebra/la-basics
       - file: basics/linear-algebra/linear-system-example
       - file: basics/linear-algebra/gaussian_elimination
+      - file: basics/linear-algebra/gaussian_elimination_python
       - file: basics/linear-algebra/la-cxx
       - file: basics/linear-algebra/going-further
 
