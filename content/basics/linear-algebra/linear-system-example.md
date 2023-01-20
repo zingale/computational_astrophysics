@@ -154,7 +154,7 @@ so, we can rewrite the system approximating the roundoff as:
 \end{alignat*}
 
 But now notice that the last equation is just $-2\times$ the second
-equation &\mdash; our system has become _singular_, and no longer has
+equation &mdash; our system has become _singular_, and no longer has
 a solution!
 
 The problem arose because we started out the Gaussian elimination with
@@ -166,3 +166,9 @@ pivoting](https://en.wikipedia.org/wiki/Pivot_element#Partial_and_complete_pivot
 In terms of matrix form, partial pivoting means swapping rows of the
 matrix such that the element in the column we are eliminating from the
 rows below has the largest absolute magnitude.
+
+A further refinement on this is [scaled
+pivoting](https://en.wikipedia.org/wiki/Pivot_element#Scaled_pivoting)
+which is when we first scale each row by its largest element, and then
+we consider which row to pivot with.
+

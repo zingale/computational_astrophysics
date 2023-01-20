@@ -37,6 +37,7 @@ parts:
       sections:
       - file: basics/linear-algebra/la-basics
       - file: basics/linear-algebra/linear-system-example
+      - file: basics/linear-algebra/gaussian_elimination
       - file: basics/linear-algebra/la-cxx
 
   - caption: Ordinary Differential Equations
