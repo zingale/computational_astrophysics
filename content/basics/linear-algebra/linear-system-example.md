@@ -118,7 +118,51 @@ Pivoting
 --------
 
 The above case worked well because all of the matrix elements were
-roughly the same magnitude.  Consider now the case where one of the
-matrix elements is small.
+roughly the same magnitude.  Consider the same system, with the first
+term in the first equation multiplied by a small number $\epsilon$:
 
+\begin{alignat*}{4}
+ \epsilon x &+ y    &+ z  &= 6 \\
+-x &+ 2y   &     &= 3 \\
+2x &+      &+ z  &= 5
+\end{alignat*}
 
+We can do the same procedure as before &mdash; use the first equation to
+eliminate $x$ in the other two equations.  We start by rewriting the first
+equation as:
+
+$$x + \frac{1}{\epsilon}y + \frac{1}{\epsilon}z + \frac{6}{\epsilon}$$
+
+then adding or subtracting this from the other two, our system becomes:
+
+\begin{alignat*}{4}
+ \epsilon x &+ y                             &+ z                            &= 6 \\
+            &+ (2 + \tfrac{1}{\epsilon} )y   &+  \frac{1}{\epsilon} z        &= 3 + \tfrac{6}{\epsilon} \\
+            &-\tfrac{2}{\epsilon}y           &+ (1 - \tfrac{2}{\epsilon}) z  &= 5 - \tfrac{12}{\epsilon}
+\end{alignat*}
+
+Now, as $\epsilon \rightarrow 0$, roundoff error means that
+
+$$\alpha + \frac{\beta}{\epsilon} \approx \frac{\beta}{\epsilon}$$
+
+so, we can rewrite the system approximating the roundoff as:
+
+\begin{alignat*}{4}
+ \epsilon x &+ y                             &+ z                            &= 6 \\
+            &+ \tfrac{1}{\epsilon} y   &+  \frac{1}{\epsilon} z        &= \tfrac{6}{\epsilon} \\
+            &-\tfrac{2}{\epsilon}y           &- \tfrac{2}{\epsilon} z  &= -\tfrac{12}{\epsilon}
+\end{alignat*}
+
+But now notice that the last equation is just $-2\times$ the second
+equation &\mdash; our system has become _singular_, and no longer has
+a solution!
+
+The problem arose because we started out the Gaussian elimination with
+an equation that had a very small coefficient on $x$.  But we could
+reorder the equations, swapping the first and second, and then we
+would no longer have this problem.  This is called [partial
+pivoting](https://en.wikipedia.org/wiki/Pivot_element#Partial_and_complete_pivoting).
+
+In terms of matrix form, partial pivoting means swapping rows of the
+matrix such that the element in the column we are eliminating from the
+rows below has the largest absolute magnitude.
