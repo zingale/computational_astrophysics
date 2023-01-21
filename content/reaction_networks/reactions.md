@@ -1,5 +1,5 @@
-Nuclear Reactions
-=================
+Application: Nuclear Reaction Networks
+======================================
 
 Reaction Rates
 --------------

@@ -88,11 +88,9 @@ parts:
 
   - caption: Stiff ODEs
     chapters:
-    - file: reaction_networks/stiff-ODEs
-      sections:
-      - file: reaction_networks/ODEs-implicit
-      - file: reaction_networks/ODEs-implicit-systems
-      - file: reaction_networks/ODEs-implicit-nonlinear-systems
+    - file: reaction_networks/ODEs-implicit
+    - file: reaction_networks/ODEs-implicit-systems
+    - file: reaction_networks/ODEs-implicit-nonlinear-systems
     - file: reaction_networks/reactions
       sections:
       - file: reaction_networks/integration-example
