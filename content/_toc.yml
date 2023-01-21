@@ -20,27 +20,33 @@ parts:
     - file: python/numpy-basics.ipynb
     - file: python/matplotlib-basics.ipynb
 
-  - caption: Core Numerical Methods
+  - caption: Floating Point and Errors
     chapters:
     - file: basics/floating-point/floating-point
-      sections:
-      - file: basics/floating-point/floating-point-details
-      - file: basics/floating-point/numerical_error
-    - file: basics/diff-int/diff-int
-      sections:
+    - file: basics/floating-point/floating-point-details
+    - file: basics/floating-point/numerical_error
+
+  - caption: Differentiation and Integration
+    chapters:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
       - file: basics/diff-int/integration-applications
       - file: basics/diff-int/going-further
-    - file: basics/roots/root-finding
+
+  - caption: Linear Algebra
+    chapters:
     - file: basics/linear-algebra/la-overview
+    - file: basics/linear-algebra/la-basics
+    - file: basics/linear-algebra/linear-system-example
       sections:
-      - file: basics/linear-algebra/la-basics
-      - file: basics/linear-algebra/linear-system-example
       - file: basics/linear-algebra/gaussian_elimination
       - file: basics/linear-algebra/gaussian_elimination_python
       - file: basics/linear-algebra/la-cxx
-      - file: basics/linear-algebra/going-further
+    - file: basics/linear-algebra/going-further
+
+  - caption: Root Finding and Optimization
+    chapters:
+    - file: basics/roots/root-finding
 
   - caption: Ordinary Differential Equations
     chapters:
