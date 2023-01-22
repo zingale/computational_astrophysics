@@ -1,0 +1,10 @@
+* Root finding:
+
+  Do Fermi integral and find mu given a number density
+
+* Interpolation:
+
+  EOS interpolation?
+
+  Show helmeos
+
