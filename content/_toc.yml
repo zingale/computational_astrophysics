@@ -4,6 +4,7 @@ parts:
   - caption: Logistics and Overview
     chapters:
     - file: overview/intro
+    - file: overview/using
 
   - caption: Tour of Python
     chapters:
@@ -22,7 +23,6 @@ parts:
 
   - caption: Floating Point and Errors
     chapters:
-    - file: basics/floating-point/floating-point
     - file: basics/floating-point/floating-point-details
     - file: basics/floating-point/numerical_error
 

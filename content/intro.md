@@ -10,6 +10,5 @@ Starting at the beginning, these notebooks introduce numerical methods
 for derivatives, integration, rooting finding, ODEs, and linear algebra
 and then move onto applications in astrophysics.
 
-By clicking on the "rocket ship" icon, you can launch the notebook
-in google colab or binder to run it in the cloud.
+
 

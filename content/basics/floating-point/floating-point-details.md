@@ -1,6 +1,11 @@
 Floating Point Format
 =====================
 
+In numerical calculations, we need to worry about several sources of
+error including floating point and truncation error.  Here we will describe
+these concepts.
+
+
 ```{note}
    Reading: [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://dl.acm.org/doi/10.1145/103162.103163)
 ```
