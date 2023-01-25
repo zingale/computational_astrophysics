@@ -1,148 +1,152 @@
-# this comes from Newman 8.16
-
 import numpy as np
 import matplotlib.pyplot as plt
 
-class Star(object):
-    """ a container to hold the star positions """
+class State:
+    """ a container to hold a single star's position """
 
-    def __init__(self):
-        self.t = []
-        self.x = []
-        self.y = []
-        self.u = []
-        self.v = []
+    def __init__(self, x, y, u, v):
+
+        self.x = x
+        self.y = y
+        self.u = u
+        self.v = v
+
+    def __add__(self, other):
+        return State(self.x + other.x, self.y + other.y,
+                     self.u + other.u, self.v + other.v)
+
+    def __sub__(self, other):
+        return State(self.x - other.x, self.y - other.y,
+                     self.u - other.u, self.v - other.v)
+
+    def __mul__(self, other):
+        return State(other * self.x, other * self.y,
+                     other * self.u, other * self.v)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __str__(self):
+        return f"{self.x:14} {self.y:14} {self.u:14} {self.v:14}"
 
 
 class ThreeBody(object):
     """ model the gravitational interaction of three stars """
 
-    def __init__(self, M1, pos1, M2, pos2, M3, pos3, SMALL=1.e-30):
+    def __init__(self, M0, pos0, M1, pos1, M2, pos2, SMALL=1.e-30):
         """ pos is a tuple of x-y coords of the stars """
 
         self.G = 1  # dimensionless units
 
-        self.pos0 = []
-        self.pos0 += list(pos1)
-        self.pos0 += list(pos2)
-        self.pos0 += list(pos3)
-        self.pos0 = np.asarray(self.pos0, dtype=np.float64)
+        star0 = State(pos0[0], pos0[1], 0.0, 0.0)
+        star1 = State(pos1[0], pos1[1], 0.0, 0.0)
+        star2 = State(pos2[0], pos2[1], 0.0, 0.0)
 
-        self.M = []
-        self.M.append(M1)
-        self.M.append(M2)
-        self.M.append(M3)
-        self.M = np.array(self.M, dtype=np.float64)
+        # this history will be stored in a list of tuples, such that
+        # stars[n][istar] is star istar and timestep n
 
-        self.stars = []
+        self.stars = [(star0, star1, star2)]
 
-        self.N = len(self.M)
+        self.M = np.array([M0, M1, M2])
 
         self.SMALL = SMALL
 
-    def time(self):
-        """return the time that the steps are defined at --- it is the same
-        for all stars"""
-        return self.stars[0].t
+        self.time = [0.0]
 
     def npts(self):
         """ return the number of integration points """
-        return len(self.stars[0].t)
+        return len(self.time)
 
-    def center_of_mass(self):
-        """return the center of mass of the system at all time points"""
+    def center_of_mass(self, n):
+        """return the center of mass of the system at time n"""
+
         Mtot = np.sum(self.M)
 
-        x_cm = np.zeros(self.npts(), dtype=np.float64)
-        y_cm = np.zeros(self.npts(), dtype=np.float64)
+        x_cm = 0.0
+        y_cm = 0.0
 
-        for n in range(self.N):
-            M = self.M[n]
-            x_cm[:] = x_cm[:] + M*np.asarray(self.stars[n].x[:])
-            y_cm[:] = y_cm[:] + M*np.asarray(self.stars[n].y[:])
+        for mass, star in zip(self.M, self.stars[n]):
+            x_cm += mass * star.x
+            y_cm += mass * star.y
 
         x_cm /= Mtot
         y_cm /= Mtot
 
         return x_cm, y_cm
 
-    def energy(self):
-        """return the energy of the system vs time"""
+    def energy(self, n):
+        """return the energy of the system at time n """
 
-        E = np.zeros(self.npts(), dtype=np.float64)
+        # kinetic energy
+        KE = [0.5 * self.M[i] * (self.stars[n][i].u**2 +
+                                 self.stars[n][i].v**2)
+              for i in range(len(self.M))]
 
-        for n in range(self.npts()):
+        # potential energy -- we need all pairs, but order doesn't matter
 
-            # kinetic energy
+        PE = [-self.G * self.M[i] * self.M[j] /
+              np.sqrt((self.stars[n][i].x - self.stars[n][j].x)**2 +
+                      (self.stars[n][i].y - self.stars[n][j].y)**2)
+              for i in range(len(self.M)) for j in range(len(self.M)) if i > j]
 
-            KE = [0.5 * self.M[i] * (self.stars[i].u[n]**2 +
-                                     self.stars[i].v[n]**2)
-                  for i in range(self.N)]
+        return KE + PE
 
-            # potential energy -- we need all pairs, but order doesn't matter
+    def rhs(self, star_states):
+        """ here, star states is (State, State, ...) """
 
-            PE = [-self.G * self.M[i] * self.M[j] /
-                  np.sqrt((self.stars[i].x[n] - self.stars[j].x[n])**2 +
-                          (self.stars[i].y[n] - self.stars[j].y[n])**2)
-                  for i in range(self.N) for j in range(self.N) if i > j]
+        ydots = []
 
-            E[n] = sum(KE) + sum(PE)
-
-        return E
-
-    def rhs(self, xvec, vvec):
-        """ x vec is (x1, y1, x2, y2, x3, y3) """
-
-        xdot = []
-        vdot = []
-        for n in range(len(self.M)):
-
-            xs = xvec[2*n]
-            ys = xvec[2*n+1]
-
-            us = vvec[2*n]
-            vs = vvec[2*n+1]
+        for istar in range(len(self.M)):
 
             # compute the space derivatives
-            xdot.append(us)
-            xdot.append(vs)
+
+            dxdt = star_states[istar].u
+            dydt = star_states[istar].v
 
             # compute the velocity derivatives
-            vxdot = 0.0
-            vydot = 0.0
+            dudt = 0.0
+            dvdt = 0.0
 
-            for m in range(len(self.M)):
-                if n == m:
+            for jstar in range(len(self.M)):
+                if istar == jstar:
                     continue
                 else:
-                    xo = xvec[2*m]
-                    yo = xvec[2*m+1]
+                    dx = star_states[jstar].x - star_states[istar].x
+                    dy = star_states[jstar].y - star_states[istar].y
 
-                    r = np.sqrt((xo - xs)**2 + (yo - ys)**2) + self.SMALL
-                    vxdot += self.G*self.M[m]*(xo - xs)/r**3
-                    vydot += self.G*self.M[m]*(yo - ys)/r**3
+                    r = np.sqrt(dx**2 + dy**2) + self.SMALL
 
-            vdot.append(vxdot)
-            vdot.append(vydot)
+                    dudt += self.G * self.M[jstar] * dx / r**3
+                    dvdt += self.G * self.M[jstar] * dy / r**3
 
-        return np.asarray(xdot), np.asarray(vdot)
+            ydots.append(State(dxdt, dydt, dudt, dvdt))
+
+        return ydots
 
 
-    def single_step(self, xvec, vvec, t, dt):
+    def single_step(self, state_old, dt):
         """ take a single RK-4 timestep from t to t+dt for the system
         ydot = rhs """
 
-        # get the RHS at several points
-        xdot1, vdot1 = self.rhs(xvec, vvec)
-        xdot2, vdot2 = self.rhs(xvec + 0.5*dt*xdot1, vvec + 0.5*dt*vdot1)
-        xdot3, vdot3 = self.rhs(xvec + 0.5*dt*xdot2, vvec + 0.5*dt*vdot2)
-        xdot4, vdot4 = self.rhs(xvec + dt*xdot3, vvec + dt*vdot3)
+        ydot1 = self.rhs(state_old)
 
-        # advance
-        xvec_new = xvec + (dt/6.0)*(xdot1 + 2.0*xdot2 + 2.0*xdot3 + xdot4)
-        vvec_new = vvec + (dt/6.0)*(vdot1 + 2.0*vdot2 + 2.0*vdot3 + vdot4)
+        state_temp = [state_old[istar] + 0.5 * dt * ydot1[istar]
+                      for istar in range(len(self.M))]
+        ydot2 = self.rhs(state_temp)
 
-        return xvec_new, vvec_new
+        state_temp = [state_old[istar] + 0.5 * dt * ydot2[istar]
+                      for istar in range(len(self.M))]
+        ydot3 = self.rhs(state_temp)
+
+        state_temp = [state_old[istar] + dt * ydot3[istar]
+                      for istar in range(len(self.M))]
+        ydot4 = self.rhs(state_temp)
+
+        state_new = [state_old[istar] + (dt/6.0) * (ydot1[istar] + 2.0*ydot2[istar] +
+                                                    2.0*ydot3[istar] + ydot4[istar])
+                     for istar in range(len(self.M))]
+
+        return state_new
 
     def integrate(self, dt, err, tmax):
         """ integrate the equations of motion using 4th order R-K
@@ -159,17 +163,6 @@ class ThreeBody(object):
 
         # initial conditions
         t = 0.0
-        xvec = np.asarray(self.pos0)
-        vvec = np.zeros_like(xvec)
-
-        for n in range(len(self.M)):
-            star = Star()
-            star.t.append(t)
-            star.x.append(xvec[2*n])
-            star.y.append(xvec[2*n+1])
-            star.u.append(vvec[2*n])
-            star.v.append(vvec[2*n+1])
-            self.stars.append(star)
 
         # start with the old timestep
         dt_new = dt
@@ -178,6 +171,8 @@ class ThreeBody(object):
 
         while t < tmax:
 
+            state_old = self.stars[-1]
+
             # adaptive stepping iteration loop -- keep trying to take
             # a step until we achieve our desired error
             rel_error = 1.e10
@@ -185,28 +180,33 @@ class ThreeBody(object):
             n_try = 0
             while rel_error > err:
                 dt = dt_new
-                if t+dt > tmax:
+                if t + dt > tmax:
                     dt = tmax-t
 
                 # take 2 half steps
-                xvec_tmp, vvec_tmp = self.single_step(xvec, vvec, t, 0.5*dt)
-                xvec_new, vvec_new = self.single_step(xvec_tmp, vvec_tmp, t+0.5*dt, 0.5*dt)
+                state_tmp = self.single_step(state_old, 0.5*dt)
+                state_new = self.single_step(state_tmp, 0.5*dt)
 
                 # now take just a single step to cover dt
-                xvec_single, vvec_single = self.single_step(xvec, vvec, t, dt)
+                state_single = self.single_step(state_old, dt)
 
-                # xvec_new, vvec_new should be more accurate than
-                # xvec_single, vvec_single, since it used smaller
-                # steps.
+                # state_new should be more accurate than state_single,
+                # since it used smaller steps.
 
                 # estimate the relative error now
-                ex = np.abs((xvec_new - xvec_single)/(xvec_single + self.SMALL))
-                ev = np.abs((vvec_new - vvec_single)/(vvec_single + self.SMALL))
-                rel_error = max(ex.max(), ev.max())
+                pos_err = max([max(abs((state_new[istar].x - state_single[istar].x) / state_single[istar].x),
+                                   abs((state_new[istar].y - state_single[istar].y) / state_single[istar].y))
+                               for istar in range(len(self.M))])
+
+                vel_err = max([max((abs(state_new[istar].u - state_single[istar].u) / state_single[istar].u),
+                                   (abs(state_new[istar].v - state_single[istar].v) / state_single[istar].v))
+                               for istar in range(len(self.M))])
+
+                rel_error = max(pos_err, vel_err)
 
                 # adaptive timestep algorithm from Garcia (Eqs. 3.30
                 # and 3.31)
-                dt_est = dt*abs(err/rel_error)**0.2
+                dt_est = dt * abs(err / rel_error)**0.2
                 dt_new = min(max(S1*dt_est, dt/S2), S2*dt)
 
                 n_try += 1
@@ -219,16 +219,8 @@ class ThreeBody(object):
             t += dt
 
             # set for the next step
-            xvec[:] = xvec_new[:]
-            vvec[:] = vvec_new[:]
-
-            # store
-            for n in range(len(self.M)):
-                self.stars[n].t.append(t)
-                self.stars[n].x.append(xvec[2*n])
-                self.stars[n].y.append(xvec[2*n+1])
-                self.stars[n].u.append(vvec[2*n])
-                self.stars[n].v.append(vvec[2*n+1])
+            self.time.append(t)
+            self.stars.append(state_new)
 
 
 if __name__ == "__main__":
@@ -241,17 +233,15 @@ if __name__ == "__main__":
 
     print(f"number of steps: {tb.npts()}")
 
-    xmin = min([min(q.x) for q in tb.stars])
-    xmax = max([max(q.x) for q in tb.stars])
-    ymin = min([min(q.y) for q in tb.stars])
-    ymax = max([max(q.y) for q in tb.stars])
-
     fig = plt.figure()
     ax = fig.add_subplot()
 
-    for i in range(tb.N):
-        ax.plot(tb.stars[i].x, tb.stars[i].y)
-        ax.scatter([tb.stars[i].x[0]], [tb.stars[i].y[0]], marker="x")
+    for istar in range(len(tb.M)):
+        x = [star[istar].x for star in tb.stars]
+        y = [star[istar].y for star in tb.stars]
+
+        ax.plot(x, y)
+        ax.scatter([x[0]], [y[0]], marker="x")
 
     fig.savefig("three_body.png")
 

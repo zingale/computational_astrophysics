@@ -250,7 +250,7 @@ public:
 
         // start with the old timestep
         double dt_new{dt_in};
-        double dt;
+        double dt{dt_in};
 
         int n_reset{0};
         double t{0.0};
@@ -344,6 +344,9 @@ int main() {
 
     ThreeBody tb(M0, pos0, M1, pos1, M2, pos2);
     tb.integrate(0.05, 1.e-8, 2.0);
+
+
+    std::cout << "number of points = " << tb.npts() << std::endl;
 
     std::ofstream of("three_body.dat");
 
