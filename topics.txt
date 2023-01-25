@@ -43,3 +43,10 @@
 
     https://archive.stsci.edu/hello-universe
 
+
+* FFT
+
+  for C++, consider using pocketFFT -- this is C++ header, and is used by NumPy
+  https://gitlab.mpcdf.mpg.de/mtr/pocketfft/tree/cpp
+
+  we can pass in the `.data()` of the underlying vector.

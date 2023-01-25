@@ -27,7 +27,7 @@ class State:
         return self.__mul__(other)
 
     def __str__(self):
-        return f"{self.x:14} {self.y:14} {self.u:14} {self.v:14}"
+        return f"{self.x:10.6f} {self.y:10.6f} {self.u:10.6f} {self.v:10.6f}"
 
 
 class ThreeBody(object):
@@ -89,7 +89,7 @@ class ThreeBody(object):
                       (self.stars[n][i].y - self.stars[n][j].y)**2)
               for i in range(len(self.M)) for j in range(len(self.M)) if i > j]
 
-        return KE + PE
+        return sum(KE) + sum(PE)
 
     def rhs(self, star_states):
         """ here, star states is (State, State, ...) """
@@ -222,6 +222,11 @@ class ThreeBody(object):
             self.time.append(t)
             self.stars.append(state_new)
 
+            print(t, end="")
+            for s in state_new:
+                print(s, end="")
+            print("\n")
+
 
 if __name__ == "__main__":
 
@@ -250,8 +255,13 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot()
 
-    t = tb.time()
-    x_cm, y_cm = tb.center_of_mass()
+    t = tb.time
+    x_cm = []
+    y_cm = []
+    for n in range(tb.npts()):
+        _xcm, _ycm = tb.center_of_mass(n)
+        x_cm.append(_xcm)
+        y_cm.append(_ycm)
 
     ax.plot(t, x_cm, label="x center of mass")
     ax.plot(t, y_cm, label="y center of mass")
@@ -262,7 +272,7 @@ if __name__ == "__main__":
 
     # timestep plot
 
-    t = np.array(tb.stars[0].t)
+    t = np.asarray(t)
     dt = t[1:] - t[:-1]
     ts = 0.5 * (t[1:] + t[:-1])
 
@@ -284,7 +294,9 @@ if __name__ == "__main__":
     fig = plt.figure()
     ax = fig.add_subplot()
 
-    E = tb.energy()
+    E = []
+    for n in range(tb.npts()):
+        E.append(tb.energy(n))
 
     ax.plot(t, np.abs(E))
 
