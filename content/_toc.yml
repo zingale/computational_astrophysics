@@ -47,6 +47,7 @@ parts:
   - caption: Root Finding and Optimization
     chapters:
     - file: basics/roots/root-finding
+    - file: basics/roots/roots-applications
 
   - caption: Ordinary Differential Equations
     chapters:
