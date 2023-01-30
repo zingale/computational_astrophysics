@@ -101,3 +101,6 @@ parts:
       sections:
       - file: machine-learning/machine-learning-basics.ipynb
 
+  - caption: Homework
+    chapters:
+    - file: homework/homework1
