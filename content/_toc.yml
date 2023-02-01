@@ -50,7 +50,8 @@ parts:
   - caption: Root Finding and Optimization
     chapters:
     - file: basics/roots/root-finding
-    - file: basics/roots/roots-application
+    - file: basics/roots/application-wiens
+    - file: basics/roots/application-degeneracy
 
   - caption: Ordinary Differential Equations
     chapters:
