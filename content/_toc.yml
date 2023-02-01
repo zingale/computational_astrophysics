@@ -30,6 +30,9 @@ parts:
     chapters:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
+        sections:
+        - file: basics/diff-int/integration-composite
+        - file: basics/diff-int/integration-simpsons
       - file: basics/diff-int/integration-applications
       - file: basics/diff-int/going-further
 
