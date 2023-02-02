@@ -30,7 +30,7 @@ parts:
     chapters:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
-      - file: basics/diff-int/integration-applications
+      - file: basics/diff-int/application-blackbody
       - file: basics/diff-int/going-further
 
   - caption: Linear Algebra
