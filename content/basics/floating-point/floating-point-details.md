@@ -43,17 +43,17 @@ $$
 
 In fact, ``0.1`` cannot be exactly represented in floating point:
 
-C++:
-
-```{literalinclude} ../../../examples/floating_point/simple_roundoff.cpp
-:language: c++
-```
-
-python:
-
+````{tab-set}
+```{tab-item} python
 ```python
 print(f"{0.1:30.20f}")
 ```
+
+```{tab-item} C++
+```{literalinclude} ../../../examples/floating_point/simple_roundoff.cpp
+:language: c++
+```
+````
 
 Precision
 ---------
@@ -101,10 +101,24 @@ converting to base 10, this is
 $$ \sim 10^{-308} \mbox{ to } \sim 10^{308} $$
 
 
-```{note}
-In C++, you can get these ranges via ``std::numeric_limits``:
+
+Accessing Properties
+--------------------
+
+Most languages have functions that return the basic properties / limits
+of floating point
+
+````{tab-set}
+```{tab-item} python
+  ```python
+    import sys
+    sys.float_info
+  ```
+
+```{tab-item} C++
 ```{literalinclude} ../../../examples/floating_point/limits.cpp
 :language: c++
 ```
+````
 
 
