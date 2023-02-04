@@ -68,6 +68,10 @@ parts:
     chapters:
     - file: fitting/least_squares
 
+  - caption: Fourier transforms
+    chapters:
+    - file: ffts/fourier
+
   - caption: Partial Differential Equations
     chapters:
     - file: advection/advection/advection
