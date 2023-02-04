@@ -71,6 +71,7 @@ parts:
   - caption: Fourier transforms
     chapters:
     - file: ffts/fourier
+    - file: ffts/dft
 
   - caption: Partial Differential Equations
     chapters:

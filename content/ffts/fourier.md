@@ -72,7 +72,7 @@ $$\mathrm{Im}(F_k) = \sum_{n=0}^{N-1} f_n \sin \left ( \frac{2 \pi n k}{N} \righ
 ```{note}
 $k = 0$ is special:
 
-$$\mathrm{Re}(F_0) = \sum_{n=0}^{N-1} f_n \cos \left ( \frac{2 \pi n (0)}{N} \right ) = \sum_{n=0}^N-1} f_n$$
+$$\mathrm{Re}(F_0) = \sum_{n=0}^{N-1} f_n \cos \left ( \frac{2 \pi n (0)}{N} \right ) = \sum_{n=0}^{N-1} f_n$$
 $$\mathrm{Im}(F_0) = \sum_{n=0}^{N-1} f_n \sin \left ( \frac{2 \pi n (0)}{N} \right ) = 0$$
 
 This is sometimes called the _DC offset_.
@@ -80,3 +80,28 @@ This is sometimes called the _DC offset_.
 ```
 
 ### Normalization
+
+We haven't yet motivated the $1/N$ in front of the inverse DFT.  This can be shown to arise
+from the discrete form of the [Plancherel theorem](https://en.wikipedia.org/wiki/Plancherel_theorem)&mdash;namely that both the real-space
+and frequency-space form of the function contain the same power.
+
+But we can motivate it by a simple example.
+
+Consider $f(x) = 1$:
+
+$$ f(x) = 1 \Longleftrightarrow F(k) = \delta(k)$$
+
+If we look at the discrete transform then:
+
+$$F_k = \sum_{n=0}^{N-1} 1 \cdot e^{-2\pi i k n /N}
+= \sum_{n=0}^{N-1} \left [ \cos \left (\frac{2\pi kn}{N}\right) + i \sin \left (\frac{2\pi kn}{N}\right ) \right ]$$
+
+* For $k = 0$: $\cos(0) = 1$ and $\sin(0) = 0$, so $F_0 = N$
+* For $k > 0$: we are essentially doing a sum over the cosine and sine using equally spaced points, and the sum is always over a multiple of a full wavelength $\rightarrow$ $F_k = 0$
+
+With these frequency-space $F_k$'s, we can compute the inverse transform:
+
+$$f_n = \frac{1}{N} \sum_{k=0}^{N-1} F_k e^{2\pi i nk/N}
+ = \frac{1}{N} N e^{2\pi i n 0/N} = 1$$
+
+So we see that the $1/N$ is needed to get back the original value of $f(x)$.
