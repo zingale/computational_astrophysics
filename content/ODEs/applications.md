@@ -1,7 +1,7 @@
 Application: Few Body Problem
 =============================
 
-Consider a system of masses interacting gravitationally.  Each
+Consider a system of masses (e.g., stars) interacting gravitationally.  Each
 experiences a gravitational force from the others.  For $N$ masses,
 there are $N(N-1)/2$ interactions, which means that the work involved
 in evaluating all of the forces scales like $\mathcal{O}(N^2)$ for
@@ -12,11 +12,11 @@ that all of the motion is in the $x-y$ plane.
 
 The evolution equations for the system are:
 
-$$\frac{d^2 {\bf x}_i}{dt^2} = \sum_{j = 1; j \ne i}^{3}
+$$\frac{d^2 {\bf x}_i}{dt^2} = \sum_{j = 1; j \ne i}^{N}
                 G m_j \frac{{\bf x}_j - {\bf x}_i}{|{\bf x}_j - {\bf x}_i|^3}$$
 
 
-where $i = 1, 2, 3$, and ${\bf x}_i = (x_i, y_i)$ are the coordinates
+where $i = 1, 2, \ldots, N$, and ${\bf x}_i = (x_i, y_i)$ are the coordinates
 of star $i$.  We can write this as a system of first-order ODEs by
 introducing the velocity,
 
@@ -31,14 +31,18 @@ changing the equations to:
 
 \begin{align*}
 \frac{d{\bf x}_i}{dt} &= {\bf v}_i \\
-\frac{d{\bf v}_i}{dt} &= \sum_{j = 1; j \ne i}^{3}
+\frac{d{\bf v}_i}{dt} &= \sum_{j = 1; j \ne i}^{N}
                 G m_j \frac{{\bf x}_j - {\bf x}_i}{(|{\bf x}_j - {\bf x}_i|^2 + \epsilon^2)^{3/2}}
 \end{align*}
 
 where $\epsilon$ is chosen to be small.
 
 
-Finally, we'll work in units with $G = 1$.
+Implementation
+--------------
+
+Here's an implementation for $N = 3$.  Extending it to more stars is
+straightforward.  We work in units with $G = 1$.
 
 We'll solve this with an adaptive RK4 method.  The code implementing
 this is shown below:
