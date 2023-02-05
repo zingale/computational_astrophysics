@@ -72,6 +72,8 @@ parts:
     chapters:
     - file: ffts/fourier
     - file: ffts/dft
+    - file: ffts/dft-tests
+    - file: ffts/fft
 
   - caption: Partial Differential Equations
     chapters:
