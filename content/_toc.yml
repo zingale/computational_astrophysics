@@ -36,17 +36,6 @@ parts:
       - file: basics/diff-int/application-blackbody
       - file: basics/diff-int/going-further
 
-  - caption: Linear Algebra
-    chapters:
-    - file: basics/linear-algebra/la-overview
-    - file: basics/linear-algebra/la-basics
-    - file: basics/linear-algebra/linear-system-example
-      sections:
-      - file: basics/linear-algebra/gaussian_elimination
-      - file: basics/linear-algebra/gaussian_elimination_python
-      - file: basics/linear-algebra/la-cxx
-    - file: basics/linear-algebra/going-further
-
   - caption: Root Finding and Optimization
     chapters:
     - file: basics/roots/root-finding
@@ -63,6 +52,17 @@ parts:
     - file: ODEs/applications
     - file: ODEs/boundary-value-problems
     - file: ODEs/exercises
+
+  - caption: Linear Algebra
+    chapters:
+    - file: basics/linear-algebra/la-overview
+    - file: basics/linear-algebra/la-basics
+    - file: basics/linear-algebra/linear-system-example
+      sections:
+      - file: basics/linear-algebra/gaussian_elimination
+      - file: basics/linear-algebra/gaussian_elimination_python
+      - file: basics/linear-algebra/la-cxx
+    - file: basics/linear-algebra/going-further
 
   - caption: Fitting and Interpolation of Data
     chapters:
