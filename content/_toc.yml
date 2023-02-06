@@ -31,8 +31,8 @@ parts:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
         sections:
-        - file: basics/diff-int/integration-composite
         - file: basics/diff-int/integration-simpsons
+        - file: basics/diff-int/integration-composite
       - file: basics/diff-int/application-blackbody
       - file: basics/diff-int/going-further
 
@@ -46,8 +46,9 @@ parts:
     chapters:
     - file: ODEs/ODEs
       sections:
-      - file: ODEs/ODEs-partI
-      - file: ODEs/ODEs-partII
+      - file: ODEs/ODEs-euler
+      - file: ODEs/ODEs-midpoint
+      - file: ODEs/ODEs-rk4
     - file: ODEs/adaptive_stepping
     - file: ODEs/applications
     - file: ODEs/boundary-value-problems
