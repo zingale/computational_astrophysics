@@ -75,6 +75,7 @@ parts:
     - file: ffts/dft
     - file: ffts/dft-tests
     - file: ffts/fft
+    - file: ffts/application-lightcurves
 
   - caption: Partial Differential Equations
     chapters:
