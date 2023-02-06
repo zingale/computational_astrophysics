@@ -137,7 +137,7 @@ public:
         return KE + PE;
     }
 
-    std::vector<State> rhs(std::vector<State>& star_states) {
+    std::vector<State> rhs(const std::vector<State>& star_states) {
         // compute the ydot terms
 
         std::vector<State> ydot;
@@ -183,7 +183,9 @@ public:
 
     }
 
-    std::vector<State> update_state(const std::vector<State>& state_old, const std::vector<State>& ydot, const double dt) {
+    std::vector<State> update_state(const std::vector<State>& state_old,
+                                    const std::vector<State>& ydot,
+                                    const double dt) {
 
         std::vector<State> state_new;
 
@@ -200,7 +202,7 @@ public:
         return state_new;
     }
 
-    std::vector<State> single_step(std::vector<State>& state_old, const double dt) {
+    std::vector<State> single_step(const std::vector<State>& state_old, const double dt) {
         /// take a single RK-4 timestep through dt
 
         auto ydot1 = rhs(state_old);
