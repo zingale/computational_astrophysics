@@ -31,10 +31,28 @@ parts:
       - file: basics/diff-int/differentiation
       - file: basics/diff-int/integration
         sections:
-        - file: basics/diff-int/integration-composite
         - file: basics/diff-int/integration-simpsons
+        - file: basics/diff-int/integration-composite
       - file: basics/diff-int/application-blackbody
       - file: basics/diff-int/going-further
+
+  - caption: Root Finding and Optimization
+    chapters:
+    - file: basics/roots/root-finding
+    - file: basics/roots/application-wiens
+    - file: basics/roots/application-degeneracy
+
+  - caption: Ordinary Differential Equations
+    chapters:
+    - file: ODEs/ODEs
+      sections:
+      - file: ODEs/ODEs-euler
+      - file: ODEs/ODEs-midpoint
+      - file: ODEs/ODEs-rk4
+    - file: ODEs/adaptive_stepping
+    - file: ODEs/applications
+    - file: ODEs/boundary-value-problems
+    - file: ODEs/exercises
 
   - caption: Linear Algebra
     chapters:
@@ -47,26 +65,17 @@ parts:
       - file: basics/linear-algebra/la-cxx
     - file: basics/linear-algebra/going-further
 
-  - caption: Root Finding and Optimization
-    chapters:
-    - file: basics/roots/root-finding
-    - file: basics/roots/application-wiens
-    - file: basics/roots/application-degeneracy
-
-  - caption: Ordinary Differential Equations
-    chapters:
-    - file: ODEs/ODEs
-      sections:
-      - file: ODEs/ODEs-partI
-      - file: ODEs/ODEs-partII
-    - file: ODEs/adaptive_stepping
-    - file: ODEs/applications
-    - file: ODEs/boundary-value-problems
-    - file: ODEs/exercises
-
   - caption: Fitting and Interpolation of Data
     chapters:
     - file: fitting/least_squares
+
+  - caption: Fourier transforms
+    chapters:
+    - file: ffts/fourier
+    - file: ffts/dft
+    - file: ffts/dft-tests
+    - file: ffts/fft
+    - file: ffts/application-lightcurves
 
   - caption: Partial Differential Equations
     chapters:
