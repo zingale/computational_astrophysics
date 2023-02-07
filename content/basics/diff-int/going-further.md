@@ -22,5 +22,3 @@ dimension is really high ($N > 3$), this becomes computationally
 expensive and randomly sampling the integrand becomes
 better&mdash;this is [Monte Carlo
 integration](https://en.wikipedia.org/wiki/Monte_Carlo_integration).
-
-

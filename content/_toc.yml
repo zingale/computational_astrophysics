@@ -34,6 +34,7 @@ parts:
         - file: basics/diff-int/integration-simpsons
         - file: basics/diff-int/integration-composite
       - file: basics/diff-int/application-blackbody
+      - file: basics/diff-int/integration-scipy
       - file: basics/diff-int/going-further
 
   - caption: Root Finding and Optimization
