@@ -47,7 +47,7 @@ double simpsons_inf(const int N,
 
     double I = 0.0;
     double c = 3.0;
-    
+
     // we will work in the transformed coords z = [0, 1]
     double dz = (1.0 - 0.0) / static_cast<double>(N);
 
@@ -58,7 +58,7 @@ double simpsons_inf(const int N,
 
         double f0 = func(xv(z0, c));
         double f1 = func(xv(z1, c));
-        double f2 = func(xv(z2, c));            
+        double f2 = func(xv(z2, c));
 
         I += dz / 3.0 * (f0 / std::pow(1.0 - z0 + SMALL, 2) +
                          4.0 * f1 / std::pow(1.0 - z1 + SMALL, 2) +
@@ -80,7 +80,7 @@ double trap_inf(const int N,
 
     double I = 0.0;
     double c = 3.0;
-    
+
     // we will work in the transformed coords z = [0, 1]
     double dz = (1.0 - 0.0) / static_cast<double>(N);
 
@@ -103,10 +103,10 @@ double trap_inf(const int N,
 
 int main() {
 
-    std::vector<double> bins{2, 4, 8, 16, 32, 64};  
+    std::vector<double> bins{2, 4, 8, 16, 32, 64};
 
     for (auto N : bins) {
-        auto I = trap_inf(N, integrand);
+        auto I = simpsons_inf(N, integrand);
         double err = std::abs(I - I_analytic());
         std::cout << std::setw(3) << N << ": " << I << " " << err << std::endl;
     }
