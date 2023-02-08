@@ -40,8 +40,8 @@ parts:
   - caption: Root Finding and Optimization
     chapters:
     - file: basics/roots/root-finding
-    sections:
-      - file: basics/roots/roots-scipy
+      sections:
+        - file: basics/roots/roots-scipy
     - file: basics/roots/application-wiens
     - file: basics/roots/application-degeneracy
 
