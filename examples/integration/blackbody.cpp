@@ -112,7 +112,7 @@ double trap_inf(const int N,
 
 int main() {
 
-    std::vector<double> bins{2, 4, 8, 16, 32, 64};
+    std::vector<int> bins{2, 4, 8, 16, 32, 64};
 
     for (auto N : bins) {
         auto I = simpsons_inf(N, integrand);

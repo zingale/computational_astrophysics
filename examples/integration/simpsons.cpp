@@ -39,7 +39,7 @@ double simpsons(const double xmin, const double xmax, const int N,
 
 int main() {
 
-    std::vector<double> bins{2, 4, 8, 16, 32, 64};
+    std::vector<int> bins{2, 4, 8, 16, 32, 64};
 
     double xmin{0.5};
     double xmax{1.5};
