@@ -32,3 +32,8 @@ written behaves correctly.
 3. Poisson problem with FFTs
 
 
+4. 2D Advection
+
+
+5. Code up a tree solver
+
