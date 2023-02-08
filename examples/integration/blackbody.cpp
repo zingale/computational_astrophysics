@@ -22,7 +22,16 @@ inline double xv(const double z, const double c) {
     return c * z / (1.0 - z + SMALL);
 }
 
-double integrand(double x) {
+
+double gaussian(const double x) {
+    return std::exp(-x*x);
+}
+
+double gaussian_analytic() {
+    return std::sqrt(M_PI) / 2;
+}
+
+double integrand(const double x) {
     double I{0};
 
     if (x == 0) {
@@ -108,6 +117,12 @@ int main() {
     for (auto N : bins) {
         auto I = simpsons_inf(N, integrand);
         double err = std::abs(I - I_analytic());
+
+        // uncomment these lines to test the integration
+        // of a Gaussian over [0, oo]
+        //auto I = simpsons_inf(N, gaussian);
+        //double err = std::abs(I - gaussian_analytic());
+
         std::cout << std::setw(3) << N << ": " << I << " " << err << std::endl;
     }
 }
