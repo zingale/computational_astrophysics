@@ -51,6 +51,7 @@ double bisect(const double _xl, const double _xr,
 int main() {
 
     // let's try this out on a cubic
-    auto r = bisect(-2.0, -1.0, [](double x){return 0.5 * std::pow(x, 3) + M_PI/3.0 * x + 2;});
+    auto r = bisect(-2.0, -1.0,
+                    [](double x){return 0.5 * std::pow(x, 3) + M_PI/3.0 * x + 2;});
     std::cout << "the root is " << r << std::endl;
 }
