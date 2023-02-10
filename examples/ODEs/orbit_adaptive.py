@@ -161,44 +161,55 @@ class OrbitsRK4:
 
             state_old = self.history[-1]
 
-            # adaptive stepping iteration loop -- keep trying to take a step
-            # until we achieve our desired error
+            if err > 0.0:
 
-            rel_error = 1.e10
+                # adaptive stepping iteration loop -- keep trying to take a step
+                # until we achieve our desired error
 
-            n_try = 0
-            while rel_error > err:
-                dt = dt_new
-                if t+dt > tmax:
-                    dt = tmax-t
+                rel_error = 1.e10
 
-                # take 2 half steps
-                state_tmp = self.single_step(state_old, 0.5*dt)
-                state_new = self.single_step(state_tmp, 0.5*dt)
+                n_try = 0
+                while rel_error > err:
+                    dt = dt_new
+                    if t+dt > tmax:
+                        dt = tmax-t
 
-                # now take just a single step to cover dt
-                state_single = self.single_step(state_old, dt)
+                    # take 2 half steps
+                    state_tmp = self.single_step(state_old, 0.5*dt)
+                    state_new = self.single_step(state_tmp, 0.5*dt)
 
-                # state_new should be more accurate than state_single since it
-                # used smaller steps
+                    # now take just a single step to cover dt
+                    state_single = self.single_step(state_old, dt)
 
-                # estimate the relative error now
+                    # state_new should be more accurate than state_single since it
+                    # used smaller steps
 
-                rel_error = max(abs((state_new.x - state_single.x) / state_single.x),
-                                abs((state_new.y - state_single.y) / state_single.y),
-                                abs((state_new.u - state_single.u) / state_single.u),
-                                abs((state_new.v - state_single.v) / state_single.v))
+                    # estimate the relative error now
 
-                # adaptive timestep algorithm for RK4
+                    rel_error = max(abs((state_new.x - state_single.x) / state_single.x),
+                                    abs((state_new.y - state_single.y) / state_single.y),
+                                    abs((state_new.u - state_single.u) / state_single.u),
+                                    abs((state_new.v - state_single.v) / state_single.v))
 
-                dt_est = dt * abs(err/rel_error)**0.2
-                dt_new = min(max(S1*dt_est, dt/S2), S2*dt)
+                    # adaptive timestep algorithm for RK4
 
-                n_try += 1
+                    dt_est = dt * abs(err/rel_error)**0.2
+                    dt_new = min(max(S1*dt_est, dt/S2), S2*dt)
 
-            if n_try > 1:
-                # n_try = 1 if we took only a single try at the step
-                n_reset += (n_try-1)
+                    n_try += 1
+
+                if n_try > 1:
+                    # n_try = 1 if we took only a single try at the step
+                    n_reset += (n_try-1)
+
+            else:
+
+                # take just a single step
+                if t + dt > tmax:
+                    dt = tmax - t
+
+                # take just a single step to cover dt
+                state_new = self.single_step(state_old, dt)
 
             # successful step
             t += dt
@@ -207,7 +218,7 @@ class OrbitsRK4:
             self.time.append(t)
             self.history.append(state_new)
 
-    def plot(self):
+    def plot(self, points=False):
         """plot the orbit"""
         fig, ax = plt.subplots()
         x = [q.x for q in self.history]
@@ -216,7 +227,10 @@ class OrbitsRK4:
         # draw the Sun
         ax.scatter([0], [0], marker=(20,1), color="y", s=250)
 
-        ax.plot(x, y)
+        if points:
+            ax.scatter(x, y)
+        else:
+            ax.plot(x, y)
         ax.set_aspect("equal")
         return fig
 

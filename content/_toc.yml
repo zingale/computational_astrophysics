@@ -53,6 +53,8 @@ parts:
       - file: ODEs/ODEs-midpoint
       - file: ODEs/ODEs-rk4
     - file: ODEs/adaptive_stepping
+      sections:
+      - file: ODEs/adaptive-orbits
     - file: ODEs/applications
     - file: ODEs/boundary-value-problems
     - file: ODEs/exercises
