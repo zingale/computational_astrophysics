@@ -21,29 +21,24 @@ parts:
     - file: python/numpy-basics.ipynb
     - file: python/matplotlib-basics.ipynb
 
-  - caption: Floating Point and Errors
+  - caption: Fundamentals
     chapters:
     - file: basics/floating-point/floating-point-details
-    - file: basics/floating-point/numerical_error
-
-  - caption: Differentiation and Integration
-    chapters:
-      - file: basics/diff-int/differentiation
-      - file: basics/diff-int/integration
-        sections:
-        - file: basics/diff-int/integration-simpsons
-        - file: basics/diff-int/integration-composite
+      sections:
+      - file: basics/floating-point/numerical_errors
+    - file: basics/diff-int/differentiation
+    - file: basics/diff-int/integration
+      sections:
+      - file: basics/diff-int/integration-simpsons
+      - file: basics/diff-int/integration-composite
       - file: basics/diff-int/application-blackbody
       - file: basics/diff-int/integration-scipy
       - file: basics/diff-int/going-further
-
-  - caption: Root Finding and Optimization
-    chapters:
     - file: basics/roots/root-finding
       sections:
         - file: basics/roots/roots-scipy
-    - file: basics/roots/application-wiens
-    - file: basics/roots/application-degeneracy
+        - file: basics/roots/application-wiens
+        - file: basics/roots/application-degeneracy
 
   - caption: Ordinary Differential Equations
     chapters:
