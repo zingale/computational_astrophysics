@@ -36,34 +36,29 @@ parts:
       - file: basics/diff-int/going-further
     - file: basics/roots/root-finding
       sections:
-        - file: basics/roots/roots-scipy
-        - file: basics/roots/application-wiens
-        - file: basics/roots/application-degeneracy
+      - file: basics/roots/roots-scipy
+      - file: basics/roots/application-wiens
+      - file: basics/roots/application-degeneracy
+    - file: basics/linear-algebra/la-overview
+      sections:
+      - file: basics/linear-algebra/la-basics
+      - file: basics/linear-algebra/linear-system-example
+      - file: basics/linear-algebra/gaussian_elimination
+      - file: basics/linear-algebra/gaussian_elimination_python
+      - file: basics/linear-algebra/la-cxx
+      - file: basics/linear-algebra/going-further
 
   - caption: Ordinary Differential Equations
     chapters:
-    - file: ODEs/ODEs
+    - file: ODEs/ODEs-euler
       sections:
-      - file: ODEs/ODEs-euler
       - file: ODEs/ODEs-midpoint
       - file: ODEs/ODEs-rk4
     - file: ODEs/adaptive_stepping
       sections:
       - file: ODEs/adaptive-orbits
-    - file: ODEs/applications
+      - file: ODEs/applications
     - file: ODEs/boundary-value-problems
-    - file: ODEs/exercises
-
-  - caption: Linear Algebra
-    chapters:
-    - file: basics/linear-algebra/la-overview
-    - file: basics/linear-algebra/la-basics
-    - file: basics/linear-algebra/linear-system-example
-      sections:
-      - file: basics/linear-algebra/gaussian_elimination
-      - file: basics/linear-algebra/gaussian_elimination_python
-      - file: basics/linear-algebra/la-cxx
-    - file: basics/linear-algebra/going-further
 
   - caption: Working with Data Samples
     chapters:
