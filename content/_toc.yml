@@ -25,7 +25,7 @@ parts:
     chapters:
     - file: basics/floating-point/floating-point-details
       sections:
-      - file: basics/floating-point/numerical_errors
+      - file: basics/floating-point/numerical_error
     - file: basics/diff-int/differentiation
     - file: basics/diff-int/integration
       sections:
