@@ -28,3 +28,7 @@ derivations, notes, etc.
    even or odd $N$ (you can start with the code from class).
    
    
+2. Integrate Maxwellian?
+
+3. Integrate reaction rate <sigma v>?
+

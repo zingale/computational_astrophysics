@@ -65,17 +65,15 @@ parts:
       - file: basics/linear-algebra/la-cxx
     - file: basics/linear-algebra/going-further
 
-  - caption: Fitting and Interpolation of Data
+  - caption: Working with Data Samples
     chapters:
     - file: fitting/least_squares
-
-  - caption: Fourier transforms
-    chapters:
     - file: ffts/fourier
-    - file: ffts/dft
-    - file: ffts/dft-tests
-    - file: ffts/fft
-    - file: ffts/application-lightcurves
+      sections:
+      - file: ffts/dft
+      - file: ffts/dft-tests
+      - file: ffts/fft
+      - file: ffts/application-lightcurves
 
   - caption: Partial Differential Equations
     chapters:
