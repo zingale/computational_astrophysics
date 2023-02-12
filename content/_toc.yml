@@ -58,6 +58,7 @@ parts:
       sections:
       - file: ODEs/adaptive-orbits
       - file: ODEs/applications
+    - file: ODEs/ODEs-conservation
     - file: ODEs/boundary-value-problems
 
   - caption: Working with Data Samples
