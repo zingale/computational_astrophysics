@@ -37,3 +37,9 @@ written behaves correctly.
 
 5. Code up a tree solver
 
+
+6. Download an existing simulation code and run some simulations and discuss:
+
+   * rebound
+
+   * pyro
