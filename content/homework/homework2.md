@@ -36,7 +36,7 @@ derivations, notes, etc.
       from $[0, 5]$ using $N = \{3, 5, 9, 17, 33\}$ and compute the error compared
       to the analytic solution,
 
-      $$I_\mathrm{analytic} = -\frac{5}{2/pi}$$
+      $$I_\mathrm{analytic} = -\frac{5}{2\pi}$$
 
       How does the error converge?
 
