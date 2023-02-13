@@ -57,6 +57,7 @@ parts:
     - file: ODEs/adaptive_stepping
       sections:
       - file: ODEs/adaptive-orbits
+      - file: ODEs/ODEs-scipy
       - file: ODEs/applications
     - file: ODEs/ODEs-conservation
       sections:
