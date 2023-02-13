@@ -19,7 +19,7 @@ derivations, notes, etc.
    integration method for the first $N-1$ intervals (treating them in
    pairs).  For the very last interval, we need a new form of Simpsons
    rule.  Denote the last 3 points in the domain as $x_{N-2}$,
-   $x_{N-1}$, $x_N$&mdaqsh;we want to do the final integration over $x
+   $x_{N-1}$, $x_N$&mdash;we want to do the final integration over $x
    \in [x_{N-1}, x_N]$.
 
    a. Construct the form of the integral in this case by using the
@@ -46,7 +46,7 @@ derivations, notes, etc.
 
    The average velocity of this distribution, defined as:
 
-   $$\langle v \rangle = \frac{1}{n_I} \int_0^\infty 4\pi n(p) \left (\frac{p}{m_I}\right ) dp$$
+   $$\langle v \rangle = \frac{1}{n_I} \int_0^\infty 4\pi n(p) p^2 \left (\frac{p}{m_I}\right ) dp$$
 
    Evaluate this integral numerically for a gas of protons ($m_I = m_p)$ and the conditions
    in the center of the Sun ($T = 1.5\times 10^7~\mathrm{K}$).
