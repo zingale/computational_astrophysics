@@ -22,23 +22,23 @@ derivations, notes, etc.
    $x_{N-1}$, $x_N$&mdash;we want to do the final integration over $x
    \in [x_{N-1}, x_N]$.
 
-   a. Construct the form of the integral in this case by using the
-      same parabolic interpolant, and evalute it by integrating only
-      over $[x_{N-1}, x_N]$.
+     a. Construct the form of the integral in this case by using the
+        same parabolic interpolant, and evalute it by integrating only
+        over $[x_{N-1}, x_N]$.
 
-   b. Write a general composite Simpsons rule integrator that works for
-      even or odd $N$ (you can start with the code from class).
+     b. Write a general composite Simpsons rule integrator that works for
+        even or odd $N$ (you can start with the code from class).
 
-   c. Integrate
+     c. Integrate
 
-      $$I = \int_0^5 x \sin(2\pi x) dx$$
+        $$I = \int_0^5 x \sin(2\pi x) dx$$
 
-      from $[0, 5]$ using $N = \{3, 5, 9, 17, 33\}$ and compute the error compared
-      to the analytic solution,
+        from $[0, 5]$ using $N = \{3, 5, 9, 17, 33\}$ and compute the error compared
+        to the analytic solution,
 
-      $$I_\mathrm{analytic} = -\frac{5}{2\pi}$$
+        $$I_\mathrm{analytic} = -\frac{5}{2\pi}$$
 
-      How does the error converge?
+        How does the error converge?
 
 2. The particles in an ideal gas a well-described by the Maxwell-Boltzmann distribution:
 
