@@ -63,6 +63,8 @@ parts:
       sections:
       - file: ODEs/ODEs-timereverse
     - file: ODEs/boundary-value-problems
+      sections:
+      - file: ODEs/application-lane-emden
 
   - caption: Working with Data Samples
     chapters:
