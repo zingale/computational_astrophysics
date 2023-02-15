@@ -44,6 +44,12 @@ Implementation
 Here's an implementation for $N = 3$.  Extending it to more stars is
 straightforward.  We work in units with $G = 1$.
 
+```{note}
+You should try extending this to an arbitrary $N$.  You'll want to change the
+interface to allow you to pass in a list of initial particles, or create a
+method that randomly initializes them
+```
+
 We'll solve this with an adaptive RK4 method.  The code implementing
 this is shown below:
 
