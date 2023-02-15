@@ -222,11 +222,6 @@ class ThreeBody(object):
             self.time.append(t)
             self.stars.append(state_new)
 
-            print(t, end="")
-            for s in state_new:
-                print(s, end="")
-            print("\n")
-
 
 if __name__ == "__main__":
 
