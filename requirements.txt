@@ -4,4 +4,4 @@ numpy
 scipy
 sympy
 pynucastro
-
+sphinx_design

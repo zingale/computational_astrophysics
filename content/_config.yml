@@ -42,10 +42,16 @@ launch_buttons:
 
 
 parse:
+  extensions:
+    - myst_parser
+    - sphinx_design
+
   myst_enable_extensions:
     # don't forget to list any other extensions you want enabled,
     # including those that are enabled by default!
     - amsmath
     - dollarmath
     - linkify
+    - colon_fence
+
 
