@@ -89,15 +89,6 @@ def error_radius(history):
 
     return e
 
-def error_radius(history):
-
-    # define the error to be distance from (0, 0) at end compared to start
-    R_orig = np.sqrt(history[0].x**2 + history[0].y**2)
-    R_new = np.sqrt(history[-1].x**2 + history[-1].y**2)
-    e = np.abs(R_new - R_orig)
-
-    return e
-
 def error_position(history):
     """return the difference in the distance from the Sun"""
     dx = history[0].x - history[-1].x
