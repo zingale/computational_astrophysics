@@ -6,17 +6,21 @@ by a system of ODEs.  Here are some suggestions to explore.
 
 1. _Trojan asteroids in the Sun-Jupiter system._
 
-   The [trojan asteroids](https://en.wikipedia.org/wiki/Jupiter_trojan) share the same
-   orbit as Jupiter around the Sun, but lead or trail it in its orbit by 60 degrees.
-   These can have interesting orbits around the L4 and L5 Lagrange points.  This is also
-   an example of the _restricted 3-body problem_.  To make the integration easier, we work
-   in the rotating frame defined by Jupiter's orbital period.  Then Jupiter is stationary
-   and we integrate the orbits of the Trojan asteroids.
-   Initial conditions for some interesting orbits have been worked out
-   by [Rabe
+   The [trojan
+   asteroids](https://en.wikipedia.org/wiki/Jupiter_trojan) share the
+   same orbit as Jupiter around the Sun, but lead or trail it in its
+   orbit by 60 degrees.  These can have interesting orbits around the
+   L4 and L5 Lagrange points.  This is also an example of the
+   [_restricted 3-body
+   problem_](https://en.wikipedia.org/wiki/Three-body_problem#Restricted_three-body_problem).
+   To make the integration easier, we work in the rotating frame
+   defined by Jupiter's orbital period.  Then Jupiter is stationary
+   and we integrate the orbits of the Trojan asteroids.  Initial
+   conditions for some interesting orbits have been worked out by
+   [Rabe
    1961](https://ui.adsabs.harvard.edu/abs/1961AJ.....66..500R/abstract)&mdash;see
-   table I.
-   This topic is discussed extensively in the text by Paul Hellings.
+   table I.  This topic is discussed extensively in the text by Paul
+   Hellings.
 
 2. _Star formation in the Galaxy._
 
