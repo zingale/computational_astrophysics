@@ -65,6 +65,7 @@ parts:
     - file: ODEs/boundary-value-problems
       sections:
       - file: ODEs/application-lane-emden
+    - file: ODEs/more-applications
 
   - caption: Working with Data Samples
     chapters:

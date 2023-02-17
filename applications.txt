@@ -1,3 +1,20 @@
+* ODEs:
+
+  * Trojan asteroids (from Hellings book): switch into the rotating
+    frame for S-J system and trojan initial conditions from Rabe
+    (1961)
+
+    https://ui.adsabs.harvard.edu/abs/1961AJ.....66..500R/abstract
+
+    Table I gives initial conditions
+
+  * Star formation in the Galaxy (also from Hellings book)
+
+    This is essentially Eq. 4 from Bodifee (1986)
+    https://articles.adsabs.harvard.edu/pdf/1986Ap%26SS.122...41B
+
+  * Lots of ODE examples in "Astrophysics through Computation"
+
 * Root finding:
 
   Do Fermi integral and find mu given a number density
