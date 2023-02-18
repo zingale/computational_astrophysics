@@ -14,7 +14,7 @@ and therefore
 
 we work in coordinates with the Sun at the origin
 
-This version implements adaptive timestepping
+This version implements adaptive timestepping with velocity Verlet
 """
 
 import numpy as np
@@ -123,23 +123,22 @@ class OrbitsRK4:
         """ take a single RK-4 timestep from t to t+dt for the system
         ydot = rhs """
 
-        # get the RHS at several points
-        ydot1 = self.rhs(state_old)
+        ydot_old = self.rhs(state_old)
 
-        state_tmp = state_old + 0.5 * dt * ydot1
-        ydot2 = self.rhs(state_tmp)
+        uhalf = state_old.u + 0.5 * dt * ydot_old.u
+        vhalf = state_old.v + 0.5 * dt * ydot_old.v
 
-        state_tmp = state_old + 0.5 * dt * ydot2
-        ydot3 = self.rhs(state_tmp)
+        xnew = state_old.x + dt * uhalf
+        ynew = state_old.y + dt * vhalf
 
-        state_tmp = state_old + dt * ydot3
-        ydot4 = self.rhs(state_tmp)
+        # this works only because the acceleration does not depend
+        # on velocity
+        ydot_new = self.rhs(OrbitState(xnew, ynew, uhalf, vhalf))
 
-        # advance
-        state_new = state_old + (dt / 6.0) * (ydot1 + 2.0 * ydot2 +
-                                              2.0 * ydot3 + ydot4)
+        unew = uhalf + 0.5 * dt * ydot_new.u
+        vnew = vhalf + 0.5 * dt * ydot_new.v
 
-        return state_new
+        return OrbitState(xnew, ynew, unew, vnew)
 
     def integrate(self, dt_in, err, tmax):
         """ integrate the equations of motion using 4th order R-K method with an
@@ -193,7 +192,7 @@ class OrbitsRK4:
 
                     # adaptive timestep algorithm for RK4
 
-                    dt_est = dt * abs(err/rel_error)**0.2
+                    dt_est = dt * abs(err/rel_error)**(1.0/3.0)
                     dt_new = min(max(S1*dt_est, dt/S2), S2*dt)
 
                     n_try += 1
@@ -245,8 +244,7 @@ if __name__ == "__main__":
 
     fig = o.plot()
     fig.tight_layout()
-    fig.savefig("adaptive_rk4_orbit.png", bbox_inches="tight")
-
+    fig.savefig("adaptive_verlet_orbit.png", bbox_inches="tight")
 
     E = []
     for n in range(o.npts()):
@@ -256,4 +254,4 @@ if __name__ == "__main__":
     ax.plot(o.time, E/E[0])
     ax.set_xlabel("time [yr]")
     ax.set_ylabel("E/E(t=0)")
-    fig.savefig("adaptive_rk4_energy.png")
+    fig.savefig("adaptive_verlet_energy.png")
