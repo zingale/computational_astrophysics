@@ -22,7 +22,22 @@ by a system of ODEs.  Here are some suggestions to explore.
    table I.  This topic is discussed extensively in the text by Paul
    Hellings.
 
-2. _Star formation in the Galaxy._
+
+2. _A one zone model of X-ray bursts._
+
+   [X-ray bursts](https://en.wikipedia.org/wiki/X-ray_burster) are the
+   thermonuclear explosion of a thin accreted layer on the surface of
+   a neutron star.  The dynamics of this burning can be approximated
+   as a toy model looking at the heating and the depth of the fuel
+   layer, as described in [Heger et
+   al. 2018](https://arxiv.org/pdf/astro-ph/0511292.pdf) and
+   [Paczynski
+   1983](https://articles.adsabs.harvard.edu/pdf/1983ApJ...264..282P)
+   This simple system can give rise to repeated bursts (and a [limit cycle](https://en.wikipedia.org/wiki/Limit_cycle)
+   ) depending on the accretion rate.
+
+
+3. _Star formation in the Galaxy._
 
    The paper by [Bodifee
    1986](https://articles.adsabs.harvard.edu/pdf/1986Ap%26SS.122...41B)
@@ -31,3 +46,12 @@ by a system of ODEs.  Here are some suggestions to explore.
    This can show [limit cycle](https://en.wikipedia.org/wiki/Limit_cycle) behavior, as
    explored in [Sharaf et al. 2012](https://ui.adsabs.harvard.edu/abs/2012JAsGe...1...70S/abstract).
    This topic is also discussed extensively in the text by Paul Hellings.
+
+
+4. _Geodesics around a Schwarzschild black hole._
+
+   The motion of a test particle in general relativity around a black hole of mass $M$
+   described by the Schwarzschild metric leads to an ordinary differential equation.
+   See the [Schwardzschild geodesics](https://en.m.wikipedia.org/wiki/Schwarzschild_geodesics) Wikipedia
+   article for references.
+   
