@@ -121,4 +121,5 @@ parts:
       sections:
       - file: homework/hw1-solutions
     - file: homework/homework2
+    - file: homework/homework3
 
