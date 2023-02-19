@@ -25,6 +25,9 @@
 
   see https://bayesiancomputationbook.com/welcome.html
 
+  maybe create fake RV data from a system with 4 planets (with some inclination)
+  and try to recover their orbital periods?
+
 * machine learning
 
   sample dataset: 
@@ -50,3 +53,10 @@
   https://gitlab.mpcdf.mpg.de/mtr/pocketfft/tree/cpp
 
   we can pass in the `.data()` of the underlying vector.
+
+* Fitting an orbit:
+
+  See this paper for grid search: https://ui.adsabs.harvard.edu/abs/1989AJ.....98.1014H/abstract
+  and this: https://ui.adsabs.harvard.edu/abs/1999AJ....117.1023M/abstract
+
+  nice example: https://docs.exoplanet.codes/en/v0.4.5/tutorials/astrometric/
