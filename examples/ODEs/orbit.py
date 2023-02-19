@@ -220,12 +220,15 @@ class Orbit:
 
             ydot_old = self.rhs(state_old)
 
+            # kick
             uhalf = state_old.u + 0.5 * dt * ydot_old.u
             vhalf = state_old.v + 0.5 * dt * ydot_old.v
 
+            # drift
             xnew = state_old.x + dt * uhalf
             ynew = state_old.y + dt * vhalf
 
+            # kick
             # this works only because the acceleration does not depend
             # on velocity
             ydot_new = self.rhs(OrbitState(xnew, ynew, uhalf, vhalf))
