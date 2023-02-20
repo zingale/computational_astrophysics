@@ -28,6 +28,11 @@
   maybe create fake RV data from a system with 4 planets (with some inclination)
   and try to recover their orbital periods?
 
+  here's a nice fit to a line example: https://arxiv.org/pdf/1008.4686.pdf
+
+  Alex Ji: https://github.com/alexji/cda-samplers
+           https://arxiv.org/abs/1802.06810
+
 * machine learning
 
   sample dataset: 

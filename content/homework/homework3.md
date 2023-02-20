@@ -31,7 +31,7 @@ derivations, notes, etc.
    approximation.  For larger amplitude displacements, the period takes
    the form:
   
-   $$T = 2\pi \sqrt{\frac{L}{g}} \left ( 1 + \frac{1}{16}\theta_m^2 + \ldots \right )$$
+   $$T = 2\pi \sqrt{\frac{L}{g}} \left ( 1 + \frac{1}{16}\theta_0^2 + \ldots \right )$$
    
    (see, e.g, [Wikipedia](https://en.wikipedia.org/wiki/Pendulum_(mechanics)#Power_series_solution_for_the_elliptic_integral)), where $\theta_0$ is the initial angular displacement of the pendulum.
   
