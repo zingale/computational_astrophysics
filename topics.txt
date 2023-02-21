@@ -33,6 +33,8 @@
   Alex Ji: https://github.com/alexji/cda-samplers
            https://arxiv.org/abs/1802.06810
 
+  Fitting a line: https://github.com/bmorris3/mcmc_interact
+
 * machine learning
 
   sample dataset: 
