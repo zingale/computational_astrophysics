@@ -67,3 +67,10 @@
   and this: https://ui.adsabs.harvard.edu/abs/1999AJ....117.1023M/abstract
 
   nice example: https://docs.exoplanet.codes/en/v0.4.5/tutorials/astrometric/
+
+
+* Gaussian processes:
+
+  * review: https://arxiv.org/pdf/2209.08940.pdf
+
+  * https://github.com/bmorris3/gp_interact
