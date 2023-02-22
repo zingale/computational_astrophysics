@@ -18,6 +18,12 @@ We'll use a generalization of Newton's method to systems of equations.
 Solution procedure
 ------------------
 
+```{note}
+This is the simplest case of a multivariable root finding algorithm.  More
+sophisticated methods exist, but this method will give you a feel for what
+is involve
+```
+
 Start with an initial guess, ${\bf x}^{(0)}$
 
 Taylor expand our function seeking a correction $\delta {\bf x}$.  Each component has the form:

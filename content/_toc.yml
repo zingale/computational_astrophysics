@@ -49,6 +49,8 @@ parts:
         - file: basics/linear-algebra/la-cxx
       - file: basics/linear-algebra/condition-number
       - file: basics/linear-algebra/multivariate-roots
+        sections:
+        - file: basics/linear-algebra/application-lorenz
       - file: basics/linear-algebra/going-further
 
   - caption: Ordinary Differential Equations
