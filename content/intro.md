@@ -49,9 +49,25 @@ value problelms
 applied to the [Lane-Emden equation for polytropes](https://zingale.github.io/computational_astrophysics/ODEs/application-lane-emden.html).
 :::
 
+:::{grid-item-card} Lorenz System Stationary States
+A demonstration of using Newton's method to find
+the [stationary states of the Lorenz system](https://zingale.github.io/computational_astrophysics/basics/linear-algebra/application-lorenz.html).
+:::
+
+::::
+
+
+::::{grid}
+:gutter: 3
+
 :::{grid-item-card} X-ray timing
 Using FFTs on time-series data to
 [study low mass X-ray binaries](https://zingale.github.io/computational_astrophysics/ffts/application-lightcurves.html).
+:::
+
+:::{grid-item-card} Integrating the CNO Cycle
+Using stiff-ODE solvers to 
+[integrate an CNO reaction network](https://zingale.github.io/computational_astrophysics/reaction_networks/application-CNO-network.html)
 :::
 
 ::::

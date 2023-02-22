@@ -112,7 +112,7 @@ parts:
     - file: reaction_networks/ODEs-implicit-nonlinear-systems
     - file: reaction_networks/reactions
       sections:
-      - file: reaction_networks/integration-example
+      - file: reaction_networks/application-CNO-network
 
   - caption: Machine Learning
     chapters:
