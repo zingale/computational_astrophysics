@@ -48,6 +48,7 @@ parts:
         - file: basics/linear-algebra/gaussian_elimination_python
         - file: basics/linear-algebra/la-cxx
       - file: basics/linear-algebra/condition-number
+      - file: basics/linear-algebra/multivariate-roots
       - file: basics/linear-algebra/going-further
 
   - caption: Ordinary Differential Equations

@@ -28,7 +28,18 @@ where $n_s$ is the number of swaps.
 Matrix Inverse
 --------------
 
+We can use Gaussian elimination to find the inverse of our matrix ${\bf A}$ by starting with
 
+$${\bf A}{\bf A}^{-1} = {\bf I}$$
+
+where ${\bf I}$ is the identity matrix.  Consider a single column, $j$ of ${\bf A}^{-1}$ which we'll call
+${\bf x}^{(j)}$ and the corresponding column of ${\bf I}$ which we'll call ${\bf e}^{(j)}$.  Then we can
+solve for that column of the inverse by solving:
+
+$${\bf A} {\bf x}^{(j)} = {\bf e}^{(j)}$$
+
+We can actually work on all of the columns together
+to save on the computaitonal expense.
 
 Sparse Matrices
 ---------------
@@ -58,9 +69,6 @@ computational expense is in doing the factorization, this can be much
 less expensive when solving the same system with different righthand
 sides.
 
-
-SVD
----
 
 
 Iterative Methods
