@@ -64,6 +64,7 @@ parts:
       - file: ODEs/adaptive-orbits
       - file: ODEs/ODEs-scipy
       - file: ODEs/application-few-body
+    - file: ODEs/inclass-lorenz
     - file: ODEs/ODEs-conservation
       sections:
       - file: ODEs/ODEs-timereverse
