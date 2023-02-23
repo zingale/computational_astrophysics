@@ -47,6 +47,7 @@ parts:
         - file: basics/linear-algebra/gaussian_elimination
         - file: basics/linear-algebra/gaussian_elimination_python
         - file: basics/linear-algebra/la-cxx
+      - file: basics/linear-algebra/linear-algebra-libraries
       - file: basics/linear-algebra/condition-number
       - file: basics/linear-algebra/multivariate-roots
         sections:
