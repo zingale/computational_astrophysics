@@ -79,6 +79,7 @@ parts:
     - file: fitting/least_squares
       sections:
       - file: fitting/fitting-to-a-line
+      - file: fitting/generalized-linear-least-squares
     - file: ffts/fourier
       sections:
       - file: ffts/dft
