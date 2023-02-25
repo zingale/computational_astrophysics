@@ -77,6 +77,8 @@ parts:
   - caption: Working with Data Samples
     chapters:
     - file: fitting/least_squares
+      sections:
+      - file: fitting/fitting-to-a-line
     - file: ffts/fourier
       sections:
       - file: ffts/dft
