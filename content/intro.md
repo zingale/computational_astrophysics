@@ -60,6 +60,11 @@ the [stationary states of the Lorenz system](https://zingale.github.io/computati
 ::::{grid}
 :gutter: 3
 
+:::{grid-item-card} Hubble's Constant
+Using linear regression to [estimate $H_0$ from
+Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html).
+:::
+
 :::{grid-item-card} X-ray timing
 Using FFTs on time-series data to
 [study low mass X-ray binaries](https://zingale.github.io/computational_astrophysics/ffts/application-lightcurves.html).
