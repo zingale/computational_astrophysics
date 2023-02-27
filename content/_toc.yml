@@ -82,6 +82,7 @@ parts:
       - file: fitting/generalized-linear-least-squares
       - file: fitting/fitting-nonlinear
       - file: fitting/fitting-scipy
+      - file: fitting/application-snia-h0
     - file: ffts/fourier
       sections:
       - file: ffts/dft
