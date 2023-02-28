@@ -131,7 +131,7 @@ We can do the same procedure as before &mdash; use the first equation to
 eliminate $x$ in the other two equations.  We start by rewriting the first
 equation as:
 
-$$x + \frac{1}{\epsilon}y + \frac{1}{\epsilon}z + \frac{6}{\epsilon}$$
+$$x + \frac{1}{\epsilon}y + \frac{1}{\epsilon}z = \frac{6}{\epsilon}$$
 
 then adding or subtracting this from the other two, our system becomes:
 
