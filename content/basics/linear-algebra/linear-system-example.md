@@ -167,6 +167,78 @@ In terms of matrix form, partial pivoting means swapping rows of the
 matrix such that the element in the column we are eliminating from the
 rows below has the largest absolute magnitude.
 
+Let's redo this using pivoting.  To make the notation more compact, we'll use the
+augmented matrix form:
+
+$$
+\left ( \begin{array}{ccc|c}
+       \epsilon  &  1  &  1 & 6 \\
+       -1  &  2  &  0 & 3 \\
+       2  &  0  &  1 & 5 \end{array} \right )
+$$
+
+now we pivot, swapping the first and last rows, sinc the last row has the 
+largest magnitude of any entry in the first column:
+
+$$
+\left ( \begin{array}{ccc|c}
+       2  &  0  &  1 & 5 \\
+       -1  &  2  &  0 & 3 \\
+       \epsilon  &  1  &  1 & 6 \end{array} \right )
+$$
+
+now we do forward elimination, eliminating all the non-zero entries in the first
+column beneath row 1:
+
+$$
+\left ( \begin{array}{ccc|c}
+       2  &  0  &  1 & 5 \\
+       0  &  2  &  \tfrac{1}{2} & \tfrac{11}{2} \\
+       0  &  1  &  1 - \tfrac{\epsilon}{2} & 6 - \tfrac{5\epsilon}{2} \end{array} \right )
+$$
+
+next we can do the rounding, as $\epsilon \rightarrow 0$
+
+$$
+\left ( \begin{array}{ccc|c}
+       2  &  0  &  1 & 5 \\
+       0  &  2  &  \tfrac{1}{2} & \tfrac{11}{2} \\
+       0  &  1  &  1 & 6 \end{array} \right )
+$$
+
+Note now that this is not singular.  We can continue with forward elimination, removing
+all non-zero entries in the second column beneath row 2:
+
+$$
+\left ( \begin{array}{ccc|c}
+       2  &  0  &  1 & 5 \\
+       0  &  2  &  \tfrac{1}{2} & \tfrac{11}{2} \\
+       0  &  0  &  \tfrac{3}{4} & \tfrac{13}{4} \end{array} \right )
+$$
+
+Now we can do back substitution.  From the last row, we can read off 
+
+$$z = \frac{13}{3}$$
+
+and then putting this into the second row's linear equation, we get
+
+$$2 y + \frac{1}{2} z = 2 y + \frac{13}{6} = \frac{11}{2}$$
+
+or 
+
+$$y = \frac{5}{3}$$
+
+then moving up to the first row, we have:
+
+$$2 x + z = 2 x + \frac{13}{3} = 5$$
+
+so
+
+$$x = \frac{1}{3}$$
+
+We see that pivoting made this system solvable even in the presence of roundoff.
+
+
 A further refinement on this is [scaled
 pivoting](https://en.wikipedia.org/wiki/Pivot_element#Scaled_pivoting)
 which is when we first scale each row by its largest element, and then

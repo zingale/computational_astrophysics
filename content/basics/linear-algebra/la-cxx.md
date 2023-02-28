@@ -48,3 +48,14 @@ To run this, we would do:
 g++ -I . --std=c++17 -o gauss_test gauss_test.cpp
 ./gauss_test
 ```
+
+Try it
+------
+
+Let's test this out on the system we used when we introduced pivoting:
+
+\begin{alignat*}{4}
+ \epsilon x &+ y    &+ z  &= 6 \\
+-x &+ 2y   &     &= 3 \\
+2x &+      &+ z  &= 5
+\end{alignat*}
