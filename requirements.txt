@@ -5,3 +5,4 @@ scipy
 sympy
 pynucastro
 sphinx_design
+#sphinx-book-theme==1.0.0
