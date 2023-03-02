@@ -73,7 +73,7 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
     for (int irow = 0; irow < N; ++irow) {
         double maxval = std::numeric_limits<double>::lowest();
         for (int jcol = 0; jcol < N; ++jcol) {
-            maxval = std::max(maxval, A(irow, jcol));
+            maxval = std::max(maxval, std::abs(A(irow, jcol)));
         }
         scales[irow] = maxval;
     }
@@ -96,7 +96,7 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
         int row_max{krow};
         double col_max = std::numeric_limits<double>::lowest();
         for (int kk = krow; kk < N; ++kk) {
-            double scaled_col_val = A(kk, krow) / scales[kk];
+            double scaled_col_val = std::abs(A(kk, krow)) / scales[kk];
             if (scaled_col_val > col_max) {
                 col_max = scaled_col_val;
                 row_max = kk;

@@ -7,7 +7,7 @@
 inline
 std::vector<double> matmul(const Array& A, const std::vector<double>& x) {
 
-    assert (A.ncols() == static_cast<double>(x.size()));
+    assert (A.ncols() == static_cast<int>(x.size()));
 
     std::vector<double> b(A.nrows(), 0.0);
 
