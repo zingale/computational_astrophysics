@@ -76,6 +76,12 @@ parts:
 
   - caption: Working with Data Samples
     chapters:
+    - file: ffts/fourier
+      sections:
+      - file: ffts/dft
+      - file: ffts/dft-tests
+      - file: ffts/fft
+      - file: ffts/application-lightcurves
     - file: fitting/least_squares
       sections:
       - file: fitting/fitting-to-a-line
@@ -83,12 +89,6 @@ parts:
       - file: fitting/fitting-nonlinear
       - file: fitting/fitting-scipy
       - file: fitting/application-snia-h0
-    - file: ffts/fourier
-      sections:
-      - file: ffts/dft
-      - file: ffts/dft-tests
-      - file: ffts/fft
-      - file: ffts/application-lightcurves
 
   - caption: Partial Differential Equations
     chapters:
