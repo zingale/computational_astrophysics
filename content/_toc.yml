@@ -80,6 +80,7 @@ parts:
       sections:
       - file: ffts/dft
       - file: ffts/dft-tests
+      - file: ffts/inclass-filter
       - file: ffts/fft
       - file: ffts/application-lightcurves
     - file: fitting/least_squares
