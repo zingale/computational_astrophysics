@@ -84,6 +84,8 @@ parts:
       - file: ffts/fft
       - file: ffts/application-lightcurves
     - file: interpolation/interpolation
+      sections:
+      - file: interpolation/lagrange-interpolation
     - file: fitting/least_squares
       sections:
       - file: fitting/fitting-to-a-line
