@@ -83,6 +83,7 @@ parts:
       - file: ffts/inclass-filter
       - file: ffts/fft
       - file: ffts/application-lightcurves
+    - file: interpolation/interpolation
     - file: fitting/least_squares
       sections:
       - file: fitting/fitting-to-a-line
