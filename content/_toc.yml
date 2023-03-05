@@ -86,6 +86,7 @@ parts:
     - file: interpolation/interpolation
       sections:
       - file: interpolation/lagrange-interpolation
+      - file: interpolation/conservative-interpolation
     - file: fitting/least_squares
       sections:
       - file: fitting/fitting-to-a-line
