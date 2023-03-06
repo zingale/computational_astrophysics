@@ -9,7 +9,7 @@ All code should be uploaded to Brightspace along with any analytic
 derivations, notes, etc.
 ```
 
-1. The Hilbert matrix, ${\bf H}$ is defined such
+1. The [Hilbert matrix](https://en.wikipedia.org/wiki/Hilbert_matrix), ${\bf H}$ is defined such
    that its elements are:
 
    $$H_{ij} = (i + j -1)^{-1}$$
