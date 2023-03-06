@@ -1,4 +1,4 @@
-'65;6800;1c# Homework 4
+# Homework 4
 
 ```{note}
 You are free to discuss these questions with your classmates and on
