@@ -142,4 +142,5 @@ parts:
       sections:
       - file: homework/hw2-solutions
     - file: homework/homework3
+    - file: homework/homework4
 
