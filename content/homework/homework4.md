@@ -1,4 +1,4 @@
-# Homework 4
+'65;6800;1c# Homework 4
 
 ```{note}
 You are free to discuss these questions with your classmates and on
@@ -9,12 +9,48 @@ All code should be uploaded to Brightspace along with any analytic
 derivations, notes, etc.
 ```
 
+1. The Hilbert matrix, ${\bf H}$ is defined such
+   that its elements are:
 
-1. A convolution is defined as:
+   $$H_{ij} = (i + j -1)^{-1}$$
+
+   for $i = 1, \ldots, N$ and $j = 1, \ldots, N$.  This matrix is known to
+   have a large condition number.  Here we will explore the influence of this
+   by solving progressively larger linear systems.
+
+   Define a vector ${\bf x}^{(N)} = (0, 1, \ldots, N-1)^T$ and call the
+   $N\times N$ Hilbert matrix ${\bf H}^{(N)}$.  We if we define the righthand
+   side of a linear system simply as:
+
+   $${\bf b}^{(N)} = {\bf H}^{(N)} {\bf x}^{(N)}$$
+
+   Using Gaussian elimination (you can use my code on the website or a
+   built-in version in whatever language you are using), solve the system
+
+   $${\bf H}^{(N)} \tilde{\bf x} = {\bf b}^{(N)}$$
+
+   for $N = 2, \ldots, 15$.
+
+   Define the error in your solution as
+
+   $$\epsilon = \max |\tilde{\bf x}  - {\bf x}^{(N)} |$$
+
+   For what value of $N$ does this error become
+   $\mathcal{O}(1)$?---i.e. even the first digit in your computed
+   solution is wrong.
+
+   ```{note}
+   Some languages have a built-in routine to compute the
+   ondition number, if you can do so easily, compute the condition
+   number of the matrix for each $N$ and comment on how this is
+   reflected in your solution.
+   ```
+
+2. A convolution is defined as:
 
    $$(f \star g)(t) \equiv \int_{-\infty}^{\infty} f(\tau) g(t - \tau) d\tau$$
 
-   It is easy to compute this with FFTs, via the {\em convolution theorem},
+   It is easy to compute this with FFTs, via the [_convolution theorem_](https://en.wikipedia.org/wiki/Convolution_theorem):
 
    $$\mathcal{F}\{f \star g\} = \mathcal{F}\{f\} \, \mathcal{F}\{g\}$$
 
@@ -35,6 +71,8 @@ derivations, notes, etc.
 
    $$q^\mathrm{gauss}(x) = \frac{1}{\sigma \sqrt{2 \pi}}\, e^{-\frac{1}{2} (x/\sigma)^2}$$
 
+   You are free to choose the width of the Gaussian, $\sigma$.
+
    * Make the kernel periodic on the domain defined by the $x$ in
      the `signal.txt` file.  You can do this simply by left-right
      flipping the definitions above and applying them at the far end of
@@ -50,13 +88,12 @@ derivations, notes, etc.
 
    * Compute the convolution of $f^\mathrm{(noisy)}(x)$ and $q(x)$
      in Fourier space and transform back to real space, and plot the
-     {\em de-noised} function together with the original signal from
+     _de-noised_ function together with the original signal from
      the `signal.txt` (i.e., $f^\mathrm{(orig)}(x)$).
 
-   * Experiment with the tunable parameters in the kernels ($L$ or $\sigma$)
+   * Experiment with the tunable parameter, $\sigma$,
      to see how clean you can get the noisy data and comment on what you see.
 
   This process is used a lot in image processing both to remove noise
-  and to compensate for the behavior of cameras to sharpen images.
-
-
+  and to compensate for the behavior of cameras to sharpen images.  In image processing
+  programs, this is what is done in the _Gaussian blur_ transform.
