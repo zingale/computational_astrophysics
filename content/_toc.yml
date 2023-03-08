@@ -21,6 +21,14 @@ parts:
     - file: python/numpy-basics.ipynb
     - file: python/matplotlib-basics.ipynb
 
+  - caption: Git and Github
+    chapters:
+    - file: git/version-control
+    - file: git/git
+    - file: git/git-branches
+    - file: git/git-remotes
+    - file: git/github
+
   - caption: Fundamentals
     chapters:
     - file: basics/floating-point/floating-point-details
