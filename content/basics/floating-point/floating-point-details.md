@@ -55,6 +55,11 @@ print(f"{0.1:30.20f}")
 ```
 ````
 
+```{note}
+You can interactively explore the floating-point formats at this nice website:
+[float.exposed](https://float.exposed/0x4630e9c60554875f)
+```
+
 Precision
 ---------
 
