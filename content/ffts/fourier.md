@@ -54,6 +54,14 @@ The convention we choose here is the same as used by the NumPy library in [numpy
 The discrete Fourier transform is closely related to the Fourier series.
 ```
 
+Sometimes we write the DFT operation as:
+
+$$F_k = \mathcal{F}(f_n)$$
+
+and the inverse as:
+
+$$f_n = \mathcal{F}^{-1}(F_k)$$
+
 ### Significance of real and imaginary parts
 
 Recall that we are integrating with a factor $e^{-2\pi i k x}$.  Euler's formula

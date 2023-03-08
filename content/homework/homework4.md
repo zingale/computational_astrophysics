@@ -18,8 +18,12 @@ derivations, notes, etc.
    have a large condition number.  Here we will explore the influence of this
    by solving progressively larger linear systems.
 
-   Define a vector ${\bf x}^{(N)} = (0, 1, \ldots, N-1)^T$ and call the
-   $N\times N$ Hilbert matrix ${\bf H}^{(N)}$.  We if we define the righthand
+   Define a vector:
+
+   $${\bf x}^{(N)} = (0, 1, \ldots, N-1)^T$$
+
+   and call the
+   $N\times N$ Hilbert matrix ${\bf H}^{(N)}$.  Define the righthand
    side of a linear system simply as:
 
    $${\bf b}^{(N)} = {\bf H}^{(N)} {\bf x}^{(N)}$$
@@ -54,6 +58,7 @@ derivations, notes, etc.
 
    $$\mathcal{F}\{f \star g\} = \mathcal{F}\{f\} \, \mathcal{F}\{g\}$$
 
+   Here $\mathcal{F}\{\}$ indicates _taking the Fourier transform_.
    That is the Fourier transform of the convolution of $f$ and $g$ is simply
    the product of the individual transforms of $f$ and $g$.  This allows us
    to compute the convolution via multiplication in Fourier space and then take
