@@ -1,0 +1,1063 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Burgers’ equation &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'advection/burgers/burgers-methods';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exercises" href="exercises.html" />
+    <link rel="prev" title="Burgers’ Equation" href="burgers.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/rt_small.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/rt_small.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python-basics.html">Python Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python-functions-classes.html">Functions and Classes</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-classes.html">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../git/git-remotes.html">Git Remotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../git/github.html">github</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/floating-point/floating-point-details.html">Floating Point Format</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../basics/diff-int/differentiation.html">Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/diff-int/integration.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/roots/root-finding.html">Root finding</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/linear-algebra/la-overview.html">Linear Algebra</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ODEs/inclass-lorenz.html">In-Class Example</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-conservation.html">ODEs and Conservation</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/boundary-value-problems.html">Two Point Boundary Value Problems</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ODEs/more-applications.html">More Applications</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffts/fourier.html">Fourier Transforms</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/inclass-pendulum.html">In-class Example: The Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interpolation/interpolation.html">Interpolation</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/conservative-interpolation.html">Conservative Interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fitting/least_squares.html">Least Squares Regression</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection.html">Linear Advection Equation</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection-partI.html">Linear Advection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection-partII.html">Finite-Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection-partIII.html">Second-order advection</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="burgers.html">Burgers’ Equation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Burgers’ equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/elliptic-relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid.html">Multigrid</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Stiff ODEs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../reaction_networks/ODEs-implicit.html">Implicit Methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reaction_networks/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reaction_networks/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../reaction_networks/reactions.html">Application: Nuclear Reaction Networks</a><input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reaction_networks/application-CNO-network.html">Integration Example</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/machine-learning.html">Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/machine-learning-basics.html">Machine Learning Introduction</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework1.html">Homework 1</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/hw1-solutions.html">Homework 1 solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework2.html">Homework 2</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/hw2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework3.html">Homework 3</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/hw3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/homework4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/advection/burgers/burgers-methods.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/advection/burgers/burgers-methods.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Fadvection/burgers/burgers-methods.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/advection/burgers/burgers-methods.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Burgers’ equation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solution">Numerical solution</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="burgers-equation">
+<h1>Burgers’ equation<a class="headerlink" href="#burgers-equation" title="Permalink to this heading">#</a></h1>
+<p>The inviscid Burgers’ equation is the simplest nonlinear wave equation, and serves as a great stepping stone toward doing full hydrodynamics.</p>
+<div class="math notranslate nohighlight">
+\[u_t + u u_x = 0\]</div>
+<p>This looks like the linear advection equation, except the quantity being advected is the velocity itself.  This means that <span class="math notranslate nohighlight">\(u\)</span> is no longer a constant, but can vary in space and time.</p>
+<p>Written in conservative form,</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial u}{\partial t} + \frac{\partial F(u)}{\partial x} = 0\]</div>
+<p>it appears as:</p>
+<div class="math notranslate nohighlight">
+\[u_t + \left [ \frac{1}{2} u^2 \right ]_x = 0\]</div>
+<p>so the flux is <span class="math notranslate nohighlight">\(F(u) = \frac{1}{2} u^2\)</span>.</p>
+<p>In the finite volume approach, we integrate over the volume of a cell to get the update:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \langle u \rangle_i}{\partial t} = - \frac{1}{\Delta x} (F_{i+1/2} - F_{i-1/2})\]</div>
+<p>To second order accuracy, as we saw previously, <span class="math notranslate nohighlight">\(\langle u \rangle_i \approx u_i\)</span>, so we’ll drop the <span class="math notranslate nohighlight">\(\langle \rangle\)</span> here.</p>
+<p>Our solution method is essentially the same, aside from the Riemann problem.  We still want to use the idea of upwinding, but now we have a problem—the nonlinear nature of the Burgers’ equation means that information can “pile up” and we lose track of where the flow is coming from.  This gives rise to a nonlinear wave called a shock.</p>
+<p>For the linear advection equation, the solution was unchanged along the lines <span class="math notranslate nohighlight">\(x - ut = \mbox{constant}\)</span>—we called these the <em>characteristic curves</em>.</p>
+<p>We can visualize the characteristics as show below:</p>
+<p><img alt="advection equation characteristics" src="../../_images/advection-characteristics.png" /></p>
+<p>The top panel shows the initial <span class="math notranslate nohighlight">\(a(x, t=0)\)</span>, and the bottom shows the characteristic curves in the <span class="math notranslate nohighlight">\(x\)</span>-<span class="math notranslate nohighlight">\(t\)</span> spacetime diagram.  We see that at any <span class="math notranslate nohighlight">\(t &gt; 0\)</span>, we find the value of <span class="math notranslate nohighlight">\(a(x, t)\)</span> by simply tracing backwards along the characteristic curve to the initial conditions.  Since <span class="math notranslate nohighlight">\(u\)</span> is constant in the advection equation, the characteristic curves are parallel.</p>
+<p>The characteristic curves are the curves on which the solution is constant.
+For Burgers’ equation, the characteristic curves are given by <span class="math notranslate nohighlight">\(dx/dt = u\)</span>, but now <span class="math notranslate nohighlight">\(u\)</span> varies in the domain.  To see this, look at the change of <span class="math notranslate nohighlight">\(u\)</span> in a fluid element (the full, or Lagrangian time derivative):</p>
+<div class="math notranslate nohighlight">
+\[\frac{du}{dt} = \frac{\partial u}{\partial t} + \frac{dx}{dt} \frac{\partial u}{\partial x} =
+\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0\]</div>
+<p>We see that <span class="math notranslate nohighlight">\(du/dt = 0\)</span> since it just gives us the Burgers equation.  So <span class="math notranslate nohighlight">\(u\)</span> is constant along the curves <span class="math notranslate nohighlight">\(dx/dt = 0\)</span>, but now <span class="math notranslate nohighlight">\(u\)</span> varies in the domain.  So if we look at the characteristic curves in the spacetime diagram, we get:</p>
+<p><img alt="converging characteristics for the Burgers' equation" src="../../_images/burgers-characteristics-shock.png" /></p>
+<p>Now we see that, for these initial conditions, at some point in the future the characteristics intersect.  This means that there is not a unique curve that we can trace back along to find the value of <span class="math notranslate nohighlight">\(u(x,t)\)</span>.  The information about where the solution was coming from was lost.  This is the situation of a <em>shock</em>.  The correct solution here is to put a discontinuous jump between the left and right states where the characteristics intersect.  The speed of the shock can be found from the Rankine-Hugoniot conditions.</p>
+<p>It is also possible to get a <em>rarefaction</em> if the characteristics diverge:</p>
+<p><img alt="diverging characteristics for the Burgers' equation" src="../../_images/burgers-characteristics-rare.png" /></p>
+<section id="numerical-solution">
+<h2>Numerical solution<a class="headerlink" href="#numerical-solution" title="Permalink to this heading">#</a></h2>
+<p>We’ll use the same finite-volume grid class, with one change—we’ll allow for “outflow” boundary conditions.  These simply enforce a zero gradient in the ghost cells, so:</p>
+<div class="math notranslate nohighlight">
+\[u_{\mathrm{lo}-1} = u_{\mathrm{lo}}\]</div>
+<div class="math notranslate nohighlight">
+\[u_{\mathrm{lo}-2} = u_{\mathrm{lo}}\]</div>
+<p>and similar at the right boundary.</p>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FVGrid</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ng</span><span class="p">,</span> <span class="n">bc</span><span class="o">=</span><span class="s2">&quot;outflow&quot;</span><span class="p">,</span>
+                 <span class="n">xmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span> <span class="o">=</span> <span class="n">xmin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span> <span class="o">=</span> <span class="n">xmax</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ng</span> <span class="o">=</span> <span class="n">ng</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nx</span> <span class="o">=</span> <span class="n">nx</span>
+
+        <span class="c1"># python is zero-based.  Make easy intergers to know where the</span>
+        <span class="c1"># real data lives</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ilo</span> <span class="o">=</span> <span class="n">ng</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ihi</span> <span class="o">=</span> <span class="n">ng</span><span class="o">+</span><span class="n">nx</span><span class="o">-</span><span class="mi">1</span>
+
+        <span class="c1"># physical coords -- cell-centered, left and right edges</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">ng</span><span class="p">)</span><span class="o">-</span><span class="n">ng</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xl</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">ng</span><span class="p">)</span><span class="o">-</span><span class="n">ng</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xr</span> <span class="o">=</span> <span class="n">xmin</span> <span class="o">+</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nx</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">ng</span><span class="p">)</span><span class="o">-</span><span class="n">ng</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span>
+
+        <span class="c1"># storage for the solution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uinit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bc</span> <span class="o">=</span> <span class="n">bc</span>
+        
+    <span class="k">def</span> <span class="nf">scratch_array</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; return a scratch array dimensioned for our grid &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nx</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ng</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fill_BCs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atmp</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; fill all ghostcells &quot;&quot;&quot;</span>
+ 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc</span> <span class="o">==</span> <span class="s2">&quot;periodic&quot;</span><span class="p">:</span>
+
+            <span class="c1"># left boundary</span>
+            <span class="n">atmp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ilo</span><span class="p">]</span> <span class="o">=</span> <span class="n">atmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ihi</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">ng</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># right boundary</span>
+            <span class="n">atmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">atmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ilo</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">ng</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bc</span> <span class="o">==</span> <span class="s2">&quot;outflow&quot;</span><span class="p">:</span>
+
+            <span class="c1"># left boundary</span>
+            <span class="n">atmp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ilo</span><span class="p">]</span> <span class="o">=</span> <span class="n">atmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ilo</span><span class="p">]</span>
+
+            <span class="c1"># right boundary</span>
+            <span class="n">atmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">atmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ihi</span><span class="p">]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">&quot;invalid BC&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; return the norm of quantity e which lives on the grid &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ng</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nx</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dx</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uinit</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;initial conditions&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>The Riemann problem is more complicated.  If there is compression <span class="math notranslate nohighlight">\(u_l &gt; u_r\)</span>, then we have a shock, and we need to compute the shock speed and then upwind based on that.  For the Burgers’ equation, the shock speed is obtained via the Rankine-Hugoniot jump conditions as:</p>
+<div class="math notranslate nohighlight">
+\[S = \frac{f(u_r) - f(u_l)}{u_r - u_l} = \frac{ \frac{1}{2}u_r^2 - \frac{1}{2}u_l^2}{u_r - u_l} = \frac{1}{2} (u_l + u_r)\]</div>
+<p>For an interface in our domain:</p>
+<div class="math notranslate nohighlight">
+\[S = \frac{1}{2} (u_{i+1/2,L} + u_{i+1/2,R})\]</div>
+<p>Then our Riemann problem is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u_{i+1/2} = \mathcal{R}(u_{i+1/2,L}, u_{i+1/2,R}) = \left \{ \begin{array}{cc}
+         u_s &amp; \mbox{if}~ u_{i+1/2,L} &gt; u_{i+1/2,R} \\
+         u_r &amp; \mbox{otherwise} \end{array} \right .
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_s\)</span> is the shock case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u_s = \left \{ \begin{array}{cc}
+     u_{i+1/2,L} &amp; \mbox{if}~ S &gt; 0 \\
+     u_{i+1/2,R} &amp; \mbox{if}~ S &lt; 0 \end{array} \right .
+\end{split}\]</div>
+<p>and <span class="math notranslate nohighlight">\(u_r\)</span> is the rarefaction case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}u_r = \left \{ \begin{array}{cc}
+     u_{i+1/2,L} &amp; \mbox{if}~ u_{i+1/2,L} &gt; 0 \\
+     u_{i+1/2,R} &amp; \mbox{if}~ u_{i+1/2,R} &lt; 0 \\
+     0           &amp; \mbox{otherwise} \end{array} \right .
+\end{split}\]</div>
+<p>One we have the interface state, <span class="math notranslate nohighlight">\(u_{i+1/2}\)</span>, we can compute the flux:</p>
+<div class="math notranslate nohighlight">
+\[F_{i+1/2} = \frac{1}{2} u_{i+1/2}^2\]</div>
+<p>and then the divergence of the fluxes:</p>
+<div class="math notranslate nohighlight">
+\[-\frac{1}{\Delta x} (F_{i+1/2} - F_{i-1/2}) = -\frac{1}{\Delta x} \left ( \frac{1}{2} u_{i+1/2}^2 - \frac{1}{2} u_{i-1/2}^2 \right )\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flux_update</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;compute -div{F} for linear advection&quot;&quot;&quot;</span>
+
+    <span class="c1"># slope -- we&#39;ll do the minmod limiter</span>
+    
+    <span class="c1"># dl = u_i - u_{i-1}</span>
+    <span class="n">dl</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+    <span class="n">dl</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># dr = u_{i+1} - u_i</span>
+    <span class="n">dr</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+    <span class="n">dr</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">u</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+    
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">dl</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">fabs</span><span class="p">(</span><span class="n">dr</span><span class="p">),</span> <span class="n">dl</span><span class="p">,</span> <span class="n">dr</span><span class="p">)</span>
+    <span class="n">du</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">dl</span><span class="o">*</span><span class="n">dr</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1"># unlimited</span>
+    <span class="c1">#du[gr.ilo-1:gr.ihi+2] = 0.5*(u[gr.ilo:gr.ihi+3] - u[gr.ilo-2:gr.ihi+1])</span>
+
+    
+    <span class="c1"># compute the left and right interface states</span>
+    <span class="c1"># Note that there are 1 more interfaces than zones</span>
+
+    <span class="n">ul</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+    <span class="n">ur</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+    
+    <span class="c1"># u_{i-1/2,R} = u_i - 1/2 du_i</span>
+    <span class="n">ur</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">du</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># u_{i-1/2,L} = u_{i-1} + 1/2 du_{i-1}</span>
+    <span class="n">ul</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">du</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># now do the Riemann problem</span>
+    
+    <span class="n">S</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">ul</span> <span class="o">+</span> <span class="n">ur</span><span class="p">)</span>
+    <span class="n">ushock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">S</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">ur</span><span class="p">)</span>
+    <span class="n">ushock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">S</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ushock</span><span class="p">)</span>
+    
+    <span class="c1"># rarefaction solution</span>
+    <span class="n">urare</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ur</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ur</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">urare</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ul</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">ul</span><span class="p">,</span> <span class="n">urare</span><span class="p">)</span>
+    
+    <span class="c1"># if we are compressive, then we are a shock</span>
+    <span class="n">us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ul</span> <span class="o">&gt;</span> <span class="n">ur</span><span class="p">,</span> <span class="n">ushock</span><span class="p">,</span> <span class="n">urare</span><span class="p">)</span>
+    
+    <span class="n">flux_diff</span> <span class="o">=</span> <span class="n">gr</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+    <span class="n">flux_diff</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">us</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span>
+                                  <span class="mf">0.5</span> <span class="o">*</span> <span class="n">us</span><span class="p">[</span><span class="n">gr</span><span class="o">.</span><span class="n">ilo</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">gr</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">gr</span><span class="o">.</span><span class="n">dx</span>
+
+    <span class="k">return</span> <span class="n">flux_diff</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now our main driver—the main difference here compared to linear advection is that we need to recompute dt each timestep, since <span class="math notranslate nohighlight">\(u\)</span> changes in space and time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">burgers_mol</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">init_cond</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="c1"># create a grid</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">FVGrid</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># setup initial conditions</span>
+    <span class="n">init_cond</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="n">g</span><span class="o">.</span><span class="n">uinit</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[:]</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tmax</span><span class="p">:</span>
+
+        <span class="c1"># compute the timestep</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">g</span><span class="o">.</span><span class="n">dx</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="n">tmax</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">tmax</span> <span class="o">-</span> <span class="n">t</span>
+
+        <span class="c1"># second-order RK integration</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">fill_BCs</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">)</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="n">flux_update</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">)</span>
+
+        <span class="n">utmp</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">scratch_array</span><span class="p">()</span>
+        <span class="n">utmp</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[:]</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k1</span><span class="p">[:]</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="n">fill_BCs</span><span class="p">(</span><span class="n">utmp</span><span class="p">)</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="n">flux_update</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">utmp</span><span class="p">)</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[:]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">k2</span><span class="p">[:]</span>
+
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+
+    <span class="k">return</span> <span class="n">g</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s test it out with a sine-like initial conditions.  Based on the characteristics shown above, this should result in a shock.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sine</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">0.333</span><span class="p">,</span>
+                           <span class="n">g</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mf">0.666</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">-</span><span class="mf">0.333</span><span class="p">)</span><span class="o">/</span><span class="mf">0.333</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mf">0.25</span>
+
+<span class="k">for</span> <span class="n">tmax</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">burgers_mol</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">init_cond</span><span class="o">=</span><span class="n">sine</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8782e7fc6c4471c98491b9aed226b5ae04f25bcb2b06c508febf91a9bb65e848.png" src="../../_images/8782e7fc6c4471c98491b9aed226b5ae04f25bcb2b06c508febf91a9bb65e848.png" />
+<img alt="../../_images/a869883b88950737f3df342569d95bfb259deb425d616fce8dad905438d40d8c.png" src="../../_images/a869883b88950737f3df342569d95bfb259deb425d616fce8dad905438d40d8c.png" />
+<img alt="../../_images/27ab021985639c76e91673ae007caddd867870b9a3cba5935318db841d5e78d8.png" src="../../_images/27ab021985639c76e91673ae007caddd867870b9a3cba5935318db841d5e78d8.png" />
+<img alt="../../_images/daeec0e2afd6f1fb0f6ce974496f433d5884be4d1bd12975364edb97d78ca7c3.png" src="../../_images/daeec0e2afd6f1fb0f6ce974496f433d5884be4d1bd12975364edb97d78ca7c3.png" />
+<img alt="../../_images/1b0a1a03bdcbb9593038ee2d2c6b9e2afe3adc8f51a7fa493c2aafac18dd662c.png" src="../../_images/1b0a1a03bdcbb9593038ee2d2c6b9e2afe3adc8f51a7fa493c2aafac18dd662c.png" />
+</div>
+</div>
+<p>Keep in mind that although our method ideally converges as second order in space and time, the slope limiter we use kicks in near discontinuities and reduces the converges locally to first order there.</p>
+<div class="alert alert-block alert-info">
+<p><strong>Exercise:</strong></p>
+<p>Implement initial conditions that will give rise to a rarefaction and evolve Burgers’ equation to see the evolution.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rare</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">burgers_mol</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">init_cond</span><span class="o">=</span><span class="n">rare</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/15bf5ad5d4499ce10c41c21fc32b7ac3f610625a1378c0230bfe86fabc99755e.png" src="../../_images/15bf5ad5d4499ce10c41c21fc32b7ac3f610625a1378c0230bfe86fabc99755e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">shock</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">2.0</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    
+<span class="n">g</span> <span class="o">=</span> <span class="n">burgers_mol</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="n">init_cond</span><span class="o">=</span><span class="n">shock</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a772a4dbfb09a7a1bc6f690e6541dcf135ee09d3151c40a3d871c233c1000813.png" src="../../_images/a772a4dbfb09a7a1bc6f690e6541dcf135ee09d3151c40a3d871c233c1000813.png" />
+</div>
+</div>
+<p>We see that at the end, the shock is at a position of 0.8 and that it started at 0.5.  We can just compute the shock speed as <span class="math notranslate nohighlight">\((x_\mathrm{final} - x_\mathrm{initial}) / \Delta t\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">0.8</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">/</span><span class="n">tmax</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5000000000000002
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the expected result from the jump conditions.  Because we solve the Riemann problem, which knows about the jump conditions, we get the shock speed correct.  These methods are therefore sometimes called <em>shock-capturing methods</em>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./advection/burgers"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="burgers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Burgers’ Equation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solution">Numerical solution</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2023; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

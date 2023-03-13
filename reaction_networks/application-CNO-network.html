@@ -1,0 +1,2017 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Integration Example &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/myfile.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reaction_networks/application-CNO-network';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Machine Learning" href="../machine-learning/machine-learning.html" />
+    <link rel="prev" title="Application: Nuclear Reaction Networks" href="reactions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/rt_small.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/rt_small.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-basics.html">Python Basics</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-functions-classes.html">Functions and Classes</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-classes.html">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git-remotes.html">Git Remotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/github.html">github</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/floating-point/floating-point-details.html">Floating Point Format</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/diff-int/differentiation.html">Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/integration.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/roots/root-finding.html">Root finding</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/linear-algebra/la-overview.html">Linear Algebra</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ODEs/inclass-lorenz.html">In-Class Example</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-conservation.html">ODEs and Conservation</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/boundary-value-problems.html">Two Point Boundary Value Problems</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ODEs/more-applications.html">More Applications</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffts/fourier.html">Fourier Transforms</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-pendulum.html">In-class Example: The Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interpolation/interpolation.html">Interpolation</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/conservative-interpolation.html">Conservative Interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fitting/least_squares.html">Least Squares Regression</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection/advection.html">Linear Advection Equation</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partI.html">Linear Advection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partII.html">Finite-Volumes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partIII.html">Second-order advection</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/burgers/burgers.html">Burgers’ Equation</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-methods.html">Burgers’ equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/exercises.html">Exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid.html">Multigrid</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Stiff ODEs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="ODEs-implicit.html">Implicit Methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="reactions.html">Application: Nuclear Reaction Networks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Integration Example</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine-learning.html">Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/machine-learning-basics.html">Machine Learning Introduction</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework1.html">Homework 1</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/hw1-solutions.html">Homework 1 solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework2.html">Homework 2</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/hw2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework3.html">Homework 3</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/hw3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../homework/homework4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/reaction_networks/application-CNO-network.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/reaction_networks/application-CNO-network.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Freaction_networks/application-CNO-network.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/reaction_networks/application-CNO-network.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Integration Example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pynucastro</span> <span class="k">as</span> <span class="nn">pyrl</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="integration-example">
+<h1>Integration Example<a class="headerlink" href="#integration-example" title="Permalink to this heading">#</a></h1>
+<p>We can use <a class="reference external" href="https://github.com/pynucastro/pynucastro">pynucastro</a> to generate the righthand side function for an astrophysical reaction network.</p>
+<p>We’ll create a CNO network that has the rates for all 4 CNO cycles + hot-CNO, as listed here:
+<a class="reference external" href="https://reaclib.jinaweb.org/popularRates.php">https://reaclib.jinaweb.org/popularRates.php</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c12-pg-n13-ls09&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;c13-pg-n14-nacr&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;n13--c13-wc12&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;n13-pg-o14-lg06&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;n14-pg-o15-im05&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;n15-pa-c12-nacr&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o14--n14-wc12&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o15--n15-wc12&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;n15-pg-o16-li10&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o16-pg-f17-ia08&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;f17--o17-wc12&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o17-pa-n14-il10&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o17-pg-f18-il10&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;f18--o18-wc12&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o18-pa-n15-il10&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o18-pg-f19-il10&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;f19-pa-o16-nacr&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;o14-ap-f17-Ha96c&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;f17-pg-ne18-cb09&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;ne18--f18-wc12&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;f18-pa-o15-il10&quot;</span><span class="p">]</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">pyrl</span><span class="o">.</span><span class="n">RateCollection</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can visualize the network and rates linking the nuclei</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rc</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/93f277eefa104a2fec80c0d35b79a13ca2911fc97f1714564f60f37370138d06.png" src="../_images/93f277eefa104a2fec80c0d35b79a13ca2911fc97f1714564f60f37370138d06.png" />
+<img alt="../_images/93f277eefa104a2fec80c0d35b79a13ca2911fc97f1714564f60f37370138d06.png" src="../_images/93f277eefa104a2fec80c0d35b79a13ca2911fc97f1714564f60f37370138d06.png" />
+</div>
+</div>
+<p>pynucastro can write out the python code needed to evaluate the reaction rates</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pynet</span> <span class="o">=</span> <span class="n">pyrl</span><span class="o">.</span><span class="n">PythonNetwork</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+<span class="n">pynet</span><span class="o">.</span><span class="n">write_network</span><span class="p">(</span><span class="s2">&quot;cno_integration_example.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">cat</span> cno_integration_example.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>import numba
+import numpy as np
+from numba.experimental import jitclass
+
+from pynucastro.rates import Tfactors, _find_rate_file
+from pynucastro.screening import PlasmaState, ScreenFactors
+
+jp = 0
+jhe4 = 1
+jc12 = 2
+jc13 = 3
+jn13 = 4
+jn14 = 5
+jn15 = 6
+jo14 = 7
+jo15 = 8
+jo16 = 9
+jo17 = 10
+jo18 = 11
+jf17 = 12
+jf18 = 13
+jf19 = 14
+jne18 = 15
+nnuc = 16
+
+A = np.zeros((nnuc), dtype=np.int32)
+
+A[jp] = 1
+A[jhe4] = 4
+A[jc12] = 12
+A[jc13] = 13
+A[jn13] = 13
+A[jn14] = 14
+A[jn15] = 15
+A[jo14] = 14
+A[jo15] = 15
+A[jo16] = 16
+A[jo17] = 17
+A[jo18] = 18
+A[jf17] = 17
+A[jf18] = 18
+A[jf19] = 19
+A[jne18] = 18
+
+Z = np.zeros((nnuc), dtype=np.int32)
+
+Z[jp] = 1
+Z[jhe4] = 2
+Z[jc12] = 6
+Z[jc13] = 6
+Z[jn13] = 7
+Z[jn14] = 7
+Z[jn15] = 7
+Z[jo14] = 8
+Z[jo15] = 8
+Z[jo16] = 8
+Z[jo17] = 8
+Z[jo18] = 8
+Z[jf17] = 9
+Z[jf18] = 9
+Z[jf19] = 9
+Z[jne18] = 10
+
+names = []
+names.append(&quot;h1&quot;)
+names.append(&quot;he4&quot;)
+names.append(&quot;c12&quot;)
+names.append(&quot;c13&quot;)
+names.append(&quot;n13&quot;)
+names.append(&quot;n14&quot;)
+names.append(&quot;n15&quot;)
+names.append(&quot;o14&quot;)
+names.append(&quot;o15&quot;)
+names.append(&quot;o16&quot;)
+names.append(&quot;o17&quot;)
+names.append(&quot;o18&quot;)
+names.append(&quot;f17&quot;)
+names.append(&quot;f18&quot;)
+names.append(&quot;f19&quot;)
+names.append(&quot;ne18&quot;)
+
+@jitclass([
+    (&quot;p_c12__n13&quot;, numba.float64),
+    (&quot;p_c13__n14&quot;, numba.float64),
+    (&quot;n13__c13__weak__wc12&quot;, numba.float64),
+    (&quot;p_n13__o14&quot;, numba.float64),
+    (&quot;p_n14__o15&quot;, numba.float64),
+    (&quot;p_n15__he4_c12&quot;, numba.float64),
+    (&quot;o14__n14__weak__wc12&quot;, numba.float64),
+    (&quot;o15__n15__weak__wc12&quot;, numba.float64),
+    (&quot;p_n15__o16&quot;, numba.float64),
+    (&quot;p_o16__f17&quot;, numba.float64),
+    (&quot;f17__o17__weak__wc12&quot;, numba.float64),
+    (&quot;p_o17__he4_n14&quot;, numba.float64),
+    (&quot;p_o17__f18&quot;, numba.float64),
+    (&quot;f18__o18__weak__wc12&quot;, numba.float64),
+    (&quot;p_o18__he4_n15&quot;, numba.float64),
+    (&quot;p_o18__f19&quot;, numba.float64),
+    (&quot;p_f19__he4_o16&quot;, numba.float64),
+    (&quot;he4_o14__p_f17&quot;, numba.float64),
+    (&quot;p_f17__ne18&quot;, numba.float64),
+    (&quot;ne18__f18__weak__wc12&quot;, numba.float64),
+    (&quot;p_f18__he4_o15&quot;, numba.float64),
+])
+class RateEval:
+    def __init__(self):
+        self.p_c12__n13 = np.nan
+        self.p_c13__n14 = np.nan
+        self.n13__c13__weak__wc12 = np.nan
+        self.p_n13__o14 = np.nan
+        self.p_n14__o15 = np.nan
+        self.p_n15__he4_c12 = np.nan
+        self.o14__n14__weak__wc12 = np.nan
+        self.o15__n15__weak__wc12 = np.nan
+        self.p_n15__o16 = np.nan
+        self.p_o16__f17 = np.nan
+        self.f17__o17__weak__wc12 = np.nan
+        self.p_o17__he4_n14 = np.nan
+        self.p_o17__f18 = np.nan
+        self.f18__o18__weak__wc12 = np.nan
+        self.p_o18__he4_n15 = np.nan
+        self.p_o18__f19 = np.nan
+        self.p_f19__he4_o16 = np.nan
+        self.he4_o14__p_f17 = np.nan
+        self.p_f17__ne18 = np.nan
+        self.ne18__f18__weak__wc12 = np.nan
+        self.p_f18__he4_o15 = np.nan
+
+@numba.njit()
+def ye(Y):
+    return np.sum(Z * Y)/np.sum(A * Y)
+
+@numba.njit()
+def p_c12__n13(rate_eval, tf):
+    # c12 + p --&gt; n13
+    rate = 0.0
+
+    # ls09n
+    rate += np.exp(  17.1482 + -13.692*tf.T913i + -0.230881*tf.T913
+                  + 4.44362*tf.T9 + -3.15898*tf.T953 + -0.666667*tf.lnT9)
+    # ls09r
+    rate += np.exp(  17.5428 + -3.77849*tf.T9i + -5.10735*tf.T913i + -2.24111*tf.T913
+                  + 0.148883*tf.T9 + -1.5*tf.lnT9)
+
+    rate_eval.p_c12__n13 = rate
+
+@numba.njit()
+def p_c13__n14(rate_eval, tf):
+    # c13 + p --&gt; n14
+    rate = 0.0
+
+    # nacrn
+    rate += np.exp(  18.5155 + -13.72*tf.T913i + -0.450018*tf.T913
+                  + 3.70823*tf.T9 + -1.70545*tf.T953 + -0.666667*tf.lnT9)
+    # nacrr
+    rate += np.exp(  13.9637 + -5.78147*tf.T9i + -0.196703*tf.T913
+                  + 0.142126*tf.T9 + -0.0238912*tf.T953 + -1.5*tf.lnT9)
+    # nacrr
+    rate += np.exp(  15.1825 + -13.5543*tf.T9i
+                  + -1.5*tf.lnT9)
+
+    rate_eval.p_c13__n14 = rate
+
+@numba.njit()
+def n13__c13__weak__wc12(rate_eval, tf):
+    # n13 --&gt; c13
+    rate = 0.0
+
+    # wc12w
+    rate += np.exp(  -6.7601)
+
+    rate_eval.n13__c13__weak__wc12 = rate
+
+@numba.njit()
+def p_n13__o14(rate_eval, tf):
+    # n13 + p --&gt; o14
+    rate = 0.0
+
+    # lg06n
+    rate += np.exp(  18.1356 + -15.1676*tf.T913i + 0.0955166*tf.T913
+                  + 3.0659*tf.T9 + -0.507339*tf.T953 + -0.666667*tf.lnT9)
+    # lg06r
+    rate += np.exp(  10.9971 + -6.12602*tf.T9i + 1.57122*tf.T913i
+                  + -1.5*tf.lnT9)
+
+    rate_eval.p_n13__o14 = rate
+
+@numba.njit()
+def p_n14__o15(rate_eval, tf):
+    # n14 + p --&gt; o15
+    rate = 0.0
+
+    # im05n
+    rate += np.exp(  17.01 + -15.193*tf.T913i + -0.161954*tf.T913
+                  + -7.52123*tf.T9 + -0.987565*tf.T953 + -0.666667*tf.lnT9)
+    # im05r
+    rate += np.exp(  6.73578 + -4.891*tf.T9i
+                  + 0.0682*tf.lnT9)
+    # im05r
+    rate += np.exp(  7.65444 + -2.998*tf.T9i
+                  + -1.5*tf.lnT9)
+    # im05n
+    rate += np.exp(  20.1169 + -15.193*tf.T913i + -4.63975*tf.T913
+                  + 9.73458*tf.T9 + -9.55051*tf.T953 + 0.333333*tf.lnT9)
+
+    rate_eval.p_n14__o15 = rate
+
+@numba.njit()
+def p_n15__he4_c12(rate_eval, tf):
+    # n15 + p --&gt; he4 + c12
+    rate = 0.0
+
+    # nacrn
+    rate += np.exp(  27.4764 + -15.253*tf.T913i + 1.59318*tf.T913
+                  + 2.4479*tf.T9 + -2.19708*tf.T953 + -0.666667*tf.lnT9)
+    # nacrr
+    rate += np.exp(  -6.57522 + -1.1638*tf.T9i + 22.7105*tf.T913
+                  + -2.90707*tf.T9 + 0.205754*tf.T953 + -1.5*tf.lnT9)
+    # nacrr
+    rate += np.exp(  20.8972 + -7.406*tf.T9i
+                  + -1.5*tf.lnT9)
+    # nacrr
+    rate += np.exp(  -4.87347 + -2.02117*tf.T9i + 30.8497*tf.T913
+                  + -8.50433*tf.T9 + -1.54426*tf.T953 + -1.5*tf.lnT9)
+
+    rate_eval.p_n15__he4_c12 = rate
+
+@numba.njit()
+def o14__n14__weak__wc12(rate_eval, tf):
+    # o14 --&gt; n14
+    rate = 0.0
+
+    # wc12w
+    rate += np.exp(  -4.62354)
+
+    rate_eval.o14__n14__weak__wc12 = rate
+
+@numba.njit()
+def o15__n15__weak__wc12(rate_eval, tf):
+    # o15 --&gt; n15
+    rate = 0.0
+
+    # wc12w
+    rate += np.exp(  -5.17053)
+
+    rate_eval.o15__n15__weak__wc12 = rate
+
+@numba.njit()
+def p_n15__o16(rate_eval, tf):
+    # n15 + p --&gt; o16
+    rate = 0.0
+
+    # li10r
+    rate += np.exp(  14.5444 + -10.2295*tf.T9i
+                  + 0.0459037*tf.T9 + -1.5*tf.lnT9)
+    # li10r
+    rate += np.exp(  6.59056 + -2.92315*tf.T9i
+                  + -1.5*tf.lnT9)
+    # li10n
+    rate += np.exp(  20.0176 + -15.24*tf.T913i + 0.334926*tf.T913
+                  + 4.59088*tf.T9 + -4.78468*tf.T953 + -0.666667*tf.lnT9)
+
+    rate_eval.p_n15__o16 = rate
+
+@numba.njit()
+def p_o16__f17(rate_eval, tf):
+    # o16 + p --&gt; f17
+    rate = 0.0
+
+    # ia08n
+    rate += np.exp(  19.0904 + -16.696*tf.T913i + -1.16252*tf.T913
+                  + 0.267703*tf.T9 + -0.0338411*tf.T953 + -0.666667*tf.lnT9)
+
+    rate_eval.p_o16__f17 = rate
+
+@numba.njit()
+def f17__o17__weak__wc12(rate_eval, tf):
+    # f17 --&gt; o17
+    rate = 0.0
+
+    # wc12w
+    rate += np.exp(  -4.53318)
+
+    rate_eval.f17__o17__weak__wc12 = rate
+
+@numba.njit()
+def p_o17__he4_n14(rate_eval, tf):
+    # o17 + p --&gt; he4 + n14
+    rate = 0.0
+
+    # il10r
+    rate += np.exp(  10.174 + -4.95865*tf.T9i + 5.10182*tf.T913
+                  + 0.379373*tf.T9 + -0.0672515*tf.T953 + -1.5*tf.lnT9)
+    # il10r
+    rate += np.exp(  5.5336 + -2.11477*tf.T9i
+                  + -1.5*tf.lnT9)
+    # il10r
+    rate += np.exp(  -7.20763 + -0.753395*tf.T9i
+                  + -1.5*tf.lnT9)
+    # il10n
+    rate += np.exp(  19.579 + -16.9078*tf.T913i
+                  + -2.0*tf.T953 + -0.666667*tf.lnT9)
+
+    rate_eval.p_o17__he4_n14 = rate
+
+@numba.njit()
+def p_o17__f18(rate_eval, tf):
+    # o17 + p --&gt; f18
+    rate = 0.0
+
+    # il10r
+    rate += np.exp(  9.39048 + -6.22828*tf.T9i + 2.31435*tf.T913
+                  + -0.302835*tf.T9 + 0.020133*tf.T953 + -1.5*tf.lnT9)
+    # il10r
+    rate += np.exp(  -13.077 + -0.746296*tf.T9i
+                  + -1.5*tf.lnT9)
+    # il10n
+    rate += np.exp(  15.8929 + -16.4035*tf.T913i + 4.31885*tf.T913
+                  + -0.709921*tf.T9 + -2.0*tf.T953 + -0.666667*tf.lnT9)
+
+    rate_eval.p_o17__f18 = rate
+
+@numba.njit()
+def f18__o18__weak__wc12(rate_eval, tf):
+    # f18 --&gt; o18
+    rate = 0.0
+
+    # wc12w
+    rate += np.exp(  -9.15982)
+
+    rate_eval.f18__o18__weak__wc12 = rate
+
+@numba.njit()
+def p_o18__he4_n15(rate_eval, tf):
+    # o18 + p --&gt; he4 + n15
+    rate = 0.0
+
+    # il10r
+    rate += np.exp(  -27.9044 + -0.245884*tf.T9i
+                  + -1.5*tf.lnT9)
+    # il10n
+    rate += np.exp(  26.9671 + -16.6979*tf.T913i
+                  + -3.0*tf.T953 + -0.666667*tf.lnT9)
+    # il10r
+    rate += np.exp(  8.94352 + -5.32335*tf.T9i + 11.6568*tf.T913
+                  + -2.16303*tf.T9 + 0.209965*tf.T953 + -1.5*tf.lnT9)
+    # il10r
+    rate += np.exp(  10.2725 + -1.663*tf.T9i
+                  + -1.5*tf.lnT9)
+
+    rate_eval.p_o18__he4_n15 = rate
+
+@numba.njit()
+def p_o18__f19(rate_eval, tf):
+    # o18 + p --&gt; f19
+    rate = 0.0
+
+    # il10r
+    rate += np.exp(  5.07648 + -1.65681*tf.T9i
+                  + -1.5*tf.lnT9)
+    # il10r
+    rate += np.exp(  -35.0079 + -0.244743*tf.T9i
+                  + -1.5*tf.lnT9)
+    # il10n
+    rate += np.exp(  19.917 + -16.7246*tf.T913i
+                  + -3.0*tf.T953 + -0.666667*tf.lnT9)
+    # il10r
+    rate += np.exp(  7.26876 + -6.7253*tf.T9i + 3.99059*tf.T913
+                  + -0.593127*tf.T9 + 0.0877534*tf.T953 + -1.5*tf.lnT9)
+
+    rate_eval.p_o18__f19 = rate
+
+@numba.njit()
+def p_f19__he4_o16(rate_eval, tf):
+    # f19 + p --&gt; he4 + o16
+    rate = 0.0
+
+    # nacr 
+    rate += np.exp(  15.1955 + -3.75185*tf.T9i
+                  + -1.5*tf.lnT9)
+    # nacr 
+    rate += np.exp(  8.239 + -2.46828*tf.T9i
+                  + -1.5*tf.lnT9)
+    # nacr 
+    rate += np.exp(  -52.7043 + -0.12765*tf.T9i
+                  + -1.5*tf.lnT9)
+    # nacr 
+    rate += np.exp(  26.2916 + -18.116*tf.T913i
+                  + 1.86674*tf.T9 + -7.5666*tf.T953 + -0.666667*tf.lnT9)
+    # nacrr
+    rate += np.exp(  14.3586 + -3.286*tf.T9i
+                  + -0.21103*tf.T9 + 2.87702*tf.lnT9)
+
+    rate_eval.p_f19__he4_o16 = rate
+
+@numba.njit()
+def he4_o14__p_f17(rate_eval, tf):
+    # o14 + he4 --&gt; p + f17
+    rate = 0.0
+
+    # Ha96n
+    rate += np.exp(  40.8358 + -39.388*tf.T913i + -17.4673*tf.T913
+                  + 35.3029*tf.T9 + -24.8162*tf.T953 + -0.666667*tf.lnT9)
+    # Ha96r
+    rate += np.exp(  16.3087 + -22.51*tf.T9i
+                  + -1.5*tf.lnT9)
+    # Ha96r
+    rate += np.exp(  11.1184 + -13.6*tf.T9i
+                  + -1.5*tf.lnT9)
+    # Ha96r
+    rate += np.exp(  -106.091 + -0.453036*tf.T9i
+                  + -1.5*tf.lnT9)
+    # Ha96r
+    rate += np.exp(  12.1289 + -12.0223*tf.T9i
+                  + -1.5*tf.lnT9)
+    # Ha96r
+    rate += np.exp(  18.6518 + -26.0*tf.T9i
+                  + -1.5*tf.lnT9)
+
+    rate_eval.he4_o14__p_f17 = rate
+
+@numba.njit()
+def p_f17__ne18(rate_eval, tf):
+    # f17 + p --&gt; ne18
+    rate = 0.0
+
+    # cb09 
+    rate += np.exp(  27.5778 + -4.95969*tf.T9i + -21.3249*tf.T913i + -0.230774*tf.T913
+                  + 0.917931*tf.T9 + -0.0440377*tf.T953 + -7.36014*tf.lnT9)
+    # cb09 
+    rate += np.exp(  -7.84708 + -0.0323504*tf.T9i + -14.2191*tf.T913i + 34.0647*tf.T913
+                  + -16.5698*tf.T9 + 2.48116*tf.T953 + -2.13376*tf.lnT9)
+
+    rate_eval.p_f17__ne18 = rate
+
+@numba.njit()
+def ne18__f18__weak__wc12(rate_eval, tf):
+    # ne18 --&gt; f18
+    rate = 0.0
+
+    # wc12w
+    rate += np.exp(  -0.879336)
+
+    rate_eval.ne18__f18__weak__wc12 = rate
+
+@numba.njit()
+def p_f18__he4_o15(rate_eval, tf):
+    # f18 + p --&gt; he4 + o15
+    rate = 0.0
+
+    # il10n
+    rate += np.exp(  62.0058 + -21.4023*tf.T913i + -80.8891*tf.T913
+                  + 134.6*tf.T9 + -126.504*tf.T953 + -0.666667*tf.lnT9)
+    # il10r
+    rate += np.exp(  1.75704 + -3.01675*tf.T9i + 13.3223*tf.T913
+                  + -1.36696*tf.T9 + 0.0757363*tf.T953 + -1.5*tf.lnT9)
+    # il10r
+    rate += np.exp(  -31.7388 + -0.376432*tf.T9i + 61.738*tf.T913
+                  + -108.29*tf.T9 + -34.2365*tf.T953 + -1.5*tf.lnT9)
+
+    rate_eval.p_f18__he4_o15 = rate
+
+def rhs(t, Y, rho, T, screen_func=None):
+    return rhs_eq(t, Y, rho, T, screen_func)
+
+@numba.njit()
+def rhs_eq(t, Y, rho, T, screen_func):
+
+    tf = Tfactors(T)
+    rate_eval = RateEval()
+
+    # reaclib rates
+    p_c12__n13(rate_eval, tf)
+    p_c13__n14(rate_eval, tf)
+    n13__c13__weak__wc12(rate_eval, tf)
+    p_n13__o14(rate_eval, tf)
+    p_n14__o15(rate_eval, tf)
+    p_n15__he4_c12(rate_eval, tf)
+    o14__n14__weak__wc12(rate_eval, tf)
+    o15__n15__weak__wc12(rate_eval, tf)
+    p_n15__o16(rate_eval, tf)
+    p_o16__f17(rate_eval, tf)
+    f17__o17__weak__wc12(rate_eval, tf)
+    p_o17__he4_n14(rate_eval, tf)
+    p_o17__f18(rate_eval, tf)
+    f18__o18__weak__wc12(rate_eval, tf)
+    p_o18__he4_n15(rate_eval, tf)
+    p_o18__f19(rate_eval, tf)
+    p_f19__he4_o16(rate_eval, tf)
+    he4_o14__p_f17(rate_eval, tf)
+    p_f17__ne18(rate_eval, tf)
+    ne18__f18__weak__wc12(rate_eval, tf)
+    p_f18__he4_o15(rate_eval, tf)
+
+    if screen_func is not None:
+        plasma_state = PlasmaState(T, rho, Y, Z)
+
+        scn_fac = ScreenFactors(1, 1, 6, 12)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_c12__n13 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 6, 13)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_c13__n14 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 7, 13)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_n13__o14 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 7, 14)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_n14__o15 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 7, 15)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_n15__he4_c12 *= scor
+        rate_eval.p_n15__o16 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 8, 16)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_o16__f17 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 8, 17)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_o17__he4_n14 *= scor
+        rate_eval.p_o17__f18 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 8, 18)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_o18__he4_n15 *= scor
+        rate_eval.p_o18__f19 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 9, 19)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_f19__he4_o16 *= scor
+
+        scn_fac = ScreenFactors(2, 4, 8, 14)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.he4_o14__p_f17 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 9, 17)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_f17__ne18 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 9, 18)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_f18__he4_o15 *= scor
+
+    dYdt = np.zeros((nnuc), dtype=np.float64)
+
+    dYdt[jp] = (
+       -rho*Y[jp]*Y[jc12]*rate_eval.p_c12__n13
+       -rho*Y[jp]*Y[jc13]*rate_eval.p_c13__n14
+       -rho*Y[jp]*Y[jn13]*rate_eval.p_n13__o14
+       -rho*Y[jp]*Y[jn14]*rate_eval.p_n14__o15
+       -rho*Y[jp]*Y[jn15]*rate_eval.p_n15__he4_c12
+       -rho*Y[jp]*Y[jn15]*rate_eval.p_n15__o16
+       -rho*Y[jp]*Y[jo16]*rate_eval.p_o16__f17
+       -rho*Y[jp]*Y[jo17]*rate_eval.p_o17__he4_n14
+       -rho*Y[jp]*Y[jo17]*rate_eval.p_o17__f18
+       -rho*Y[jp]*Y[jo18]*rate_eval.p_o18__he4_n15
+       -rho*Y[jp]*Y[jo18]*rate_eval.p_o18__f19
+       -rho*Y[jp]*Y[jf19]*rate_eval.p_f19__he4_o16
+       -rho*Y[jp]*Y[jf17]*rate_eval.p_f17__ne18
+       -rho*Y[jp]*Y[jf18]*rate_eval.p_f18__he4_o15
+       +rho*Y[jhe4]*Y[jo14]*rate_eval.he4_o14__p_f17
+       )
+
+    dYdt[jhe4] = (
+       -rho*Y[jhe4]*Y[jo14]*rate_eval.he4_o14__p_f17
+       +rho*Y[jp]*Y[jn15]*rate_eval.p_n15__he4_c12
+       +rho*Y[jp]*Y[jo17]*rate_eval.p_o17__he4_n14
+       +rho*Y[jp]*Y[jo18]*rate_eval.p_o18__he4_n15
+       +rho*Y[jp]*Y[jf19]*rate_eval.p_f19__he4_o16
+       +rho*Y[jp]*Y[jf18]*rate_eval.p_f18__he4_o15
+       )
+
+    dYdt[jc12] = (
+       -rho*Y[jp]*Y[jc12]*rate_eval.p_c12__n13
+       +rho*Y[jp]*Y[jn15]*rate_eval.p_n15__he4_c12
+       )
+
+    dYdt[jc13] = (
+       -rho*Y[jp]*Y[jc13]*rate_eval.p_c13__n14
+       +Y[jn13]*rate_eval.n13__c13__weak__wc12
+       )
+
+    dYdt[jn13] = (
+       -Y[jn13]*rate_eval.n13__c13__weak__wc12
+       -rho*Y[jp]*Y[jn13]*rate_eval.p_n13__o14
+       +rho*Y[jp]*Y[jc12]*rate_eval.p_c12__n13
+       )
+
+    dYdt[jn14] = (
+       -rho*Y[jp]*Y[jn14]*rate_eval.p_n14__o15
+       +rho*Y[jp]*Y[jc13]*rate_eval.p_c13__n14
+       +Y[jo14]*rate_eval.o14__n14__weak__wc12
+       +rho*Y[jp]*Y[jo17]*rate_eval.p_o17__he4_n14
+       )
+
+    dYdt[jn15] = (
+       -rho*Y[jp]*Y[jn15]*rate_eval.p_n15__he4_c12
+       -rho*Y[jp]*Y[jn15]*rate_eval.p_n15__o16
+       +Y[jo15]*rate_eval.o15__n15__weak__wc12
+       +rho*Y[jp]*Y[jo18]*rate_eval.p_o18__he4_n15
+       )
+
+    dYdt[jo14] = (
+       -Y[jo14]*rate_eval.o14__n14__weak__wc12
+       -rho*Y[jhe4]*Y[jo14]*rate_eval.he4_o14__p_f17
+       +rho*Y[jp]*Y[jn13]*rate_eval.p_n13__o14
+       )
+
+    dYdt[jo15] = (
+       -Y[jo15]*rate_eval.o15__n15__weak__wc12
+       +rho*Y[jp]*Y[jn14]*rate_eval.p_n14__o15
+       +rho*Y[jp]*Y[jf18]*rate_eval.p_f18__he4_o15
+       )
+
+    dYdt[jo16] = (
+       -rho*Y[jp]*Y[jo16]*rate_eval.p_o16__f17
+       +rho*Y[jp]*Y[jn15]*rate_eval.p_n15__o16
+       +rho*Y[jp]*Y[jf19]*rate_eval.p_f19__he4_o16
+       )
+
+    dYdt[jo17] = (
+       -rho*Y[jp]*Y[jo17]*rate_eval.p_o17__he4_n14
+       -rho*Y[jp]*Y[jo17]*rate_eval.p_o17__f18
+       +Y[jf17]*rate_eval.f17__o17__weak__wc12
+       )
+
+    dYdt[jo18] = (
+       -rho*Y[jp]*Y[jo18]*rate_eval.p_o18__he4_n15
+       -rho*Y[jp]*Y[jo18]*rate_eval.p_o18__f19
+       +Y[jf18]*rate_eval.f18__o18__weak__wc12
+       )
+
+    dYdt[jf17] = (
+       -Y[jf17]*rate_eval.f17__o17__weak__wc12
+       -rho*Y[jp]*Y[jf17]*rate_eval.p_f17__ne18
+       +rho*Y[jp]*Y[jo16]*rate_eval.p_o16__f17
+       +rho*Y[jhe4]*Y[jo14]*rate_eval.he4_o14__p_f17
+       )
+
+    dYdt[jf18] = (
+       -Y[jf18]*rate_eval.f18__o18__weak__wc12
+       -rho*Y[jp]*Y[jf18]*rate_eval.p_f18__he4_o15
+       +rho*Y[jp]*Y[jo17]*rate_eval.p_o17__f18
+       +Y[jne18]*rate_eval.ne18__f18__weak__wc12
+       )
+
+    dYdt[jf19] = (
+       -rho*Y[jp]*Y[jf19]*rate_eval.p_f19__he4_o16
+       +rho*Y[jp]*Y[jo18]*rate_eval.p_o18__f19
+       )
+
+    dYdt[jne18] = (
+       -Y[jne18]*rate_eval.ne18__f18__weak__wc12
+       +rho*Y[jp]*Y[jf17]*rate_eval.p_f17__ne18
+       )
+
+    return dYdt
+
+def jacobian(t, Y, rho, T, screen_func=None):
+    return jacobian_eq(t, Y, rho, T, screen_func)
+
+@numba.njit()
+def jacobian_eq(t, Y, rho, T, screen_func):
+
+    tf = Tfactors(T)
+    rate_eval = RateEval()
+
+    # reaclib rates
+    p_c12__n13(rate_eval, tf)
+    p_c13__n14(rate_eval, tf)
+    n13__c13__weak__wc12(rate_eval, tf)
+    p_n13__o14(rate_eval, tf)
+    p_n14__o15(rate_eval, tf)
+    p_n15__he4_c12(rate_eval, tf)
+    o14__n14__weak__wc12(rate_eval, tf)
+    o15__n15__weak__wc12(rate_eval, tf)
+    p_n15__o16(rate_eval, tf)
+    p_o16__f17(rate_eval, tf)
+    f17__o17__weak__wc12(rate_eval, tf)
+    p_o17__he4_n14(rate_eval, tf)
+    p_o17__f18(rate_eval, tf)
+    f18__o18__weak__wc12(rate_eval, tf)
+    p_o18__he4_n15(rate_eval, tf)
+    p_o18__f19(rate_eval, tf)
+    p_f19__he4_o16(rate_eval, tf)
+    he4_o14__p_f17(rate_eval, tf)
+    p_f17__ne18(rate_eval, tf)
+    ne18__f18__weak__wc12(rate_eval, tf)
+    p_f18__he4_o15(rate_eval, tf)
+
+    if screen_func is not None:
+        plasma_state = PlasmaState(T, rho, Y, Z)
+
+        scn_fac = ScreenFactors(1, 1, 6, 12)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_c12__n13 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 6, 13)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_c13__n14 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 7, 13)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_n13__o14 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 7, 14)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_n14__o15 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 7, 15)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_n15__he4_c12 *= scor
+        rate_eval.p_n15__o16 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 8, 16)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_o16__f17 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 8, 17)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_o17__he4_n14 *= scor
+        rate_eval.p_o17__f18 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 8, 18)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_o18__he4_n15 *= scor
+        rate_eval.p_o18__f19 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 9, 19)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_f19__he4_o16 *= scor
+
+        scn_fac = ScreenFactors(2, 4, 8, 14)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.he4_o14__p_f17 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 9, 17)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_f17__ne18 *= scor
+
+        scn_fac = ScreenFactors(1, 1, 9, 18)
+        scor = screen_func(plasma_state, scn_fac)
+        rate_eval.p_f18__he4_o15 *= scor
+
+    jac = np.zeros((nnuc, nnuc), dtype=np.float64)
+
+    jac[jp, jp] = (
+       -rho*Y[jc12]*rate_eval.p_c12__n13
+       -rho*Y[jc13]*rate_eval.p_c13__n14
+       -rho*Y[jn13]*rate_eval.p_n13__o14
+       -rho*Y[jn14]*rate_eval.p_n14__o15
+       -rho*Y[jn15]*rate_eval.p_n15__he4_c12
+       -rho*Y[jn15]*rate_eval.p_n15__o16
+       -rho*Y[jo16]*rate_eval.p_o16__f17
+       -rho*Y[jo17]*rate_eval.p_o17__he4_n14
+       -rho*Y[jo17]*rate_eval.p_o17__f18
+       -rho*Y[jo18]*rate_eval.p_o18__he4_n15
+       -rho*Y[jo18]*rate_eval.p_o18__f19
+       -rho*Y[jf19]*rate_eval.p_f19__he4_o16
+       -rho*Y[jf17]*rate_eval.p_f17__ne18
+       -rho*Y[jf18]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jp, jhe4] = (
+       +rho*Y[jo14]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jp, jc12] = (
+       -rho*Y[jp]*rate_eval.p_c12__n13
+       )
+
+    jac[jp, jc13] = (
+       -rho*Y[jp]*rate_eval.p_c13__n14
+       )
+
+    jac[jp, jn13] = (
+       -rho*Y[jp]*rate_eval.p_n13__o14
+       )
+
+    jac[jp, jn14] = (
+       -rho*Y[jp]*rate_eval.p_n14__o15
+       )
+
+    jac[jp, jn15] = (
+       -rho*Y[jp]*rate_eval.p_n15__he4_c12
+       -rho*Y[jp]*rate_eval.p_n15__o16
+       )
+
+    jac[jp, jo14] = (
+       +rho*Y[jhe4]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jp, jo16] = (
+       -rho*Y[jp]*rate_eval.p_o16__f17
+       )
+
+    jac[jp, jo17] = (
+       -rho*Y[jp]*rate_eval.p_o17__he4_n14
+       -rho*Y[jp]*rate_eval.p_o17__f18
+       )
+
+    jac[jp, jo18] = (
+       -rho*Y[jp]*rate_eval.p_o18__he4_n15
+       -rho*Y[jp]*rate_eval.p_o18__f19
+       )
+
+    jac[jp, jf17] = (
+       -rho*Y[jp]*rate_eval.p_f17__ne18
+       )
+
+    jac[jp, jf18] = (
+       -rho*Y[jp]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jp, jf19] = (
+       -rho*Y[jp]*rate_eval.p_f19__he4_o16
+       )
+
+    jac[jhe4, jp] = (
+       +rho*Y[jn15]*rate_eval.p_n15__he4_c12
+       +rho*Y[jo17]*rate_eval.p_o17__he4_n14
+       +rho*Y[jo18]*rate_eval.p_o18__he4_n15
+       +rho*Y[jf19]*rate_eval.p_f19__he4_o16
+       +rho*Y[jf18]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jhe4, jhe4] = (
+       -rho*Y[jo14]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jhe4, jn15] = (
+       +rho*Y[jp]*rate_eval.p_n15__he4_c12
+       )
+
+    jac[jhe4, jo14] = (
+       -rho*Y[jhe4]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jhe4, jo17] = (
+       +rho*Y[jp]*rate_eval.p_o17__he4_n14
+       )
+
+    jac[jhe4, jo18] = (
+       +rho*Y[jp]*rate_eval.p_o18__he4_n15
+       )
+
+    jac[jhe4, jf18] = (
+       +rho*Y[jp]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jhe4, jf19] = (
+       +rho*Y[jp]*rate_eval.p_f19__he4_o16
+       )
+
+    jac[jc12, jp] = (
+       -rho*Y[jc12]*rate_eval.p_c12__n13
+       +rho*Y[jn15]*rate_eval.p_n15__he4_c12
+       )
+
+    jac[jc12, jc12] = (
+       -rho*Y[jp]*rate_eval.p_c12__n13
+       )
+
+    jac[jc12, jn15] = (
+       +rho*Y[jp]*rate_eval.p_n15__he4_c12
+       )
+
+    jac[jc13, jp] = (
+       -rho*Y[jc13]*rate_eval.p_c13__n14
+       )
+
+    jac[jc13, jc13] = (
+       -rho*Y[jp]*rate_eval.p_c13__n14
+       )
+
+    jac[jc13, jn13] = (
+       +rate_eval.n13__c13__weak__wc12
+       )
+
+    jac[jn13, jp] = (
+       -rho*Y[jn13]*rate_eval.p_n13__o14
+       +rho*Y[jc12]*rate_eval.p_c12__n13
+       )
+
+    jac[jn13, jc12] = (
+       +rho*Y[jp]*rate_eval.p_c12__n13
+       )
+
+    jac[jn13, jn13] = (
+       -rate_eval.n13__c13__weak__wc12
+       -rho*Y[jp]*rate_eval.p_n13__o14
+       )
+
+    jac[jn14, jp] = (
+       -rho*Y[jn14]*rate_eval.p_n14__o15
+       +rho*Y[jc13]*rate_eval.p_c13__n14
+       +rho*Y[jo17]*rate_eval.p_o17__he4_n14
+       )
+
+    jac[jn14, jc13] = (
+       +rho*Y[jp]*rate_eval.p_c13__n14
+       )
+
+    jac[jn14, jn14] = (
+       -rho*Y[jp]*rate_eval.p_n14__o15
+       )
+
+    jac[jn14, jo14] = (
+       +rate_eval.o14__n14__weak__wc12
+       )
+
+    jac[jn14, jo17] = (
+       +rho*Y[jp]*rate_eval.p_o17__he4_n14
+       )
+
+    jac[jn15, jp] = (
+       -rho*Y[jn15]*rate_eval.p_n15__he4_c12
+       -rho*Y[jn15]*rate_eval.p_n15__o16
+       +rho*Y[jo18]*rate_eval.p_o18__he4_n15
+       )
+
+    jac[jn15, jn15] = (
+       -rho*Y[jp]*rate_eval.p_n15__he4_c12
+       -rho*Y[jp]*rate_eval.p_n15__o16
+       )
+
+    jac[jn15, jo15] = (
+       +rate_eval.o15__n15__weak__wc12
+       )
+
+    jac[jn15, jo18] = (
+       +rho*Y[jp]*rate_eval.p_o18__he4_n15
+       )
+
+    jac[jo14, jp] = (
+       +rho*Y[jn13]*rate_eval.p_n13__o14
+       )
+
+    jac[jo14, jhe4] = (
+       -rho*Y[jo14]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jo14, jn13] = (
+       +rho*Y[jp]*rate_eval.p_n13__o14
+       )
+
+    jac[jo14, jo14] = (
+       -rate_eval.o14__n14__weak__wc12
+       -rho*Y[jhe4]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jo15, jp] = (
+       +rho*Y[jn14]*rate_eval.p_n14__o15
+       +rho*Y[jf18]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jo15, jn14] = (
+       +rho*Y[jp]*rate_eval.p_n14__o15
+       )
+
+    jac[jo15, jo15] = (
+       -rate_eval.o15__n15__weak__wc12
+       )
+
+    jac[jo15, jf18] = (
+       +rho*Y[jp]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jo16, jp] = (
+       -rho*Y[jo16]*rate_eval.p_o16__f17
+       +rho*Y[jn15]*rate_eval.p_n15__o16
+       +rho*Y[jf19]*rate_eval.p_f19__he4_o16
+       )
+
+    jac[jo16, jn15] = (
+       +rho*Y[jp]*rate_eval.p_n15__o16
+       )
+
+    jac[jo16, jo16] = (
+       -rho*Y[jp]*rate_eval.p_o16__f17
+       )
+
+    jac[jo16, jf19] = (
+       +rho*Y[jp]*rate_eval.p_f19__he4_o16
+       )
+
+    jac[jo17, jp] = (
+       -rho*Y[jo17]*rate_eval.p_o17__he4_n14
+       -rho*Y[jo17]*rate_eval.p_o17__f18
+       )
+
+    jac[jo17, jo17] = (
+       -rho*Y[jp]*rate_eval.p_o17__he4_n14
+       -rho*Y[jp]*rate_eval.p_o17__f18
+       )
+
+    jac[jo17, jf17] = (
+       +rate_eval.f17__o17__weak__wc12
+       )
+
+    jac[jo18, jp] = (
+       -rho*Y[jo18]*rate_eval.p_o18__he4_n15
+       -rho*Y[jo18]*rate_eval.p_o18__f19
+       )
+
+    jac[jo18, jo18] = (
+       -rho*Y[jp]*rate_eval.p_o18__he4_n15
+       -rho*Y[jp]*rate_eval.p_o18__f19
+       )
+
+    jac[jo18, jf18] = (
+       +rate_eval.f18__o18__weak__wc12
+       )
+
+    jac[jf17, jp] = (
+       -rho*Y[jf17]*rate_eval.p_f17__ne18
+       +rho*Y[jo16]*rate_eval.p_o16__f17
+       )
+
+    jac[jf17, jhe4] = (
+       +rho*Y[jo14]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jf17, jo14] = (
+       +rho*Y[jhe4]*rate_eval.he4_o14__p_f17
+       )
+
+    jac[jf17, jo16] = (
+       +rho*Y[jp]*rate_eval.p_o16__f17
+       )
+
+    jac[jf17, jf17] = (
+       -rate_eval.f17__o17__weak__wc12
+       -rho*Y[jp]*rate_eval.p_f17__ne18
+       )
+
+    jac[jf18, jp] = (
+       -rho*Y[jf18]*rate_eval.p_f18__he4_o15
+       +rho*Y[jo17]*rate_eval.p_o17__f18
+       )
+
+    jac[jf18, jo17] = (
+       +rho*Y[jp]*rate_eval.p_o17__f18
+       )
+
+    jac[jf18, jf18] = (
+       -rate_eval.f18__o18__weak__wc12
+       -rho*Y[jp]*rate_eval.p_f18__he4_o15
+       )
+
+    jac[jf18, jne18] = (
+       +rate_eval.ne18__f18__weak__wc12
+       )
+
+    jac[jf19, jp] = (
+       -rho*Y[jf19]*rate_eval.p_f19__he4_o16
+       +rho*Y[jo18]*rate_eval.p_o18__f19
+       )
+
+    jac[jf19, jo18] = (
+       +rho*Y[jp]*rate_eval.p_o18__f19
+       )
+
+    jac[jf19, jf19] = (
+       -rho*Y[jp]*rate_eval.p_f19__he4_o16
+       )
+
+    jac[jne18, jp] = (
+       +rho*Y[jf17]*rate_eval.p_f17__ne18
+       )
+
+    jac[jne18, jf17] = (
+       +rho*Y[jp]*rate_eval.p_f17__ne18
+       )
+
+    jac[jne18, jne18] = (
+       -rate_eval.ne18__f18__weak__wc12
+       )
+
+    return jac
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p>Now we can import the network that was just created</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cno_integration_example</span> <span class="k">as</span> <span class="nn">cno</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">cno_integration_example</span> <span class="k">as</span> <span class="nn">cno</span>
+
+<span class="n">File</span> <span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">computational_astrophysics</span><span class="o">/</span><span class="n">computational_astrophysics</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">reaction_networks</span><span class="o">/</span><span class="n">cno_integration_example</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numba</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">numba.experimental</span> <span class="kn">import</span> <span class="n">jitclass</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numba&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use the BDF solver from SciPy</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">solve_ivp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll set the thermodynamic conditions.  We initialize mass fractions and then convert to molar fractions, since that’s what the RHS uses</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">1.5e7</span>
+
+<span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">cno</span><span class="o">.</span><span class="n">nnuc</span><span class="p">)</span>
+<span class="n">X0</span><span class="p">[</span><span class="n">cno</span><span class="o">.</span><span class="n">ip</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">X0</span><span class="p">[</span><span class="n">cno</span><span class="o">.</span><span class="n">ihe4</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.28</span>
+<span class="n">X0</span><span class="p">[</span><span class="n">cno</span><span class="o">.</span><span class="n">ic12</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="n">Y0</span> <span class="o">=</span> <span class="n">X0</span><span class="o">/</span><span class="n">cno</span><span class="o">.</span><span class="n">A</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.7       , 0.07      , 0.00166667, 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        , 0.        , 0.        , 0.        , 0.        ,
+       0.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmax</span> <span class="o">=</span> <span class="mf">1.e20</span>
+
+<span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">cno</span><span class="o">.</span><span class="n">rhs</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">],</span> <span class="n">Y0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;BDF&quot;</span><span class="p">,</span>
+                <span class="n">dense_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">T</span><span class="p">),</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1.e-6</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1.e-6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  message: &#39;The solver successfully reached the end of the integration interval.&#39;
+     nfev: 345
+     njev: 20
+      nlu: 63
+      sol: &lt;scipy.integrate._ivp.common.OdeSolution object at 0x7f54490ee5b0&gt;
+   status: 0
+  success: True
+        t: array([0.00000000e+00, 1.00000000e-04, 2.00000000e-04, 1.20000000e-03,
+       2.20000000e-03, 1.22000000e-02, 2.22000000e-02, 1.22200000e-01,
+       2.22200000e-01, 1.22220000e+00, 2.22220000e+00, 1.22222000e+01,
+       2.22222000e+01, 1.22222200e+02, 2.22222200e+02, 1.22222220e+03,
+       2.22222220e+03, 1.22222222e+04, 2.22222222e+04, 1.22222222e+05,
+       2.22222222e+05, 1.22222222e+06, 2.22222222e+06, 1.22222222e+07,
+       2.22222222e+07, 1.22222222e+08, 2.22222222e+08, 1.22222222e+09,
+       2.22222222e+09, 1.22222222e+10, 2.22222222e+10, 1.22222222e+11,
+       2.22222222e+11, 1.18930639e+12, 2.15639055e+12, 3.12347472e+12,
+       5.88239225e+12, 8.64130978e+12, 1.14002273e+13, 1.41591448e+13,
+       1.91252701e+13, 2.40913954e+13, 2.90575207e+13, 3.40236460e+13,
+       3.89897713e+13, 4.68497332e+13, 5.47096950e+13, 6.25696569e+13,
+       7.04296187e+13, 7.82895806e+13, 9.11122132e+13, 1.03934846e+14,
+       1.16757478e+14, 1.29580111e+14, 1.46986055e+14, 1.64391999e+14,
+       1.81797943e+14, 1.99203887e+14, 2.16609830e+14, 2.64882217e+14,
+       3.13154604e+14, 3.61426990e+14, 4.09699377e+14, 4.57971763e+14,
+       5.46800147e+14, 6.35628531e+14, 7.24456914e+14, 8.13285298e+14,
+       1.10221886e+15, 1.39115243e+15, 1.68008599e+15, 4.56942165e+15,
+       7.45875730e+15, 1.91689901e+16, 3.08792230e+16, 4.25894558e+16,
+       8.46062725e+16, 1.26623089e+17, 1.68639906e+17, 2.41071575e+17,
+       3.13503243e+17, 3.85934912e+17, 4.58366581e+17, 5.70970421e+17,
+       6.83574262e+17, 7.96178103e+17, 9.08781944e+17, 1.02138578e+18,
+       1.19974740e+18, 1.37810902e+18, 1.55647063e+18, 1.73483225e+18,
+       1.91319387e+18, 2.11506050e+18, 2.31692714e+18, 2.51879378e+18,
+       2.72066042e+18, 2.92252705e+18, 3.12439369e+18, 3.39568748e+18,
+       3.66698128e+18, 3.93827507e+18, 4.20956886e+18, 4.48086266e+18,
+       4.75215645e+18, 5.09868743e+18, 5.44521840e+18, 5.79174937e+18,
+       6.13828035e+18, 6.48481132e+18, 6.83134229e+18, 7.22834613e+18,
+       7.62534996e+18, 8.02235380e+18, 8.41935763e+18, 8.81636147e+18,
+       9.29499887e+18, 9.77363628e+18, 1.02522737e+19, 1.07309111e+19,
+       1.12095485e+19, 1.16881859e+19, 1.23607969e+19, 1.30334079e+19,
+       1.37060188e+19, 1.43786298e+19, 1.50512408e+19, 1.57238518e+19,
+       1.65943192e+19, 1.74647866e+19, 1.83352541e+19, 1.92057215e+19,
+       2.00761889e+19, 2.06423325e+19, 2.12084761e+19, 2.17746197e+19,
+       2.23407633e+19, 2.65290211e+19, 3.07172789e+19, 3.49055367e+19,
+       7.67881147e+19, 1.00000000e+20])
+ t_events: None
+        y: array([[ 7.00000000e-001,  7.00000000e-001,  7.00000000e-001, ...,
+         1.96850485e-008,  5.17746174e-009,  2.78572823e-010],
+       [ 7.00000000e-002,  7.00000000e-002,  7.00000000e-002, ...,
+         2.44132876e-001,  2.44132892e-001,  2.44132894e-001],
+       [ 1.66666667e-003,  1.66666667e-003,  1.66666667e-003, ...,
+         3.11241160e-006,  3.11622075e-006,  3.11654096e-006],
+       ...,
+       [ 0.00000000e+000,  8.19119797e-124,  5.42621931e-123, ...,
+         2.71592977e-027,  7.14328637e-028,  3.84344694e-029],
+       [ 0.00000000e+000,  3.46660092e-153,  3.09799299e-152, ...,
+         1.27460238e-009,  1.27460252e-009,  1.27460254e-009],
+       [ 0.00000000e+000,  1.09799942e-119,  6.00420323e-119, ...,
+        -9.67611878e-055, -1.56368393e-055, -4.07296560e-060]])
+ y_events: None
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can plot the mass fractions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cno</span><span class="o">.</span><span class="n">nnuc</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">*</span> <span class="n">cno</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;X(</span><span class="si">{</span><span class="n">cno</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">1.e10</span><span class="p">,</span> <span class="mf">1.e20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">1.e-8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;small&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3a7e64e13c6b7c1b7a17c2c20aa84d6008e52c7cad382c9cefde9de53de68876.png" src="../_images/3a7e64e13c6b7c1b7a17c2c20aa84d6008e52c7cad382c9cefde9de53de68876.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./reaction_networks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reactions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Application: Nuclear Reaction Networks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../machine-learning/machine-learning.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Machine Learning</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            <div class="bd-footer-content__inner">
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2023; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div></div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
