@@ -53,6 +53,9 @@ was working, and ask for the difference with the current code.
 ```{tip}
 Version control is not just for source code.  You can use it for
 writing papers in LaTeX, course notes, etc.
+
+These course notes are in git, hosted on github here:
+https://github.com/zingale/computational_astrophysics
 ```
 
 ## Centralized vs. distributed version control
@@ -63,7 +66,7 @@ version control the *repository*.
 
 ### Centralized version control
 
-Examples: CVS, subversion
+Examples: [CVS](https://en.wikipedia.org/wiki/Concurrent_Versions_System) , [subversion](https://en.wikipedia.org/wiki/Apache_Subversion)
 
 * A server holds the master copy of the source, stores the history, changes
 
@@ -79,7 +82,7 @@ This is the older style of version control, and not widely used for new projects
 
 ### Distributed version control
 
-Examples: git, mercurial
+Examples: [git](https://en.wikipedia.org/wiki/Git), [mercurial](https://en.wikipedia.org/wiki/Mercurial)
 
 * Everyone has a full-fledged repository
 
