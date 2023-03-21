@@ -101,6 +101,15 @@ Project scores will be assigned with the following weighting (out of 25)
   write-up _or_ clear instructions + additional custom code needed to
   use an external code / library to reproduce your results.  (10 pts.)
 
-* 
+* a thorough write-up that demonstrates that you understand:
 
+  * the basic ideas of the algorithm you are working with
+  * the astrophysical applications of your algorithm
+  * the connections to the topics we covered in class
+  * the limitations of the method
 
+  and also indicates that you spent some time exploring the method in-depth.
+
+  overall (12 pts.)
+
+* an in-class summary of your project (3 pts.)
