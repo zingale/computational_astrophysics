@@ -1,22 +1,50 @@
 # Course Project
 
 ```{note}
-This is a work in progress and will be finalized after Spring Break
+The final project counts as 1/4 of your total course grade.  You are expected
+to work independently on the project.
+
+The project is due on the last day of class, Thurs. May 4.  There will be _no_ extensions,
+since I need to turn in grades shortly afterwards.
 ```
 
+For your final course project, you are to pick an interesting
+astrophysical problem or algorithm and explore it in some depth, to
+demonstrate you understand how the numerical method works and how it
+is used in research.  You should pick a topic that interests
+you&mdash;some suggestions are given below but feel free to pick
+something else.
 
+If you are implementing the algorithm yourself, then you will turn in
+your own code.  If you are using an existing code or library, you will
+give detailed instructions on what you did, together with any code
+additions that were necessary.
 
 You will turn in:
 
-* You code (it can be as a Jupyter notebook) if your wrote your own
-  implementation of a method.
+- [] You code
 
-* Detailed instructions on how to obtain, modify, and reproduce your
-  results using an external code if you chose to use that.
+     * This can be a Jupyter notebook, C++ code, etc. if your wrote your own
+       implementation of a method.
 
-* A PDF write-up (abstract, introduction, description of what you did
-  / results, figures, references).  This is something that you can use
-  for the upper-level writing requirement, if desired.
+       Make sure I can build your code easily.
+
+     * This may also be detailed instructions on how to obtain,
+       modify, and reproduce your results using an external code if
+       you chose to use that.
+
+- [] A PDF write-up (abstract, introduction, description of what you did
+     / results, figures, references).  This is something that you can use
+     for the upper-level writing requirement, if desired.
+
+     This should include:
+
+     * An Explanation of how the algorithm works, referring to the
+       topics we learned in class.
+
+     * A demonstration of converge (if applicable)
+
+     * Some example tests where we know the right behavior (if applicable)
 
 
 
@@ -24,9 +52,14 @@ You will turn in:
 Some inspiration for projects:
 
 * Integrate the pressure and energy for an electron gas (building on
-  the example we did for the degeneracy parameter).
+  the example we did for the degeneracy parameter), and build a table
+  that you can interpolate from.
+
+* Read more about symplectic integrators and implement a higher order one
+  than we did in class (we did velocity-Verlet).
 
 * Implement the Barnes-Hut tree algorithm for approximating N-body gravity.
+  https://en.wikipedia.org/wiki/Barnes%E2%80%93Hut_simulation
 
 * Any of the ODE example applications listed here:
   https://zingale.github.io/computational_astrophysics/ODEs/more-applications.html
@@ -35,15 +68,25 @@ Some inspiration for projects:
 
 * Reproduce the analysis of any astro paper that has publicly available data.
 
+* Download an existing simulation code and run some simulations
+  (existing examples or your own sets of initial conditions).  Some codes that you
+  might read about include:
 
-Things to discuss in your write-up:
+  * REBOUND: an N-body integrator with a python interface:
+    https://rebound.readthedocs.io/en/latest/
 
-* Explain how the algorithm works, referring to the topics we learned
-  in class.
+  * pyro: a python hydrodynamics code written by my research group:
+    https://python-hydro.github.io/pyro2/
 
-* Show that things converge (if applicable)
+  * MESA: a stellar evolution code:
+    https://docs.mesastar.org/en/release-r22.11.1/
 
-* Show some example tests where we know the right behavior (if applicable)
+* Read about the _smoothed particle hydrodynamics_ method (SPH) for
+  solving PDEs and implement a simple advection solver using this.
+
+* Read about some astrophysical applications of machine learning and
+  try to reproduce their results or do some simple classification of
+  astrophysical data on your own.
 
 
 
