@@ -20,9 +20,14 @@ your own code.  If you are using an existing code or library, you will
 give detailed instructions on what you did, together with any code
 additions that were necessary.
 
-You will turn in:
+```{important}
+On the last day of class, each student will git a 5 minute / 1-2 slide summary
+of their project to the class
+```
 
-- [] You code
+## You will turn in:
+
+1. You code
 
      * This can be a Jupyter notebook, C++ code, etc. if your wrote your own
        implementation of a method.
@@ -33,7 +38,7 @@ You will turn in:
        modify, and reproduce your results using an external code if
        you chose to use that.
 
-- [] A PDF write-up (abstract, introduction, description of what you did
+2. A PDF write-up (abstract, introduction, description of what you did
      / results, figures, references).  This is something that you can use
      for the upper-level writing requirement, if desired.
 
@@ -46,10 +51,10 @@ You will turn in:
 
      * Some example tests where we know the right behavior (if applicable)
 
+3. 1-2 slides for the in-class presentation (details will be shared
+   toward the end of the semester).
 
-
-
-Some inspiration for projects:
+## Some inspiration for projects:
 
 * Integrate the pressure and energy for an electron gas (building on
   the example we did for the degeneracy parameter), and build a table
@@ -88,5 +93,14 @@ Some inspiration for projects:
   try to reproduce their results or do some simple classification of
   astrophysical data on your own.
 
+## Rubric for grading
+
+Project scores will be assigned with the following weighting (out of 25)
+
+* clearly commented, working code the produces the results in your
+  write-up _or_ clear instructions + additional custom code needed to
+  use an external code / library to reproduce your results.  (10 pts.)
+
+* 
 
 
