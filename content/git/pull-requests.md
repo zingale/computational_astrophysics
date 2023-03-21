@@ -7,35 +7,37 @@ around pulls.
 
 How do we contribute to a project that we don't own?
 
-Here's a github *organization* for our class: https://github.com/phy504-sbu
+Here's a github *organization* for our class: https://github.com/ast390-sbu
 
-and here's a simple repo in this organization: https://github.com/phy504-sbu/test-repo
+and here's a simple repo in this organization: https://github.com/ast390-sbu/test-repo
 
+```{note}
 An organization is meant to be used by a collection of developers who
 can all have different access permissions.  It provides tools for
 managing who can do different things to the repos under its control.
+```
 
 Let's clone this repo:
 
-.. prompt:: bash
-
-   git clone git@github.com:phy504-sbu/test-repo.git
-   cd test-repo
+```bash
+git clone git@github.com:phy504-sbu/test-repo.git
+cd test-repo
+```
 
 Now, let's each try to add a file of the form *username.txt* containing
 your full name.  Ex:
 
-.. prompt:: bash
-
-   echo Michael Zingale > zingale.txt
-   git add zingale.txt
-   git commit
+```bash
+echo Michael Zingale > zingale.txt
+git add zingale.txt
+git commit
+```
 
 Now try to push it to the repo we clone:
 
-.. prompt:: bash
-
-   git push
+```bash
+git push
+```
 
 what happened?
 
@@ -48,41 +50,49 @@ This is okay.  The workflow that github emphasizes is one based around
 First, we need to *fork* the repo -- this creates a clone under our
 control that we can do with as we please.  Click on the "fork" button.
 
-.. image:: github-fork.png
-   :align: center
+```{image} github-fork.png
+:align: center
+```
 
-It may ask you where you want the fork to life -- you want it to live
+It may ask you where you want the fork to live&mdash;you want it to live
 under your profile / username.
 
 This will bring you to a new github page, displaying the fork, with a
-URL that should look something like: https://github.com/zingale/test-repo
+URL that should look something like: ``https://github.com/zingale/test-repo``
 
 Now click on the *code* button and copy the SSH location.
 
+```{image} github-copy-ssh.png
+:align: center
+```
+
 We want to add this fork as a new remote:
 
-.. prompt:: bash
-
-   git remote add myfork git@github.com:zingale/test-repo.git
+```bash
+git remote add myfork git@github.com:zingale/test-repo.git
+```
 
 (again, make sure you replace that with the link to your repo).
 
 Now you can do:
 
-.. prompt:: bash
-
-   git push myfork
+```bash
+git push myfork
+```
 
 If you reload your github page, you should see your change there.
 
 Now we can do all *pull-request*.  Select "pull requests"
 
-.. image:: github-pr.png
-   :align: center
+```{image} github-pr.png
+:align: center
+```
 
 Then click on the "New pull request" button, and you'll see something like:
 
-.. image:: github-pr2.png
+```{image} github-pr2.png
+:align: center
+```
 
 This is showing that you are asking to merge the changes in your fork into the
 class ``test-repo`` repository.
@@ -99,10 +109,10 @@ via the github web tools.
 
 The overall workflow that we did: fork, push to our fork, issue a PR, looks like:
 
-.. image:: github-workflow.png
-   :align: center
-   :width: 80%
-
+```{image} github-workflow.png
+:align: center
+:width: 80%
+```
 
 
 
