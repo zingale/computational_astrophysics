@@ -95,8 +95,10 @@ parts:
       - file: ffts/fft-multid
     - file: interpolation/interpolation
       sections:
+      - file: interpolation/linear-interpolation
       - file: interpolation/lagrange-interpolation
       - file: interpolation/conservative-interpolation
+      - file: interpolation/going-further
     - file: fitting/least_squares
       sections:
       - file: fitting/fitting-to-a-line
