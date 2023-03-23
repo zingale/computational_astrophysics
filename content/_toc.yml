@@ -28,6 +28,7 @@ parts:
     - file: git/git-branches
     - file: git/git-remotes
     - file: git/github
+    - file: git/pull-requests
 
   - caption: Fundamentals
     chapters:

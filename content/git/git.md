@@ -31,6 +31,9 @@ Replace `name` with your name and `email` with your email.  This sets `nano`
 as our default editor, but you can choose something else that you are comfortable
 with (see https://swcarpentry.github.io/git-novice/02-setup/index.html#line-endings).
 
+This information will be stored in a file called ``.gitconfig`` in your home directory.
+
+
 Our goal here is to create a project (we'll call the directory
 `project/`) and have git keep track of the files and changes to our
 project.
