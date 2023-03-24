@@ -61,6 +61,9 @@ fashion, and the solution methodology is considerably more complex.
 Fitting can be misleading, and you should always think about what the data is saying and how
 it relates to the function you are fitting to:
 
-```{image} https://imgs.xkcd.com/comics/curve_fitting.png
-:align: center
+```{figure} https://imgs.xkcd.com/comics/curve_fitting.png
+---
+align: center
+---
+Image: XKCD
 ```
