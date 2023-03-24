@@ -1,5 +1,4 @@
-Least Squares Regression
-========================
+# Least Squares Regression
 
 Imagine a dataset where we have a set of points, $(x_i, y_i)$ with
 associated errors in $y$, $\sigma_i$, and we want to fit a line or
@@ -55,3 +54,13 @@ is called _linear regression_.
 
 For _nonlinear least squares_, the parameters can enter in a nonlinear
 fashion, and the solution methodology is considerably more complex.
+
+
+## Take care...
+
+Fitting can be misleading, and you should always think about what the data is saying and how
+it relates to the function you are fitting to:
+
+```{image} https://imgs.xkcd.com/comics/curve_fitting.png
+:align: center
+```
