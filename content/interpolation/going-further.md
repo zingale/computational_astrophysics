@@ -34,3 +34,9 @@ and at $x_2$:
 This means that all of the cubics are coupled together, and a linear
 system needs to be solved for find all of the coefficients simultaneously.
 
+
+## Thermodynamic consistency
+
+One place where interpolation is widely used in astrophysics is in interpolating complex equations of state (like electron degeneracy) where computing the functions is very computationally expensive.  By creating a grid of $\rho, T$ points where the results are tabulated, a high-order, multidimensional interpolant can be used to cheaply find the thermodynamic state.
+
+However, care must be taken to ensure that the results are thermodynamically consistent.  This is discussed in the paper [_The Accuracy, Consistency, and Speed of an Electron-Positron Equation of State Based on Table Interpolation of the Helmholtz Free Energy_](https://ui.adsabs.harvard.edu/abs/2000ApJS..126..501T/abstract).
