@@ -3,7 +3,7 @@ AST 390: Computational Astrophysics
 
 Michael Zingale
 
-Spring 2023
+(Spring 2023)
 
 This is a collection of notebooks on computational (astro)physics.
 Starting at the beginning, these notebooks introduce numerical methods
