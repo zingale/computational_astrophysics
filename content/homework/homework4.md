@@ -45,7 +45,7 @@ derivations, notes, etc.
 
    ```{note}
    Some languages have a built-in routine to compute the
-   ondition number, if you can do so easily, compute the condition
+   condition number, if you can do so easily, compute the condition
    number of the matrix for each $N$ and comment on how this is
    reflected in your solution.
    ```
