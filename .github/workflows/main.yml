@@ -22,6 +22,11 @@ jobs:
         pip install ghp-import
         PATH="${PATH}:${HOME}/.local/bin"
 
+    - name: version list
+      run: |
+        jupyter-book --version
+        pip list | grep -i docutils
+
     - name: Build book HTML
       run: |
         jupyter-book build --all ./content
