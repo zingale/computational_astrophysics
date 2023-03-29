@@ -111,8 +111,9 @@ parts:
   - caption: Partial Differential Equations
     chapters:
     - file: advection/pdes
+    - file: advection/advection/advection-partI
       sections:
-      - file: advection/advection/advection-partI
+      - file: advection/advection/advection-convergence
       - file: advection/advection/advection-partII
       - file: advection/advection/advection-partIII
     - file: advection/burgers/burgers

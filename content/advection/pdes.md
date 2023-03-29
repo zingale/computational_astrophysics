@@ -43,4 +43,9 @@ The heat equation is the canoncial parabolic PDE:
 
 $$\frac{\partial \phi}{\partial t} = k \frac{\partial^2 \phi}{\partial x^2}$$
 
-As with elliptic PDEs, information about the solution is communicated instantaneously---
+As with elliptic PDEs, information about the solution is communicated instantaneously&mdash;there is no finite propagate speed like the hyperbolic case.
+But this is time-dependent.  
+
+Diffusion of photons or heat in stars is perhaps the main area where parabolic PDEs
+arise in astrophysics.
+
