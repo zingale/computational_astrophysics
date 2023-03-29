@@ -119,7 +119,6 @@ parts:
     - file: advection/burgers/burgers
       sections:
       - file: advection/burgers/burgers-methods
-      - file: advection/burgers/exercises
     - file: elliptic_multigrid/intro/elliptic-problems
       sections:
       - file: elliptic_multigrid/relaxation/relaxation
