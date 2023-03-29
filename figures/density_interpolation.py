@@ -1,6 +1,6 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import grid_plot as gp
+import matplotlib.pyplot as plt
+import numpy as np
 
 # plot a simple finite-difference grid
 
@@ -25,12 +25,12 @@ plt.clf()
 
 gr.draw_grid(draw_ghost=0, emphasize_end=0)
 
-gr.label_center(ng+nzones//2,   r"$x_i$")
-gr.label_center(ng+nzones//2-1, r"$x_{i-1}$")
-gr.label_center(ng+nzones//2+1, r"$x_{i+1}$")
+gr.label_center(ng+nzones//2,   r"$x_i$", fontsize="medium")
+gr.label_center(ng+nzones//2-1, r"$x_{i-1}$", fontsize="medium")
+gr.label_center(ng+nzones//2+1, r"$x_{i+1}$", fontsize="medium")
 
-gr.label_edge(ng+nzones//2,   r"$x_{i-\sfrac{1}{2}}$")
-gr.label_edge(ng+nzones//2+1,   r"$x_{i+\sfrac{1}{2}}$")
+gr.label_edge(ng+nzones//2,   r"$x_{i-\sfrac{1}{2}}$", fontsize="medium")
+gr.label_edge(ng+nzones//2+1,   r"$x_{i+\sfrac{1}{2}}$", fontsize="medium")
 
 # draw the data
 for i in range(nzones):
