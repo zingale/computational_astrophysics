@@ -110,7 +110,7 @@ parts:
 
   - caption: Partial Differential Equations
     chapters:
-    - file: advection/advection/advection
+    - file: advection/pdes
       sections:
       - file: advection/advection/advection-partI
       - file: advection/advection/advection-partII
