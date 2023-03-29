@@ -9,7 +9,7 @@ will each require different solution methods.
 ```{info}
 For more in-depth discussions of the methods used for PDEs in astrophysics,
 you can read my notes here: [_Introduction to Computational Astrophysical Hydrodynamics_](http://bender.astro.sunysb.edu/hydro_by_example/CompHydroTutorial.pdf).
-
+```
 
 ## Hyperbolic PDEs
 
