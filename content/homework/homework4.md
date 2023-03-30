@@ -83,8 +83,9 @@ derivations, notes, etc.
      flipping the definitions above and applying them at the far end of
      the domain.
 
-     Make sure that your kernel function by ensuring that it sums to $1$
-     on the domain.  You might need to sum up the values and divide by the sum.
+     Make sure that your kernel function is normalized by ensuring
+     that it sums to $1$ on the domain.  You might need to sum up the
+     values and divide by the sum.
 
    * Plot the noisy function, $f^\mathrm{(noisy)}(x)$, and the kernel together.
 

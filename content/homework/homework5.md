@@ -35,6 +35,11 @@ derivations, notes, etc.
 
    * Use $N_\rho$ points for density between $1~\mathrm{g~cm^{-3}}$ and $10^4~\mathrm{g~cm^{-3}}$, spaced equally logarithmically.
 
+     ```{note}
+     In most programming languages, the `log()` function is the natural log.  We want
+     The base-10 log, so you'll want to use `log10()`
+     ```
+     
    * Use $N_T$ points for temperature between $10^6~\mathrm{K}$ and $10^8~\mathrm{K}$,
      spaced equally logarithmically.
 
