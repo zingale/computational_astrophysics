@@ -131,6 +131,14 @@ parts:
       - file: elliptic_multigrid/multigrid/multigrid-two-grid
       - file: elliptic_multigrid/multigrid/multigrid-vcycles
 
+  - caption: Hydrodynamics
+    chapters:
+    - file: euler/euler
+    - file: euler/euler-eigen
+    - file: euler/euler-riemann
+    - file: euler/euler-riemann-sampling
+    - file: euler/euler-solver
+
   - caption: Stiff ODEs
     chapters:
     - file: reaction_networks/ODEs-implicit
