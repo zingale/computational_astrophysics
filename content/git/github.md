@@ -28,7 +28,7 @@ not be empty initially.
 :align: center
 ```
 
-Our project is now found at: *https://github.com/username/reponame/*,
+Our project is now found at: ``https://github.com/ [username]/ [reponame]``,
 where *username* is your Github username and *reponame* is the name of
 the repository you just created.
 
