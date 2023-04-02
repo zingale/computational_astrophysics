@@ -167,6 +167,8 @@ parts:
       sections:
       - file: homework/hw3-solutions
     - file: homework/homework4
+      sections:
+      - file: homework/hw4-solutions
     - file: homework/homework5
     - file: homework/project
 
