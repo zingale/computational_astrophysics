@@ -46,3 +46,15 @@ e^{-\tfrac{1}{4} (x - x_c)^2/ k(t + t_0)} + \phi_1$$
 
 Here, $t_0$ is a small time.  In the limit that $t_0 \rightarrow 0$,
 we get a delta-function for the initial condition.
+
+```{note}
+This is a solution of the 1D diffusion equation.  For 2 and 3D, the 
+solution is slightly different.
+```
+
+If we look at the evolution of this Gaussian, we see:
+
+```{image} ./phi_analytic_t.png
+
+This shows the expected behavior&mdash;a strongly peaked concentration
+of $\phi$ spreads out with time.
