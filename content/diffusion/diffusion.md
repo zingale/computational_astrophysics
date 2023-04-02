@@ -25,9 +25,7 @@ More generally, the diffusion coefficient, $k$, can depend on
 position (or even $\phi$), and we could write the diffusion equation
 as:
 
-$$\frac{\partial \phi}{\partial t} =
-      \frac{\partial}{\partial x} \left (k(\phi} \frac{\partial \phi}{\partial x} \right )$$
-
+$$\phi_t = \left [ -k \phi_x \right ]_x$$
 
 We'll assume that $k$ is contant here.
 ```
@@ -36,7 +34,7 @@ Solving the diffusion equation requires initial conditions and two
 boundary conditions.
 
 
-## Analytic solution
+## (An) Analytic solution
 
 Testing a numerical solution of the diffusion equation is easier if we
 have an analytic solution.  A nice property of the diffusion equation
