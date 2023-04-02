@@ -161,7 +161,7 @@ The problem arose because we started out the Gaussian elimination with
 an equation that had a very small coefficient on $x$.  But we could
 reorder the equations, swapping the first and second, and then we
 would no longer have this problem.  This is called [partial
-pivoting](https://en.wikipedia.org/wiki/Pivot_element#Partial_and_complete_pivoting).
+pivoting](https://en.wikipedia.org/wiki/Pivot_element#Partial,_rook,_and_complete_pivoting).
 
 In terms of matrix form, partial pivoting means swapping rows of the
 matrix such that the element in the column we are eliminating from the

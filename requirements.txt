@@ -5,5 +5,6 @@ scipy
 sympy
 pynucastro
 sphinx_design
-sphinx-book-theme
-pydata-sphinx-theme==0.13.1
+sphinx-book-theme>=1.0.1
+pydata-sphinx-theme>=0.13.3
+
