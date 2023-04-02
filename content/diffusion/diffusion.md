@@ -55,6 +55,8 @@ solution is slightly different.
 If we look at the evolution of this Gaussian, we see:
 
 ```{image} ./phi_analytic_t.png
+:align: center
+```
 
 This shows the expected behavior&mdash;a strongly peaked concentration
 of $\phi$ spreads out with time.
