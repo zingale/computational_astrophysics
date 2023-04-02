@@ -131,6 +131,8 @@ parts:
       - file: elliptic_multigrid/multigrid/multigrid-two-grid
       - file: elliptic_multigrid/multigrid/multigrid-vcycles
     - file: diffusion/diffusion
+      sections:
+      - file: diffusion/diffusion-explicit
 
   - caption: Hydrodynamics
     chapters:
