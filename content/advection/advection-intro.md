@@ -24,9 +24,9 @@ Looking at the second equation (momentum), and expanding out and simplifying, we
 
 $$\frac{\partial {\bf U}}{\partial t} + {\bf U} \cdot \nabla {\bf U} + \frac{1}{\rho} \nabla p = 0$$
 
-This is a nonlinear equation (because of the ${\bf U}\cdot \nabla {\bf U}$ term.  This nonlinearity
+This is a nonlinear equation (because of the ${\bf U}\cdot \nabla {\bf U}$ term).  This nonlinearity
 admits a rich diversity of solutions: rarefactions, shocks, and turbulence.
 
-Our model equation for this will be the inviscid Burgers' equation:
+Our model equation for this will be the [inviscid Burgers' equation](https://en.wikipedia.org/wiki/Burgers%27_equation):
 
 $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0$$
