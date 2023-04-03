@@ -107,3 +107,12 @@ $$
 \right )
 $$
 
+We note a few things:
+
+* This is a [tridiagonal matrix](https://en.wikipedia.org/wiki/Tridiagonal_matrix).
+  Efficient solution methods exist for this that take advantage of the [sparsity pattern](https://en.wikipedia.org/wiki/Sparse_matrix).
+  
+* The ghost cells in our grid do not explicitly appear in the system
+
+* The matrix is [diagonally dominant](https://en.wikipedia.org/wiki/Diagonally_dominant_matrix).  This means that
+  it will work well with iterative methods.
