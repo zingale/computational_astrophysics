@@ -114,6 +114,7 @@ parts:
     - file: advection/advection-intro
       sections:
       - file: advection/advection/advection-partI
+      - file: advection/advection/advection-upwind
       - file: advection/advection/advection-convergence
       - file: advection/advection/advection-partII
       - file: advection/advection/advection-partIII
