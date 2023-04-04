@@ -39,7 +39,9 @@ Notice that there is no time variable here.  Information about the solution
 moves at infinite speed, and the solution depends only on the boundary conditions and the source, $f$.
 
 In astrophysics, the Poisson equation is used to obtain the gravitational
-potential.
+potential, via [_Poisson's equation_](https://en.wikipedia.org/wiki/Poisson%27s_equation#Newtonian_gravity)
+
+$$\nabla^2 \Phi = 4 \pi G \rho$$
 
 ## Parabolic PDEs
 
