@@ -15,18 +15,26 @@ in the first equation, we get:
 
 $$\frac{\partial \rho}{\partial t} + {\bf U} \cdot \nabla \rho + \rho \nabla \cdot {\bf U} = 0 $$
 
-This has the form of an advection equation.  Our model equation for this, in one-dimension
-will be the linear advection equation:
+This has the form of an advection equation.  
+
+```{note}
+Our model equation for this, in one-dimension
+will be the _linear advection equation_:
 
 $$\frac{\partial a}{\partial t} + u \frac{\partial a}{\partial x} = 0$$
+```
 
 Looking at the second equation (momentum), and expanding out and simplifying, we have:
 
 $$\frac{\partial {\bf U}}{\partial t} + {\bf U} \cdot \nabla {\bf U} + \frac{1}{\rho} \nabla p = 0$$
 
-This is a nonlinear equation (because of the ${\bf U}\cdot \nabla {\bf U}$ term).  This nonlinearity
-admits a rich diversity of solutions: rarefactions, shocks, and turbulence.
+This is a nonlinear equation (because of the ${\bf U}\cdot \nabla {\bf
+U}$ term).  This nonlinearity admits a rich diversity of solutions:
+rarefactions, shocks, and turbulence.
 
-Our model equation for this will be the [inviscid Burgers' equation](https://en.wikipedia.org/wiki/Burgers%27_equation):
+```{note} 
+Our model equation for this will be the [inviscid Burgers'
+equation](https://en.wikipedia.org/wiki/Burgers%27_equation):
 
 $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0$$
+```
