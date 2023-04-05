@@ -99,11 +99,16 @@ these as the left and right states:
 ![left and right states for advection](riemann-adv-mol.png)
 
 Now we need to resolve this degeneracy&mdash;which of the two states
-(or what combination of them) is the correct interface state?  This is
-where the physics of the problem comes into play.  This is called the
+(or what combination of them) is the correct interface state?  This is called the
 *Riemann problem*.
 
-For advection it is easy.  We know that for $u > 0$ that $a(x)$ moves
+```{note}
+The Riemann problem is where the physics of the actual set of equations
+comes into play.  Thus far, everything we've done has been general.
+```
+
+For advection, the Riemann problem is easy.  We know that for 
+$u > 0$ that $a(x)$ moves
 from left to right, so the correct state on the interface is the left
 state&mdash;this is upwinding.
 

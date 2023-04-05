@@ -117,7 +117,7 @@ parts:
       - file: advection/advection/advection-upwind
       - file: advection/advection/advection-convergence
       - file: advection/advection/advection-finite-volumes
-      - file: advection/advection/advection-partIII
+      - file: advection/advection/advection-second-order
     - file: advection/burgers/burgers
       sections:
       - file: advection/burgers/burgers-methods
