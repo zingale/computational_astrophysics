@@ -21,6 +21,19 @@ the data living at a specific point, but instead we keep track of the
 total amount of a quantity (or its average) in a volume.  This is
 represented above as the shaded region inside our zone.
 
+```{info}
+We often use the terms _zone_, _cell_, and _volume_ interchangeably.
+```
+
+```{note}
+We use half-integer indicies to denote the location of the boundaries of
+a volume, so:
+
+$$x_{i-1/2} = x_i - \frac{Delta x}{2}$$
+
+and the volume represented by $i$ extends from $[x_{i-1/2}, x_{i+1/2}]$.
+```
+
 ## Cell-averages
 
 Imagine we have a function $f(x)$ that we wish to represent on our grid, using a finite-volume discretization.
@@ -48,8 +61,8 @@ where $F(a) = ua$ is the flux.
 Let's average (integrate) this equation over a zone (from $[x_{i-1/2},
 x_{i+1/2}]$):
 
-$$\frac{1}{\Delta x} \int_{x-1/2}^{x+1/2} \frac{\partial a}{\partial t} dx =
-   -\frac{1}{\Delta x} \int_{x-1/2}^{x+1/2} \frac{\partial F}{\partial x} dx$$
+$$\frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} \frac{\partial a}{\partial t} dx =
+   -\frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} \frac{\partial F}{\partial x} dx$$
 
 we can recognize the left is the time-derivative of the average of $a$
 and the right, via the divergence theorem is just the flux different
