@@ -1,7 +1,7 @@
 # Burgers' Equation
 
-The inviscid Burgers' equation is the simplest nonlinear wave
-equation, and serves as a great stepping stone toward doing full
+The [inviscid Burgers' equation](https://en.wikipedia.org/wiki/Burgers%27_equation#Inviscid_Burgers'_equation) is the simplest nonlinear wave
+equation, and serves as a great stepping-stone toward doing full
 hydrodynamics.
 
 $$u_t + u u_x = 0$$
@@ -38,18 +38,20 @@ coming from.  This gives rise to a nonlinear wave called a shock.
 
 For the linear advection equation, the solution was unchanged along
 the lines $x - ut = \mbox{constant}$&mdash;we called these the
-*characteristic curves*.
+[*characteristic curves*](https://en.wikipedia.org/wiki/Method_of_characteristics).
 
 We can visualize the characteristics as show below:
 
-![advection equation characteristics](advection-characteristics.png)
+```{figure} advection-characteristics.png
+:align: center
 
-The top panel shows the initial $a(x, t=0)$, and the bottom shows the
-characteristic curves in the $x$-$t$ spacetime diagram.  We see that
+The initial $a(x, t=0)$ state (top) and the
+characteristic curves in the $x$-$t$ spacetime diagram (bottom).  We see that
 at any $t > 0$, we find the value of $a(x, t)$ by simply tracing
 backwards along the characteristic curve to the initial conditions.
 Since $u$ is constant in the advection equation, the characteristic
 curves are parallel.
+```
 
 The characteristic curves are the curves on which the solution is
 constant.  For Burgers' equation, the characteristic curves are given
@@ -65,7 +67,12 @@ So $u$ is constant along the curves $dx/dt = 0$, but now $u$ varies in
 the domain.  So if we look at the characteristic curves in the
 spacetime diagram, we get:
 
-![converging characteristics for the Burgers' equation](burgers-characteristics-shock.png)
+```{figure} burgers-characteristics-shock.png
+:align: center
+
+Converging characteristic curves for Burgers's equation resulting from
+an initially non-uniform velocity.
+```
 
 Now we see that, for these initial conditions, at some point in the
 future the characteristics intersect.  This means that there is not a
@@ -78,4 +85,9 @@ found from the Rankine-Hugoniot conditions.
 
 It is also possible to get a *rarefaction* if the characteristics diverge:
 
-![diverging characteristics for the Burgers' equation](burgers-characteristics-rare.png)
+```{figure} burgers-characteristics-rare.png
+:align: center
+
+Diverging characteristics resulting from an initially non-uniform
+velocity
+```
