@@ -21,6 +21,19 @@ the data living at a specific point, but instead we keep track of the
 total amount of a quantity (or its average) in a volume.  This is
 represented above as the shaded region inside our zone.
 
+```{tip}
+We often use the terms _zone_, _cell_, and _volume_ interchangeably.
+```
+
+```{note}
+We use half-integer indicies to denote the location of the boundaries of
+a volume, so:
+
+$$x_{i-1/2} = x_i - \frac{\Delta x}{2}$$
+
+and the volume represented by $i$ extends from $[x_{i-1/2}, x_{i+1/2}]$.
+```
+
 ## Cell-averages
 
 Imagine we have a function $f(x)$ that we wish to represent on our grid, using a finite-volume discretization.
@@ -48,8 +61,8 @@ where $F(a) = ua$ is the flux.
 Let's average (integrate) this equation over a zone (from $[x_{i-1/2},
 x_{i+1/2}]$):
 
-$$\frac{1}{\Delta x} \int_{x-1/2}^{x+1/2} \frac{\partial a}{\partial t} dx =
-   -\frac{1}{\Delta x} \int_{x-1/2}^{x+1/2} \frac{\partial F}{\partial x} dx$$
+$$\frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} \frac{\partial a}{\partial t} dx =
+   -\frac{1}{\Delta x} \int_{x_{i-1/2}}^{x_{i+1/2}} \frac{\partial F}{\partial x} dx$$
 
 we can recognize the left is the time-derivative of the average of $a$
 and the right, via the divergence theorem is just the flux different
@@ -57,6 +70,25 @@ through the boundary of the zone:
 
 $$\frac{\partial}{\partial t} \langle a\rangle_i = -\frac{1}{\Delta x}
    \left [ F_{i+1/2} - F_{i-1/2} \right ]$$
+
+Here, $F_{i-1/2}$ indicates the flux moving through the interface at location $x_{i-1/2}$.
+
+```{note}
+Finite-volume method are conservative because the flux leaving one volume enters
+the adjacent zone.
+
+For example, in the updates for zones $i-1$ and $i$, we have:
+
+$$\frac{\partial}{\partial t} \langle a\rangle_{i-1} = -\frac{1}{\Delta x}
+   \left [ F_{i-1/2} - F_{i-3/2} \right ]$$
+
+$$\frac{\partial}{\partial t} \langle a\rangle_i = -\frac{1}{\Delta x}
+   \left [ F_{i+1/2} - F_{i-1/2} \right ]$$
+
+So any amount of $\langle a\rangle_{i-1}$ that leaves zone $i-1$ through the right interface is gained
+by $\langle a\rangle_i$ by that same flux entering through its left interface.  This is an
+example of a [telescoping sum](https://en.wikipedia.org/wiki/Telescoping_series).
+```
 
 ## Time update
 
@@ -89,8 +121,8 @@ have about its average value.  There are a variety of methods we can
 use (some of which we will explore later).  For now, we will do the
 simplest, and assume that $a(x)$ is constant in each cell:
 
-$$a_{i+1/2,L} = a_i^n$$
-$$a_{i+1/2,R} = a_{i+1}^n$$
+$$a_{i+1/2,L} = \langle a\rangle_i^n$$
+$$a_{i+1/2,R} = \langle a\rangle_{i+1}^n$$
 
 Notice that we actually have 2 values for the interface state when we
 do this, one coming from each side of the interface&mdash;we label
