@@ -27,11 +27,19 @@ We can solve for the update for a single zone:
 $$\phi_i = \frac{1}{2} ( \phi_{i+1} + \phi_{i-1} - \Delta x^2 f_i ) $$
 
 
+```{note}
 We could solve this by writing it as a linear system, $Ax = b$, with $A$ a triadiagonal matrix with diagonals $1, -2, 1$ and $b$ corresponding to $f_i$.  This approach is a "direct solve" of the coupled system.  But this can be expensive in multi-dimensions and harder to parallelize if domain decomposition is used.
+```
 
-Instead of directly solving the linear system, we can use relaxation&mdash;an iterative approach that converges to the solution.  Generally relaxation requires that the matrix be *diagonally dominant*, which we are just shy of, but nevertheless, relaxation works quite well for this system.  There are two popular approaches we can consider:
+Instead of directly solving the linear system, we can use [relaxation](https://en.wikipedia.org/wiki/Relaxation_(iterative_method))&mdash;an iterative approach that converges to the solution.
 
-* *Jacobi iteration* :
+```{tip}
+Relaxation is often also called _smoothing_ because the trend is to make the solution smoother as we iterate.
+```
+
+Generally relaxation requires that the matrix be [*diagonally dominant*](https://en.wikipedia.org/wiki/Diagonally_dominant_matrix), which we are just shy of, but nevertheless, relaxation works quite well for this system.  There are two popular approaches we can consider:
+
+* [*Jacobi iteration*](https://en.wikipedia.org/wiki/Jacobi_method) :
   * pick an initial guess $\phi_i^{(0)}$ for all $i$
   * Improve the guess via relaxation:
 
@@ -39,7 +47,7 @@ Instead of directly solving the linear system, we can use relaxation&mdash;an it
 
   * Assess the error, and if needed iterate
 
-* *Gauss-Seidel (G-S) iteration* :
+* [*Gauss-Seidel (G-S) iteration*](https://en.wikipedia.org/wiki/Gauss%E2%80%93Seidel_method) :
 
   * pick an initial guess $\phi_i^{(0)}$ for all $i$
 
