@@ -7,4 +7,8 @@ pynucastro
 sphinx_design
 sphinx-book-theme>=1.0.1
 pydata-sphinx-theme>=0.13.3
-
+keras
+tensorflow
+pydot
+graphviz
+scikit-learn
