@@ -1,7 +1,11 @@
 #include <iostream>
-#include <grid.H>
+#include <functional>
 
-Grid upwind(const int nx, const double u, const double C_in, const int num_periods) {
+#include <fdgrid.H>
+#include <initial_conditions.H>
+
+Grid upwind(const int nx, const double u, const double C_in,
+            const int num_periods, std::function<void(Grid&)> init_cond) {
 
     double C = C_in;
 
@@ -14,16 +18,7 @@ Grid upwind(const int nx, const double u, const double C_in, const int num_perio
 
     double tmax = num_periods * (g.xmax - g.xmin) / u;
 
-    // initial the data to a tophat
-
-    for (int i = g.ilo; i <= g.ihi; ++i) {
-        if (g.x[i] > 1.0/3.0 && g.x[i] <= 2.0/3.0) {
-            g.a[i] = 1.0;
-        } else {
-            g.a[i] = 0.0;
-        }
-    }
-
+    init_cond(g);
 
     // evolution loop
 
@@ -68,7 +63,7 @@ int main() {
 
     int num_periods{1};
 
-    auto g = upwind(nx, u, C, num_periods);
+    auto g = upwind(nx, u, C, num_periods, tophat);
 
     // output
 

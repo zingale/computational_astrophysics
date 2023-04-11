@@ -1,8 +1,12 @@
+#ifndef FDGRID_H
+#define FDGRID_H
+
 #include <iostream>
 #include <cassert>
 #include <vector>
 
 class Grid {
+    // a finite-difference grid class with nx points and ng ghost points
 
     public:
 
@@ -15,10 +19,14 @@ class Grid {
 
     double dx;
 
+    // indices of the valid domain (i.e. no ghost cells)
     int ilo;
     int ihi;
 
+    // storage for the coordinate
     std::vector<double> x;
+
+    // storage for the solution
     std::vector<double> a;
 
     Grid(const int _nx, const int _ng, const double _xmin, const double _xmax)
@@ -40,6 +48,8 @@ class Grid {
 
     void fill_BCs() {
 
+        // periodic BCs
+
         // left edge of domain
         for (int i = 0; i < ng; ++i) {
             a[ilo-1-i] = a[ihi-i];
@@ -52,3 +62,4 @@ class Grid {
     }
 
 };
+#endif
