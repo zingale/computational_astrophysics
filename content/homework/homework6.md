@@ -22,6 +22,7 @@ derivations, notes, etc.
    Although these forms are analytically equivalent, the numerical solutions
    will differ.
 
+   For the following, use outflow boundary conditions.
 
    * Using first-order upwinding, we can difference the first form of Burgers' equation
      as:
