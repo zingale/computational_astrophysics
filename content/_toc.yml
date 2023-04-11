@@ -120,6 +120,7 @@ parts:
       - file: advection/advection/advection-second-order
     - file: advection/burgers/burgers
       sections:
+      - file: advection/burgers/burgers-riemann
       - file: advection/burgers/burgers-methods
     - file: elliptic_multigrid/intro/elliptic-problems
       sections:
