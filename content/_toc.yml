@@ -157,9 +157,10 @@ parts:
 
   - caption: Machine Learning
     chapters:
-    - file: machine-learning/machine-learning
+    - file: machine-learning/machine-learning-basics.ipynb
       sections:
-      - file: machine-learning/machine-learning-basics.ipynb
+      - file: machine-learning/keras-mnist.ipynb
+      - file: machine-learning/keras-clustering.ipynb
 
   - caption: Homework
     chapters:
