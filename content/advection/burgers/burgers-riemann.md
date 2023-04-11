@@ -13,8 +13,9 @@ is computed through the _Rankine-Hugoniot_ jump conditions.
 Consider the following space-time diagram:
 
 ```{figure} rh.png
+---
 align: center
-
+---
 A rightward moving shock in the $x$-$t$ plane separating two state
 ```
 
@@ -42,3 +43,13 @@ Now for the right side.  We see that all along $x = x_l$, the flux is $f = f(u_l
 Likewise, all along $x = x_r$, the flux is $f = f(u_r)$ in the same time interval.  Therefore, our expression becomes:
 
 $$(u_l - u_r) = - \frac{\Delta t}{\Delta x} \left [ f(u_r) - f(u_l) \right ]$$
+
+Using $S = \Delta x/\Delta t$, we see:
+
+$$S = \frac{f(u_r) - f(u_l)}{u_r - u_l}$$
+
+and taking $f(u) = u^2 / 2$, we get:
+
+$$S = \frac{1}{2} (u_l + u_r)$$
+
+
