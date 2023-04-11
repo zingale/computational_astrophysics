@@ -24,11 +24,12 @@ derivations, notes, etc.
 
    The values of the constants are:
 
-   * $k_b = 1.38\times 10^{-16}~\mathrm{K}$
-   * $a = 7.56\times 10^{-15}~\mathrm{erg~cm^{-3}}$
+   * $k_b = 1.38\times 10^{-16}~\mathrm{K}$ (Boltzmann's constant)
+   * $a = 7.56\times 10^{-15}~\mathrm{erg~cm^{-3}}$ (radiation constant)
    * $\mu_I = 1.26$
    * $\mu_e = 1.15$
-   * $K = 10^{13}~\mathrm{erg~cm^{-3}}$
+   * $m_u = 1.66\times 10^{-24}~\mathrm{g}$ (the atomic mass unit)
+* $K = 10^{13}~\mathrm{erg~cm^{-3}}$
 
    Our goal is to create a two-dimensional table of pressure at discrete
    values of density and temperature.  We'll construct this in the following way:
