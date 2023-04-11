@@ -159,6 +159,7 @@ parts:
   - caption: Machine Learning
     chapters:
     - file: machine-learning/machine-learning-basics
+    - file: machine-learning/machine-learning-libraries
       sections:
       - file: machine-learning/keras-mnist
       - file: machine-learning/keras-clustering
