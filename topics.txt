@@ -49,6 +49,8 @@
 
      See also: https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research#Astronomy
 
+     Also the AstroML sample datasets: https://www.astroml.org/examples/datasets/index.html
+
   hello universe:
 
     https://archive.stsci.edu/hello-universe
