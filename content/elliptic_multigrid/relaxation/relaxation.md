@@ -28,16 +28,27 @@ $$\phi_i = \frac{1}{2} ( \phi_{i+1} + \phi_{i-1} - \Delta x^2 f_i ) $$
 
 
 ```{note}
-We could solve this by writing it as a linear system, $Ax = b$, with $A$ a triadiagonal matrix with diagonals $1, -2, 1$ and $b$ corresponding to $f_i$.  This approach is a "direct solve" of the coupled system.  But this can be expensive in multi-dimensions and harder to parallelize if domain decomposition is used.
+We could solve this by writing it as a linear system,
+${\bf A}{\bf x} = {\bf b}$, with ${\bf A}$ a triadiagonal matrix with
+diagonals $1, -2, 1$ and $b$ corresponding to $f_i$.  This approach is a
+"direct solve" of the coupled system.  But this can be expensive in
+multi-dimensions and harder to parallelize if domain decomposition is used.
 ```
 
-Instead of directly solving the linear system, we can use [relaxation](https://en.wikipedia.org/wiki/Relaxation_(iterative_method))&mdash;an iterative approach that converges to the solution.
+Instead of directly solving the linear system, we can use
+[relaxation](https://en.wikipedia.org/wiki/Relaxation_(iterative_method))&mdash;an
+iterative approach that converges to the solution.
 
 ```{tip}
-Relaxation is often also called _smoothing_ because the trend is to make the solution smoother as we iterate.
+Relaxation is often also called _smoothing_ because the trend is to make
+the solution smoother as we iterate.
 ```
 
-Generally relaxation requires that the matrix be [*diagonally dominant*](https://en.wikipedia.org/wiki/Diagonally_dominant_matrix), which we are just shy of, but nevertheless, relaxation works quite well for this system.  There are two popular approaches we can consider:
+Generally relaxation requires that the matrix be [*diagonally
+dominant*](https://en.wikipedia.org/wiki/Diagonally_dominant_matrix),
+which we are just shy of, but nevertheless, relaxation works quite
+well for this system.  There are two popular approaches we can
+consider:
 
 * [*Jacobi iteration*](https://en.wikipedia.org/wiki/Jacobi_method) :
   * pick an initial guess $\phi_i^{(0)}$ for all $i$
@@ -60,43 +71,56 @@ Generally relaxation requires that the matrix be [*diagonally dominant*](https:/
     memory.  We keep only a single $\phi$ and update it as we sweep
     from $i = 0, \ldots, N-1$.
 
-A variation on G-S iteration is red-black Gauss-Seidel (think of a checkerboard).
+A variation on G-S iteration is red-black Gauss-Seidel (think of a
+checkerboard).
 
-* First update the odd points&mdash;they only depend on the values at the even points
-* Next update the even points&mdash;they only depend on the values of the odd points
+* First update the odd points&mdash;they only depend on the values at
+  the even points
+
+* Next update the even points&mdash;they only depend on the values of
+  the odd points
 
 The advantage of this is that it makes it much easier to parallelize
 via domain decomposition.  We'll use this approach going forward.
 
 ## Boundary conditions
 
-We need to pay special attention to the boundaries.  This depends on what type of grid we are using.
+We need to pay special attention to the boundaries.  This depends on
+what type of grid we are using.
 
 For a finite difference (node-centered) grid:
 
 ![finite-difference grid](fd_grid_bnd.png)
 
-we have a point exactly on each boundary, so we only need to iterate over the interior points.
+we have a point exactly on each boundary, so we only need to iterate
+over the interior points.
 
 In contracts, for a finite-volume or cell-centered finite-difference grid:
 
 ![finite-volume grid](ccfd_grid_bnd.png)
 
-we don't have data on the physical boundaries, so we will need to interpolate to the boundary.
+we don't have data on the physical boundaries, so we will need to
+interpolate to the boundary.
 
-We'll work with a cell-centered grid, with a single ghost cell (needed to set the boundary conditions).  We'll label the first interior zone as `lo` and the last interior zone as `hi`.  Imagine that the domain runs from $[a, b]$.
+We'll work with a cell-centered grid, with a single ghost cell (needed
+to set the boundary conditions).  We'll label the first interior zone
+as `lo` and the last interior zone as `hi`.  Imagine that the domain
+runs from $[a, b]$.
 
 ![cell-centered finite difference grid with labels](ccfd_ghost.png)
 
 Consider the following boundary conditions:
 
-* Dirichlet: we need the value on the boundary itself to satisfy the boundary condition:
+* Dirichlet: we need the value on the boundary itself to satisfy the
+  boundary condition:
 
   $$\phi(a) = A$$
 
-  A naive guess would be to set $\phi_{\mathrm{lo}-1} = A$, but this is only first order accurate.
+  A naive guess would be to set $\phi_{\mathrm{lo}-1} = A$, but this
+  is only first order accurate.
 
-  Instead we recognize that we can average across the boundary to be second-onder on the boundary:
+  Instead we recognize that we can average across the boundary to be
+  second-onder on the boundary:
 
   $$A = \frac{\phi_\mathrm{lo} + \phi_\mathrm{lo-1}}{2}$$
 
@@ -105,7 +129,8 @@ Consider the following boundary conditions:
   $$\phi_{\mathrm{lo}-1} = 2 A - \phi_\mathrm{lo}$$
 
 
-* Neumann: we need a gradient, centered at the boundary to match the given value:
+* Neumann: we need a gradient, centered at the boundary to match the
+  given value:
 
   $$\phi^\prime(a) = C$$
 
