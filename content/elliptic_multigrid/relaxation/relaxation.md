@@ -84,6 +84,16 @@ consider:
   The advantage of this is that it makes it much easier to parallelize
   via domain decomposition.  We'll use this approach going forward.
 
+```{note}
+We already saw how to solve this type of boundary value problem using
+[shooting](https://zingale.github.io/computational_astrophysics/ODEs/boundary-value-problems.html),
+so why are we redoing it now using an iterative process?
+
+The answer is that shooting only works for a 1D Poisson equation, but relaxation extends
+easily to 2- and 3D.  We will also see that there is a powerful technique called _multigrid_
+that can accelerate the convergence of relaxation.
+```
+
 ## Boundary conditions
 
 We need to pay special attention to the boundaries.  This depends on
