@@ -46,7 +46,7 @@ the solution smoother as we iterate.
 Generally relaxation requires that the matrix be [*diagonally
 dominant*](https://en.wikipedia.org/wiki/Diagonally_dominant_matrix),
 which we are just shy of, but nevertheless, relaxation works quite
-well for this system.  There are two popular approaches we can
+well for this system.  There are a few popular approaches we can
 consider:
 
 * [*Jacobi iteration*](https://en.wikipedia.org/wiki/Jacobi_method) :
