@@ -70,7 +70,7 @@ consider:
     memory.  We keep only a single $\phi$ and update it as we sweep
     from $i = 0, \ldots, N-1$.
 
-* Red-black Gauss-Seidel: this is a variation on G-S iteration that does the update
+* *Red-black Gauss-Seidel*: this is a variation on G-S iteration that does the update
   of the odd and even zones separately.  The name comes from thinking about a checkerboard:
   with our update, the black squares depend only on the red and the red squares depend only
   on the black.  So we can update them in 2 separate passes.
