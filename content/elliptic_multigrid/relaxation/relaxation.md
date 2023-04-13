@@ -1,8 +1,5 @@
 # Relaxation
 
-We will use an iterative technique for solving our elliptic problems called
-_relaxation_.
-
 A second-order accurate discretization of the second derivative is:
 
 $$\phi_i^{\prime\prime} = \frac{\phi_{i+1} - 2\phi_i + \phi_{i-1}}{\Delta x^2}$$
@@ -22,11 +19,6 @@ $$\frac{\phi_{i+1} - 2\phi_i + \phi_{i-1}}{\Delta x^2} = f_i$$
 Using this discretization for all zones i in $0, \ldots, N-1$ results
 in $N$ coupled algebraic equations.
 
-We can solve for the update for a single zone:
-
-$$\phi_i = \frac{1}{2} ( \phi_{i+1} + \phi_{i-1} - \Delta x^2 f_i ) $$
-
-
 ```{note}
 We could solve this by writing it as a linear system,
 ${\bf A}{\bf x} = {\bf b}$, with ${\bf A}$ a triadiagonal matrix with
@@ -38,6 +30,13 @@ multi-dimensions and harder to parallelize if domain decomposition is used.
 Instead of directly solving the linear system, we can use
 [relaxation](https://en.wikipedia.org/wiki/Relaxation_(iterative_method))&mdash;an
 iterative approach that converges to the solution.
+
+We solve for the update for a single zone:
+
+$$\phi_i = \frac{1}{2} ( \phi_{i+1} + \phi_{i-1} - \Delta x^2 f_i ) $$
+
+and then iteratively use this expression to update the zones one by one.
+
 
 ```{tip}
 Relaxation is often also called _smoothing_ because the trend is to make
@@ -71,17 +70,19 @@ consider:
     memory.  We keep only a single $\phi$ and update it as we sweep
     from $i = 0, \ldots, N-1$.
 
-A variation on G-S iteration is red-black Gauss-Seidel (think of a
-checkerboard).
+* Red-black Gauss-Seidel: this is a variation on G-S iteration that does the update
+  of the odd and even zones separately.  The name comes from thinking about a checkerboard:
+  with our update, the black squares depend only on the red and the red squares depend only
+  on the black.  So we can update them in 2 separate passes.
 
-* First update the odd points&mdash;they only depend on the values at
-  the even points
+  * First update the odd points&mdash;they only depend on the values at
+    the even points
 
-* Next update the even points&mdash;they only depend on the values of
-  the odd points
+  * Next update the even points&mdash;they only depend on the values of
+    the odd points
 
-The advantage of this is that it makes it much easier to parallelize
-via domain decomposition.  We'll use this approach going forward.
+  The advantage of this is that it makes it much easier to parallelize
+  via domain decomposition.  We'll use this approach going forward.
 
 ## Boundary conditions
 
@@ -134,7 +135,7 @@ Consider the following boundary conditions:
 
   $$\phi^\prime(a) = C$$
 
-  A second-order accurate discretization one the boundary is:
+  A second-order accurate discretization on the boundary is:
 
   $$C = \frac{\phi_\mathrm{lo} - \phi_\mathrm{lo-1}}{\Delta x}$$
 

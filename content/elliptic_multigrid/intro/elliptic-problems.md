@@ -16,12 +16,15 @@ $$\phi^{\prime\prime} = f$$
 
 on the domain $[a, b]$.
 
-We can supply boundary conditions as
+At each boundary. we can specify the boundary conditions as
 
-* Dirichlet: $\phi(a) = A$
-* Neumann: $\phi^\prime(a) = C$
+* [Dirichlet](https://en.wikipedia.org/wiki/Dirichlet_boundary_condition): $\phi(a) = A$
+* [Neumann](https://en.wikipedia.org/wiki/Neumann_boundary_condition): $\phi^\prime(a) = C$
+* [Robin](https://en.wikipedia.org/wiki/Robin_boundary_condition): $\alpha \phi(a) + \beta \phi^\prime(a) = \gamma$ (a mix of the above two)
+* periodic
 
-or a mix of the two.  If the values are set to 0, we call the
+We can also have diffrent boundary conditions on each boundary.
+If the values are set to 0, we call the
 conditions homogeneous, otherwise we call them inhomogeneous.
 
 ```{note}
