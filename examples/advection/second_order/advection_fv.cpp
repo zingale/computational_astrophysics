@@ -50,7 +50,7 @@ std::vector<double> flux_update(const FVGrid& g, const double u, const std::vect
 FVGrid advection_mol(const int nx, const double u, const double C,
                      const int num_periods, std::function<void(FVGrid&)> init_cond) {
 
-    FVGrid g(nx, 1, 0.0, 1.0);
+    FVGrid g(nx, 2, 0.0, 1.0);
 
     // time information
 
