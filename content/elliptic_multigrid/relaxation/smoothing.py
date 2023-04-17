@@ -1,6 +1,13 @@
 import numpy as np
 
-class Grid:
+
+class TooManyIterations(Exception):
+    pass
+
+
+class PoissonRelaxation:
+    """an implementation of solving the Poisson equation via pure relaxation"""
+
     def __init__(self, nx, ng=1, xmin=0, xmax=1,
                  bc_left_type="dirichlet", bc_left_val=0.0,
                  bc_right_type="dirichlet", bc_right_val=0.0):
@@ -70,54 +77,46 @@ class Grid:
         else:
             raise ValueError("invalid bc_right_type")
 
-class TooManyIterations(Exception):
-    pass
+    def relax(self, tol=1.e-8, max_iters=200000, analytic=None):
 
-def relax(g, tol=1.e-8, max_iters=200000, analytic=None):
+        iter = 0
+        fnorm = self.source_norm()
+        if fnorm == 0.0:
+            fnorm = 1.0
 
-    iter = 0
-    fnorm = g.source_norm()
-    if fnorm == 0.0:
-        fnorm = tol
+        r = self.residual_norm()
 
-    r = g.residual_norm()
+        res_norm = []
+        true_norm = []
 
-    res_norm = []
-    true_norm = []
 
-    if tol is None:
-        test = iter < max_iters
-    else:
-        test = iter < max_iter and r > tol * fnorm
+        while iter < max_iters and (tol is None or r > tol * fnorm):
 
-    g.fill_bcs()
+            self.fill_bcs()
 
-    while test:
-        g.phi[g.ilo:g.ihi+1:2] = 0.5 * (-g.dx * g.dx * g.f[g.ilo:g.ihi+1:2] +
-                                        g.phi[g.ilo+1:g.ihi+2:2] + g.phi[g.ilo-1:g.ihi:2])
+            self.phi[self.ilo:self.ihi+1:2] = 0.5 * (-self.dx**2 * self.f[self.ilo:self.ihi+1:2] +
+                                                     self.phi[self.ilo+1:self.ihi+2:2] +
+                                                     self.phi[self.ilo-1:self.ihi:2])
 
-        g.fill_bcs()
+            self.fill_bcs()
 
-        g.phi[g.ilo+1:g.ihi+1:2] = 0.5 * (-g.dx * g.dx * g.f[g.ilo+1:g.ihi+1:2] +
-                                          g.phi[g.ilo+2:g.ihi+2:2] + g.phi[g.ilo:g.ihi:2])
+            self.phi[self.ilo+1:self.ihi+1:2] = 0.5 * (-self.dx**2 * self.f[self.ilo+1:self.ihi+1:2] +
+                                                       self.phi[self.ilo+2:self.ihi+2:2] +
+                                                       self.phi[self.ilo:self.ihi:2])
 
-        g.fill_bcs()
+            self.fill_bcs()
 
-        r = g.residual_norm()
-        res_norm.append(r)
+            r = self.residual_norm()
+            res_norm.append(r)
 
-        if analytic is not None:
-            true_norm.append(g.norm(g.phi - analytic(g.x)))
+            if analytic is not None:
+                true_norm.append(self.norm(self.phi - analytic(self.x)))
 
-        iter += 1
+            iter += 1
 
-        if tol is None:
-            test = iter < max_iters
-        else:
-            test = iter < max_iter and r > tol * fnorm
 
-    if tol is not None and iter >= max_iters:
-        raise TooManyIterations(f"too many iteration, niter = {iter}")
+        if tol is not None and iter >= max_iters:
+            raise TooManyIterations(f"too many iteration, niter = {iter}")
 
-    return res_norm, true_norm
+        return res_norm, true_norm, iter
 
