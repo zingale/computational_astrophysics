@@ -84,6 +84,7 @@ class PoissonRelaxation:
         if fnorm == 0.0:
             fnorm = 1.0
 
+        self.fill_bcs()
         r = self.residual_norm()
 
         res_norm = []
@@ -91,8 +92,6 @@ class PoissonRelaxation:
 
 
         while iter < max_iters and (tol is None or r > tol * fnorm):
-
-            self.fill_bcs()
 
             self.phi[self.ilo:self.ihi+1:2] = 0.5 * (-self.dx**2 * self.f[self.ilo:self.ihi+1:2] +
                                                      self.phi[self.ilo+1:self.ihi+2:2] +
@@ -107,7 +106,7 @@ class PoissonRelaxation:
             self.fill_bcs()
 
             r = self.residual_norm()
-            res_norm.append(r)
+            res_norm.append(r / fnorm)
 
             if analytic is not None:
                 true_norm.append(self.norm(self.phi - analytic(self.x)))
