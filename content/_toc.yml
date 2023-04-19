@@ -137,7 +137,8 @@ parts:
       sections:
       - file: diffusion/diffusion-explicit
       - file: diffusion/diffusion-implicit-intro
-      - file: diffusion/diffusion-implicit-implementation
+      - file: diffusion/diffusion-implicit-direct
+      - file: diffusion/diffusion-implicit-relaxation
 
   - caption: Hydrodynamics
     chapters:
