@@ -23,8 +23,8 @@ Here, the main diagnoal is represented by $b_i$, which runs from $i =
 0, \ldots, N-1$.  The two off diagonals have one fewer entries.
 
 We can solve this just using Gaussian elimination, as before, but we
-won't need to pivot, since the structure is the same on all rows.  
-The result is the [tridiagonal matrix
+won't need to pivot, since the structure is the same on all rows.  The
+result is the [tridiagonal matrix
 solver](https://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm).
 Notice that we only need to update 2 elements in each row instead of
 $N$, so by taking advantage of this pattern, this solver will be much
