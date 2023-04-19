@@ -139,7 +139,7 @@ parts:
       - file: diffusion/diffusion-implicit-intro
       - file: diffusion/tridiagonal-system
       - file: diffusion/diffusion-implicit-direct
-      - file: diffusion/diffusion-implicit-relaxation
+      - file: diffusion/diffusion-implicit-relax
 
   - caption: Hydrodynamics
     chapters:
