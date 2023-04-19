@@ -1,7 +1,7 @@
 Multigrid
 =========
 
-Now we learn how to transfer data between grids at different
+Now we need to learn how to transfer data between grids at different
 resolution and use it to accelerate the convergence of our relaxation.
 
 A lot of inspiration came from the fantastic book *A Multigrid

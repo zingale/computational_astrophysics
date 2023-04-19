@@ -1,5 +1,7 @@
 import numpy as np
+
 import grid
+
 
 class Multigrid:
     """
@@ -143,7 +145,8 @@ class Multigrid:
             self.v_cycle(self.nlevels-1)
 
             # compute the residual error, relative to the source norm
-            residual_error = self.soln_grid.residual_norm()
+            self.soln_grid.compute_residual()
+            residual_error = self.soln_grid.norm(self.soln_grid.r)
             if self.source_norm != 0.0:
                 residual_error /= self.source_norm
 
@@ -171,7 +174,8 @@ class Multigrid:
             cp = self.grids[level-1]
 
             if self.verbose:
-                old_res_norm = fp.residual_norm()
+                fp.compute_residual()
+                old_res_norm = fp.norm(fp.r)
 
             # smooth on the current level
             self.smooth(level, self.nsmooth)
@@ -183,22 +187,24 @@ class Multigrid:
                 print(f"  level = {level}, nx = {fp.nx:4}, residual change: {old_res_norm:11.6g} -> {fp.norm(fp.r):11.6g}")
 
             # restrict the residual down to the RHS of the coarser level
-            cp.f[:] = fp.restrict("r")
+            cp.f[:] = fp.restrict(fp.r)
 
             # solve the coarse problem
             self.v_cycle(level-1)
 
             # prolong the error up from the coarse grid
-            fp.v += cp.prolong("v")
+            fp.v += cp.prolong(cp.v)
 
             if self.verbose:
-                old_res_norm = fp.residual_norm()
+                fp.compute_residual()
+                old_res_norm = fp.norm(fp.r)
 
             # smooth
             self.smooth(level, self.nsmooth)
 
             if self.verbose:
-                print(f"  level = {level}, nx = {fp.nx:4}, residual change: {old_res_norm:11.6g} -> {fp.residual_norm():11.6g}")
+                fp.compute_residual()
+                print(f"  level = {level}, nx = {fp.nx:4}, residual change: {old_res_norm:11.6g} -> {fp.norm(fp.r):11.6g}")
 
         else:
             # solve the discrete coarse problem just via smoothing
