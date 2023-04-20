@@ -22,7 +22,9 @@ $${\bf x} = (x_0, x_1, \ldots, x_{N-1})$$
 
 are the inputs,
 
-$${\bf z} = (z_0, z_1, \ldots, z_{M-1})$$ are the outputs, and
+$${\bf z} = (z_0, z_1, \ldots, z_{M-1})$$ 
+
+are the outputs, and
 ${\bf A}$ is an $M \times N$ matrix.
 
 Our goal is to determine the matrix elements of ${\bf A}$.
