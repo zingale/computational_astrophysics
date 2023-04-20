@@ -162,6 +162,8 @@ parts:
   - caption: Machine Learning
     chapters:
     - file: machine-learning/machine-learning-basics
+      sections:
+      - file: machine-learning/gradient-descent
     - file: machine-learning/neural-net-mnist
     - file: machine-learning/machine-learning-libraries
       sections:
