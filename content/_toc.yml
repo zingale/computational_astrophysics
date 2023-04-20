@@ -137,7 +137,9 @@ parts:
       sections:
       - file: diffusion/diffusion-explicit
       - file: diffusion/diffusion-implicit-intro
-      - file: diffusion/diffusion-implicit-implementation
+      - file: diffusion/tridiagonal-system
+      - file: diffusion/diffusion-implicit-direct
+      - file: diffusion/diffusion-implicit-relax
 
   - caption: Hydrodynamics
     chapters:
@@ -183,5 +185,6 @@ parts:
       sections:
       - file: homework/hw5-solutions
     - file: homework/homework6
+    - file: homework/homework7
     - file: homework/project
 
