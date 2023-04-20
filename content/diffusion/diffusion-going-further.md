@@ -12,7 +12,7 @@ $$\frac{\phi_i^{n+1} - \phi_i^n}{\Delta x} = \frac{k}{2}
 This is still an implicit update, but the coefficients and righthand side
 in the linear system will be different
 
-## State-dependent transfer coefficients
+## State-dependent transport coefficients
 
 If we have a non-constant conductivity that depends on $\phi$ itself,
 then our discretization is more complicated:
@@ -24,7 +24,7 @@ $$\frac{\phi_i^{n+1} - \phi_i^n}{\Delta t} =
 Now we need $k$ at the interfaces.  There are several ways to do this, which
 should be motivated by the physics of what the coefficient $k$ represents:
 
-$$k_{i+1/2} = \frac{1}{2} (k_i + k_{i+1}$$
+$$k_{i+1/2} = \frac{1}{2} (k_i + k_{i+1})$$
 
 or
 
