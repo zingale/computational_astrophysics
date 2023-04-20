@@ -78,9 +78,9 @@ $$g({\bf x}) = \left ( \begin{array}{c} g(x_0) \\ g(x_1) \\ \vdots \\ g(x_{n-1})
 
 Then our neural network has the form: ${\bf z} = g({\bf A x})$
 
-We want to choose a $g(x)$ that is differentiable.  A commont choice is the _sigmoid function_:
+We want to choose a function $g(\xi)$ that is differentiable.  A commont choice is the _sigmoid function_:
 
-$$g(p) = \frac{1}{1 + e^{-p}}$$
+$$g(\xi) = \frac{1}{1 + e^{-\xi}}$$
 
 ```{figure} sigmoid.png
 ---
@@ -94,11 +94,11 @@ The sigmoid function
 
 * Training
 
-  * We have $T$ pairs $(x^k, y^k)$ for $k = 1, \ldots, T$
+  * We have $T$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, T$
 
   * We require that $g({\bf A x}^k) = {\bf y}^k$ for all $k$
 
-    Recall that $g(p)$ is a scalar function that works element-by-element:
+    Recall that $g(\xi)$ is a scalar function that works element-by-element:
 
     $$z_i = g([{\bf A x}]_i) = g \left ( \sum_j A_{ij} x_j \right )$$
 
@@ -134,8 +134,8 @@ than either the input or output layers.
 
 Now we have an additional matrix ${\bf B}$ to train.  This can all be done together using the same algorithm described above.  Where we now minimze:
 
-$$f(A_{ls}, B_{ij}) = \sum_{l=1}^m (z_l - y_l)^2$$
+$$f(A_{lm}, B_{ij}) = \sum_{l=1}^M (z_l - y_l)^2$$
 
-$$\tilde{z}_i = g \left ( \sum_{j=1}^n B_{ij} x_j \right )$$
+$$\tilde{z}_i = g \left ( \sum_{j=1}^N B_{ij} x_j \right )$$
 
-$$z_l = g \left ( \sum_{s=1}^k A_{ls} \tilde{z}_s \right )$$
+$$z_l = g \left ( \sum_{m=1}^K A_{lm} \tilde{z}_m \right )$$
