@@ -57,7 +57,7 @@ Now ${\bf z}$ and ${\bf y}^k$ are all vectors of size $N_\mathrm{out} \times 1$ 
 
 $$\frac{\partial f}{\partial {\bf A}} = 2 ({\bf z} - {\bf y}^k) \circ {\bf z} \circ (1 - {\bf z}) \cdot ({\bf x}^k)^\intercal$$
 
-where the operator $\circ$ represents _element-by-element_ multiplication (the [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_(matrices)).
+where the operator $\circ$ represents _element-by-element_ multiplication (the [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_(matrices))).
 
 ## Performing the update
 
