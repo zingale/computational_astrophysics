@@ -90,14 +90,17 @@ The sigmoid function
 
     Recall that $g(p)$ is a scalar function that works element-by-element:
 
-    $$z_i = g([{\bf A x}]_i) = g \left ( \sum_j A_{ij} x_j \right )$$
+    $$z_i = g([{\bf A x}]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} x_j \right )$$
 
   * Find the elements of ${\bf A}$
 
     This is a minimization problem, where we are minimizing:
 
-    $$f(A_{ij}) = \| g({\bf A x}^k) - {\bf y}^k \|^2$$
-
+    \begin{align}
+    f(A_{ij}) &= \| g({\bf A x}^k) - {\bf y}^k \|^2 \\
+              &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x_j \right ) - y_i \right ]^2
+    \end{align}
+    
     We call this function the _cost function_.
 
     A common minimization technique is [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent).
@@ -111,21 +114,3 @@ The sigmoid function
 * Using the network
 
   With the trained ${\bf A}$, we can now use the network on data we haven't seen before
-
-
- ## Hidden layers
-
- We can get better performance from a neural network by adding a hidden layer:
-
-![hidden layers](nn_fig_hidden.png)
-
-The size of the hidden layer is independent of the size of the input and output layers.  In this case, we have a hidden layer that is larger
-than either the input or output layers.
-
-Now we have an additional matrix ${\bf B}$ to train.  This can all be done together using the same algorithm described above.  Where we now minimze:
-
-$$f(A_{ls}, B_{ij}) = \sum_{l=1}^m (z_l - y_l)^2$$
-
-$$\tilde{z}_i = g \left ( \sum_{j=1}^n B_{ij} x_j \right )$$
-
-$$z_l = g \left ( \sum_{s=1}^k A_{ls} \tilde{z}_s \right )$$
