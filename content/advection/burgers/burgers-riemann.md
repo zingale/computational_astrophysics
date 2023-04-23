@@ -70,22 +70,22 @@ at whether the flow is converging or diverging.  For converging flow, $u_{i+1/2,
 We write this as:
 
 $$u_{i+1/2} = \mathcal{R}(u_{i+1/2,L}, u_{i+1/2,R}) = \left \{ \begin{array}{cc}
-         u_s & \mbox{if}~ u_{i+1/2,L} > u_{i+1/2,R} \\
-         u_r & \mbox{otherwise} \end{array} \right .
+         u_\mathrm{shock} & \mbox{if}~ u_{i+1/2,L} > u_{i+1/2,R} \\
+         u_\mathrm{rare} & \mbox{otherwise} \end{array} \right .
 $$
 
 where $u_s$ is the shock case and $u_r$ is the rarefaction case.
 
 For the shock, we look at the direction the shock is moving and choose the appropriate state:
 
-$$u_s = \left \{ \begin{array}{cc}
+$$u_\mathrm{shock} = \left \{ \begin{array}{cc}
      u_{i+1/2,L} & \mbox{if}~ S > 0 \\
      u_{i+1/2,R} & \mbox{if}~ S < 0 \end{array} \right .
 $$
 
 For the rarefaction, we do:
 
-$$u_r = \left \{ \begin{array}{cc}
+$$u_\mathrm{rare} = \left \{ \begin{array}{cc}
      u_{i+1/2,L} & \mbox{if}~ u_{i+1/2,L} > 0 \\
      u_{i+1/2,R} & \mbox{if}~ u_{i+1/2,R} < 0 \\
      0           & \mbox{otherwise} \end{array} \right .

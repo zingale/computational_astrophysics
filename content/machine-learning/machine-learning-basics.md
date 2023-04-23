@@ -11,11 +11,21 @@ Basic idea:
 * Train the network on data with known inputs and outputs to set the parameters
 * Use the trained network on new data to predict the outcome
 
-We can think of a neural network as a map that takes a set of n parameters and returns a set of m parameters, $\mathbb{R}^n \rightarrow \mathbb{R}^m$ and we can express this as:
+We can think of a neural network as a map that takes a set of $N$ parameters and returns a set of $M$ parameters,
+which we can express this as:
 
 $${\bf z} = {\bf A} {\bf x}$$
 
-where ${\bf x} \in \mathbb{R}^n$ are the inputs, ${\bf z} \in \mathbb{R}^m$ are the outputs, and ${\bf A}$ is an $m \times n$ matrix.
+where 
+
+$${\bf x} = (x_0, x_1, \ldots, x_{N-1})$$
+
+are the inputs,
+
+$${\bf z} = (z_0, z_1, \ldots, z_{M-1})$$ 
+
+are the outputs, and
+${\bf A}$ is an $M \times N$ matrix.
 
 Our goal is to determine the matrix elements of ${\bf A}$.
 

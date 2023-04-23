@@ -87,7 +87,10 @@ class NeuralNet(object):
                 top_label = r"${\bf x}$"
             elif i == len(self.layers)-1:
                 label = "output\nlayer {}".format(i+1)
-                top_label = r"${\bf z} = g({\bf A}\tilde{\bf z})$"
+                if len(self.layers) == 3:
+                    top_label = r"${\bf z} = g({\bf A}\tilde{\bf z})$"
+                else:
+                    top_label = r"${\bf z} = g({\bf A}{\bf x})$"
             else:
                 label = "hidden\nlayer {}".format(i+1)
                 top_label = r"$\tilde{\bf z} = g({\bf B x})$"

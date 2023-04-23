@@ -4,11 +4,16 @@ One of the issues we have with our diffusion implementation is that the timestep
 
 $$\Delta t = \frac{C}{2} \frac{\Delta x^2}{k}$$
 
-can be very restrictive as $\Delta x$ gets small.  In particular, if we are combining advection and diffusion,
-the diffusive timestep restriction can dominate.
+can be very restrictive as $\Delta x$ gets small.  
 
-For this reason, in astrophysics, we often wish to use an _implicit-in-time_
+```{note}
+In astrophysical simulations, we are often combining advection and diffusion,
+and the diffusive timestep restriction can dominate, making our overall simulation
+computationally expensive.
+
+For this reason, we often wish to use an _implicit-in-time_
 integration method for diffusion.
+```
 
 Going back to our original discretization, we would write the implicit update as:
 
@@ -25,6 +30,11 @@ $$-\alpha \phi^{n+1}_{i-1} + (1 + 2\alpha) \phi_i^{n+1}
 - \alpha \phi_{i+1}^{n+1} = \phi_i^n$$
 
 This is a coupled set of algebraic equations for the new time state of $\phi$&mdash;a linear system.
+
+```{important}
+The implicit discretization is stable for all values of $C$.  But keep in mind that
+stability and accuracy are not the same thing.
+```
 
 There are several ways we can solve this:
 

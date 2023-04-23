@@ -23,7 +23,7 @@ class PoissonRelaxation:
         self.bc_right_type = bc_right_type
         self.bc_right_val = bc_right_val
 
-        # python is zero-based.  Make easy intergers to know where the
+        # python is zero-based.  Make easy integers to know where the
         # real data lives
         self.ilo = ng
         self.ihi = ng+nx-1

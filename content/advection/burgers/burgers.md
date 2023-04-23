@@ -63,7 +63,7 @@ $$\frac{du}{dt} = \frac{\partial u}{\partial t} + \frac{dx}{dt} \frac{\partial u
 \frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x} = 0$$
 
 We see that $du/dt = 0$ since it just gives us the Burgers equation.
-So $u$ is constant along the curves $dx/dt = 0$, but now $u$ varies in
+So $u$ is constant along the curves $dx/dt = u$, but now $u$ varies in
 the domain.  So if we look at the characteristic curves in the
 spacetime diagram, we get:
 
