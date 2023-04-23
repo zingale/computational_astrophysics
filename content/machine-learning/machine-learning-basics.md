@@ -100,7 +100,7 @@ The sigmoid function
 
     Recall that $g(\xi)$ is a scalar function that works element-by-element:
 
-    $$z_i = g([{\bf A x}]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} x_j \right )$$
+    $$z_i = g([{\bf A x}^k]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right )$$
 
   * Find the elements of ${\bf A}$
 
@@ -108,7 +108,7 @@ The sigmoid function
 
     \begin{align}
     f(A_{ij}) &= \| g({\bf A x}^k) - {\bf y}^k \|^2 \\
-              &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x_j \right ) - y_i \right ]^2
+              &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right ) - y^k_i \right ]^2
     \end{align}
     
     We call this function the _cost function_.
