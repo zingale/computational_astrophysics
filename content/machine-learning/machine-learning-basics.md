@@ -78,7 +78,7 @@ $$g({\bf x}) = \left ( \begin{array}{c} g(x_0) \\ g(x_1) \\ \vdots \\ g(x_{n-1})
 
 Then our neural network has the form: ${\bf z} = g({\bf A x})$
 
-We want to choose a $g(\xi)$ that is differentiable.  A commont choice is the _sigmoid function_:
+We want to choose a function $g(\xi)$ that is differentiable.  A common choice is the _sigmoid function_:
 
 $$g(\xi) = \frac{1}{1 + e^{-\xi}}$$
 
@@ -94,11 +94,11 @@ The sigmoid function
 
 * Training
 
-  * We have $T$ pairs $(x^k, y^k)$ for $k = 1, \ldots, T$
+  * We have $T$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, T$
 
   * We require that $g({\bf A x}^k) = {\bf y}^k$ for all $k$
 
-    Recall that $g(p)$ is a scalar function that works element-by-element:
+    Recall that $g(\xi)$ is a scalar function that works element-by-element:
 
     $$z_i = g([{\bf A x}]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} x_j \right )$$
 
