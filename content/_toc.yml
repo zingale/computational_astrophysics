@@ -164,7 +164,9 @@ parts:
     - file: machine-learning/machine-learning-basics
       sections:
       - file: machine-learning/gradient-descent
-    - file: machine-learning/neural-net-mnist
+    - file: machine-learning/machine-learning-hidden
+      sections:
+      - file: machine-learning/neural-net-mnist
     - file: machine-learning/machine-learning-libraries
       sections:
       - file: machine-learning/keras-mnist
