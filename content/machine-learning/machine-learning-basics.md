@@ -11,21 +11,21 @@ Basic idea:
 * Train the network on data with known inputs and outputs to set the parameters
 * Use the trained network on new data to predict the outcome
 
-We can think of a neural network as a map that takes a set of $N$ parameters and returns a set of $M$ parameters,
+We can think of a neural network as a map that takes a set of $N_\mathrm{in}$ parameters and returns a set of $N_\mathrm{out}$ parameters,
 which we can express this as:
 
 $${\bf z} = {\bf A} {\bf x}$$
 
 where 
 
-$${\bf x} = (x_0, x_1, \ldots, x_{N-1})$$
+$${\bf x} = (x_1, x_2, \ldots, x_{N_\mathrm{in}})$$
 
 are the inputs,
 
-$${\bf z} = (z_0, z_1, \ldots, z_{M-1})$$ 
+$${\bf z} = (z_1, z_2, \ldots, z_{N_\mathrm{out}})$$ 
 
 are the outputs, and
-${\bf A}$ is an $M \times N$ matrix.
+${\bf A}$ is an $N_\mathrm{out} \times N_\mathrm{in}$ matrix.
 
 Our goal is to determine the matrix elements of ${\bf A}$.
 
@@ -78,9 +78,9 @@ $$g({\bf x}) = \left ( \begin{array}{c} g(x_0) \\ g(x_1) \\ \vdots \\ g(x_{n-1})
 
 Then our neural network has the form: ${\bf z} = g({\bf A x})$
 
-We want to choose a $g(x)$ that is differentiable.  A commont choice is the _sigmoid function_:
+We want to choose a $g(\xi)$ that is differentiable.  A commont choice is the _sigmoid function_:
 
-$$g(p) = \frac{1}{1 + e^{-p}}$$
+$$g(\xi) = \frac{1}{1 + e^{-\xi}}$$
 
 ```{figure} sigmoid.png
 ---
