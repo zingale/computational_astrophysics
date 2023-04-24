@@ -165,6 +165,7 @@ parts:
       sections:
       - file: machine-learning/gradient-descent
       - file: machine-learning/machine-learning-derivation
+      - file: machine-learning/last-number
     - file: machine-learning/machine-learning-hidden
       sections:
       - file: machine-learning/neural-net-mnist
