@@ -36,11 +36,11 @@ $$\frac{\partial z_i}{\partial A_{pq}} = g(b_i)(1 - g(b_i)) \delta_{ip} x^k_q = 
 
 Then finally, we have:
 
-\begin{align}
+\begin{align*}
 \frac{\partial f}{\partial A_{pq}} &= 2 \sum_{i=1}^{N_\mathrm{out}}
    (z_i - y^k_i) z_i (1 - z_i) \delta_{ip} x^k_q \\
    &= 2 (z_p - y^k_p) z_p (1- z_p) x^k_q
-\end{align}
+\end{align*}
    
 where we used the fact that the $\delta_{ip}$ means that only a single term contributes to the sum.
 

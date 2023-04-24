@@ -106,10 +106,10 @@ The sigmoid function
 
     This is a minimization problem, where we are minimizing:
 
-    \begin{align}
+    \begin{align*}
     f(A_{ij}) &= \| g({\bf A x}^k) - {\bf y}^k \|^2 \\
               &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right ) - y^k_i \right ]^2
-    \end{align}
+    \end{align*}
     
     We call this function the _cost function_.
 
