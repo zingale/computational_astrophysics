@@ -92,6 +92,7 @@ The sigmoid function
 ## Basic algorithm
 
 
+
 * Training
 
   * We have $T$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, T$
@@ -113,14 +114,9 @@ The sigmoid function
     
     We call this function the _cost function_.
 
-    A common minimization technique is [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent).
-
-    Some caveats:
-
-    * When you minimize with one set of training data, there is no guarantee that your are still minimimzed with respect to the others.  We do multiple _epochs_ or passes through the training data to fix this.
-
-    * We often don't apply the full correction from gradient descent, but instead scale it by some $\eta < 1$ called the _learning rate_.
-
 * Using the network
 
   With the trained ${\bf A}$, we can now use the network on data we haven't seen before
+
+    
+A common minimization technique is [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent).
