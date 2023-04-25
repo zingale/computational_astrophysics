@@ -16,13 +16,13 @@ which we can express this as:
 
 $${\bf z} = {\bf A} {\bf x}$$
 
-where 
+where
 
 $${\bf x} = (x_1, x_2, \ldots, x_{N_\mathrm{in}})$$
 
 are the inputs,
 
-$${\bf z} = (z_1, z_2, \ldots, z_{N_\mathrm{out}})$$ 
+$${\bf z} = (z_1, z_2, \ldots, z_{N_\mathrm{out}})$$
 
 are the outputs, and
 ${\bf A}$ is an $N_\mathrm{out} \times N_\mathrm{in}$ matrix.
@@ -89,34 +89,44 @@ align: center
 The sigmoid function
 ```
 
+```{note}
+The activation function, $g(\xi)$ works element-by-element.
+```
+
 ## Basic algorithm
 
 
 
 * Training
 
-  * We have $T$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, T$
+  * Loop over the $T$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, T$
 
-  * We require that $g({\bf A x}^k) = {\bf y}^k$ for all $k$
+    * Predict the output for ${\bf x}^k$ as:
 
-    Recall that $g(\xi)$ is a scalar function that works element-by-element:
+      $$z_i = g([{\bf A x}^k]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right )$$
 
-    $$z_i = g([{\bf A x}^k]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right )$$
+    * Constrain that ${\bf z} = {\bf y}^k$.
 
-  * Find the elements of ${\bf A}$
+      This is a minimization problem, where we are minimizing:
 
-    This is a minimization problem, where we are minimizing:
+      \begin{align*}
+      f(A_{ij}) &= \| g({\bf A x}^k) - {\bf y}^k \|^2 \\
+                &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right ) - y^k_i \right ]^2
+      \end{align*}
 
-    \begin{align*}
-    f(A_{ij}) &= \| g({\bf A x}^k) - {\bf y}^k \|^2 \\
-              &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right ) - y^k_i \right ]^2
-    \end{align*}
-    
-    We call this function the _cost function_.
+      We call this function the _cost function_.
+
+      ```{info}
+      This is one possible choice for the cost function, $f(A_{ij})$, but many others exist.
+      ```
+
+    * Update the matrix ${\bf A}$ based on the training pair $({\bf x}^k, {\bf y^{k}}$.
 
 * Using the network
 
-  With the trained ${\bf A}$, we can now use the network on data we haven't seen before
+  With the trained ${\bf A}$, we can now use the network on data we haven't seen before, $\boldsymbol \xi$:
 
-    
+  $$z_i = g([{\bf A {\boldsymbol \xi}}^k]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} \xi^k_j \right )$$
+
+
 A common minimization technique is [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent).
