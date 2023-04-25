@@ -6,7 +6,7 @@ When we talk about machine learning, we usually mean an [_artifical
 neural
 network_](https://en.wikipedia.org/wiki/Artificial_neural_network).  A
 neural network mimics the action of neurons in your brain.  We'll
-follow the notation from _Computational Method for Physics_ by
+follow the notation from _Computational Methods for Physics_ by
 Franklin.
 
 Basic idea:
