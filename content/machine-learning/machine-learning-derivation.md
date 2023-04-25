@@ -25,7 +25,7 @@ and for $g(\xi)$, we will assume the sigmoid function,so
 
 $$\frac{\partial g}{\partial \xi} 
   = \frac{\partial}{\partial \xi} \frac{1}{1 + e^{-\xi}} 
-  =- (1 + e^{-\xi})^2 (- e^{-\xi})
+  =- (1 + e^{-\xi})^{-2} (- e^{-\xi})
   = g(\xi) \frac{e^{-\xi}}{1+ e^{-\xi}} = g(\xi) (1 - g(\xi))$$
 
 which gives us:
