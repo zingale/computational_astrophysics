@@ -125,7 +125,7 @@ $$\tilde{e}^k_p \equiv \sum_{l=1}^{N_\mathrm{out}} \omega^k_l A_{lp} = ({\bf A}^
 
 and we can write
 
-$$\frac{\partial f}{\partial {\bf B}} = 2 \tilde{\bf e} \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal$$
+$$\frac{\partial f}{\partial {\bf B}} = 2 \tilde{\bf e}^k \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal$$
 
 ```{note}
 It seems that a common approximation is to take:
@@ -140,7 +140,7 @@ Notice the symmetry in the update of each matrix:
 
 \begin{align*}
 \frac{\partial f}{\partial {\bf A}} &= 2 {\bf e}^k \circ {\bf z} \circ (1 - {\bf z}) \cdot \tilde{\bf z}^\intercal \\
-\frac{\partial f}{\partial {\bf B}} &= 2 \tilde{\bf e} \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal
+\frac{\partial f}{\partial {\bf B}} &= 2 \tilde{\bf e}^k \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal
 \end{align*}
 
 Adding additional hidden layers would continue the trend, with each hidden layer's matrix update depending
