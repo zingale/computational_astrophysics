@@ -2,8 +2,12 @@
 
 ## Neural networks
 
-When we talk about machine learning, we usually mean an [_artifical neural network_](https://en.wikipedia.org/wiki/Artificial_neural_network).
-A neural network mimics the action of neurons in your brain.
+When we talk about machine learning, we usually mean an [_artifical
+neural
+network_](https://en.wikipedia.org/wiki/Artificial_neural_network).  A
+neural network mimics the action of neurons in your brain.  We'll
+follow the notation from _Computational Method for Physics_ by
+Franklin.
 
 Basic idea:
 
@@ -11,8 +15,9 @@ Basic idea:
 * Train the network on data with known inputs and outputs to set the parameters
 * Use the trained network on new data to predict the outcome
 
-We can think of a neural network as a map that takes a set of $N_\mathrm{in}$ parameters and returns a set of $N_\mathrm{out}$ parameters,
-which we can express this as:
+We can think of a neural network as a map that takes a set of
+$N_\mathrm{in}$ parameters and returns a set of $N_\mathrm{out}$
+parameters, which we can express this as:
 
 $${\bf z} = {\bf A} {\bf x}$$
 
@@ -74,7 +79,11 @@ A neural network can be designed to approximate any function, $f(x)$.  For this 
 We call this an [_activation function_](https://en.wikipedia.org/wiki/Activation_function) and it has the form:
 
 
-$$g({\bf x}) = \left ( \begin{array}{c} g(x_0) \\ g(x_1) \\ \vdots \\ g(x_{n-1}) \end{array} \right )$$
+$$g({\bf v}) = \left ( \begin{array}{c} g(v_0) \\ g(v_1) \\ \vdots \\ g(v_{n-1}) \end{array} \right )$$
+
+```{note}
+The activation function, $g(\xi)$ works element-by-element.
+```
 
 Then our neural network has the form: ${\bf z} = g({\bf A x})$
 
@@ -89,9 +98,6 @@ align: center
 The sigmoid function
 ```
 
-```{note}
-The activation function, $g(\xi)$ works element-by-element.
-```
 
 ## Basic algorithm
 
@@ -120,13 +126,14 @@ The activation function, $g(\xi)$ works element-by-element.
       This is one possible choice for the cost function, $f(A_{ij})$, but many others exist.
       ```
 
-    * Update the matrix ${\bf A}$ based on the training pair $({\bf x}^k, {\bf y^{k}}$.
+    * Update the matrix ${\bf A}$ based on the training pair $({\bf x}^k, {\bf y^{k}})$.
 
 * Using the network
 
-  With the trained ${\bf A}$, we can now use the network on data we haven't seen before, $\boldsymbol \xi$:
+  With the trained ${\bf A}$, we can now use the network on data we haven't seen before, $\boldsymbol \chi$:
 
-  $$z_i = g([{\bf A {\boldsymbol \xi}}^k]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} \xi^k_j \right )$$
+  $$z_i = g([{\bf A {\boldsymbol \chi}}^k]_i) = g \left ( \sum_{j=1}^{N_\mathrm{in}} A_{ij} \chi^k_j \right )$$
 
-
-A common minimization technique is [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent).
+There are a lot of details that we still need to figure out involving the training and minimization.
+We'll start with minimization: a common minimization technique used with
+neural networks is [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent).

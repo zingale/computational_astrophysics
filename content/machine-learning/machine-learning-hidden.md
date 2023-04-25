@@ -113,13 +113,15 @@ and
 $$\frac{\partial f}{\partial B_{pq}} = \sum_{l=1}^{N_\mathrm{out}}
    2 \underbrace{(z_l - y_l^k)}_{ = e_l^k} z_l (1 - z_l) A_{lp} \tilde{z}_p (1 - \tilde{z}_p) x^k_q$$
    
-Now, that sum is contracting on the first of the indices of the matrix ${\bf A}$, indicating a matrix vector product involving ${\bf A}^\intercal$.  Let's define:
+Now, that remaining sum is contracting on the first of the indices of
+the matrix ${\bf A}$, indicating a matrix vector product involving
+${\bf A}^\intercal$.  Let's define:
 
 $$\omega^k_l = e^k_l z_l (1 - z_l)$$
 
 then we can define the error backpropagated to the hidden layer as:
 
-$$\tilde{e}^k_p \equiv \omega^k_l A_{lp} = ({\bf A}^\intercal {\boldsymbol \omega}^k)_p$$
+$$\tilde{e}^k_p \equiv \sum_{l=1}^{N_\mathrm{out}} \omega^k_l A_{lp} = ({\bf A}^\intercal {\boldsymbol \omega}^k)_p$$
 
 and we can write
 
@@ -133,3 +135,13 @@ $$\tilde{\bf e} = {\bf A}^\intercal {\bf e}$$
 absorbing the rest of the terms in ${\boldsymbol \omega}$ into the weights of
 the matrices we are training.
 ```
+
+Notice the symmetry in the update of each matrix:
+
+\begin{align*}
+\frac{\partial f}{\partial {\bf A}} &= 2 {\bf e}^k \circ {\bf z} \circ (1 - {\bf z}) \cdot \tilde{\bf z}^\intercal \\
+\frac{\partial f}{\partial {\bf B}} &= 2 \tilde{\bf e} \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal
+\end{align*}
+
+Adding additional hidden layers would continue the trend, with each hidden layer's matrix update depending
+on the error backpropagated to that layer.
