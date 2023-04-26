@@ -95,12 +95,6 @@ ${\bf A}^\intercal$.  This allows us to define the error _backpropagated_ to the
 $$\tilde{e}_p^k = \sum_{l=1}^{N_\mathrm{out}} e_l^k z_l (1 - z_l) A_{lp} 
    = \left [ {\bf A}^\intercal  \cdot ({\bf e}^k \circ {\bf z} \circ (1 - {\bf z})) \right ]_p$$
 
-$$\omega^k_l = e^k_l z_l (1 - z_l)$$
-
-then we can define the error backpropagated to the hidden layer as:
-
-$$\tilde{e}^k_p \equiv \sum_{l=1}^{N_\mathrm{out}} \omega^k_l A_{lp} = ({\bf A}^\intercal {\boldsymbol \omega}^k)_p$$
-
 and we can write
 
 $$\frac{\partial f}{\partial {\bf B}} = 2 \tilde{\bf e}^k \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal$$
@@ -110,7 +104,7 @@ It seems that a common approximation is to take:
 
 $$\tilde{\bf e} = {\bf A}^\intercal {\bf e}$$
 
-absorbing the rest of the terms in ${\boldsymbol \omega}$ into the weights of
+absorbing the rest of the terms in our expression for $\tilde{\bf e}$ above into the weights of
 the matrices we are training.
 ```
 
