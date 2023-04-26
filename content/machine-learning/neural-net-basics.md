@@ -74,15 +74,15 @@ We can visualize a neural network as:
 
 ## Universal approximation theorem
 
-A neural network can be designed to approximate any function, $f(x)$.  For this to work, there must be a source of non-linearity in the network.  This is applyed on a layer.  This is a result of the [universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem).
+A neural network can be designed to approximate any function, $f(x)$.  For this to work, there must be a source of non-linearity in the network&mdash;this is a result of the [universal approximation theorem](https://en.wikipedia.org/wiki/Universal_approximation_theorem).
 
-We call this an [_activation function_](https://en.wikipedia.org/wiki/Activation_function) and it has the form:
-
+We use a nonlinear [_activation function_](https://en.wikipedia.org/wiki/Activation_function) that is applied in a layer.  It has
+the form:
 
 $$g({\bf v}) = \left ( \begin{array}{c} g(v_0) \\ g(v_1) \\ \vdots \\ g(v_{n-1}) \end{array} \right )$$
 
 ```{note}
-The activation function, $g(\xi)$ works element-by-element.
+The activation function, $g({\bf v})$ works element-by-element on the vector ${\bf v}$.
 ```
 
 Then our neural network has the form: ${\bf z} = g({\bf A x})$
@@ -98,6 +98,11 @@ align: center
 The sigmoid function
 ```
 
+```{note}
+There are [many choices for the activation function](https://en.wikipedia.org/wiki/Activation_function) which have
+different properties.  Often the choice of activation function will be emperical, by experimenting with the 
+performance of the network.
+```
 
 ## Basic algorithm
 
@@ -120,10 +125,10 @@ The sigmoid function
                 &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right ) - y^k_i \right ]^2
       \end{align*}
 
-      We call this function the _cost function_.
+      We call this function the _cost function_ or _loss function_.
 
       ```{info}
-      This is one possible choice for the cost function, $f(A_{ij})$, but many others exist.
+      This is one possible choice for the cost function, $f(A_{ij})$, but [many others exist](https://en.wikipedia.org/wiki/Loss_function).
       ```
 
     * Update the matrix ${\bf A}$ based on the training pair $({\bf x}^k, {\bf y^{k}})$.
