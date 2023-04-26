@@ -6,7 +6,7 @@ ${\bf A}$ based on training on a set of our data, $({\bf x}^k, {\bf y}^k)$.
 Let's start with our cost function:
 
 $$f(A_{ij}) = \sum_{i=1}^{N_\mathrm{out}} (z_i - y_i^k)^2 = \sum_{i=1}^{N_\mathrm{out}} 
-  \Biggl [ g\biggl (\underbrace{\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j}_{\equiv b_i} \biggr ) - y^k_i \Biggr ]^2$$
+  \Biggl [ g\biggl (\underbrace{\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j}_{\equiv \alpha_i} \biggr ) - y^k_i \Biggr ]^2$$
 
 where we'll refer to the product ${\bf b} \equiv {\bf Ax}$ to help simplify notation.
 
@@ -14,12 +14,12 @@ We can compute the derivative with respect to a single matrix
 element, $A_{pq}$ by applying the chain rule:
 
 $$\frac{\partial f}{\partial A_{pq}} =
-  2 \sum_{i=1}^{N_\mathrm{out}} (z_i - y^k_i) \left . \frac{\partial g}{\partial \xi} \right |_{\xi=b_i} \frac{\partial b_i}{\partial A_{pq}}$$
+  2 \sum_{i=1}^{N_\mathrm{out}} (z_i - y^k_i) \left . \frac{\partial g}{\partial \xi} \right |_{\xi=\alpha_i} \frac{\partial \alpha_i}{\partial A_{pq}}$$
   
 
 with
 
-$$\frac{\partial b_i}{\partial A_{pq}} = \sum_{j=1}^{N_\mathrm{in}} \frac{\partial A_{ij}}{\partial A_{pq}} x^k_j = \sum_{j=1}^{N_\mathrm{in}} \delta_{ip} \delta_{jq} x^k_j = \delta_{ip} x^k_q$$
+$$\frac{\partial \alpha_i}{\partial A_{pq}} = \sum_{j=1}^{N_\mathrm{in}} \frac{\partial A_{ij}}{\partial A_{pq}} x^k_j = \sum_{j=1}^{N_\mathrm{in}} \delta_{ip} \delta_{jq} x^k_j = \delta_{ip} x^k_q$$
 
 and for $g(\xi)$, we will assume the sigmoid function,so
 

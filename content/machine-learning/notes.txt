@@ -1,0 +1,3 @@
+about batch size:
+https://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network
+
