@@ -27,7 +27,7 @@ as:
 
 $$\phi_t = \left [ -k \phi_x \right ]_x$$
 
-We'll assume that $k$ is contant here.
+We'll assume that $k$ is constant here.
 ```
 
 Solving the diffusion equation requires initial conditions and two

@@ -45,7 +45,7 @@ $$\nabla^2 \Phi = 4 \pi G \rho$$
 
 ## Parabolic PDEs
 
-The heat equation is the canoncial parabolic PDE:
+The heat equation is the canonical parabolic PDE:
 
 $$\frac{\partial \phi}{\partial t} = k \frac{\partial^2 \phi}{\partial x^2}$$
 

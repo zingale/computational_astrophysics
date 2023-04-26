@@ -1,4 +1,4 @@
-# Artifical Neural Network Basics
+# Artificial Neural Network Basics
 
 ## Neural networks
 
@@ -100,7 +100,7 @@ The sigmoid function
 
 ```{note}
 There are [many choices for the activation function](https://en.wikipedia.org/wiki/Activation_function) which have
-different properties.  Often the choice of activation function will be emperical, by experimenting with the 
+different properties.  Often the choice of activation function will be empirical, by experimenting with the 
 performance of the network.
 ```
 

@@ -26,7 +26,7 @@ We often use the terms _zone_, _cell_, and _volume_ interchangeably.
 ```
 
 ```{note}
-We use half-integer indicies to denote the location of the boundaries of
+We use half-integer indices to denote the location of the boundaries of
 a volume, so:
 
 $$x_{i-1/2} = x_i - \frac{\Delta x}{2}$$

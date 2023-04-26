@@ -19,7 +19,7 @@ $$
   \left ( \begin{array}{c} d_0 \\ d_1 \\ d_2 \\ \vdots \\ \vdots \\ d_{N-2} \\ d_{N-1} \\\end{array} \right )
 $$
 
-Here, the main diagnoal is represented by $b_i$, which runs from $i =
+Here, the main diagonal is represented by $b_i$, which runs from $i =
 0, \ldots, N-1$.  The two off diagonals have one fewer entries.
 
 We can solve this just using Gaussian elimination, as before, but we

@@ -49,7 +49,7 @@ derivations, notes, etc.
 
    ![simple 2-d grid showing pressure](bilinear_eos.png)
 
-   Now we need to intepolate in two-dimensions.  Imagine that the orange "$\times$"
+   Now we need to interpolate in two-dimensions.  Imagine that the orange "$\times$"
    is where we want to know the pressure.  We will use the 4 tabulated points surrounding it: $(\rho_i, T_j)$, $(\rho_{i+1}, T_j)$, $(\rho_i, T_{j+1})$, $(\rho_{i+1}, T_{j+1})$
 
    * Write our interpolating function as:

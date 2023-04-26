@@ -23,7 +23,7 @@ derivations, notes, etc.
    \in [x_{N-1}, x_N]$.
 
    a. Construct the form of the integral in this case by using the
-      same parabolic interpolant, and evalute it by integrating only
+      same parabolic interpolant, and evaluate it by integrating only
       over $[x_{N-1}, x_N]$.
 
    b. Write a general composite Simpsons rule integrator that works for
