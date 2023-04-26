@@ -161,12 +161,12 @@ parts:
 
   - caption: Machine Learning
     chapters:
-    - file: machine-learning/machine-learning-basics
+    - file: machine-learning/neural-net-basics
       sections:
       - file: machine-learning/gradient-descent
-      - file: machine-learning/machine-learning-derivation
+      - file: machine-learning/neural-net-derivation
       - file: machine-learning/last-number
-    - file: machine-learning/machine-learning-hidden
+    - file: machine-learning/neural-net-hidden
       sections:
       - file: machine-learning/last-number-hidden
       - file: machine-learning/neural-net-mnist
