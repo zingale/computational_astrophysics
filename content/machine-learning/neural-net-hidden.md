@@ -99,14 +99,6 @@ and we can write
 
 $$\frac{\partial f}{\partial {\bf B}} = 2 \tilde{\bf e}^k \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal$$
 
-```{note}
-It seems that a common approximation is to take:
-
-$$\tilde{\bf e} = {\bf A}^\intercal {\bf e}$$
-
-absorbing the rest of the terms in our expression for $\tilde{\bf e}$ above into the weights of
-the matrices we are training.
-```
 
 Notice the symmetry in the update of each matrix:
 
