@@ -1,8 +1,8 @@
-# Machine Learning Basics
+# Artifical Neural Network Basics
 
 ## Neural networks
 
-When we talk about machine learning, we usually mean an [_artifical
+When we talk about machine learning, we often mean an [_artifical
 neural
 network_](https://en.wikipedia.org/wiki/Artificial_neural_network).  A
 neural network mimics the action of neurons in your brain.  We'll
