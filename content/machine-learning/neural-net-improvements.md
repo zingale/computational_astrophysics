@@ -11,7 +11,7 @@ Right now, we did our training as:
 
 * Loop over the $T$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, T$
 
-  * Propagate $({\bf x}^k, {\bf y_k})$ through the network
+  * Propagate $({\bf x}^k, {\bf y}^k)$ through the network
   * Compute the corrections $\partial f/\partial {\bf A}$, $\partial f/\partial {\bf B}$
   * Update the matrices:
   
@@ -30,12 +30,14 @@ each with $\tau = T/N$ training pairs and do our update as:
 
   * Loop over the $\tau$ pairs $({\bf x}^k, {\bf y}^k)$ for $k = 1, \ldots, \tau$ in the current batch 
 
-    * Propagate $({\bf x}^k, {\bf y_k})$ through the network
+    * Propagate $({\bf x}^k, {\bf y}^k)$ through the network
     * Compute the corrections $\partial f/\partial {\bf A}^k$, $\partial f/\partial {\bf B}^k$ from the current pair
     
     * Accumulate the corrections:
   
       $$\frac{\partial f}{\partial {\bf A}} = \frac{\partial f}{\partial {\bf A}} + \frac{\partial f}{\partial {\bf A}^k}$$
+      
+      $$\frac{\partial f}{\partial {\bf B}} = \frac{\partial f}{\partial {\bf B}} + \frac{\partial f}{\partial {\bf B}^k}$$
       
   * Apply a single update to the matrices for this batch:
 
