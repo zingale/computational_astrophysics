@@ -64,12 +64,33 @@ our derivatives.
 
 ## Use a different minimization technique
 
+We only explored gradient descent.  But there are improvements
+to this (like momentum that we mentioned previously) as well
+as alternate minimization techniques we could use (some of 
+which don't need the gradient at all).
+
 
 ## Different types of layers / connections
 
+We only considered a dense network: every node on one
+layer was connected to every node on the adjacent layer.
+But there are alternatives.
+
+For example, a [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network) performs a convolution on a layer with some kernel.  This
+helps identifying features.
 
 ## More hidden layers
 
+There is no restriction on the number of hidden layers we
+can use.  Each additional hidden layer means an additional
+matrix is added to our network.  For our code, we'd simply need to backpropagate
+the error to each hidden layer and compute the update to
+the new matrix.
 
 ## Auto-differentiation libraries
 
+At some point, with all of these options, doing all of the
+differentiation / chain-rule by hand becomes burdensome and
+prone to errors.  For this reason, libraries often use
+automatic differentiation libraries, like [JAX](https://jax.readthedocs.io/en/latest/) which can take
+the derivatives of our python functions themselves.
