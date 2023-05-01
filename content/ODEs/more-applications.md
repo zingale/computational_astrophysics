@@ -48,10 +48,17 @@ by a system of ODEs.  Here are some suggestions to explore.
    This topic is also discussed extensively in the text by Paul Hellings.
 
 
-4. _Geodesics around a Schwarzschild black hole._
+4. General relativistic orbits:
 
-   The motion of a test particle in general relativity around a black hole of mass $M$
-   described by the Schwarzschild metric leads to an ordinary differential equation.
-   See the [Schwardzschild geodesics](https://en.m.wikipedia.org/wiki/Schwarzschild_geodesics) Wikipedia
-   article for references.
-   
+   * _Geodesics around a Schwarzschild black hole_
+
+     The motion of a test particle in general relativity around a black hole of mass $M$
+     described by the Schwarzschild metric leads to an ordinary differential equation.
+     See the [Schwardzschild geodesics](https://en.m.wikipedia.org/wiki/Schwarzschild_geodesics) Wikipedia
+     article for references.
+
+   * _Precession of Mercury_
+
+     The orbit of Mercury precesses due to general relativistic effects.  This is
+     nicely worked out in [Körber et al. 2018](https://arxiv.org/pdf/1803.01678.pdf).
+     
