@@ -11,8 +11,8 @@ for derivatives, integration, rooting finding, ODEs, and linear algebra
 and then move onto applications in astrophysics.
 
 
-List of Applications
---------------------
+List of Astrophysical Applications
+----------------------------------
 
 ::::{grid}
 :gutter: 3
