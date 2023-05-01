@@ -127,7 +127,7 @@ performance of the network.
 
       We call this function the _cost function_ or _loss function_.
 
-      ```{info}
+      ```{note}
       This is one possible choice for the cost function, $f(A_{ij})$, but [many others exist](https://en.wikipedia.org/wiki/Loss_function).
       ```
 

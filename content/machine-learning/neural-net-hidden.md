@@ -23,7 +23,7 @@ is to do ${\bf z} = {\bf A B x}$ which has size $N_\mathrm{out}$.
 The derivation of the corrections to matrices ${\bf A}$ and ${\bf B}$ can be done
 via the chain rule.
 
-```{info}
+```{note}
 We'll consider the case of a single hidden layer, but the derivation we
 do here generalizes to multiple hidden layers.
 ```
