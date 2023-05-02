@@ -38,11 +38,11 @@ sphinx:
     html_show_copyright: false
     nbsphinx_timeout: 300
     nb_execution_timeout: 300
+    linkcheck_ignore: "https://ieeexplore.ieee.org/document/9994215"
 
 launch_buttons:
    binderhub_url: "https://mybinder.org"
    colab_url: "https://colab.research.google.com"
-   linkcheck_ignore: "https://ieeexplore.ieee.org/document/9994215"
 
 
 
