@@ -14,7 +14,7 @@ Some observational examples:
 
 * [Machine and Deep Learning Applied to Galaxy Morphology -- A Comparative Study](https://arxiv.org/abs/1901.07047) by Barchi et al.
 
-* [Identifying Exoplanets with Machine Learning Methods: A Preliminary Study](https://arxiv.org/abs/2204.00721) et Jin et al.
+* [Identifying Exoplanets with Machine Learning Methods: A Preliminary Study](https://arxiv.org/abs/2204.00721) by Jin et al.
 
 Some theoretical examples:
 
@@ -23,6 +23,12 @@ Some theoretical examples:
 * [Fast and realistic large-scale structure from machine-learning-augmented random field simulations](https://arxiv.org/abs/2205.07898) by Piras et al.
 
 * [Neural Networks for Nuclear Reactions in MAESTROeX](https://iopscience.iop.org/article/10.3847/1538-4357/ac9a4b) by Fan et al.
+
+* [Machine Learning for Conservative-to-Primitive in Relativistic Hydrodynamics](https://arxiv.org/abs/2109.02679) by Dieselhorst et al.
+
+* [Machine learning moment closure models for the radiative transfer equation I: Directly learning a gradient based closure](https://www.sciencedirect.com/science/article/abs/pii/S0021999122000031) by Huang et al.
+
+* [Deep Learning of the Eddington Tensor in Core-collapse Supernova Simulation](https://iopscience.iop.org/article/10.3847/1538-4357/ac3998/pdf) by Harada et al.
 
 ## Example notebooks:
 
