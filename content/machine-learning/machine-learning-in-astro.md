@@ -16,6 +16,11 @@ Some observational examples:
 
 * [Identifying Exoplanets with Machine Learning Methods: A Preliminary Study](https://arxiv.org/abs/2204.00721) by Jin et al.
 
+* [Stellar classification from single-band imaging using machine learning](https://www.aanda.org/articles/aa/full_html/2016/07/aa28660-16/aa28660-16.html) by Kuntzer et al.
+
+* [Stellar Objects Classification Using Supervised Machine Learning Techniques](https://ieeexplore.ieee.org/document/9994215) by Omat et al.
+
+
 Some theoretical examples:
 
 * [Physics-informed Machine Learning for Modeling Turbulence in Supernovae](https://iopscience.iop.org/article/10.3847/1538-4357/ac88cc/pdf) by Karpov et al.
