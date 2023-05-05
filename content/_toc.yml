@@ -94,6 +94,7 @@ parts:
       - file: ffts/fft
       - file: ffts/application-lightcurves
       - file: ffts/fft-multid
+      - file: ffts/non-periodic
     - file: interpolation/interpolation
       sections:
       - file: interpolation/linear-interpolation
