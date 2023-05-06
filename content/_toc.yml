@@ -200,5 +200,7 @@ parts:
       sections:
       - file: homework/hw6-solutions
     - file: homework/homework7
+      sections:
+      - file: homework/hw7-solutions
     - file: homework/project
 
