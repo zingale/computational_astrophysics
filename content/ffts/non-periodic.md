@@ -10,5 +10,5 @@ paper [Understanding the Lomb-Scargle Periodogram](https://arxiv.org/abs/1703.09
 J. VanderPlas.
 ```
 
-SciPy provides the [_scipy.signal.lombscargle` function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lombscargle.html)
+SciPy provides the [`scipy.signal.lombscargle` function](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lombscargle.html)
 which implements this algorithm.
