@@ -24,6 +24,11 @@
 
   * subgrid modeling with Burgers equation
 
+* fitting
+
+  * orthogonal distance regression: https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr
+
+
 * bayesian
 
   see https://bayesiancomputationbook.com/welcome.html
