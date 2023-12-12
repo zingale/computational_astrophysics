@@ -66,6 +66,9 @@ of their project to the class
 * Implement the Barnes-Hut tree algorithm for approximating N-body gravity.
   https://en.wikipedia.org/wiki/Barnes%E2%80%93Hut_simulation
 
+  Demonstrate that it works by comparing to the direct sum, $\mathcal{O}(N^2)$
+  algorithm.
+  
 * Any of the ODE example applications listed here:
   https://zingale.github.io/computational_astrophysics/ODEs/more-applications.html
 
@@ -79,6 +82,11 @@ of their project to the class
 
   * REBOUND: an N-body integrator with a python interface:
     https://rebound.readthedocs.io/en/latest/
+
+    Some example applications:
+    
+    * Reproduce some of the results from [_Dynamics of Systems of Two
+      Close Planets_](https://ui.adsabs.harvard.edu/abs/1993Icar..106..247G/abstract) by B. Gladman
 
   * pyro: a python hydrodynamics code written by my research group:
     https://python-hydro.github.io/pyro2/

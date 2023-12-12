@@ -4,6 +4,9 @@
   * sympletic integrators / Leap frog
   * close encounters / softening
 
+  * look at Wisdom-Holman -- decomposes orbit into Keplerian part and interaction part.  See,
+    e.g., https://academic.oup.com/mnras/article/452/1/376/1748797
+
 * reaction networks
 
   * stiff ODEs
@@ -20,6 +23,11 @@
 * hydro
 
   * subgrid modeling with Burgers equation
+
+* fitting
+
+  * orthogonal distance regression: https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr
+
 
 * bayesian
 
