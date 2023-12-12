@@ -37,6 +37,8 @@
 
 * machine learning
 
+  instead of MNIST, try Cifar10
+
   sample dataset: 
 
      * galaxies: https://zenodo.org/record/4288837#.YYTamy2l1Z0
