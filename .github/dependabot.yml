@@ -6,4 +6,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    target-branch: "development"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
