@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="201pt" height="274pt" viewBox="0.00 0.00 223.00 304.00">
+<g id="graph0" class="graph" transform="scale(0.902778 0.902778) rotate(0) translate(4 300)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-300 219,-300 219,4 -4,4"/>
+<!-- 139814849032272 -->
+<g id="node1" class="node">
+<title>139814849032272</title>
+<polygon fill="none" stroke="black" points="0,-249.5 0,-295.5 215,-295.5 215,-249.5 0,-249.5"/>
+<text text-anchor="middle" x="41" y="-280.3" font-family="Times,serif" font-size="14.00">dense_input</text>
+<polyline fill="none" stroke="black" points="0,-272.5 82,-272.5 "/>
+<text text-anchor="middle" x="41" y="-257.3" font-family="Times,serif" font-size="14.00">InputLayer</text>
+<polyline fill="none" stroke="black" points="82,-249.5 82,-295.5 "/>
+<text text-anchor="middle" x="109.5" y="-280.3" font-family="Times,serif" font-size="14.00">input:</text>
+<polyline fill="none" stroke="black" points="82,-272.5 137,-272.5 "/>
+<text text-anchor="middle" x="109.5" y="-257.3" font-family="Times,serif" font-size="14.00">output:</text>
+<polyline fill="none" stroke="black" points="137,-249.5 137,-295.5 "/>
+<text text-anchor="middle" x="176" y="-280.3" font-family="Times,serif" font-size="14.00">[(None, 2)]</text>
+<polyline fill="none" stroke="black" points="137,-272.5 215,-272.5 "/>
+<text text-anchor="middle" x="176" y="-257.3" font-family="Times,serif" font-size="14.00">[(None, 2)]</text>
+</g>
+<!-- 139814849135376 -->
+<g id="node2" class="node">
+<title>139814849135376</title>
+<polygon fill="none" stroke="black" points="17,-166.5 17,-212.5 198,-212.5 198,-166.5 17,-166.5"/>
+<text text-anchor="middle" x="42" y="-197.3" font-family="Times,serif" font-size="14.00">dense</text>
+<polyline fill="none" stroke="black" points="17,-189.5 67,-189.5 "/>
+<text text-anchor="middle" x="42" y="-174.3" font-family="Times,serif" font-size="14.00">Dense</text>
+<polyline fill="none" stroke="black" points="67,-166.5 67,-212.5 "/>
+<text text-anchor="middle" x="94.5" y="-197.3" font-family="Times,serif" font-size="14.00">input:</text>
+<polyline fill="none" stroke="black" points="67,-189.5 122,-189.5 "/>
+<text text-anchor="middle" x="94.5" y="-174.3" font-family="Times,serif" font-size="14.00">output:</text>
+<polyline fill="none" stroke="black" points="122,-166.5 122,-212.5 "/>
+<text text-anchor="middle" x="160" y="-197.3" font-family="Times,serif" font-size="14.00">(None, 2)</text>
+<polyline fill="none" stroke="black" points="122,-189.5 198,-189.5 "/>
+<text text-anchor="middle" x="160" y="-174.3" font-family="Times,serif" font-size="14.00">(None, 50)</text>
+</g>
+<!-- 139814849032272&#45;&gt;139814849135376 -->
+<g id="edge1" class="edge">
+<title>139814849032272-&gt;139814849135376</title>
+<path fill="none" stroke="black" d="M107.5,-249.37C107.5,-241.15 107.5,-231.66 107.5,-222.73"/>
+<polygon fill="black" stroke="black" points="111,-222.61 107.5,-212.61 104,-222.61 111,-222.61"/>
+</g>
+<!-- 139814849101712 -->
+<g id="node3" class="node">
+<title>139814849101712</title>
+<polygon fill="none" stroke="black" points="11.5,-83.5 11.5,-129.5 203.5,-129.5 203.5,-83.5 11.5,-83.5"/>
+<text text-anchor="middle" x="42" y="-114.3" font-family="Times,serif" font-size="14.00">dense_1</text>
+<polyline fill="none" stroke="black" points="11.5,-106.5 72.5,-106.5 "/>
+<text text-anchor="middle" x="42" y="-91.3" font-family="Times,serif" font-size="14.00">Dense</text>
+<polyline fill="none" stroke="black" points="72.5,-83.5 72.5,-129.5 "/>
+<text text-anchor="middle" x="100" y="-114.3" font-family="Times,serif" font-size="14.00">input:</text>
+<polyline fill="none" stroke="black" points="72.5,-106.5 127.5,-106.5 "/>
+<text text-anchor="middle" x="100" y="-91.3" font-family="Times,serif" font-size="14.00">output:</text>
+<polyline fill="none" stroke="black" points="127.5,-83.5 127.5,-129.5 "/>
+<text text-anchor="middle" x="165.5" y="-114.3" font-family="Times,serif" font-size="14.00">(None, 50)</text>
+<polyline fill="none" stroke="black" points="127.5,-106.5 203.5,-106.5 "/>
+<text text-anchor="middle" x="165.5" y="-91.3" font-family="Times,serif" font-size="14.00">(None, 20)</text>
+</g>
+<!-- 139814849135376&#45;&gt;139814849101712 -->
+<g id="edge2" class="edge">
+<title>139814849135376-&gt;139814849101712</title>
+<path fill="none" stroke="black" d="M107.5,-166.37C107.5,-158.15 107.5,-148.66 107.5,-139.73"/>
+<polygon fill="black" stroke="black" points="111,-139.61 107.5,-129.61 104,-139.61 111,-139.61"/>
+</g>
+<!-- 139814849212816 -->
+<g id="node4" class="node">
+<title>139814849212816</title>
+<polygon fill="none" stroke="black" points="11.5,-0.5 11.5,-46.5 203.5,-46.5 203.5,-0.5 11.5,-0.5"/>
+<text text-anchor="middle" x="42" y="-31.3" font-family="Times,serif" font-size="14.00">dense_2</text>
+<polyline fill="none" stroke="black" points="11.5,-23.5 72.5,-23.5 "/>
+<text text-anchor="middle" x="42" y="-8.3" font-family="Times,serif" font-size="14.00">Dense</text>
+<polyline fill="none" stroke="black" points="72.5,-0.5 72.5,-46.5 "/>
+<text text-anchor="middle" x="100" y="-31.3" font-family="Times,serif" font-size="14.00">input:</text>
+<polyline fill="none" stroke="black" points="72.5,-23.5 127.5,-23.5 "/>
+<text text-anchor="middle" x="100" y="-8.3" font-family="Times,serif" font-size="14.00">output:</text>
+<polyline fill="none" stroke="black" points="127.5,-0.5 127.5,-46.5 "/>
+<text text-anchor="middle" x="165.5" y="-31.3" font-family="Times,serif" font-size="14.00">(None, 20)</text>
+<polyline fill="none" stroke="black" points="127.5,-23.5 203.5,-23.5 "/>
+<text text-anchor="middle" x="165.5" y="-8.3" font-family="Times,serif" font-size="14.00">(None, 1)</text>
+</g>
+<!-- 139814849101712&#45;&gt;139814849212816 -->
+<g id="edge3" class="edge">
+<title>139814849101712-&gt;139814849212816</title>
+<path fill="none" stroke="black" d="M107.5,-83.37C107.5,-75.15 107.5,-65.66 107.5,-56.73"/>
+<polygon fill="black" stroke="black" points="111,-56.61 107.5,-46.61 104,-56.61 111,-56.61"/>
+</g>
+</g>
+</svg>
