@@ -12,3 +12,4 @@ tensorflow
 pydot
 graphviz
 scikit-learn
+jupyterlab_myst

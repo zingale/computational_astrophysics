@@ -49,7 +49,7 @@ and integrating over the volume of a cell to get the finite-volume
 conservative update for the system:
 
 $$\frac{\partial {\bf U}_i}{\partial t} =
-  - \frac{1}{\Delta x} \left [ {\bf F}({\bf U}_{i+1/2}) - {\bf F}({\bf U}_{i+1/2}) \right ]$$
+  - \frac{1}{\Delta x} \left [ {\bf F}({\bf U}_{i+1/2}) - {\bf F}({\bf U}_{i-1/2}) \right ]$$
 
 This means that we will be able to use the same basic solution methodology
 from advection and Burgers' equation with the Euler equations, so long
