@@ -85,7 +85,7 @@ public:
     }
 
     std::vector<State>& get_state(const int n) {
-        // return a referece to the state at time index n
+        // return a reference to the state at time index n
         return stars[n];
     }
 

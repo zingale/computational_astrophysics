@@ -13,7 +13,7 @@ density of species B.  The denominator ensures that we don't double
 count for a species reacting with itself.  The term $\langle \sigma v
 \rangle$ is the average of the cross section and velocity over the
 distribution of velocities in the frame of the reaction.  This is what is
-measured by experiements.
+measured by experiments.
 
 Here the rate, $r$, has units of reactions / time / volume.
 

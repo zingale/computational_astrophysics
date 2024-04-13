@@ -28,9 +28,9 @@ We will solve this in steps.
    \end{alignat*}
 
    At this point, we completed _forward elimination_ &mdash; the last
-   equation has a single unknown, $z$, and once we solve for it, we can
-   substitute the value of $z$ in the equation above, leaving it with a
-   single unknown, $y$, and so forth.
+   equation has a single unknown, $z$, and once we solve for it, we
+   can substitute the value of $z$ in the equation above, leaving it
+   with a single unknown, $y$, and so forth.
 
 3. Now we do _back substitution_.
 
@@ -41,13 +41,14 @@ We will solve this in steps.
 The process we just did is the basis of _Gaussian elimination_.
 
 ```{note}
-The only source of error in the procedure we did would be round-off error.  There is no trunction error.
+The only source of error in the procedure we did would be round-off error.
+There is no truncation error.
 ```
 
 ```{note}
-You may have learned [Cramer's rule](https://en.wikipedia.org/wiki/Cramer's_rule) for solving a linear system
-in school.  But for practical purposes, this method is usually much more computationally expensive than
-Gaussian elimination.
+You may have learned [Cramer's rule](https://en.wikipedia.org/wiki/Cramer's_rule)
+for solving a linear system in school.  But for practical purposes, this method
+is usually much more computationally expensive than Gaussian elimination.
 ```
 
 
