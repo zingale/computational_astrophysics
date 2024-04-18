@@ -60,7 +60,7 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
 
     // A is square, with each dimension of length N
 
-    assert(A.nrows() == N && A.ncols() == N);
+    assert(static_cast<int>(A.nrows()) == N && static_cast<int>(A.ncols()) == N);
 
     // allocate the solution array
 
