@@ -86,3 +86,11 @@
   * review: https://arxiv.org/pdf/2209.08940.pdf
 
   * https://github.com/bmorris3/gp_interact
+
+
+* diffusion:
+
+  Do the simple accretion disk diffusion model
+
+  dripping handrail model:
+  https://articles.adsabs.harvard.edu/pdf/1996ApJ...468..617Y
