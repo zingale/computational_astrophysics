@@ -11,8 +11,21 @@ for derivatives, integration, rooting finding, ODEs, and linear algebra
 and then move onto applications in astrophysics.
 
 
+Course Outline
+--------------
+
+We'll start with an [An Overview of Python](https://zingale.github.io/computational_astrophysics/python/jupyter.html)
+and [Version Control with Git](https://zingale.github.io/computational_astrophysics/git/version-control.html) and then
+move on to core numerical methods.
+
+You should follow the outline in the navigation panel to the left.
+
+
 List of Astrophysical Applications
 ----------------------------------
+
+Throughout the course, we'll see some applications to interesting problems in astrophysics.  Here's a listing
+to some of them:
 
 ::::{grid}
 :gutter: 3
