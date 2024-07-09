@@ -179,28 +179,5 @@ parts:
       - file: machine-learning/keras-clustering
     - file: machine-learning/machine-learning-in-astro
 
-  - caption: Homework
-    chapters:
-    - file: homework/homework1
-      sections:
-      - file: homework/hw1-solutions
-    - file: homework/homework2
-      sections:
-      - file: homework/hw2-solutions
-    - file: homework/homework3
-      sections:
-      - file: homework/hw3-solutions
-    - file: homework/homework4
-      sections:
-      - file: homework/hw4-solutions
-    - file: homework/homework5
-      sections:
-      - file: homework/hw5-solutions
-    - file: homework/homework6
-      sections:
-      - file: homework/hw6-solutions
-    - file: homework/homework7
-      sections:
-      - file: homework/hw7-solutions
     - file: homework/project
 

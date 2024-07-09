@@ -20,6 +20,10 @@ move on to core numerical methods.
 
 You should follow the outline in the navigation panel to the left.
 
+```{note}
+This course assumes that you are already familiar with a programming language.
+```
+
 
 List of Astrophysical Applications
 ----------------------------------
