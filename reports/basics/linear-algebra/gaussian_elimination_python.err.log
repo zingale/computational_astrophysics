@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+A = np.array([[1., 2., 3., 4.],
+              [5., 1., 6., -1.],
+              [10., 2., 12., -2.],
+              [4., 10., -2., -5.]])
+b = np.array([3., 2., 4., 1.])
+
+x = gauss_elim(A, b)
+------------------
+
+----- stdout -----
+ 
+╭   1.000    2.000    3.000    4.000 ╮        ╭  3.000 ╮
+│   5.000    1.000    6.000   -1.000 │        │  2.000 │
+│  10.000    2.000   12.000   -2.000 │        │  4.000 │
+╰   4.000   10.000   -2.000   -5.000 ╯        ╰  1.000 ╯
+pivoted
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[11], line 7[0m
+[1;32m      1[0m A [38;5;241m=[39m np[38;5;241m.[39marray([[[38;5;241m1.[39m, [38;5;241m2.[39m, [38;5;241m3.[39m, [38;5;241m4.[39m],
+[1;32m      2[0m               [[38;5;241m5.[39m, [38;5;241m1.[39m, [38;5;241m6.[39m, [38;5;241m-[39m[38;5;241m1.[39m],
+[1;32m      3[0m               [[38;5;241m10.[39m, [38;5;241m2.[39m, [38;5;241m12.[39m, [38;5;241m-[39m[38;5;241m2.[39m],
+[1;32m      4[0m               [[38;5;241m4.[39m, [38;5;241m10.[39m, [38;5;241m-[39m[38;5;241m2.[39m, [38;5;241m-[39m[38;5;241m5.[39m]])
+[1;32m      5[0m b [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m3.[39m, [38;5;241m2.[39m, [38;5;241m4.[39m, [38;5;241m1.[39m])
+[0;32m----> 7[0m x [38;5;241m=[39m [43mgauss_elim[49m[43m([49m[43mA[49m[43m,[49m[43m [49m[43mb[49m[43m)[49m
+
+Cell [0;32mIn[2], line 58[0m, in [0;36mgauss_elim[0;34m(A, b, quiet)[0m
+[1;32m     56[0m     [38;5;66;03m# check if the row is all zeros -- singular[39;00m
+[1;32m     57[0m     [38;5;28;01mif[39;00m A[i, :][38;5;241m.[39mmin() [38;5;241m==[39m [38;5;241m0[39m [38;5;129;01mand[39;00m A[i, :][38;5;241m.[39mmax() [38;5;241m==[39m [38;5;241m0[39m:
+[0;32m---> 58[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m"[39m[38;5;124mmatrix is singular[39m[38;5;124m"[39m)
+[1;32m     60[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m quiet:
+[1;32m     61[0m     print_Ab(A, b)
+
+[0;31mValueError[0m: matrix is singular
+

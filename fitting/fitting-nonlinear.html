@@ -1,0 +1,1840 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nonlinear Fitting &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fitting/fitting-nonlinear';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fitting Function in SciPy" href="fitting-scipy.html" />
+    <link rel="prev" title="General Linear Least Squares" href="generalized-linear-least-squares.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git-remotes.html">Git Remotes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/github.html">github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/pull-requests.html">Pull requests</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/floating-point/floating-point-details.html">Floating Point Format</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/diff-int/differentiation.html">Differentiation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODEs/inclass-lorenz.html">In-Class Example</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/boundary-value-problems.html">Two Point Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODEs/more-applications.html">More Applications</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffts/fourier.html">Fourier Transforms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-pendulum.html">In-class Example: The Pendulum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/conservative-interpolation.html">Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="least_squares.html">Least Squares Regression</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/burgers/burgers.html">Burgers’ Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid.html">Multigrid</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler.html">Euler Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-riemann.html">Euler Riemann Problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Stiff ODEs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reaction_networks/ODEs-implicit.html">Implicit Methods for ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reaction_networks/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reaction_networks/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../reaction_networks/reactions.html">Application: Nuclear Reaction Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reaction_networks/application-CNO-network.html">Integration Example</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/fitting/fitting-nonlinear.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/fitting/fitting-nonlinear.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Ffitting/fitting-nonlinear.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/fitting/fitting-nonlinear.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Nonlinear Fitting</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-an-exponential">Fitting an exponential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-a-minimum">Is it a minimum?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubles">Troubles</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-fitting">
+<h1>Nonlinear Fitting<a class="headerlink" href="#nonlinear-fitting" title="Link to this heading">#</a></h1>
+<p>What about the case of fitting to a function where the fit parameters enter in a nonlinear fashion?
+For example:</p>
+<div class="math notranslate nohighlight">
+\[f(x; a_0, a_1) = a_0 e^{a_1 x}\]</div>
+<p>One trick that is often used for something like this is to transform the data.  So instead of fitting the data <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>, you instead fit <span class="math notranslate nohighlight">\((x_i, \log y_i)\)</span>, and then our fitting function is:</p>
+<div class="math notranslate nohighlight">
+\[\log f(x; a_0, a_1) = a_1 x + \log a_0\]</div>
+<p>which is linear.</p>
+<p>However, when there are errors associated with the <span class="math notranslate nohighlight">\(y_i\)</span>, the errors do not necessarily transform the correct way when you take the logarithm.</p>
+<p>So let’s look at how we would fit directly to a nonlinear function.</p>
+<p>We’ll minimize the same fitting function:</p>
+<div class="math notranslate nohighlight">
+\[\chi^2 = \sum_{i=1}^N \frac{(y_i - f(x; {\bf a}))^2}{\sigma_i^2}\]</div>
+<p>with fitting parameters <span class="math notranslate nohighlight">\({\bf a} = (a_1, \ldots, a_M)^\intercal\)</span>.</p>
+<p>Now we take the derivatives with respect to each parameter, <span class="math notranslate nohighlight">\(a_k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \chi^2}{\partial a_k} = -2 \sum_{i=1}^N \frac{(y_i - f(x, {\bf a}))}{\sigma_i^2} \frac{\partial f}{\partial a_k} = 0\]</div>
+<p>Let’s define <span class="math notranslate nohighlight">\(g_k \equiv {\partial \chi^2}/{\partial a_k}\)</span>, then we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\bf g}({\bf a}) = \left ( \begin{array}{c} g_1({\bf a}) \\ g_2({\bf a}) \\ \vdots \\ g_M({\bf a}) \end{array} \right ) = 0\end{split}\]</div>
+<p>This is a nonlinear system of <span class="math notranslate nohighlight">\(M\)</span> equations and <span class="math notranslate nohighlight">\(M\)</span> unknowns.  We can solve this using the same multivariate Newton’s method we looked at before:</p>
+<ul class="simple">
+<li><p>Take an initial guess at the fit parameters, <span class="math notranslate nohighlight">\({\bf a}^{(k)}\)</span></p></li>
+<li><p>Solve the system <span class="math notranslate nohighlight">\({\bf J}\delta {\bf a} = -{\bf g}\)</span>, where <span class="math notranslate nohighlight">\(J_{ij} = \partial g_i/\partial a_j\)</span> is the Jacobian</p></li>
+<li><p>Correct the initial guess, <span class="math notranslate nohighlight">\({\bf a}^{(k+1)} = {\bf a}^{(k)} + \delta {\bf a}\)</span></p></li>
+</ul>
+<p>As we’ve seen with Newton’s method, convergence will be very sensitive to the initial guess.</p>
+<section id="fitting-an-exponential">
+<h2>Fitting an exponential<a class="headerlink" href="#fitting-an-exponential" title="Link to this heading">#</a></h2>
+<p>Let’s try this out on data that is constructed to follow an exponential trend.</p>
+<p>First let’s construct the data, and perturb it with some errors.  We’ll take the form:</p>
+<div class="math notranslate nohighlight">
+\[y = a_0 e^{a_1 x}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make up some experimental data</span>
+<span class="n">a0</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">4.0</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span>
+<span class="n">yerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ErrorbarContainer object of 3 artists&gt;
+</pre></div>
+</div>
+<img alt="../_images/c2ae27bbf4f4f3dc243893bcff261596f72934c56b67f39b74142c611db103be.png" src="../_images/c2ae27bbf4f4f3dc243893bcff261596f72934c56b67f39b74142c611db103be.png" />
+</div>
+</div>
+<p>Now, let’s compute our vector <span class="math notranslate nohighlight">\({\bf g}\)</span> that we will zero:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+g_0 &amp;= \frac{\partial \chi^2}{\partial a_0} = -2 \sum_{i=1}^N \frac{(y_i - a_0 e^{a_1 x_i})}{\sigma_i^2} (e^{a_1 x_i}) \\
+g_1 &amp;= \frac{\partial \chi^2}{\partial a_1} = -2 \sum_{i=1}^N \frac{(y_i - a_0 e^{a_1 x_i})}{\sigma_i^2} (x_i a_0 e^{a_1 x_i})
+\end{align*}\]</div>
+<p>We can divide out the <span class="math notranslate nohighlight">\(-2\)</span> in each expression.  We’ll keep the overall <span class="math notranslate nohighlight">\(a_0\)</span> in the expression, to deal with the case where it might be <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>Let’s write a function to compute this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;compute the nonlinear functions we minimize.  Here a is the vector</span>
+<span class="sd">    of fit parameters&quot;&quot;&quot;</span>
+    
+    <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span>
+    
+    <span class="n">g0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">yerr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">yerr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">g0</span><span class="p">,</span> <span class="n">g1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also need the Jacobian.  We could either compute this numerically, via differencing, or analytically.  We’ll do the latter.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{\partial g_0}{\partial a_0} &amp;= -\sum_{i=1}^N \frac{e^{2a_1 x_i}}{\sigma_i^2} \\
+\frac{\partial g_0}{\partial a_1} &amp;= \sum_{i=1}^N \frac{x_i e^{a_1 x_i} (y_i - 2 a_0 e^{a_1 x_i})}{\sigma_i^2} \\
+\frac{\partial g_1}{\partial a_0} &amp;=  \sum_{i=1}^N \frac{x_i e^{a_1 x_i} (y_i - 2 a_0 e^{a_1 x_i})}{\sigma_i^2} \\
+\frac{\partial g_1}{\partial a_1} &amp;= \sum_{i=1}^N \frac{a_0 x_i^2 e^{a_1 x_i} (y_i - 2 a_0 e^{a_1 x_i})}{\sigma_i^2}
+\end{align*}\]</div>
+<p>Notice that the Jacobian is symmetric:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\bf J} = \left ( \begin{array}{cc}
+         \frac{\partial g_0}{\partial a_0} &amp; \frac{\partial g_0}{\partial a_1} \\
+         \frac{\partial g_1}{\partial a_0} &amp; \frac{\partial g_1}{\partial a_1} \end{array} \right )
+= \left ( \begin{array}{cc}
+         \frac{\partial^2 \chi^2}{\partial a_0^2} &amp; \frac{\partial^2 \chi^2}{\partial a_0 \partial a_1} \\
+         \frac{\partial^2 \chi^2}{\partial a_1 \partial a_0} &amp; \frac{\partial^2 \chi^2}{\partial a_1^2} \end{array} \right )       
+\end{split}\]</div>
+<p>This is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Hessian_matrix">Hessian matrix</a>.</p>
+<p>Let’s write this function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">jac</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; compute the Jacobian of the function g&quot;&quot;&quot;</span>
+
+    <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span> <span class="o">=</span> <span class="n">a</span>
+    
+    <span class="n">dg0da0</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">yerr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">dg0da1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">yerr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">dg1da0</span> <span class="o">=</span> <span class="n">dg0da1</span>
+    <span class="n">dg1da1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a0</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">yerr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">dg0da0</span><span class="p">,</span> <span class="n">dg0da1</span><span class="p">],</span>
+                     <span class="p">[</span><span class="n">dg1da0</span><span class="p">,</span> <span class="n">dg1da1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">aguess</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1.e-5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; aguess is the initial guess to our fit parameters.  x and y</span>
+<span class="sd">        are the vector of points that we are fitting to, and yerr are</span>
+<span class="sd">        the errors in y&quot;&quot;&quot;</span>
+    
+    <span class="n">avec</span> <span class="o">=</span> <span class="n">aguess</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">err</span> <span class="o">=</span> <span class="mf">1.e100</span>
+    <span class="k">while</span> <span class="n">err</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">:</span>
+
+        <span class="c1"># get the jacobian</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">jac</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">avec</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;condition number of J: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">J</span><span class="p">))</span>
+
+        <span class="c1"># get the current function values</span>
+        <span class="n">gv</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">avec</span><span class="p">)</span>
+
+        <span class="c1"># solve for the correction: J da = -g</span>
+        <span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="o">-</span><span class="n">gv</span><span class="p">)</span>
+
+        <span class="n">avec</span> <span class="o">+=</span> <span class="n">da</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">da</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">avec</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial guesses</span>
+<span class="n">aguess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+<span class="c1"># fit</span>
+<span class="n">afit</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">aguess</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>condition number of J:  148.90211769148755
+condition number of J:  246.5710189081322
+condition number of J:  3362.246355078368
+condition number of J:  72.27828287616136
+condition number of J:  71.79094613879293
+condition number of J:  71.58812445206055
+condition number of J:  72.28445109511279
+condition number of J:  74.10661654162502
+condition number of J:  73.43399209450607
+condition number of J:  64.96527996748785
+condition number of J:  56.08745942386445
+condition number of J:  52.183413133495826
+condition number of J:  55.49744892164047
+condition number of J:  76.08251614442402
+condition number of J:  215.11794974486781
+condition number of J:  652.9524443570467
+condition number of J:  4.557348211246642
+condition number of J:  203.90669332059002
+condition number of J:  555.4264010355366
+condition number of J:  1510.981067614676
+condition number of J:  4108.453499882672
+condition number of J:  11169.117639741196
+condition number of J:  30361.99341441968
+condition number of J:  82533.6391432938
+condition number of J:  224350.87578996134
+condition number of J:  609850.0931660563
+condition number of J:  1657745.6106583588
+condition number of J:  4506220.9539864
+condition number of J:  12249179.718570504
+condition number of J:  33296723.826847788
+condition number of J:  90509880.5100685
+condition number of J:  246031364.67084754
+condition number of J:  668782589.0000747
+condition number of J:  1817939560.053024
+condition number of J:  4941672072.513297
+condition number of J:  13432857398.100758
+condition number of J:  36514292170.72326
+condition number of J:  99256136887.90585
+condition number of J:  269806153266.6224
+condition number of J:  733409163632.2793
+condition number of J:  1993612802328.1484
+condition number of J:  5419201453553.126
+condition number of J:  14730916835953.453
+condition number of J:  40042783551714.62
+condition number of J:  108847570889545.55
+condition number of J:  295878374020960.4
+condition number of J:  804280807535186.4
+condition number of J:  2186261904101264.8
+condition number of J:  5942876006170740.0
+condition number of J:  1.6154411856359188e+16
+condition number of J:  4.3912244198584536e+16
+condition number of J:  1.1936585545186846e+17
+condition number of J:  3.244700358132831e+17
+condition number of J:  8.820010022307031e+17
+condition number of J:  2.397527297046386e+18
+condition number of J:  6.517154884795723e+18
+condition number of J:  1.7715463696593314e+19
+condition number of J:  4.815562304917551e+19
+condition number of J:  1.3090055507269737e+20
+condition number of J:  3.5582460018931565e+20
+condition number of J:  9.672315448133218e+20
+condition number of J:  2.629207932178424e+21
+condition number of J:  7.14692814528099e+21
+condition number of J:  1.9427364906619825e+22
+condition number of J:  5.280905300050763e+22
+condition number of J:  1.435498891494105e+23
+condition number of J:  3.9020905515215286e+23
+condition number of J:  1.0606981839202704e+24
+condition number of J:  2.883276598829981e+24
+condition number of J:  7.837558385020738e+24
+condition number of J:  2.1304692537488696e+25
+condition number of J:  5.791215858556254e+25
+condition number of J:  1.5742156832997317e+26
+condition number of J:  4.2791618859889e+26
+condition number of J:  1.1631967995718163e+27
+condition number of J:  3.161896723197786e+27
+condition number of J:  8.594926406132742e+27
+condition number of J:  2.3363432266733437e+28
+condition number of J:  6.350839338109523e+28
+condition number of J:  1.7263371168245986e+29
+condition number of J:  4.692670814458687e+29
+condition number of J:  1.2756001801883154e+30
+condition number of J:  3.4674407901849816e+30
+condition number of J:  9.425481291217508e+30
+condition number of J:  2.562111451839725e+31
+condition number of J:  6.964541002022747e+31
+condition number of J:  1.8931585249356385e+32
+condition number of J:  5.146138416724877e+32
+condition number of J:  1.398865454491823e+33
+condition number of J:  3.802510545404227e+33
+condition number of J:  1.0336295318096204e+34
+condition number of J:  2.8096963736767214e+34
+condition number of J:  7.637546596052707e+34
+condition number of J:  2.0761004126059313e+35
+condition number of J:  5.643426025643029e+35
+condition number of J:  1.5340422415758292e+36
+condition number of J:  4.169959149364158e+36
+condition number of J:  1.1335124181133127e+37
+condition number of J:  3.08120620849009e+37
+condition number of J:  8.375586846273805e+37
+condition number of J:  2.2767205526906686e+38
+condition number of J:  6.188768106858278e+38
+condition number of J:  1.6822815885419743e+39
+condition number of J:  4.5729154724848655e+39
+condition number of J:  1.2430473031934818e+40
+condition number of J:  3.3789528961858627e+40
+condition number of J:  9.184946256921093e+40
+condition number of J:  2.496727250556153e+41
+condition number of J:  6.786808315805305e+41
+condition number of J:  1.8448457718088296e+42
+condition number of J:  5.0148107378174456e+42
+condition number of J:  1.3631668901770459e+43
+condition number of J:  3.70547178672529e+43
+condition number of J:  1.007251662372303e+44
+condition number of J:  2.737993890511796e+44
+condition number of J:  7.442639039010098e+44
+condition number of J:  2.0231190455521044e+45
+condition number of J:  5.499407738333693e+45
+condition number of J:  1.4948940122399537e+46
+condition number of J:  4.063543228944098e+46
+condition number of J:  1.104585571839654e+47
+condition number of J:  3.002574887909774e+47
+condition number of J:  8.161844756392594e+47
+condition number of J:  2.218619428800573e+48
+condition number of J:  6.030832877574785e+48
+condition number of J:  1.639350342158491e+49
+condition number of J:  4.4562162455675445e+49
+condition number of J:  1.2113251644010245e+50
+condition number of J:  3.292723182746471e+50
+condition number of J:  8.950549593805564e+50
+condition number of J:  2.433011631556315e+51
+condition number of J:  6.613611306489026e+51
+condition number of J:  1.7977659434920403e+52
+condition number of J:  4.886834496016943e+52
+condition number of J:  1.3283793409209674e+53
+condition number of J:  3.610909423725869e+53
+condition number of J:  9.815469470725553e+53
+condition number of J:  2.6681212300067787e+54
+condition number of J:  7.252705455653223e+54
+condition number of J:  1.971489744726794e+55
+condition number of J:  5.359064748084206e+55
+condition number of J:  1.4567448322252748e+56
+condition number of J:  3.959843006139585e+56
+condition number of J:  1.0763969287139872e+57
+condition number of J:  2.9259502115323577e+57
+condition number of J:  7.953557290984308e+57
+condition number of J:  2.1620010255690596e+58
+condition number of J:  5.876928100914195e+58
+condition number of J:  1.597514686387538e+59
+condition number of J:  4.342495142703696e+59
+condition number of J:  1.1804125636583124e+60
+condition number of J:  3.2086940218771466e+60
+condition number of J:  8.722134652753817e+60
+condition number of J:  2.3709220131953643e+61
+condition number of J:  6.444834225162497e+61
+condition number of J:  1.7518875761690145e+62
+condition number of J:  4.762124163803392e+62
+condition number of J:  1.2944795579332488e+63
+condition number of J:  3.518760259641648e+63
+condition number of J:  9.564982072487727e+63
+condition number of J:  2.6000316957179923e+64
+condition number of J:  7.067618911887776e+64
+condition number of J:  1.921178005865803e+65
+condition number of J:  5.222303262580198e+65
+condition number of J:  1.4195692061374134e+66
+condition number of J:  3.858789177283364e+66
+condition number of J:  1.0489276500463798e+67
+condition number of J:  2.851280970489323e+67
+condition number of J:  7.750585249912198e+67
+condition number of J:  2.1068275044759034e+68
+condition number of J:  5.726950921114565e+68
+condition number of J:  1.5567466621342516e+69
+condition number of J:  4.231676163193809e+69
+condition number of J:  1.1502888418333024e+70
+condition number of J:  3.126809256234667e+70
+condition number of J:  8.499548782280237e+70
+condition number of J:  2.3104169004973577e+71
+condition number of J:  6.280364276786636e+71
+condition number of J:  1.7071800089692446e+72
+condition number of J:  4.640596396289648e+72
+condition number of J:  1.2614448857246322e+73
+condition number of J:  3.428962710467865e+73
+condition number of J:  9.320887026328471e+73
+condition number of J:  2.5336797828788345e+74
+condition number of J:  6.887255712933595e+74
+condition number of J:  1.8721502052418143e+75
+condition number of J:  5.0890318830546955e+75
+condition number of J:  1.3833422892156294e+76
+condition number of J:  3.7603142073137823e+76
+condition number of J:  1.0221593779037432e+77
+condition number of J:  2.778517262744748e+77
+condition number of J:  7.552792985378815e+77
+condition number of J:  2.0530619926268176e+78
+condition number of J:  5.580801107257397e+78
+condition number of J:  1.5170190238101897e+79
+condition number of J:  4.123685245849919e+79
+condition number of J:  1.1209338670078506e+80
+condition number of J:  3.047014161591769e+80
+condition number of J:  8.282643226512277e+80
+condition number of J:  2.2514558574237714e+81
+condition number of J:  6.120091544812718e+81
+condition number of J:  1.6636133634770257e+82
+condition number of J:  4.5221699755212314e+82
+condition number of J:  1.2292532469662448e+83
+condition number of J:  3.341456763802622e+83
+condition number of J:  9.083021201626237e+83
+condition number of J:  2.469021147988884e+84
+condition number of J:  6.711495320659275e+84
+condition number of J:  1.824373577193602e+85
+condition number of J:  4.9591615432061934e+85
+condition number of J:  1.3480398707290313e+86
+condition number of J:  3.6643522846410055e+86
+condition number of J:  9.960742228412034e+86
+condition number of J:  2.707610459745709e+87
+condition number of J:  7.3600483112724e+87
+condition number of J:  2.000668558111245e+88
+condition number of J:  5.4383809862831566e+88
+condition number of J:  1.4783052211250687e+89
+condition number of J:  4.0184502195004046e+89
+condition number of J:  1.0923280210235212e+90
+condition number of J:  2.969255410264867e+90
+condition number of J:  8.071273025776696e+90
+condition number of J:  2.1939994798500445e+91
+condition number of J:  5.963908917724974e+91
+condition number of J:  1.621158523763665e+92
+condition number of J:  4.406765756198261e+92
+condition number of J:  1.1978831277349316e+93
+condition number of J:  3.2561839387395503e+93
+condition number of J:  8.851225630795922e+93
+condition number of J:  2.4060125791783498e+94
+condition number of J:  6.540220273024389e+94
+condition number of J:  1.7778161922281653e+95
+condition number of J:  4.8326054496740737e+95
+condition number of J:  1.313638357796119e+96
+condition number of J:  3.570839277163971e+96
+condition number of J:  9.706547519462655e+96
+condition number of J:  2.6385131739229554e+97
+condition number of J:  7.17222241482457e+97
+condition number of J:  1.9496121859884284e+98
+condition number of J:  5.299595377714661e+98
+condition number of J:  1.4405793813427314e+99
+condition number of J:  3.91590075475672e+99
+condition number of J:  1.0644521863704252e+100
+condition number of J:  2.893481035474228e+100
+condition number of J:  7.865296919720455e+100
+condition number of J:  2.1380093692311016e+101
+condition number of J:  5.81171201745609e+101
+condition number of J:  1.5797871169287946e+102
+condition number of J:  4.2943066127812463e+102
+condition number of J:  1.1673135631354776e+103
+condition number of J:  3.173087246784949e+103
+condition number of J:  8.62534540305067e+103
+condition number of J:  2.3446119673295398e+104
+condition number of J:  6.373316105579499e+104
+condition number of J:  1.7324469356822125e+105
+condition number of J:  4.709279024034514e+105
+condition number of J:  1.2801147596176366e+106
+condition number of J:  3.479712689410841e+106
+condition number of J:  9.458839771883844e+106
+condition number of J:  2.571179227021755e+107
+condition number of J:  6.98918977052461e+107
+condition number of J:  1.8998587548868891e+108
+condition number of J:  5.164351530047859e+108
+condition number of J:  1.4038162919903758e+109
+condition number of J:  3.815968317012196e+109
+condition number of J:  1.0372877334109404e+110
+condition number of J:  2.81964039661443e+110
+condition number of J:  7.66457725290606e+110
+condition number of J:  2.083448106939509e+111
+condition number of J:  5.663399129631065e+111
+condition number of J:  1.5394714941386898e+112
+condition number of J:  4.184717387947896e+112
+condition number of J:  1.1375241232895367e+113
+condition number of J:  3.092111153771754e+113
+condition number of J:  8.405229560873291e+113
+condition number of J:  2.2847782779348667e+114
+condition number of J:  6.210671274968296e+114
+condition number of J:  1.6882354869278894e+115
+condition number of J:  4.58909984627579e+115
+condition number of J:  1.2474466721115677e+116
+condition number of J:  3.390911620772584e+116
+condition number of J:  9.217453440656723e+116
+condition number of J:  2.5055636192404475e+117
+condition number of J:  6.810828056229386e+117
+condition number of J:  1.8513750142007382e+118
+condition number of J:  5.032559058764973e+118
+condition number of J:  1.3679913840087783e+119
+condition number of J:  3.718586120639601e+119
+condition number of J:  1.0108165079294646e+120
+condition number of J:  2.747684145411092e+120
+condition number of J:  7.468979882815991e+120
+condition number of J:  2.030279229258488e+121
+condition number of J:  5.518871135591183e+121
+condition number of J:  1.5001847121484652e+122
+condition number of J:  4.077924842365237e+122
+condition number of J:  1.1084948996823137e+123
+condition number of J:  3.0132015427459657e+123
+condition number of J:  8.190730999131119e+123
+condition number of J:  2.226471523673432e+124
+condition number of J:  6.052177084383014e+124
+condition number of J:  1.6451522991094592e+125
+condition number of J:  4.471987599716862e+125
+condition number of J:  1.215612262940453e+126
+condition number of J:  3.304376724803012e+126
+condition number of J:  8.982227205415045e+126
+condition number of J:  2.441622499157019e+127
+condition number of J:  6.637018071415283e+127
+condition number of J:  1.8041285618682464e+128
+condition number of J:  4.904129885930405e+128
+condition number of J:  1.3330807153327549e+129
+condition number of J:  3.623689084358213e+129
+condition number of J:  9.850208189996326e+129
+condition number of J:  2.6775641929405474e+130
+condition number of J:  7.2783740902029e+130
+condition number of J:  1.978467203012568e+131
+condition number of J:  5.3780314461512565e+131
+condition number of J:  1.4619005152954276e+132
+condition number of J:  3.9738576057424763e+132
+condition number of J:  1.0802064918573543e+133
+condition number of J:  2.936305677799339e+133
+condition number of J:  7.981706366763064e+133
+condition number of J:  2.1696527376867904e+134
+condition number of J:  5.897727610920423e+134
+condition number of J:  1.6031685793966163e+135
+condition number of J:  4.357864017330325e+135
+condition number of J:  1.1845902569204553e+136
+condition number of J:  3.2200501695565056e+136
+condition number of J:  8.753003862631917e+136
+condition number of J:  2.379313134422417e+137
+condition number of J:  6.467643657514391e+137
+condition number of J:  1.7580878227169762e+138
+condition number of J:  4.778978181326685e+138
+condition number of J:  1.299060954890258e+139
+condition number of J:  3.531213787738844e+139
+condition number of J:  9.598834271614537e+139
+condition number of J:  2.6092336774919708e+140
+condition number of J:  7.092632491729795e+140
+condition number of J:  1.9279774018207296e+141
+condition number of J:  5.240785937048973e+141
+condition number of J:  1.4245933179523932e+142
+condition number of J:  3.87244612913417e+142
+condition number of J:  1.0526399944511981e+143
+condition number of J:  2.8613721688259226e+143
+condition number of J:  7.778015970977953e+143
+condition number of J:  2.1142839475373604e+144
+condition number of J:  5.7472196347934635e+144
+condition number of J:  1.5622562697422105e+145
+condition number of J:  4.246652829436463e+145
+condition number of J:  1.1543599218031327e+146
+condition number of J:  3.1378755989388598e+146
+condition number of J:  8.529630220560546e+146
+condition number of J:  2.318593883202485e+147
+condition number of J:  6.30259162028561e+147
+condition number of J:  1.713222027362062e+148
+condition number of J:  4.6570203050940584e+148
+condition number of J:  1.2659093670101976e+149
+condition number of J:  3.441098428819913e+149
+condition number of J:  9.353875329000142e+149
+condition number of J:  2.5426469332492464e+150
+condition number of J:  6.911630954838544e+150
+condition number of J:  1.8787760829552657e+151
+condition number of J:  5.107042886040761e+151
+condition number of J:  1.388238187428564e+152
+condition number of J:  3.7736226384599875e+152
+condition number of J:  1.0257769845587463e+153
+condition number of J:  2.7883509371775547e+153
+condition number of J:  7.579523683896495e+153
+condition number of J:  2.060328149831081e+154
+condition number of J:  5.600552570348471e+154
+condition number of J:  1.5223880281307847e+155
+condition number of J:  4.13827971273151e+155
+condition number of J:  1.124901054419878e+156
+condition number of J:  3.0577980950439743e+156
+condition number of J:  8.311956996854721e+156
+condition number of J:  2.2594241663483202e+157
+condition number of J:  6.141751654165866e+157
+condition number of J:  1.6695011916427353e+158
+condition number of J:  4.538174751833171e+158
+condition number of J:  1.2336037962279745e+159
+condition number of J:  3.3532827828045975e+159
+condition number of J:  9.115167654182316e+159
+condition number of J:  2.4777594597721454e+160
+condition number of J:  6.735248514791123e+160
+condition number of J:  1.8308303647912485e+161
+condition number of J:  4.976712911603096e+161
+condition number of J:  1.35281082730682e+162
+condition number of J:  3.677321089210776e+162
+condition number of J:  9.99599509421088e+162
+condition number of J:  2.7171931821959193e+163
+condition number of J:  7.386096851575974e+163
+condition number of J:  2.0077492854877538e+164
+condition number of J:  5.457628398842992e+164
+condition number of J:  1.4835372103056942e+165
+condition number of J:  4.0326722406167935e+165
+condition number of J:  1.0961939671799852e+166
+condition number of J:  2.9797641414517844e+166
+condition number of J:  8.099838718802256e+166
+condition number of J:  2.2017644402769164e+167
+condition number of J:  5.985016268552042e+167
+condition number of J:  1.6268960965836779e+168
+condition number of J:  4.422362096134363e+168
+condition number of J:  1.2021226524788095e+169
+condition number of J:  3.2677081618121353e+169
+condition number of J:  8.882551716961236e+169
+condition number of J:  2.4145278922563423e+170
+condition number of J:  6.563367293827934e+170
+condition number of J:  1.7841082048314894e+171
+condition number of J:  4.849708913198127e+171
+condition number of J:  1.3182875612062329e+172
+condition number of J:  3.5834771223104946e+172
+condition number of J:  9.740900744275328e+172
+condition number of J:  2.6478513485986816e+173
+condition number of J:  7.197606205356574e+173
+condition number of J:  1.9565122156424836e+174
+condition number of J:  5.318351602939108e+174
+condition number of J:  1.4456778519625413e+175
+condition number of J:  3.929759834795481e+175
+condition number of J:  1.0682194749132776e+176
+condition number of J:  2.9037215874628254e+176
+condition number of J:  7.893133626104451e+176
+condition number of J:  2.145576170543878e+177
+condition number of J:  5.832280715964169e+177
+condition number of J:  1.5853782688677512e+178
+condition number of J:  4.3095049394970665e+178
+condition number of J:  1.1714448966689373e+179
+condition number of J:  3.184317375656256e+179
+condition number of J:  8.655872058292795e+179
+condition number of J:  2.3529099725523703e+180
+condition number of J:  6.395872422389179e+180
+condition number of J:  1.7385783782922838e+181
+condition number of J:  4.725946013063711e+181
+condition number of J:  1.2846453169589559e+182
+condition number of J:  3.49202802110454e+182
+condition number of J:  9.492316314238272e+182
+condition number of J:  2.580279094697923e+183
+condition number of J:  7.013925775470121e+183
+condition number of J:  1.906582698162095e+184
+condition number of J:  5.1826291028684385e+184
+condition number of J:  1.408784651397028e+185
+condition number of J:  3.8294737181045526e+185
+condition number of J:  1.0409588820485101e+186
+condition number of J:  2.8296196132455075e+186
+condition number of J:  7.691703576136576e+186
+condition number of J:  2.0908218060905508e+187
+condition number of J:  5.683442922041866e+187
+condition number of J:  1.5449199618070582e+188
+condition number of J:  4.199527858603768e+188
+condition number of J:  1.141550026615015e+189
+condition number of J:  3.1030546936245344e+189
+condition number of J:  8.434977186394123e+189
+condition number of J:  2.2928645209241747e+190
+condition number of J:  6.232651962346638e+190
+condition number of J:  1.6942104572356475e+191
+condition number of J:  4.605341499488951e+191
+condition number of J:  1.251861611190915e+192
+condition number of J:  3.4029126694457264e+192
+condition number of J:  9.25007567318738e+192
+condition number of J:  2.5144312614296325e+193
+condition number of J:  6.8349328068535244e+193
+condition number of J:  1.8579273647608515e+194
+condition number of J:  5.0503701942262223e+194
+condition number of J:  1.372832952595632e+195
+condition number of J:  3.7317468685504845e+195
+condition number of J:  1.0143939701189728e+196
+condition number of J:  2.7574086958728304e+196
+condition number of J:  7.49541395162607e+196
+condition number of J:  2.037464754148355e+197
+condition number of J:  5.5384034173272505e+197
+condition number of J:  1.5054941367996143e+198
+condition number of J:  4.092357354914027e+198
+condition number of J:  1.1124180633423524e+199
+condition number of J:  3.02386580723312e+199
+condition number of J:  8.21971947550043e+199
+condition number of J:  2.234351408528374e+200
+condition number of J:  6.073596832194551e+200
+condition number of J:  1.650974790234087e+201
+condition number of J:  4.4878147715373023e+201
+condition number of J:  1.2199145342959932e+202
+condition number of J:  3.3160715108498762e+202
+condition number of J:  9.01401692981395e+202
+condition number of J:  2.4502638421735458e+203
+condition number of J:  6.660507677110592e+203
+condition number of J:  1.8105136987001688e+204
+condition number of J:  4.921486487352842e+204
+condition number of J:  1.337798728757797e+205
+condition number of J:  3.636513974517931e+205
+condition number of J:  9.885069855869472e+205
+condition number of J:  2.6870405762258254e+206
+condition number of J:  7.304133570686784e+206
+condition number of J:  1.9854693557835563e+207
+condition number of J:  5.397065270788729e+207
+condition number of J:  1.4670744452592398e+208
+condition number of J:  3.987921805544826e+208
+condition number of J:  1.0840295377328084e+209
+condition number of J:  2.9466977939319526e+209
+condition number of J:  8.009955067205583e+209
+condition number of J:  2.177331530595839e+210
+condition number of J:  5.918600734149587e+210
+condition number of J:  1.608842482554319e+211
+condition number of J:  4.373287285180344e+211
+condition number of J:  1.1887827357936719e+212
+condition number of J:  3.2314465086937684e+212
+condition number of J:  8.783982324219696e+212
+condition number of J:  2.3877339533431843e+213
+condition number of J:  6.490533816567455e+213
+condition number of J:  1.7643100130574252e+214
+condition number of J:  4.795891848262339e+214
+condition number of J:  1.3036585662386382e+215
+condition number of J:  3.5437113911214635e+215
+condition number of J:  9.632806279788796e+215
+condition number of J:  2.6184682267416063e+216
+condition number of J:  7.117734599149088e+216
+condition number of J:  1.9348008620661194e+217
+condition number of J:  5.259334025041227e+217
+condition number of J:  1.4296352110065937e+218
+condition number of J:  3.8861514154044365e+218
+condition number of J:  1.0563654775134277e+219
+condition number of J:  2.871499081736213e+219
+condition number of J:  7.805543774320382e+219
+condition number of J:  2.121766780297673e+220
+condition number of J:  5.767560083111219e+220
+condition number of J:  1.5677853768466964e+221
+condition number of J:  4.261682500806192e+221
+condition number of J:  1.1584454100603373e+222
+condition number of J:  3.1489811074288015e+222
+condition number of J:  8.559818122484552e+222
+condition number of J:  2.3267998057264177e+223
+condition number of J:  6.324897630368159e+223
+condition number of J:  1.7192854295493442e+224
+condition number of J:  4.673502341078387e+224
+condition number of J:  1.2703896489014185e+225
+condition number of J:  3.453277097671192e+225
+condition number of J:  9.386980383233394e+225
+condition number of J:  2.5516458199844855e+226
+condition number of J:  6.936092465127309e+226
+condition number of J:  1.8854254108467264e+227
+condition number of J:  5.125117633219587e+227
+condition number of J:  1.3931514131095832e+228
+condition number of J:  3.78697817054782e+228
+condition number of J:  1.0294073945771219e+229
+condition number of J:  2.7982194147603605e+229
+condition number of J:  7.606348987184394e+229
+condition number of J:  2.0676200232781196e+230
+condition number of J:  5.620373937434981e+230
+condition number of J:  1.5277760343274326e+231
+condition number of J:  4.152925832067482e+231
+condition number of J:  1.1288822824247197e+232
+condition number of J:  3.0686201947844876e+232
+condition number of J:  8.341374513925129e+232
+condition number of J:  2.267420676557407e+233
+condition number of J:  6.163488422558316e+233
+condition number of J:  1.6754098578957974e+234
+condition number of J:  4.554236171939298e+234
+condition number of J:  1.2379697428693477e+235
+condition number of J:  3.365150656223864e+235
+condition number of J:  9.147427878840362e+235
+condition number of J:  2.4865286980191427e+236
+condition number of J:  6.759085775767363e+236
+condition number of J:  1.837310004126443e+237
+condition number of J:  4.994326397462924e+237
+condition number of J:  1.3575986691616797e+238
+condition number of J:  3.6903357927223765e+238
+condition number of J:  1.0031372726269242e+239
+condition number of J:  2.7268098196317354e+239
+condition number of J:  7.412237582368632e+239
+condition number of J:  2.014855072837386e+240
+condition number of J:  5.4769439314723926e+240
+condition number of J:  1.4887877164410446e+241
+condition number of J:  4.046944596034729e+241
+condition number of J:  1.1000735956181734e+242
+condition number of J:  2.990310064936485e+242
+condition number of J:  8.128505510975035e+242
+condition number of J:  2.2095568823012645e+243
+condition number of J:  6.0061983221061486e+243
+condition number of J:  1.6326539757102352e+244
+condition number of J:  4.4380136343345476e+244
+condition number of J:  1.2063771816665088e+245
+condition number of J:  3.279273171191706e+245
+condition number of J:  8.913988671803687e+245
+condition number of J:  2.4230733425653733e+246
+condition number of J:  6.586596236118975e+246
+condition number of J:  1.7904224860038952e+247
+condition number of J:  4.8668729089688567e+247
+condition number of J:  1.3229532189869657e+248
+condition number of J:  3.5961596950736687e+248
+condition number of J:  9.775375551355574e+248
+condition number of J:  2.6572225727612677e+249
+condition number of J:  7.223079833708148e+249
+condition number of J:  1.963436665747784e+250
+condition number of J:  5.337174209832417e+250
+condition number of J:  1.4507943669907724e+251
+condition number of J:  3.94366796462176e+251
+condition number of J:  1.07200009657074e+252
+condition number of J:  2.913998382614584e+252
+condition number of J:  7.921068851620272e+252
+condition number of J:  2.1531697521332345e+253
+condition number of J:  5.852922210811437e+253
+condition number of J:  1.5909892089033073e+254
+condition number of J:  4.3247570558362906e+254
+condition number of J:  1.1755908517379831e+255
+condition number of J:  3.1955872499820515e+255
+condition number of J:  8.686506752881621e+255
+condition number of J:  2.36123734591449e+256
+condition number of J:  6.418508570078224e+256
+condition number of J:  1.7447315211852283e+257
+condition number of J:  4.7426719895775137e+257
+condition number of J:  1.2891919087610264e+258
+condition number of J:  3.504386938981529e+258
+condition number of J:  9.525911336122709e+258
+condition number of J:  2.5894111684494374e+259
+condition number of J:  7.038749325605012e+259
+condition number of J:  1.9133304386870463e+260
+condition number of J:  5.200971363320571e+260
+condition number of J:  1.4137705947250174e+261
+condition number of J:  3.843026917250753e+261
+condition number of J:  1.0446430235441702e+262
+condition number of J:  2.839634148126633e+262
+condition number of J:  7.718925904324407e+262
+condition number of J:  2.0982216020946836e+263
+condition number of J:  5.703557653054204e+263
+condition number of J:  1.5503877125865765e+264
+condition number of J:  4.214390746190275e+264
+condition number of J:  1.1455901783394981e+265
+condition number of J:  3.1140369646414148e+265
+condition number of J:  8.46483009413452e+265
+condition number of J:  2.3009793825879134e+266
+condition number of J:  6.254710443347638e+266
+condition number of J:  1.7002065740424902e+267
+condition number of J:  4.62164063484631e+267
+condition number of J:  1.2562921755370647e+268
+condition number of J:  3.414956191997684e+268
+condition number of J:  9.282813361691006e+268
+condition number of J:  2.5233302878061482e+269
+condition number of J:  6.859122868543786e+269
+condition number of J:  1.864502905273045e+270
+condition number of J:  5.068244366512814e+270
+condition number of J:  1.3776916563681713e+271
+condition number of J:  3.7449541947252425e+271
+condition number of J:  1.0179840935933103e+272
+condition number of J:  2.7671676632750475e+272
+condition number of J:  7.52194157538004e+272
+condition number of J:  2.0446757099086165e+273
+condition number of J:  5.558004827336191e+273
+condition number of J:  1.510822352463562e+274
+condition number of J:  4.1068409467314475e+274
+condition number of J:  1.1163551117871635e+275
+condition number of J:  3.0345678144784124e+275
+condition number of J:  8.248810547323348e+275
+condition number of J:  2.2422591817190374e+276
+condition number of J:  6.095092388362307e+276
+condition number of J:  1.6568178882064298e+277
+condition number of J:  4.503697958577429e+277
+condition number of J:  1.2242320321669124e+278
+condition number of J:  3.327807686856807e+278
+condition number of J:  9.045919163789186e+278
+condition number of J:  2.458935768463758e+279
+condition number of J:  6.684080416763013e+279
+condition number of J:  1.816921433684586e+280
+condition number of J:  4.938904516922567e+280
+condition number of J:  1.3425334400844911e+281
+condition number of J:  3.649384254280283e+281
+condition number of J:  9.920054903474657e+281
+condition number of J:  2.6965504981431206e+282
+condition number of J:  7.329984218624631e+282
+condition number of J:  1.992496290437891e+283
+condition number of J:  5.416166459569375e+283
+condition number of J:  1.4722666866956794e+284
+condition number of J:  4.002035781090472e+284
+condition number of J:  1.087866114058113e+285
+condition number of J:  2.957126689640524e+285
+condition number of J:  8.038303744901088e+285
+condition number of J:  2.1850375001398915e+286
+condition number of J:  5.939547731131846e+286
+condition number of J:  1.614536466680085e+287
+condition number of J:  4.388765138760948e+287
+condition number of J:  1.1929900526068424e+288
+condition number of J:  3.24288318153358e+288
+condition number of J:  8.815070424178186e+288
+condition number of J:  2.396184575063033e+289
+condition number of J:  6.513504988027702e+289
+condition number of J:  1.7705542248533052e+290
+condition number of J:  4.81286537572013e+290
+condition number of J:  1.3082724493639743e+291
+condition number of J:  3.556253225779698e+291
+condition number of J:  9.666898521035817e+291
+condition number of J:  2.627735458728928e+292
+condition number of J:  7.142925547460337e+292
+condition number of J:  1.9416484717697316e+293
+condition number of J:  5.2779477580669364e+293
+condition number of J:  1.4346949482309511e+294
+condition number of J:  3.8999052071581847e+294
+condition number of J:  1.0601041457330902e+295
+condition number of J:  2.8816618356203582e+295
+condition number of J:  7.833169003530756e+295
+condition number of J:  2.1292760961546308e+296
+condition number of J:  5.7879725199493456e+296
+condition number of J:  1.5733340524598616e+297
+condition number of J:  4.276765364897473e+297
+condition number of J:  1.1625453575983816e+298
+condition number of J:  3.1601259203191036e+298
+condition number of J:  8.590112864845836e+298
+condition number of J:  2.335034770492271e+299
+condition number of J:  6.347282585449177e+299
+condition number of J:  1.7253702912121047e+300
+condition number of J:  4.6900427099649543e+300
+condition number of J:  1.2748857873194553e+301
+condition number of J:  3.465498869031178e+301
+condition number of J:  9.420202602232825e+301
+condition number of J:  2.5606765554052097e+302
+condition number of J:  6.960640549119083e+302
+condition number of J:  1.8920982719105596e+303
+condition number of J:  5.143256350193236e+303
+condition number of J:  1.398082027583686e+304
+condition number of J:  3.8003809702759126e+304
+condition number of J:  1.0330506532722569e+305
+condition number of J:  2.808122818667721e+305
+condition number of J:  7.633269230065661e+305
+condition number of J:  2.074937703982306e+306
+condition number of J:  5.640265455919627e+306
+condition number of J:  1.5331831096511593e+307
+condition number of J:  4.1676237866650823e+307
+condition number of J:  1.1328776007145588e+308
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+condition number of J:  inf
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">LinAlgError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">aguess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># fit</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">afit</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">aguess</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">)</span>
+
+<span class="nn">Cell In[5], line 20,</span> in <span class="ni">fit</span><span class="nt">(aguess, x, y, yerr, tol)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="n">gv</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">avec</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># solve for the correction: J da = -g</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="o">-</span><span class="n">gv</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="n">avec</span> <span class="o">+=</span> <span class="n">da</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">da</span><span class="p">))</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/linalg/linalg.py:409,</span> in <span class="ni">solve</span><span class="nt">(a, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span> <span class="n">signature</span> <span class="o">=</span> <span class="s1">&#39;DD-&gt;D&#39;</span> <span class="k">if</span> <span class="n">isComplexType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;dd-&gt;d&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span> <span class="n">extobj</span> <span class="o">=</span> <span class="n">get_linalg_error_extobj</span><span class="p">(</span><span class="n">_raise_linalgerror_singular</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">409</span> <span class="n">r</span> <span class="o">=</span> <span class="n">gufunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">,</span> <span class="n">extobj</span><span class="o">=</span><span class="n">extobj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span> <span class="k">return</span> <span class="n">wrap</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">result_t</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/linalg/linalg.py:112,</span> in <span class="ni">_raise_linalgerror_singular</span><span class="nt">(err, flag)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="k">def</span> <span class="nf">_raise_linalgerror_singular</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">112</span>     <span class="k">raise</span> <span class="n">LinAlgError</span><span class="p">(</span><span class="s2">&quot;Singular matrix&quot;</span><span class="p">)</span>
+
+<span class="ne">LinAlgError</span>: Singular matrix
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">afit</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.51306818, 0.66591209])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">afit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">afit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span><span class="n">x</span><span class="p">))</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e61b659d501ff7bdc4840fdcf0c222581f45592f14aba95afae5a2d9c6144304.png" src="../_images/e61b659d501ff7bdc4840fdcf0c222581f45592f14aba95afae5a2d9c6144304.png" />
+</div>
+</div>
+</section>
+<section id="is-it-a-minimum">
+<h2>Is it a minimum?<a class="headerlink" href="#is-it-a-minimum" title="Link to this heading">#</a></h2>
+<p>We just found an extrema.  Let’s plot the surface around our fit parameters to see if it looks like a minimum</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">npts</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">a0v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">afit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">afit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">npts</span><span class="p">)</span>
+<span class="n">a1v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">afit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">afit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">npts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chisq</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">a0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a1</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">yerr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">npts</span><span class="p">,</span> <span class="n">npts</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a0</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a0v</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">a1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a1v</span><span class="p">):</span>
+        <span class="n">c2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">chisq</span><span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2885495.8835515887
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll plot the (log of) the <span class="math notranslate nohighlight">\(\chi^2\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># we need to transpose to put a0 on the horizontal</span>
+<span class="c1"># we use origin = lower to have the origin at the lower left</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+               <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span>
+               <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">a0v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a0v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">a1v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a1v</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">afit</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">afit</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$a_0$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$a_1$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$a_1$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/3fd94b15527c3f037ec9168f69d8c53b274c0c6ddde90dad44b20cf984a00066.png" src="../_images/3fd94b15527c3f037ec9168f69d8c53b274c0c6ddde90dad44b20cf984a00066.png" />
+</div>
+</div>
+<p>It looks like there is a very broad minimum there.</p>
+</section>
+<section id="troubles">
+<h2>Troubles<a class="headerlink" href="#troubles" title="Link to this heading">#</a></h2>
+<p>Consider if we tried to add another parameter, fitting to:</p>
+<div class="math notranslate nohighlight">
+\[y = a_0 e^{a_1 x + a_2}\]</div>
+<p>here <span class="math notranslate nohighlight">\(a_2\)</span> enters the same way as <span class="math notranslate nohighlight">\(a_0\)</span>, which would give a singular matrix, and make our solution unstable.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./fitting"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="generalized-linear-least-squares.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">General Linear Least Squares</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="fitting-scipy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Fitting Function in SciPy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-an-exponential">Fitting an exponential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-it-a-minimum">Is it a minimum?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubles">Troubles</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2023; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
