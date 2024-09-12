@@ -65,6 +65,7 @@
 
     https://archive.stsci.edu/hello-universe
 
+  Emily Hunt: https://github.com/emilyhunt/machine-learning-tutorial-MWGaia-DN
 
 * FFT
 
