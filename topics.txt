@@ -7,6 +7,10 @@
   * look at Wisdom-Holman -- decomposes orbit into Keplerian part and interaction part.  See,
     e.g., https://academic.oup.com/mnras/article/452/1/376/1748797
 
+* autodiff
+ 
+  do a very simple autodiff before machine learning
+
 * reaction networks
 
   * stiff ODEs
@@ -56,6 +60,12 @@
        * https://zenodo.org/record/3565489
 
        * https://zenodo.org/record/4573248
+
+       * better is galaxy10 from astroNN:
+  
+         * https://astronn.readthedocs.io/en/latest/galaxy10.html
+         * https://towardsdatascience.com/galaxy-multi-image-classification-with-lenet-5-1bc2f66d3cfc
+
 
      See also: https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research#Astronomy
 
