@@ -179,5 +179,7 @@ parts:
       - file: machine-learning/keras-clustering
     - file: machine-learning/machine-learning-in-astro
 
+  - caption: Course Project
+    chapters:
     - file: homework/project
 
