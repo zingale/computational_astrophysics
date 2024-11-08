@@ -1,6 +1,7 @@
 jupyter-book
 matplotlib
 numpy
+numba
 scipy
 sympy
 pynucastro
