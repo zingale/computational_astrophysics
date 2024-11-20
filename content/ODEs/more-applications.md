@@ -30,10 +30,10 @@ by a system of ODEs.  Here are some suggestions to explore.
    a neutron star.  The dynamics of this burning can be approximated
    as a toy model looking at the heating and the depth of the fuel
    layer, as described in [Heger et
-   al. 2018](https://arxiv.org/pdf/astro-ph/0511292.pdf) and
+   al. 2018](https://arxiv.org/pdf/astro-ph/0511292.pdf),
    [Paczynski
-   1983](https://articles.adsabs.harvard.edu/pdf/1983ApJ...264..282P)
-   [Livio & Regev 1985](https://ui.adsabs.harvard.edu/abs/1985A%26A...148..133L/abstract)
+   1983](https://articles.adsabs.harvard.edu/pdf/1983ApJ...264..282P), and 
+   [Livio & Regev 1985](https://ui.adsabs.harvard.edu/abs/1985A%26A...148..133L/abstract).
    This simple system can give rise to repeated bursts (and a [limit cycle](https://en.wikipedia.org/wiki/Limit_cycle)
    ) depending on the accretion rate.
 
