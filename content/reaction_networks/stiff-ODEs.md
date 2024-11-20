@@ -1,2 +1,0 @@
-Integrating Stiff ODEs
-======================
