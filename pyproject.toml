@@ -1,0 +1,2 @@
+[tool.codespell]
+skip = ".git,*.bib,_build,_static"
