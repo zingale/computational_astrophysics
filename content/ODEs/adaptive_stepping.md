@@ -10,7 +10,10 @@ ways to do this in the literature:
 * Compare higher and lower order methods (sometimes the lower order method is _embedded_ in the higher-order  method,
   for instance this is the [RK45 method used by SciPy](https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method))
 
-We'll do the first method here, as it is the simplest.  Consider integrating
+We'll do the first method here, as it is the simplest.  
+
+
+Consider integrating
 a function $y(t)$ through some timestep $\tau$:
 
 ![adaptive timestep comparing 2 dt/2 steps to a single dt step](adaptive_timestep.png)
@@ -33,10 +36,12 @@ If we take the ratio of these, then any proportionality cancels, and we have
 
 $$\tau_\mathrm{est} = \tau \left (\frac{\epsilon_\mathrm{want}}{\epsilon} \right)^{1/5}$$
 
+```{note}
 If we were not accurate enough, this would predict a finer timestep that would
 give us our desired accuracy.  And if we were too accurate, then this would
 tell us how much we could increase the timestep while maintaining our desired
 accuracy.
+```
 
 Let's consider doing this with RK4.  Our approach will be:
 
