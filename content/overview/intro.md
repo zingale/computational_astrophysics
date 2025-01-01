@@ -52,11 +52,7 @@ Some resources:
 * My C++ class notes are available at: https://zingale.github.io/phy504/
 
 ```{note}
-You are welcomed to sit in on my python class this semester,
-PHY 546: *Python for Scientific Computing* which meets on Monday's at 4:25 pm
-```
-
 We will start the semester with a "crash course" on python, and we
 will learn more about the language as the semester goes on and we
 implement the core numerical methods and solve interesting problems.
-
+```

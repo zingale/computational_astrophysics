@@ -9,8 +9,10 @@ https://github.com/zingale/computational_astrophysics, and the course
 website is built automatically via a Github action each time a change
 is pushed.
 
+```{tip}
 If you find any problems or have suggestions for improving the notes,
 feel free to create an issue or pull request at the Github repo.
+```
 
 ## Interactive Usage
 
