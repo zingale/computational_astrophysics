@@ -20,8 +20,8 @@ parts:
       - file: python/python-classes.ipynb
     - file: python/numpy
       sections:
-        - file: numpy-basics.ipynb
-        - file: numpy-advanced.ipynb
+        - file: python/numpy-basics.ipynb
+        - file: python/numpy-advanced.ipynb
     - file: python/matplotlib-basics.ipynb
 
   - caption: Git and Github
