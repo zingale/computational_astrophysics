@@ -30,7 +30,7 @@ html:
   use_repository_button: true
   extra_footer: |
     <p>
-    &copy; 2021-2024; CC-BY-NC-SA 4.0
+    &copy; 2021-2025; CC-BY-NC-SA 4.0
     <p>
 
 sphinx:
