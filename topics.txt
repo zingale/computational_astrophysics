@@ -105,3 +105,5 @@
 
   dripping handrail model:
   https://articles.adsabs.harvard.edu/pdf/1996ApJ...468..617Y
+
+* AstronomyCalc: https://arxiv.org/abs/2501.05491v1
