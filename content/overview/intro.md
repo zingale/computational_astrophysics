@@ -55,4 +55,12 @@ Some resources:
 We will start the semester with a "crash course" on python, and we
 will learn more about the language as the semester goes on and we
 implement the core numerical methods and solve interesting problems.
+
+You are *strongly encouraged* to install python on your own computer.
+If you don't already have python, I suggest installing the 
+(freely-available) Anaconda python distribution:
+
+https://www.anaconda.com/download
+
+This will install everything you will need for this course.
 ```
