@@ -101,6 +101,19 @@ struct Matrix {
         return A;
     }
 
+    inline Matrix operator- (const Matrix& B) {
+        // A = this - B
+        assert(B.nrows() == nrows() && B.ncols() == ncols());
+
+        Matrix A(*this);
+        for (std::size_t irow = 0; irow < nrows(); ++irow) {
+            for (std::size_t icol = 0; icol < ncols(); ++icol) {
+                A(irow, icol) = (*this)(irow, icol) - B(irow, icol);
+            }
+        }
+        return A;
+    }
+
 };
 
 // the << operator is not part of the of the class, so it is not a member
