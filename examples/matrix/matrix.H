@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 #include <cassert>
+#include <functional>
+#include <algorithm>
 
 // a simple matrix class that supports matrix-matrix multiplication
 // addition of matrices, and multiplication by a scalar.
@@ -68,7 +70,9 @@ struct Matrix {
         return _data[row*_cols + col];
     }
 
-    inline Matrix operator* (double c) {
+    // multiply matrix by scalar
+
+    inline Matrix operator* (double c) const {
         Matrix A(*this);
         for (std::size_t irow = 0; irow < nrows(); ++irow) {
             for (std::size_t icol = 0; icol < ncols(); ++icol) {
@@ -78,7 +82,38 @@ struct Matrix {
         return A;
     }
 
-    inline Matrix operator/ (double c) {
+    friend Matrix operator* (double c, const Matrix& A);
+
+    // matrix * matrix
+
+    inline Matrix operator* (const Matrix& B) {
+
+        // we are doing *this * B -- make sure their inner dimensions match
+        assert(ncols() == B.nrows());
+
+        std::size_t inner{ncols()};
+        std::size_t new_rows{nrows()};
+        std::size_t new_cols{B.ncols()};
+
+        Matrix C(new_rows, new_cols);
+
+        // loop over elements in the new matrix C -- its entry
+        // is the dot product of the row in this and the column in A
+
+        for (std::size_t irow = 0; irow < new_rows; ++irow) {
+            for (std::size_t jcol = 0; jcol < new_cols; ++jcol) {
+                for (std::size_t k = 0; k < inner; ++k) {
+                    C(irow, jcol) += (*this)(irow, k) * B(k, jcol);
+                }
+            }
+        }
+
+        return C;
+    }
+
+    // matrix divided by scalar
+
+    inline Matrix operator/ (double c) const {
         Matrix A(*this);
         for (std::size_t irow = 0; irow < nrows(); ++irow) {
             for (std::size_t icol = 0; icol < ncols(); ++icol) {
@@ -88,7 +123,9 @@ struct Matrix {
         return A;
     }
 
-    inline Matrix operator+ (const Matrix& B) {
+    // addition and subtraction of matrix (element by element)
+
+    inline Matrix operator+ (const Matrix& B) const {
         // A = this + B
         assert(B.nrows() == nrows() && B.ncols() == ncols());
 
@@ -101,7 +138,7 @@ struct Matrix {
         return A;
     }
 
-    inline Matrix operator- (const Matrix& B) {
+    inline Matrix operator- (const Matrix& B) const {
         // A = this - B
         assert(B.nrows() == nrows() && B.ncols() == ncols());
 
@@ -111,6 +148,34 @@ struct Matrix {
                 A(irow, icol) = (*this)(irow, icol) - B(irow, icol);
             }
         }
+        return A;
+    }
+
+    // compound operators
+
+    Matrix& operator+= (const Matrix& A) {
+        for (std::size_t irow = 0; irow < nrows(); ++irow) {
+            for (std::size_t icol = 0; icol < ncols(); ++icol) {
+                (*this)(irow, icol) += A(irow, icol);
+            }
+        }
+        return *this;
+    }
+
+    Matrix& operator-= (const Matrix& A) {
+        for (std::size_t irow = 0; irow < nrows(); ++irow) {
+            for (std::size_t icol = 0; icol < ncols(); ++icol) {
+                (*this)(irow, icol) -= A(irow, icol);
+            }
+        }
+        return *this;
+    }
+
+    // apply a function to all elements of the matrix
+
+    inline Matrix transform(std::function<double(double)> f) const {
+        Matrix A(nrows(), ncols());
+        std::transform(_data.cbegin(), _data.cend(), A._data.begin(), f);
         return A;
     }
 
@@ -128,6 +193,11 @@ std::ostream& operator<< (std::ostream& os, const Matrix& a) {
     }
 
     return os;
+}
+
+inline
+Matrix operator* (double c, const Matrix& A) {
+    return A * c;
 }
 
 #endif
