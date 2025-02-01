@@ -30,7 +30,7 @@ class State:
         return f"{self.x:10.6f} {self.y:10.6f} {self.u:10.6f} {self.v:10.6f}"
 
 
-class ThreeBody(object):
+class ThreeBody:
     """ model the gravitational interaction of three stars """
 
     def __init__(self, M0, pos0, M1, pos1, M2, pos2, SMALL=1.e-30):
