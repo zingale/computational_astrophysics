@@ -21,6 +21,15 @@ importantly, what are the underlying assumptions.
 For this reason, we will implement all of the methods here from
 scratch, first, before moving onto any libraries.
 
+### Topics
+
+There are a large number of interesting numerical methods used in astrophysics,
+and we will not have time to cover everything.  Some references will be given
+throughout on how you can learn about other methods.
+
+Topics in the table of contents marked with an "✱" will likely not be covered, but
+are self-contained and can be read through at your own pace.
+
 ### Programming experience
 
 

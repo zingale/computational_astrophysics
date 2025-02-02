@@ -89,6 +89,7 @@ parts:
       sections:
       - file: ODEs/application-lane-emden
     - file: ODEs/ODEs-implicit
+      title: ✱ Stiff ODEs
       sections:
       - file: ODEs/ODEs-implicit-systems
       - file: ODEs/ODEs-implicit-nonlinear-systems
@@ -142,6 +143,7 @@ parts:
       - file: elliptic_multigrid/relaxation/elliptic-residual
       - file: elliptic_multigrid/relaxation/elliptic-modes
     - file: elliptic_multigrid/multigrid/multigrid
+      title: ✱ Multigrid
       sections:
       - file: elliptic_multigrid/multigrid/multigrid-restrict-prolong
       - file: elliptic_multigrid/multigrid/multigrid-two-grid
@@ -155,7 +157,7 @@ parts:
       - file: diffusion/diffusion-implicit-relax
       - file: diffusion/diffusion-going-further.md
 
-  - caption: Hydrodynamics
+  - caption: ✱ Hydrodynamics
     chapters:
     - file: euler/euler
     - file: euler/euler-eigen
