@@ -24,17 +24,6 @@ parts:
       - file: python/numpy-advanced.ipynb
     - file: python/matplotlib-basics.ipynb
 
-  - caption: Git and Github
-    chapters:
-    - file: git/version-control
-    - file: git/git
-    - file: git/git-branches
-      sections:
-      - file: git/git-remotes
-    - file: git/github
-      sections:
-      - file: git/pull-requests
-
   - caption: Fundamentals
     chapters:
     - file: basics/floating-point/floating-point-details
@@ -95,6 +84,17 @@ parts:
       - file: ODEs/ODEs-implicit-nonlinear-systems
       - file: ODEs/application-CNO-network
     - file: ODEs/more-applications
+
+  - caption: Interlude: Git and Github
+    chapters:
+    - file: git/version-control
+    - file: git/git
+    - file: git/git-branches
+      sections:
+      - file: git/git-remotes
+    - file: git/github
+      sections:
+      - file: git/pull-requests
 
   - caption: Working with Data Samples
     chapters:
