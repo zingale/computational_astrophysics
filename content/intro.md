@@ -25,8 +25,8 @@ This course assumes that you are already familiar with a programming language.
 ```
 
 
-List of Astrophysical Applications
-----------------------------------
+Astrophysical Applications
+--------------------------
 
 Throughout the course, we'll see some applications to interesting problems in astrophysics.  Here's a listing
 to some of them:
@@ -66,9 +66,9 @@ value problelms
 applied to the [Lane-Emden equation for polytropes](https://zingale.github.io/computational_astrophysics/ODEs/application-lane-emden.html).
 :::
 
-:::{grid-item-card} Lorenz System Stationary States
-A demonstration of using Newton's method to find
-the [stationary states of the Lorenz system](https://zingale.github.io/computational_astrophysics/basics/linear-algebra/application-lorenz.html).
+:::{grid-item-card} Stability of Planetary Systems
+Investigating the [longterm stability of planetary systems](https://zingale.github.io/computational_astrophysics/ODEs/application-planetary-stability.html)
+using symplectic integrators.
 :::
 
 ::::
@@ -76,6 +76,11 @@ the [stationary states of the Lorenz system](https://zingale.github.io/computati
 
 ::::{grid}
 :gutter: 3
+
+:::{grid-item-card} Lorenz System Stationary States
+A demonstration of using Newton's method to find
+the [stationary states of the Lorenz system](https://zingale.github.io/computational_astrophysics/basics/linear-algebra/application-lorenz.html).
+:::
 
 :::{grid-item-card} Hubble's Constant
 Using linear regression to [estimate $H_0$ from
@@ -87,10 +92,15 @@ Using FFTs on time-series data to
 [study low mass X-ray binaries](https://zingale.github.io/computational_astrophysics/ffts/application-lightcurves.html).
 :::
 
+::::
+
+
+::::{grid}
+:gutter: 3
+
 :::{grid-item-card} Integrating the CNO Cycle
-Using stiff-ODE solvers to 
+Using stiff-ODE solvers to
 [integrate an CNO reaction network](https://zingale.github.io/computational_astrophysics/reaction_networks/application-CNO-network.html)
 :::
 
 ::::
-
