@@ -29,7 +29,7 @@ git config --global core.editor "nano -w"
 
 Replace `name` with your name and `email` with your email.  This sets `nano`
 as our default editor, but you can choose something else that you are comfortable
-with (see https://swcarpentry.github.io/git-novice/02-setup/index.html#line-endings).
+with (see https://swcarpentry.github.io/git-novice/02-setup.html).
 
 This information will be stored in a file called ``.gitconfig`` in your home directory.
 
