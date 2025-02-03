@@ -74,7 +74,8 @@ parts:
     - file: ODEs/ODEs-conservation
       sections:
       - file: ODEs/ODEs-timereverse
-    - file: ODEs/boundary-value-problems
+      - file: ODEs/application-planetary-stability 
+   - file: ODEs/boundary-value-problems
       sections:
       - file: ODEs/application-lane-emden
     - file: ODEs/ODEs-implicit
