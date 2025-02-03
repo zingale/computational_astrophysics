@@ -74,8 +74,8 @@ parts:
     - file: ODEs/ODEs-conservation
       sections:
       - file: ODEs/ODEs-timereverse
-      - file: ODEs/application-planetary-stability 
-   - file: ODEs/boundary-value-problems
+      - file: ODEs/application-planetary-stability
+    - file: ODEs/boundary-value-problems
       sections:
       - file: ODEs/application-lane-emden
     - file: ODEs/ODEs-implicit
@@ -86,7 +86,7 @@ parts:
       - file: ODEs/application-CNO-network
     - file: ODEs/more-applications
 
-  - caption: Interlude: Git and Github
+  - caption: "Interlude Git and Github"
     chapters:
     - file: git/version-control
     - file: git/git
