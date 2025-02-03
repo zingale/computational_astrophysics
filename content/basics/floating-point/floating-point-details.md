@@ -89,7 +89,7 @@ $$
 $$
 ```
 
-There are [varying definitions of machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon#Variant_definitions) which differ by a factor of 2.
+There are [varying definitions of machine epsilon](https://en.wikipedia.org/wiki/Machine_epsilon#Alternative_definitions_for_epsilon) which differ by a factor of 2.
 
 Range
 -----

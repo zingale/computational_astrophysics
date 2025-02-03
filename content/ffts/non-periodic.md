@@ -2,7 +2,7 @@
 
 The FFT assumes that the input data is uniformly spaced.  But if you are working with
 a collection of observational data, it may be sampled at irregular time intervals.
-In this case, the [Lomb-Scargle periodogram](https://en.wikipedia.org/wiki/Least-squares_spectral_analysis#The_Lomb.E2.80.93Scargle_periodogram) is often used.
+In this case, the [Lomb-Scargle periodogram](https://en.wikipedia.org/wiki/Least-squares_spectral_analysis#The_generalized_Lomb%E2%80%93Scargle_periodogram) is often used.
 
 ```{tip}
 A nice introduction to the Lomb-Scargle periodogram is provided in the
