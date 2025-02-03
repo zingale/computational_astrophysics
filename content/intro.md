@@ -100,7 +100,7 @@ Using FFTs on time-series data to
 
 :::{grid-item-card} Integrating the CNO Cycle
 Using stiff-ODE solvers to
-[integrate an CNO reaction network](https://zingale.github.io/computational_astrophysics/reaction_networks/application-CNO-network.html)
+[integrate an CNO reaction network](https://zingale.github.io/computational_astrophysics/ODEs/application-CNO-network.html)
 :::
 
 ::::
