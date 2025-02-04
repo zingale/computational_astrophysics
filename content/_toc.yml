@@ -65,12 +65,12 @@ parts:
       sections:
       - file: ODEs/ODEs-midpoint
       - file: ODEs/ODEs-rk4
+      - file: ODEs/example-lorenz
     - file: ODEs/adaptive_stepping
       sections:
       - file: ODEs/adaptive-orbits
       - file: ODEs/ODEs-scipy
       - file: ODEs/application-few-body
-    - file: ODEs/inclass-lorenz
     - file: ODEs/ODEs-conservation
       sections:
       - file: ODEs/ODEs-timereverse
