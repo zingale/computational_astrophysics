@@ -77,7 +77,8 @@ using symplectic integrators.
 ::::{grid}
 :gutter: 3
 
-:::{grid-item-card} ODE integration + root finding
+:::{grid-item-card} One-Zone X-ray Burst Model
+ODE integration + root finding
 to explore limit-cycles in a 
 [one-zone model of an X-ray burst](https://zingale.github.io/computational_astrophysics/ODEs/application-xrb-one-zone.html)
 :::
