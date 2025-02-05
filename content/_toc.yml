@@ -189,5 +189,6 @@ parts:
 
   - caption: Course Project
     chapters:
+    - file: homework/homework1
     - file: homework/project
 
