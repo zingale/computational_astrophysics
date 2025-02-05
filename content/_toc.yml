@@ -85,6 +85,7 @@ parts:
       - file: ODEs/ODEs-implicit-nonlinear-systems
       - file: ODEs/application-CNO-network
     - file: ODEs/more-applications
+      - file: ODEs/application-xrb-one-zone
 
   - caption: "Interlude Git and Github"
     chapters:

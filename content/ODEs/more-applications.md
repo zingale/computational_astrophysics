@@ -22,23 +22,7 @@ by a system of ODEs.  Here are some suggestions to explore.
    table I.  This topic is discussed extensively in the text by Paul
    Hellings.
 
-
-2. _A one zone model of X-ray bursts._
-
-   [X-ray bursts](https://en.wikipedia.org/wiki/X-ray_burster) are the
-   thermonuclear explosion of a thin accreted layer on the surface of
-   a neutron star.  The dynamics of this burning can be approximated
-   as a toy model looking at the heating and the depth of the fuel
-   layer, as described in [Heger et
-   al. 2018](https://arxiv.org/pdf/astro-ph/0511292.pdf),
-   [Paczynski
-   1983](https://articles.adsabs.harvard.edu/pdf/1983ApJ...264..282P), and 
-   [Livio & Regev 1985](https://ui.adsabs.harvard.edu/abs/1985A%26A...148..133L/abstract).
-   This simple system can give rise to repeated bursts (and a [limit cycle](https://en.wikipedia.org/wiki/Limit_cycle)
-   ) depending on the accretion rate.
-
-
-3. _Star formation in the Galaxy._
+2. _Star formation in the Galaxy._
 
    The paper by [Bodifee
    1986](https://articles.adsabs.harvard.edu/pdf/1986Ap%26SS.122...41B)
@@ -49,7 +33,7 @@ by a system of ODEs.  Here are some suggestions to explore.
    This topic is also discussed extensively in the text by Paul Hellings.
 
 
-4. General relativistic orbits:
+3. General relativistic orbits:
 
    * _Geodesics around a Schwarzschild black hole_
 
