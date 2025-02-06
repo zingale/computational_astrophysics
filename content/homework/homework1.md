@@ -38,7 +38,8 @@ derivations, notes, etc.
 
    $$f^\prime |_i = \frac{f_{i+1} - f_{i-1}}{2\Delta x}$$
 
-   This uses one point to the left and right of point $i$.
+   This uses one point to the left and right of point $i$.  Assume that
+   the spacing between the points, $\Delta x$, is constant.
 
    Now, instead, let's construct a *one-sided* difference for the
    first-derivative that is second-order accurate.  To do this,
