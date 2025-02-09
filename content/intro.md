@@ -34,6 +34,11 @@ to some of them:
 ::::{grid}
 :gutter: 3
 
+:::{grid-item-card} Reaction Rate Temperature Sensitivity
+An example of using numerical differentiation to
+[estimate the temperature sensitivity of the 3-$\alpha$ reaction](https://zingale.github.io/computational_astrophysics/basics/diff-int/application-rate-temperature-sensitivity.html).
+:::
+
 :::{grid-item-card} Blackbody Radiation
 An example of integrating to infinity by
 [integrating the Planck function over wavelength](https://zingale.github.io/computational_astrophysics/basics/diff-int/application-blackbody.html).
@@ -44,16 +49,17 @@ Demonstrating root finding by
 [numerically deriving Wien's law](https://zingale.github.io/computational_astrophysics/basics/roots/application-wiens.html).
 :::
 
-:::{grid-item-card} Degeneracy
-Combining integration over the Fermi-Dirac
-distribution and root-finding to [find
-the electron degeneracy parameters](https://zingale.github.io/computational_astrophysics/basics/roots/application-degeneracy.html).
-:::
 
 ::::
 
 ::::{grid}
 :gutter: 3
+
+:::{grid-item-card} Degeneracy
+Combining integration over the Fermi-Dirac
+distribution and root-finding to [find
+the electron degeneracy parameters](https://zingale.github.io/computational_astrophysics/basics/roots/application-degeneracy.html).
+:::
 
 :::{grid-item-card} Few-Body Problem
 Using adaptive stepping in ODE integration
@@ -66,16 +72,17 @@ value problelms
 applied to the [Lane-Emden equation for polytropes](https://zingale.github.io/computational_astrophysics/ODEs/application-lane-emden.html).
 :::
 
-:::{grid-item-card} Stability of Planetary Systems
-Investigating the [longterm stability of planetary systems](https://zingale.github.io/computational_astrophysics/ODEs/application-planetary-stability.html)
-using symplectic integrators.
-:::
-
 ::::
 
 
 ::::{grid}
 :gutter: 3
+
+
+:::{grid-item-card} Stability of Planetary Systems
+Investigating the [longterm stability of planetary systems](https://zingale.github.io/computational_astrophysics/ODEs/application-planetary-stability.html)
+using symplectic integrators.
+:::
 
 :::{grid-item-card} One-Zone X-ray Burst Model
 ODE integration + root finding
@@ -88,17 +95,17 @@ Using stiff-ODE solvers to
 [integrate an CNO reaction network](https://zingale.github.io/computational_astrophysics/ODEs/application-CNO-network.html)
 :::
 
-:::{grid-item-card} Lorenz System Stationary States
-A demonstration of using Newton's method to find
-the [stationary states of the Lorenz system](https://zingale.github.io/computational_astrophysics/basics/linear-algebra/application-lorenz.html).
-:::
-
-
 ::::
 
 
 ::::{grid}
 :gutter: 3
+
+
+:::{grid-item-card} Lorenz System Stationary States
+A demonstration of using Newton's method to find
+the [stationary states of the Lorenz system](https://zingale.github.io/computational_astrophysics/basics/linear-algebra/application-lorenz.html).
+:::
 
 :::{grid-item-card} Hubble's Constant
 Using linear regression to [estimate $H_0$ from

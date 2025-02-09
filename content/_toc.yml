@@ -32,6 +32,7 @@ parts:
     - file: basics/diff-int/differentiation
       sections:
       - file: basics/diff-int/example-second-deriv
+      - file: basics/diff-int/application-rate-temperature-sensitivity
     - file: basics/diff-int/integration
       sections:
       - file: basics/diff-int/integration-simpsons
