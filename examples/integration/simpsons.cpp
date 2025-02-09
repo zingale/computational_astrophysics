@@ -8,7 +8,7 @@
 // An implementation of the composite Simpsons rule for integration.  This
 // assumes that we will use an even number of intervals
 
-// note: requires C++20
+// note: requires C++20 due to std::numbers
 
 // the function we will integrate
 double f(const double x) {
@@ -36,7 +36,6 @@ double simpsons(const double xmin, const double xmax, const int N,
     }
 
     return I;
-
 }
 
 int main() {
