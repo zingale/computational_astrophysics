@@ -34,9 +34,9 @@ to some of them:
 ::::{grid}
 :gutter: 3
 
-:::{grid-item-card} Reaction Rate Temperature Sensitivity
+:::{grid-item-card} Reaction Rate $T$ Sensitivity
 An example of using numerical differentiation to
-[estimate the temperature sensitivity of the 3-$\alpha$ reaction](https://zingale.github.io/computational_astrophysics/basics/diff-int/application-rate-temperature-sensitivity.html).
+[estimate the 3-$\alpha$ reaction $T$ sensitivity](https://zingale.github.io/computational_astrophysics/basics/diff-int/application-rate-temperature-sensitivity.html).
 :::
 
 :::{grid-item-card} Blackbody Radiation
