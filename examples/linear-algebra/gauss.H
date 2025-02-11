@@ -1,6 +1,7 @@
 #ifndef GAUSS_H
 #define GAUSS_H
 
+#include <algorithm>
 #include <array.H>
 #include <vector>
 #include <limits>
@@ -68,19 +69,15 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
 
     // find the scale factors for each row -- this is used when pivoting
 
-    std::vector<double> scales(N, 0.0);
+    std::vector<double> scales(N, std::numeric_limits<double>::lowest());
 
     for (int irow = 0; irow < N; ++irow) {
-        double maxval = std::numeric_limits<double>::lowest();
         for (int jcol = 0; jcol < N; ++jcol) {
-            maxval = std::max(maxval, std::abs(A(irow, jcol)));
+            scales[irow] = std::max(scales[irow], std::abs(A(irow, jcol)));
         }
-        scales[irow] = maxval;
     }
 
     // keep track of the number of times we swapped rows
-
-    int num_row_swap{};
 
     if (!quiet) {
         print_Ab(A, b);
@@ -111,28 +108,19 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
             // swap row krow with row row_max
 
             for (int jcol = 0; jcol < N; ++jcol) {
-                double tmp_val = A(krow, jcol);
-                A(krow, jcol) = A(row_max, jcol);
-                A(row_max, jcol) = tmp_val;
+                std::swap(A(krow, jcol), A(row_max, jcol));
             }
 
-            // now swap the same elements in b
-
-            double tmp_b = b[krow];
-            b[krow] = b[row_max];
-            b[row_max] = tmp_b;
+            std::swap(b[krow], b[row_max]);
 
             // finally swap the scales
 
-            double tmp_scale = scales[krow];
-            scales[krow] = scales[row_max];
-            scales[row_max] = tmp_scale;
+            std::swap(scales[krow], scales[row_max]);
 
             if (!quiet) {
                 std::cout << "pivoted" << std::endl;
             }
 
-            ++num_row_swap;
         }
 
         // do the forward-elimination for all rows below the current
