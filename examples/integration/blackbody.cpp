@@ -13,12 +13,12 @@
 
 const double SMALL{1.e-30};
 
-inline double zv(const double x, const double c) {
-    return x / (c + x);
+inline double zv(const double x, const double alpha) {
+    return x / (alpha + x);
 }
 
-inline double xv(const double z, const double c) {
-    return c * z / (1.0 - z + SMALL);
+inline double xv(const double z, const double alpha) {
+    return alpha * z / (1.0 - z + SMALL);
 }
 
 double integrand(const double x) {
@@ -45,7 +45,7 @@ double simpsons_inf(const int N,
     assert(N % 2 == 0);
 
     double I = 0.0;
-    double c = 3.0;
+    double alpha = 3.0;
 
     // we will work in the transformed coords z = [0, 1]
     double dz = (1.0 - 0.0) / static_cast<double>(N);
@@ -55,16 +55,16 @@ double simpsons_inf(const int N,
         double z1 = static_cast<double>(n+1) * dz;
         double z2 = static_cast<double>(n+2) * dz;
 
-        double f0 = func(xv(z0, c));
-        double f1 = func(xv(z1, c));
-        double f2 = func(xv(z2, c));
+        double f0 = func(xv(z0, alpha));
+        double f1 = func(xv(z1, alpha));
+        double f2 = func(xv(z2, alpha));
 
         I += dz / 3.0 * (f0 / std::pow(1.0 - z0 + SMALL, 2) +
                          4.0 * f1 / std::pow(1.0 - z1 + SMALL, 2) +
                          f2 / std::pow(1.0 - z2 + SMALL, 2));
     }
 
-    I *= c;
+    I *= alpha;
 
     return I;
 
