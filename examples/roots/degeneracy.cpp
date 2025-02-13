@@ -30,8 +30,8 @@ double integrand(const double x, const double psi) {
 }
 
 inline
-double xv(const double z, const double c) {
-    return c * z / (1.0 - z + SMALL);
+double xv(const double z, const double alpha) {
+    return alpha * z / (1.0 - z + SMALL);
 }
 
 inline
@@ -40,9 +40,9 @@ double fd_integral(const int N, const double psi) {
     assert(N % 2 == 0);
 
     // we will transform from integrating over x to integrating over
-    // z = x / (c + x) with z = [0, 1]
+    // z = x / (alpha + x) with z = [0, 1]
 
-    double c{2.0};
+    double alpha{2.0};
 
     // N is the number of intervals
     double dz = 1.0 / static_cast<double>(N);
@@ -53,13 +53,13 @@ double fd_integral(const int N, const double psi) {
         double zc{(n + 1) * dz};
         double zr{(n + 2) * dz};
 
-        double fl = integrand(xv(zl, c), psi) / std::pow(1.0 - zl + SMALL, 2);
-        double fc = integrand(xv(zc, c), psi) / std::pow(1.0 - zc + SMALL, 2);
-        double fr = integrand(xv(zr, c), psi) / std::pow(1.0 - zr + SMALL, 2);
+        double fl = integrand(xv(zl, alpha), psi) / std::pow(1.0 - zl + SMALL, 2);
+        double fc = integrand(xv(zc, alpha), psi) / std::pow(1.0 - zc + SMALL, 2);
+        double fr = integrand(xv(zr, alpha), psi) / std::pow(1.0 - zr + SMALL, 2);
 
         I += (1.0/3.0) * dz * (fl + 4*fc + fr);
     }
-    I *= c;
+    I *= alpha;
     return I;
 }
 
