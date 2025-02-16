@@ -53,7 +53,7 @@ std::ostream& operator<< (std::ostream& os, const OrbitState& s) {
 }
 
 OrbitState operator*(double a, const OrbitState& state) {
-        return OrbitState(a * state.x, a * state.y, a * state.u, a * state.v);
+    return OrbitState(a * state.x, a * state.y, a * state.u, a * state.v);
 }
 
 
@@ -119,20 +119,21 @@ public:
         double dxdt = state.u;
         double dydt = state.v;
 
-        double dx = -state.x;
-        double dy = -state.y;
+        double dx = state.x;
+        double dy = state.y;
 
         double r = std::sqrt(dx * dx + dy * dy);
 
-        double dudt = GM * dx / std::pow(r, 3);
-        double dvdt = GM * dy / std::pow(r, 3);
+        double dudt = -GM * dx / std::pow(r, 3);
+        double dvdt = -GM * dy / std::pow(r, 3);
 
         return OrbitState(dxdt, dydt, dudt, dvdt);
 
     }
 
     void integrate(const double dt_in, const double tmax) {
-        // integrate the equations of motion using 4th order R-K method
+        // integrate the equations of motion using 4th order R-K
+        // method
 
         double t{0.0};
         double dt{dt_in};
@@ -156,13 +157,14 @@ public:
 
             // final solution
 
-            OrbitState state_new = state_old + (dt / 6.0) * (ydot1 + 2.0 * ydot2 + 2.0 * ydot3 + ydot4);
+            OrbitState state_new = state_old + (dt / 6.0) *
+                (ydot1 + 2.0 * ydot2 + 2.0 * ydot3 + ydot4);
 
             // successful step
             t += dt;
 
-            // store the new solution -- this will automatically be used as the
-            // "old" state in the next step
+            // store the new solution -- this will automatically be
+            // used as the "old" state in the next step
 
             time.push_back(t);
             history.push_back(state_new);
@@ -176,7 +178,7 @@ public:
 int main() {
 
     OrbitsRK4 o(1.0, 0.3);
-    o.integrate(0.05, 1.0);
+    o.integrate(0.05, 2.0);
 
     std::ofstream of("orbit_rk4.dat");
 
