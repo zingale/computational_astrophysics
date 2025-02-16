@@ -10,10 +10,34 @@ const double GM = 4.0 * M_PI * M_PI;
 
 struct OrbitState {
     // a container to hold the star positions
-    double x{};
-    double y{};
-    double u{};
-    double v{};
+    double x;
+    double y;
+    double u;
+    double v;
+
+    OrbitState(double x0, double y0, double u0, double v0)
+        : x{x0}, y{y0}, u{u0}, v{v0}
+    {}
+
+    OrbitState()
+        : x(0.0), y(0.0), u(0.0), v(0.0)
+    {}
+
+    OrbitState operator+(const OrbitState& other) const {
+        return OrbitState(x + other.x, y + other.y, u + other.u, v + other.v);
+    }
+
+    OrbitState operator-(const OrbitState& other) const {
+        return OrbitState(x - other.x, y - other.y, u - other.u, v - other.v);
+    }
+
+    OrbitState operator*(double a) const {
+        return OrbitState(a * x, a * y, a * u, a * v);
+    }
+
+    // a * vec -- needs to be a friend
+    friend OrbitState operator*(double a, const OrbitState& state);
+
 };
 
 std::ostream& operator<< (std::ostream& os, const OrbitState& s) {
@@ -27,6 +51,10 @@ std::ostream& operator<< (std::ostream& os, const OrbitState& s) {
     return os;
 }
 
+OrbitState operator*(double a, const OrbitState& state) {
+    return OrbitState(a * state.x, a * state.y, a * state.u, a * state.v);
+}
+
 class OrbitsRK4 {
     // model the evolution of a single planet around the Sun using gravitational
     // interaction of three stars
@@ -36,30 +64,36 @@ private:
     // a vector to store the history of our orbit
     std::vector<OrbitState> history;
     std::vector<double> time;
+    int n_reset{0};
 
 public:
 
     OrbitsRK4(const double a, const double e)
-    {
+        {
 
-        OrbitState initial_conditions;
+            OrbitState initial_conditions;
 
-        // put the planet at perihelion
+            // put the planet at perihelion
 
-        initial_conditions.x = 0.0;
-        initial_conditions.y = a * (1.0 - e);
-        initial_conditions.u = std::sqrt((GM / a) * (1.0 + e) / (1.0 - e));
-        initial_conditions.v = 0.0;
+            initial_conditions.x = 0.0;
+            initial_conditions.y = a * (1.0 - e);
+            initial_conditions.u = std::sqrt((GM / a) * (1.0 + e) / (1.0 - e));
+            initial_conditions.v = 0.0;
 
-        history.push_back(initial_conditions);
+            history.push_back(initial_conditions);
 
-        time.push_back(0.0);
+            time.push_back(0.0);
 
-    }
+        }
 
     int npts() {
         // return the number of integration points
         return time.size();
+    }
+
+    int get_n_reset() {
+        // return the number of times a step was reset
+        return n_reset;
     }
 
     double get_time(const int n) {
@@ -75,13 +109,13 @@ public:
     double energy(const int n) {
         // return the energy of the system for timestep n
 
-        auto& state = history[n];
+        const auto& state = history[n];
 
         // kinetic energy
 
         double KE = 0.5 * (std::pow(state.u, 2) + std::pow(state.v, 2));
         double PE = -GM / std::sqrt(std::pow(state.x, 2) + std::pow(state.y, 2));
-        
+
         return KE + PE;
     }
 
@@ -93,28 +127,16 @@ public:
         ydot.x = state.u;
         ydot.y = state.v;
 
-        double dx = -state.x;
-        double dy = -state.y;
+        double dx = state.x;
+        double dy = state.y;
 
         double r = std::sqrt(dx * dx + dy * dy);
 
-        ydot.u = GM * dx / std::pow(r, 3);
-        ydot.v = GM * dy / std::pow(r, 3);
+        ydot.u = -GM * dx / std::pow(r, 3);
+        ydot.v = -GM * dy / std::pow(r, 3);
 
         return ydot;
 
-    }
-
-    OrbitState update_state(const OrbitState& state_old, const OrbitState& ydot, const double dt) {
-
-        OrbitState s;
-
-        s.x = state_old.x + dt * ydot.x;
-        s.y = state_old.y + dt * ydot.y;
-        s.u = state_old.u + dt * ydot.u;
-        s.v = state_old.v + dt * ydot.v;
-
-        return s;
     }
 
     OrbitState single_step(const OrbitState& state_old, const double dt) {
@@ -124,23 +146,16 @@ public:
 
         OrbitState state_temp;
 
-        state_temp = update_state(state_old, ydot1, 0.5*dt);
+        state_temp = state_old + 0.5 * dt * ydot1;
         auto ydot2 = rhs(state_temp);
 
-        state_temp = update_state(state_old, ydot2, 0.5*dt);
+        state_temp = state_old + 0.5 * dt * ydot2;
         auto ydot3 = rhs(state_temp);
 
-        state_temp = update_state(state_old, ydot3, dt);
+        state_temp = state_old + dt * ydot3;
         auto ydot4 = rhs(state_temp);
 
-        // final solution
-
-        OrbitState s;
-
-        s.x = state_old.x + (dt / 6.0) * (ydot1.x + 2.0 * ydot2.x + 2.0 * ydot3.x + ydot4.x);
-        s.y = state_old.y + (dt / 6.0) * (ydot1.y + 2.0 * ydot2.y + 2.0 * ydot3.y + ydot4.y);
-        s.u = state_old.u + (dt / 6.0) * (ydot1.u + 2.0 * ydot2.u + 2.0 * ydot3.u + ydot4.u);
-        s.v = state_old.v + (dt / 6.0) * (ydot1.v + 2.0 * ydot2.v + 2.0 * ydot3.v + ydot4.v);
+        OrbitState s = state_old + (dt / 6.0) * (ydot1 + 2.0 * ydot2 + 2.0 * ydot3 + ydot4);
 
         return s;
     }
@@ -154,16 +169,10 @@ public:
         // if err < 0, then we don't do adaptive stepping, but rather
         // we always walk at the input dt
 
-        // safety parameters
-
-        const double S1{0.9};
-        const double S2{4.0};
-
         // start with the old timestep
         double dt_new{dt_in};
         double dt{dt_in};
 
-        int n_reset{0};
         double t{0.0};
 
         while (t < tmax) {
@@ -179,10 +188,8 @@ public:
             OrbitState state_new;
 
             while (rel_error > err) {
-                dt = dt_new;
-                if (t + dt > tmax) {
-                    dt = tmax - t;
-                }
+
+                dt = std::min(dt_new, tmax - t);
 
                 // take 2 half steps
 
@@ -209,7 +216,7 @@ public:
                 // adaptive timestep algorithm from Garcia (Eqs. 3.30 and 3.31)
 
                 double dt_est = dt * std::pow(std::abs(err/rel_error), 0.2);
-                dt_new = std::min(std::max(S1*dt_est, dt/S2), S2*dt);
+                dt_new = std::min(std::max(0.9 * dt_est, 0.25 * dt), 4.0 * dt);
 
                 n_try++;
             }
@@ -237,14 +244,15 @@ public:
 int main() {
 
     OrbitsRK4 o(1.0, 0.95);
-    o.integrate(0.05, 1.e-8, 1.0);
+    o.integrate(0.05, 1.e-5, 1.0);
 
     std::cout << "number of points = " << o.npts() << std::endl;
+    std::cout << "number of times a step was rejected = " << o.get_n_reset() << std::endl;
 
     std::ofstream of("orbit_adaptive.dat");
 
     for (int n = 0; n < o.npts(); ++n) {
-        auto& state = o.get_state(n);
+        const auto& state = o.get_state(n);
 
         of << std::setw(14) << o.get_time(n);
 
