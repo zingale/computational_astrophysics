@@ -1,0 +1,2 @@
+* For the Airy disk / Rayleigh criterion, find the zeros of the
+  J_1 Bessel function to get the 1.22 factor.
