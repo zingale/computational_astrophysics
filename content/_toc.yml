@@ -191,4 +191,5 @@ parts:
   - caption: Homework
     chapters:
     - file: homework/homework1
+    - file: homework/homework2
 
