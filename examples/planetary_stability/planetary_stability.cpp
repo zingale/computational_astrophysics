@@ -99,7 +99,7 @@ public:
         // now the planets.  We will give them random phases
 
         // seed the random number generator
-        std::mt19937 generator(1234);
+        std::mt19937 generator(123);
         std::uniform_real_distribution<double> uniform(0.0, 1.0);
 
         for (std::size_t n = 0; n < m_planets.size(); ++n) {
@@ -153,7 +153,7 @@ public:
 
                 double r_hill = 0.5 * (a1 + a2) *
                     std::cbrt((state[p1].mass + state[p2].mass) /
-                              3.0 * M_star);
+                              (3.0 * M_star));
 
                 h_sep = std::min(h_sep, std::abs(a2 - a1) / r_hill);
             }
