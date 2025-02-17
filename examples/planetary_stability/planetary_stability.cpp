@@ -1,14 +1,16 @@
 #include <algorithm>
-#include <iostream>
-#include <iomanip>
-#include <cmath>
 #include <array>
-#include <vector>
-#include <random>
 #include <cassert>
+#include <cmath>
+#include <cstddef>
 #include <deque>
-#include <numeric>
 #include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <random>
+#include <vector>
 
 constexpr double G_const{4.0 * M_PI * M_PI};
 
@@ -65,19 +67,19 @@ public:
 
     const double SMALL{1.e-30};
 
-    SolarSystem(double _M_star,
+    SolarSystem(double M_in,
                 const std::vector<double>& m_planets,
                 const std::vector<double>& a_planets,
                 double escape_radius=10000) :
-        M_star(_M_star),
+        M_star(M_in),
         escape_R(escape_radius)
     {
 
         assert (m_planets.size() == a_planets.size());
 
         // integration constants
-        double w0 = -std::cbrt(2.0) / (2.0 - cbrt(2.0));
-        double w1 = 1.0 / (2.0 - std::cbrt(2.0));
+        const double w0 = -std::cbrt(2.0) / (2.0 - cbrt(2.0));
+        const double w1 = 1.0 / (2.0 - std::cbrt(2.0));
 
         c[0] = w1 / 2.0;
         c[1] = 0.5 * (w0 + w1);
@@ -98,7 +100,7 @@ public:
         std::vector<OrbitState> system;
 
         // store the star
-        system.emplace_back(OrbitState(M_star, 0.0, 0.0, 0.0, 0.0));
+        system.emplace_back(M_star, 0.0, 0.0, 0.0, 0.0);
 
         // now the planets.  We will give them random phases
 
@@ -109,11 +111,11 @@ public:
         for (std::size_t n = 0; n < m_planets.size(); ++n) {
             double phi = uniform(generator) * 2.0 * M_PI;
             double v_circ = std::sqrt(G_const * M_star / a_planets[n]);
-            system.emplace_back(OrbitState(m_planets[n],
-                                           a_planets[n] * std::cos(phi),
-                                           a_planets[n] * std::sin(phi),
-                                           -v_circ * std::sin(phi),
-                                           v_circ * std::cos(phi)));
+            system.emplace_back(m_planets[n],
+                                a_planets[n] * std::cos(phi),
+                                a_planets[n] * std::sin(phi),
+                                -v_circ * std::sin(phi),
+                                v_circ * std::cos(phi));
 
         }
 
@@ -194,7 +196,7 @@ public:
 
             }
 
-            ydots.emplace_back(OrbitState(states[iobj].mass, dxdt, dydt, dudt, dvdt));
+            ydots.emplace_back(states[iobj].mass, dxdt, dydt, dudt, dvdt);
         }
 
         return ydots;
