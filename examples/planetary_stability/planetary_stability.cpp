@@ -29,6 +29,7 @@ struct OrbitState {
     {}
 };
 
+inline
 std::ostream& operator<< (std::ostream& os, const OrbitState& s) {
     os.precision(6);
 
@@ -60,6 +61,8 @@ public:
     std::deque<double> times;
 
     int n_objects{};
+
+    const double SMALL{1.e-30};
 
     SolarSystem(double _M_star,
                 const std::vector<double>& m_planets,
@@ -138,7 +141,8 @@ public:
         times.push_back(0.0);
     }
 
-    double compute_hill_separation(const std::vector<OrbitState>& state) {
+    double
+    compute_hill_separation(const std::vector<OrbitState>& state) {
         double h_sep{std::numeric_limits<double>::max()};
 
         for (int p1 = 1; p1 < n_objects; ++p1) {
@@ -160,6 +164,73 @@ public:
         }
 
         return h_sep;
+    }
+
+    std::vector<OrbitState>
+    rhs(const std::vector<OrbitState>& states) {
+
+        std::vector<OrbitState> ydots;
+
+        for (int iobj = 0; iobj < n_objects; ++iobj) {
+
+            double dxdt = states[iobj].u;
+            double dydt = states[iobj].v;
+
+            double dudt{};
+            double dvdt{};
+
+            for (int jobj = 0; jobj < n_objects; ++jobj) {
+                if (iobj == jobj) {
+                    continue;
+                }
+                double dx = states[jobj].x - states[iobj].x;
+                double dy = states[jobj].y - states[iobj].y;
+
+                double r = std::sqrt(dx * dx + dy * dy + SMALL);
+
+                dudt += G_const * states[jobj].mass * dx / std::pow(r, 3);
+                dvdt += G_const * states[jobj].mass * dy / std::pow(r, 3);
+
+            }
+
+            ydots.emplace_back(OrbitState(states[iobj].mass, dxdt, dydt, dudt, dvdt));
+        }
+
+        return ydots;
+    }
+
+    std::vector<OrbitState>
+    single_step_yoshida(const std::vector<OrbitState>& states, const double dt) {
+
+        // we can just work on the new state directly, so start by simply
+        // copying the old state to the new state
+        std::vector<OrbitState> states_new;
+        for (const auto& s : states) {
+            states_new.emplace_back(OrbitState(s.mass, s.x, s.y, s.u, s.v));
+        }
+        
+        // drift with the current velocity
+        for (auto& s : states_new) {
+            s.x += c[0] * s.u * dt;
+            s.y += c[0] * s.v * dt;
+        }
+
+        for (int i = 0; i < 3; ++i) {
+            // evaluate the force
+            auto ydots = rhs(states_new);
+
+            // kick followed by drift
+            for (int n = 0; n < n_objects; ++n) {
+                states_new[n].u += d[i] * ydots[n].u * dt;
+                states_new[n].v += d[i] * ydots[n].v * dt;
+
+                states_new[n].x += c[i+1] * states_new[n].u * dt;
+                states_new[n].y += c[i+1] * states_new[n].v * dt;
+            }
+
+        }
+
+        return states_new;
     }
 
 };
