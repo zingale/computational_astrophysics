@@ -8,6 +8,7 @@
 #include <cassert>
 #include <deque>
 #include <numeric>
+#include <fstream>
 
 constexpr double G_const{4.0 * M_PI * M_PI};
 
@@ -208,7 +209,7 @@ public:
         for (const auto& s : states) {
             states_new.emplace_back(OrbitState(s.mass, s.x, s.y, s.u, s.v));
         }
-        
+
         // drift with the current velocity
         for (auto& s : states_new) {
             s.x += c[0] * s.u * dt;
@@ -219,7 +220,6 @@ public:
             // evaluate the force
             auto ydots = rhs(states_new);
 
-            // kick followed by drift
             for (int n = 0; n < n_objects; ++n) {
                 states_new[n].u += d[i] * ydots[n].u * dt;
                 states_new[n].v += d[i] * ydots[n].v * dt;
@@ -233,6 +233,37 @@ public:
         return states_new;
     }
 
+    void integrate(const double dt_in, const double tmax) {
+
+        auto t = times.back();
+        bool escaped{false};
+
+        double dt{dt_in};
+
+        while (t < tmax && ! escaped) {
+            const auto& states_old = history.back();
+
+            dt = std::min(dt, tmax-t);
+
+            auto states_new = single_step_yoshida(states_old, dt);
+
+            t += dt;
+
+            times.push_back(t);
+            history.push_back(states_new);
+
+            // check if any planet has escaped
+            for (int n = 1; n < n_objects; ++n) {
+                double r = std::sqrt(std::pow(states_new[n].x, 2) +
+                                     std::pow(states_new[n].x, 2));
+                if (r > escape_R) {
+                    escaped = true;
+                    break;
+                }
+            }
+        }
+
+    }
 };
 
 
@@ -243,12 +274,29 @@ int main() {
 
     SolarSystem s(1.5, m_planets, a_planets, 1000);
 
-    for (const auto& h : s.history) {
-        for (const auto& o : h) {
+    for (const auto& states : s.history) {
+        for (const auto& o : states) {
             std::cout << o << std::endl;
         }
     }
 
     std::cout << "initial hill separation = " << s.compute_hill_separation(s.history[0]) << std::endl;
+
+    s.integrate(0.05, 50000);
+
+    std::ofstream of("planetary_stability.dat");
+
+    for (std::size_t n = 0; n < s.history.size(); ++n) {
+        const auto& states = s.history[n];
+
+        of << std::setw(14) << s.times[n];
+        for (const auto& object : states) {
+            of << object;
+        }
+        of.precision(10);
+
+        of << std::endl;
+
+    }
 
 }
