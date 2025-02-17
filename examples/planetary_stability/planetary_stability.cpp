@@ -206,9 +206,7 @@ public:
         // we can just work on the new state directly, so start by simply
         // copying the old state to the new state
         std::vector<OrbitState> states_new;
-        for (const auto& s : states) {
-            states_new.emplace_back(OrbitState(s.mass, s.x, s.y, s.u, s.v));
-        }
+        std::copy(states.cbegin(), states.cend(), std::back_inserter(states_new));
 
         // drift with the current velocity
         for (auto& s : states_new) {
@@ -280,7 +278,8 @@ int main() {
         }
     }
 
-    std::cout << "initial hill separation = " << s.compute_hill_separation(s.history[0]) << std::endl;
+    std::cout << "initial hill separation = "
+              << s.compute_hill_separation(s.history[0]) << std::endl;
 
     s.integrate(0.05, 50000);
 
