@@ -64,23 +64,21 @@ private:
 
 public:
 
-    OrbitsRK4(const double a, const double e)
-        {
+    OrbitsRK4(const double a, const double e)  {
 
-            OrbitState initial_conditions;
+        OrbitState initial_conditions;
 
-            // put the planet at perihelion
+        // put the planet at perihelion
 
-            initial_conditions.x = 0.0;
-            initial_conditions.y = a * (1.0 - e);
-            initial_conditions.u = std::sqrt((GM / a) * (1.0 + e) / (1.0 - e));
-            initial_conditions.v = 0.0;
+        initial_conditions.x = 0.0;
+        initial_conditions.y = a * (1.0 - e);
+        initial_conditions.u = std::sqrt((GM / a) * (1.0 + e) / (1.0 - e));
+        initial_conditions.v = 0.0;
 
-            history.push_back(initial_conditions);
+        history.push_back(initial_conditions);
 
-            time.push_back(0.0);
-
-        }
+        time.push_back(0.0);
+    }
 
     int npts() {
         // return the number of integration points
@@ -111,7 +109,6 @@ public:
 
         double KE = 0.5 * (state.u * state.u + state.v * state.v);
         double PE = -GM / std::sqrt(state.x * state.x + state.y * state.y);
-
         return KE + PE;
     }
 
