@@ -11,8 +11,17 @@ is pushed.
 
 ```{tip}
 If you find any problems or have suggestions for improving the notes,
-feel free to create an issue or pull request at the Github repo.
+feel free to create an [issue](https://github.com/zingale/computational_astrophysics/issues)  or [pull request](https://github.com/zingale/computational_astrophysics/pulls) at the Github repo.
 ```
+
+````{note}
+These notes make use of [MyST markdown](https://mystmd.org/) and [sphinx{design}](https://sphinx-design.readthedocs.io/en/furo-theme/index.html) for some features.  If you download and run the notebooks
+on your own, for the best experience you should install these packages, which can be done as:
+
+```
+pip install jupyterlab_myst sphinx_design
+```
+````
 
 ## Interactive Usage
 
