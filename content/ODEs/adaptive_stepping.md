@@ -4,7 +4,7 @@ Adaptive Timesteps
 So far we've been integrating with a fixed timestep.  This gives us no real control over the error.  What we would like to do is take a small timestep when the solution is changing fast, and a larger timestep when the solution changes more slowly.
 
 To do this, we need to be able to assess the error in our solution as we integrate.  There are lots of different
-ways to do this in the literature (see, e.g., the [Wikipedia article on adaptive stepping](https://en.wikipedia.org/wiki/Adaptive_step_size):
+ways to do this in the literature (see, e.g., the [Wikipedia article on adaptive stepping](https://en.wikipedia.org/wiki/Adaptive_step_size)):
 
 * Take two half steps and compare to one full step
 * Compare higher and lower order methods (sometimes the lower order method is _embedded_ in the higher-order  method,
