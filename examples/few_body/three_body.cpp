@@ -15,6 +15,15 @@ struct State {
     double y{};
     double u{};
     double v{};
+
+    State(double x_, double y_, double u_, double v_) :
+        x(x_), y(y_), u(u_), v(v_)
+    {}
+
+    State() :
+        x(0.0), y(0.0), u(0.0), v(0.0)
+    {}
+
 };
 
 std::ostream& operator<< (std::ostream& os, const State& s) {
@@ -51,22 +60,11 @@ public:
         // we will organize the data as stars[n][istar].{t,x,y,u,v}, where i
         // istar the index of the star (0, 1, 2) and n is the timestep index
 
-        std::vector<State> current(N);
+        std::vector<State> current;
 
-        current[0].x = pos0[0];
-        current[0].y = pos0[1];
-        current[0].u = 0.0;
-        current[0].v = 0.0;
-
-        current[1].x = pos1[0];
-        current[1].y = pos1[1];
-        current[1].u = 0.0;
-        current[1].v = 0.0;
-
-        current[2].x = pos2[0];
-        current[2].y = pos2[1];
-        current[2].u = 0.0;
-        current[2].v = 0.0;
+        current.emplace_back(pos0[0], pos0[1], 0.0, 0.0);
+        current.emplace_back(pos1[0], pos1[1], 0.0, 0.0);
+        current.emplace_back(pos2[0], pos2[1], 0.0, 0.0);
 
         stars.push_back(current);
 
@@ -94,7 +92,7 @@ public:
 
         auto Mtot = std::accumulate(masses.cbegin(), masses.cend(), 0.0);
 
-        auto& state = stars[n];
+        const auto& state = stars[n];
 
         double xcm{};
         double ycm{};
@@ -112,7 +110,7 @@ public:
     double energy(const int n) {
         // return the energy of the system for timestep n
 
-        auto& state = stars[n];
+        const auto& state = stars[n];
 
         // kinetic energy
 
@@ -222,13 +220,17 @@ public:
 
         std::vector<State> state_new;
 
-        for (int istar = 0; istar < N; ++istar) {
+        for (int is = 0; is < N; ++is) {
             State s;
 
-            s.x = state_old[istar].x + (dt / 6.0) * (ydot1[istar].x + 2.0 * ydot2[istar].x + 2.0 * ydot3[istar].x + ydot4[istar].x);
-            s.y = state_old[istar].y + (dt / 6.0) * (ydot1[istar].y + 2.0 * ydot2[istar].y + 2.0 * ydot3[istar].y + ydot4[istar].y);
-            s.u = state_old[istar].u + (dt / 6.0) * (ydot1[istar].u + 2.0 * ydot2[istar].u + 2.0 * ydot3[istar].u + ydot4[istar].u);
-            s.v = state_old[istar].v + (dt / 6.0) * (ydot1[istar].v + 2.0 * ydot2[istar].v + 2.0 * ydot3[istar].v + ydot4[istar].v);
+            s.x = state_old[is].x + (dt / 6.0) *
+                (ydot1[is].x + 2.0 * ydot2[is].x + 2.0 * ydot3[is].x + ydot4[is].x);
+            s.y = state_old[is].y + (dt / 6.0) *
+                (ydot1[is].y + 2.0 * ydot2[is].y + 2.0 * ydot3[is].y + ydot4[is].y);
+            s.u = state_old[is].u + (dt / 6.0) *
+                (ydot1[is].u + 2.0 * ydot2[is].u + 2.0 * ydot3[is].u + ydot4[is].u);
+            s.v = state_old[is].v + (dt / 6.0) *
+                (ydot1[is].v + 2.0 * ydot2[is].v + 2.0 * ydot3[is].v + ydot4[is].v);
 
             state_new.push_back(s);
         }
@@ -245,11 +247,6 @@ public:
         // if err < 0, then we don't do adaptive stepping, but rather
         // we always walk at the input dt
 
-        // safety parameters
-
-        const double S1{0.9};
-        const double S2{4.0};
-
         // start with the old timestep
         double dt_new{dt_in};
         double dt{dt_in};
@@ -259,7 +256,7 @@ public:
 
         while (t < tmax) {
 
-            auto &state_old = stars.back();
+            const auto &state_old = stars.back();
 
             // adaptive stepping iteration loop -- keep trying to take
             // a step until we achieve our desired error
@@ -270,10 +267,7 @@ public:
             std::vector<State> state_new;
 
             while (rel_error > err) {
-                dt = dt_new;
-                if (t + dt > tmax) {
-                    dt = tmax - t;
-                }
+                dt = std::min(dt_new, tmax - t);
 
                 // take 2 half steps
 
@@ -292,16 +286,20 @@ public:
                 double pos_err = std::numeric_limits<double>::lowest();
                 double vel_err = std::numeric_limits<double>::lowest();
 
-                for (int istar = 0; istar < N; ++istar) {
+                for (int is = 0; is < N; ++is) {
                     pos_err = std::max(pos_err,
-                                       std::abs((state_new[istar].x - state_single[istar].x) / state_single[istar].x));
+                                       std::abs((state_new[is].x - state_single[is].x) /
+                                                state_single[is].x));
                     pos_err = std::max(pos_err,
-                                       std::abs((state_new[istar].y - state_single[istar].y) / state_single[istar].y));
+                                       std::abs((state_new[is].y - state_single[is].y) /
+                                                state_single[is].y));
 
                     vel_err = std::max(vel_err,
-                                       std::abs((state_new[istar].u - state_single[istar].u) / state_single[istar].u));
+                                       std::abs((state_new[is].u - state_single[is].u) /
+                                                state_single[is].u));
                     vel_err = std::max(vel_err,
-                                       std::abs((state_new[istar].v - state_single[istar].v) / state_single[istar].v));
+                                       std::abs((state_new[is].v - state_single[is].v) /
+                                                state_single[is].v));
                 }
 
                 rel_error = std::max(pos_err, vel_err);
@@ -309,7 +307,7 @@ public:
                 // adaptive timestep algorithm from Garcia (Eqs. 3.30 and 3.31)
 
                 double dt_est = dt * std::pow(std::abs(err/rel_error), 0.2);
-                dt_new = std::min(std::max(S1*dt_est, dt/S2), S2*dt);
+                dt_new = std::min(std::max(0.9 * dt_est, 0.25 * dt), 4.0 * dt);
 
                 n_try++;
             }
