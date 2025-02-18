@@ -138,6 +138,8 @@ public:
 
         while (t < tmax) {
 
+            dt = std::min(dt, tmax - t);
+
             const auto &state_old = history.back();
 
             auto ydot1 = rhs(state_old);
