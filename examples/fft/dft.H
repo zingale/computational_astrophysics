@@ -4,7 +4,7 @@
 #include <complex>
 #include <vector>
 
-std::vector<std::complex<double>> dft(std::vector<double> f) {
+std::vector<std::complex<double>> dft(const std::vector<double>& f) {
     // compute the discrete Fourier transform of the real-valued function f
 
     using namespace std::complex_literals;

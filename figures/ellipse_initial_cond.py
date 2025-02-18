@@ -3,14 +3,14 @@ import matplotlib.pyplot as plt
 
 # show the initial conditions for integrating an orbit
 
-def ellipse():
+
+def ellipse(e):
 
     # theta ranges from 0 to 2pi
     npts = 360
     theta = np.arange(npts)*2.0*np.pi/(npts-1)
 
-    # semi-major axis, eccentricity, and semi-minor axis
-    e = 0.4
+    # semi-major axis and semi-minor axis
     a = 1.0
     b = a * np.sqrt(1 - e * e)
 
@@ -32,8 +32,8 @@ def ellipse():
     ax.plot(x, y, color="C0")
 
     # primary foci
-    ax.scatter([0], [0], color="k", marker=(20,1), s=250, zorder=-100)
-    ax.scatter([0], [0], color="y", marker=(20,1), s=200)
+    ax.scatter([0], [0], color="k", marker=(20, 1), s=250, zorder=-100)
+    ax.scatter([0], [0], color="y", marker=(20, 1), s=200)
 
     xp = 0
     yp = a * (1 - e)
@@ -52,13 +52,15 @@ def ellipse():
     ax.plot([0, -eps], [a*(1-e), a*(1-e)-eps], color='C1')
     ax.text(-0.1*b, 0.5*a*(1-e), "r", color='C1')
 
-
     # draw velocity at perihelion
     vel = 0.5*a
     ax.plot([0, -vel], [a*(1-e), a*(1-e)], color='C2')
     ax.plot([-vel, -vel+eps], [a*(1-e), a*(1-e)-eps], color='C2')
     ax.plot([-vel, -vel+eps], [a*(1-e), a*(1-e)+eps], color='C2')
     ax.text(-0.5*vel, a*(1-e)+0.05*b, "v", color='C2')
+
+    # draw the planet at perihelion
+    ax.scatter([xp], [yp], marker="o", color="C0")
 
     ax.axis([-1.25 * a, 1.25*a, -1.25 * a * (1 + e), 1.25 * a * (1 - e)])
 
@@ -69,5 +71,6 @@ def ellipse():
     fig.savefig(outfile, dpi=200, bbox_inches="tight")
 
 
-if __name__== "__main__":
-    ellipse()
+if __name__ == "__main__":
+    ellipse(0.0)
+    ellipse(0.4)
