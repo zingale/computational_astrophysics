@@ -10,18 +10,16 @@ const double GM = 4.0 * M_PI * M_PI;
 
 struct OrbitState {
     // a container to hold the star positions
-    double x;
-    double y;
-    double u;
-    double v;
+    double x{};
+    double y{};
+    double u{};
+    double v{};
 
     OrbitState(double x0, double y0, double u0, double v0)
         : x{x0}, y{y0}, u{u0}, v{v0}
     {}
 
-    OrbitState()
-        : x(0.0), y(0.0), u(0.0), v(0.0)
-    {}
+    OrbitState() {}
 
     OrbitState operator+(const OrbitState& other) const {
         return OrbitState(x + other.x, y + other.y, u + other.u, v + other.v);
@@ -31,16 +29,14 @@ struct OrbitState {
         return OrbitState(x - other.x, y - other.y, u - other.u, v - other.v);
     }
 
+    // this handles OrbitState * a
     OrbitState operator*(double a) const {
         return OrbitState(a * x, a * y, a * u, a * v);
     }
 
-    // a * vec -- needs to be a friend
-    friend OrbitState operator*(double a, const OrbitState& state);
-
-
 };
 
+inline
 std::ostream& operator<< (std::ostream& os, const OrbitState& s) {
     os.precision(6);
 
@@ -52,14 +48,16 @@ std::ostream& operator<< (std::ostream& os, const OrbitState& s) {
     return os;
 }
 
+// this handles a * OrbitState
+inline
 OrbitState operator*(double a, const OrbitState& state) {
     return OrbitState(a * state.x, a * state.y, a * state.u, a * state.v);
 }
 
 
 class OrbitsRK4 {
-    // model the evolution of a single planet around the Sun using gravitational
-    // interaction of three stars
+    // model the evolution of a single planet around the Sun using
+    // gravitational interaction of three stars
 
 private:
 
