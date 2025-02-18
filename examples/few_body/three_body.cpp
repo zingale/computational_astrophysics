@@ -20,9 +20,7 @@ struct State {
         x(x_), y(y_), u(u_), v(v_)
     {}
 
-    State() :
-        x(0.0), y(0.0), u(0.0), v(0.0)
-    {}
+    State() {}
 
 };
 
@@ -46,6 +44,7 @@ private:
     std::vector<double> masses;
     std::vector<double> time;
     std::vector<std::vector<State>> stars;
+    int n_reset{0};
 
 public:
 
@@ -251,7 +250,6 @@ public:
         double dt_new{dt_in};
         double dt{dt_in};
 
-        int n_reset{0};
         double t{0.0};
 
         while (t < tmax) {
@@ -351,13 +349,13 @@ int main() {
     std::ofstream of("three_body.dat");
 
     for (int n = 0; n < tb.npts(); ++n) {
-        auto& state = tb.get_state(n);
+        const auto& state = tb.get_state(n);
 
         of << std::setw(14) << tb.get_time(n);
 
         // first the positions and velocities
 
-        for (auto& star : state) {
+        for (const auto& star : state) {
             of << star;
         }
 
