@@ -22,7 +22,18 @@ by a system of ODEs.  Here are some suggestions to explore.
    table I.  This topic is discussed extensively in the text by Paul
    Hellings.
 
-2. _Star formation in the Galaxy._
+2. _Halo orbits about the Sun-Earth L2 point._
+
+   [JWST](https://en.wikipedia.org/wiki/James_Webb_Space_Telescope) orbits
+   the Sun-Earth system's L2 point in a [halo orbit](https://en.wikipedia.org/wiki/Halo_orbit).
+   
+   Create a model of this by solving the restricted three-body
+   equations in the corotating frame for the Sun-Earth system.  The
+   paper [Three-Dimensional Periodic "Halo"
+   Orbits](https://articles.adsabs.harvard.edu/pdf/1984CeMec..32...53H)
+   by Kathleen Howell is a good starting point.
+
+3. _Star formation in the Galaxy._
 
    The paper by [Bodifee
    1986](https://articles.adsabs.harvard.edu/pdf/1986Ap%26SS.122...41B)
@@ -33,7 +44,7 @@ by a system of ODEs.  Here are some suggestions to explore.
    This topic is also discussed extensively in the text by Paul Hellings.
 
 
-3. General relativistic orbits:
+4. General relativistic orbits:
 
    * _Geodesics around a Schwarzschild black hole_
 
