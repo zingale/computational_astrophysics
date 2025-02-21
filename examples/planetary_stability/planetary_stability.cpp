@@ -16,20 +16,19 @@ constexpr double G_const{4.0 * M_PI * M_PI};
 
 struct OrbitState {
     // a container to hold the star positions
-    double mass;
-    double x;
-    double y;
-    double u;
-    double v;
+    double mass{};
+    double x{};
+    double y{};
+    double u{};
+    double v{};
 
     OrbitState(double M,
                double x0, double y0, double u0, double v0)
         : mass(M), x(x0), y(y0), u(u0), v(v0)
     {}
 
-    OrbitState()
-        : mass(0.0), x(0.0), y(0.0), u(0.0), v(0.0)
-    {}
+    OrbitState() {}
+
 };
 
 inline
