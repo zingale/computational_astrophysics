@@ -1,2 +1,7 @@
 * For the Airy disk / Rayleigh criterion, find the zeros of the
   J_1 Bessel function to get the 1.22 factor.
+
+* Integrate a multiplanet solar system and give the radial velocity
+  vs. time and then use FFT to see if we can get back the number of
+  planets and their periods
+
