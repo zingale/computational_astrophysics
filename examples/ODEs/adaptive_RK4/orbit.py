@@ -20,7 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # global parameters
-GM = 4.0 * np.pi**2  #(assuming M = 1 solar mass)
+GM = 4.0 * np.pi**2  # (assuming M = 1 solar mass)
 
 
 class OrbitState:
@@ -65,7 +65,7 @@ class Orbit:
         x0 = 0.0          # start at x = 0 by definition
         y0 = a * (1.0 - e)  # start at perihelion
 
-        u0 = -np.sqrt((GM/a)* (1.0 + e) / (1.0 - e))
+        u0 = -np.sqrt((GM/a) * (1.0 + e) / (1.0 - e))
         v0 = 0.0
 
         self.state0 = OrbitState(x0, y0, u0, v0)
@@ -104,10 +104,7 @@ class Orbit:
 
             state_old = history[-1]
 
-            # make sure that the next step doesn't take us past where
-            # we want to be, because of roundoff
-            if t + dt > tmax:
-                dt = tmax-t
+            dt = min(dt, tmax-t)
 
             # get the RHS
             ydot = self.rhs(state_old)
@@ -136,10 +133,7 @@ class Orbit:
 
             state_old = history[-1]
 
-            # make sure that the next step doesn't take us past where
-            # we want to be, because of roundoff
-            if t + dt > tmax:
-                dt = tmax-t
+            dt = min(dt, tmax-t)
 
             # get the RHS
             ydot = self.rhs(state_old)
@@ -175,16 +169,13 @@ class Orbit:
 
             state_old = history[-1]
 
-            # make sure that the next step doesn't take us past where
-            # we want to be, because of roundoff
-            if t + dt > tmax:
-                dt = tmax-t
+            dt = min(dt, tmax-t)
 
             # get the RHS
             ydot = self.rhs(state_old)
 
             # advance to dt/2 to get intermediate position
-            state_tmp = state_old + 0.5* dt * ydot
+            state_tmp = state_old + 0.5 * dt * ydot
 
             # get the RHS with the intermediate state
             ydot = self.rhs(state_tmp)
@@ -213,10 +204,7 @@ class Orbit:
 
             state_old = history[-1]
 
-            # make sure that the next step doesn't take us past where
-            # we want to be, because of roundoff
-            if t+dt > tmax:
-                dt = tmax-t
+            dt = min(dt, tmax-t)
 
             ydot_old = self.rhs(state_old)
 
@@ -260,10 +248,7 @@ class Orbit:
 
             state_old = history[-1]
 
-            # make sure that the next step doesn't take us past where
-            # we want to be, because of roundoff
-            if t+dt > tmax:
-                dt = tmax-t
+            dt = min(dt, tmax-t)
 
             # get the RHS at several points
             ydot1 = self.rhs(state_old)
@@ -301,7 +286,7 @@ def plot(history, ax=None, label=None):
         ax = fig.add_subplot(111)
 
         # draw the Sun
-        ax.scatter([0], [0], marker=(20,1), color="y", s=250)
+        ax.scatter([0], [0], marker=(20, 1), color="y", s=250)
 
     # draw the orbit
     xs = [q.x for q in history]
@@ -316,14 +301,6 @@ def plot(history, ax=None, label=None):
 
     return fig
 
-def error_radius(history):
-
-    # define the error to be distance from (0, 0) at end compared to start
-    R_orig = np.sqrt(history[0].x**2 + history[0].y**2)
-    R_new = np.sqrt(history[-1].x**2 + history[-1].y**2)
-    e = np.abs(R_new - R_orig)
-
-    return e
 
 def error_radius(history):
 
@@ -333,6 +310,7 @@ def error_radius(history):
     e = np.abs(R_new - R_orig)
 
     return e
+
 
 def error_position(history):
     """return the difference in the distance from the Sun"""
@@ -340,9 +318,9 @@ def error_position(history):
     dy = history[0].y - history[-1].y
     return np.sqrt(dx**2 + dy**2)
 
+
 def energy(history):
     """return a vector of energy for all times"""
     E = [0.5 * (state.u**2 + state.v**2) - GM / np.sqrt(state.x**2 + state.y**2)
          for state in history]
     return E
-

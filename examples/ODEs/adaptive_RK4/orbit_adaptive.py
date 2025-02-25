@@ -23,6 +23,7 @@ import matplotlib.pyplot as plt
 # global parameters
 GM = 4.0 * np.pi**2  # assuming M = 1 solar mass
 
+
 class OrbitState:
     # a container to hold the star positions
     def __init__(self, x, y, u, v):
@@ -64,7 +65,7 @@ class OrbitsRK4:
         y0 = a*(1.0 - e)  # start at perihelion
 
         # perihelion velocity (see C&O Eq. 2.33 for ex)
-        u0 = -np.sqrt( (GM/a)* (1.0 + e) / (1.0 - e) )
+        u0 = -np.sqrt((GM/a) * (1.0 + e) / (1.0 - e))
         v0 = 0.0
 
         self.history = [OrbitState(x0, y0, u0, v0)]
@@ -94,7 +95,7 @@ class OrbitsRK4:
         """ distance between the starting and ending point """
 
         return np.sqrt((self.history[0].x - self.history[-1].x)**2 +
-                       (self.history[0].y - self.history[-1].y)**2 )
+                       (self.history[0].y - self.history[-1].y)**2)
 
     def energy(self, n):
         """ return the energy (per unit mass) at time n """
@@ -170,9 +171,7 @@ class OrbitsRK4:
 
                 n_try = 0
                 while rel_error > err:
-                    dt = dt_new
-                    if t+dt > tmax:
-                        dt = tmax-t
+                    dt = min(dt_new, tmax-t)
 
                     # take 2 half steps
                     state_tmp = self.single_step(state_old, 0.5*dt)
@@ -225,7 +224,7 @@ class OrbitsRK4:
         y = [q.y for q in self.history]
 
         # draw the Sun
-        ax.scatter([0], [0], marker=(20,1), color="y", s=250)
+        ax.scatter([0], [0], marker=(20, 1), color="y", s=250)
 
         if points:
             ax.scatter(x, y)
@@ -234,10 +233,11 @@ class OrbitsRK4:
         ax.set_aspect("equal")
         return fig
 
+
 if __name__ == "__main__":
 
     o = OrbitsRK4(1.0, 0.95)
-    o.integrate(0.05, 1.e-8, 10.0);
+    o.integrate(0.05, 1.e-8, 10.0)
 
     print("number of points = ", o.npts())
 
@@ -246,7 +246,6 @@ if __name__ == "__main__":
     fig = o.plot()
     fig.tight_layout()
     fig.savefig("adaptive_rk4_orbit.png", bbox_inches="tight")
-
 
     E = []
     for n in range(o.npts()):
