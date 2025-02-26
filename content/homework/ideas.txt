@@ -1,7 +1,12 @@
 * For the Airy disk / Rayleigh criterion, find the zeros of the
   J_1 Bessel function to get the 1.22 factor.
 
+* Integrate a resonance in a planetary system and look at the
+  change in eccentricity
+
 * Integrate a multiplanet solar system and give the radial velocity
   vs. time and then use FFT to see if we can get back the number of
   planets and their periods
 
+* Do simple ideal gas + radiation EOS and come in with p, s and
+  find the rho, T that satisfy it.
