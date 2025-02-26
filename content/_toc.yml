@@ -194,4 +194,5 @@ parts:
       sections:
       - file: homework/homework1-solutions
     - file: homework/homework2
+    - file: homework/homework3
 
