@@ -150,10 +150,10 @@ public:
         for (int p1 = 1; p1 < n_objects; ++p1) {
             double a1 = std::sqrt(std::pow(state[p1].x - state[0].x, 2) +
                                   std::pow(state[p1].y - state[0].y, 2));
-            for (int p2 = 1; p2 < n_objects; ++p2) {
-                if (p1 == p2) {
-                    continue;
-                }
+
+            // only consider unique pairs of p1 and p2
+            for (int p2 = 1; p2 < p1; ++p2) {
+
                 double a2 = std::sqrt(std::pow(state[p2].x - state[0].x, 2) +
                                       std::pow(state[p2].y - state[0].y, 2));
 
@@ -174,28 +174,30 @@ public:
         std::vector<OrbitState> ydots;
 
         for (int iobj = 0; iobj < n_objects; ++iobj) {
+            ydots.emplace_back(states[iobj].mass,
+                               states[iobj].u, states[iobj].v, 0.0, 0.0);
+        }
 
-            double dxdt = states[iobj].u;
-            double dydt = states[iobj].v;
+        // now loop over unique pairs and compute the force between
+        // the two objects and add to both their accelerations
 
-            double dudt{};
-            double dvdt{};
+        for (int iobj = 0; iobj < n_objects; ++iobj) {
+            for (int jobj = 0; jobj < iobj; ++jobj) {
 
-            for (int jobj = 0; jobj < n_objects; ++jobj) {
-                if (iobj == jobj) {
-                    continue;
-                }
                 double dx = states[jobj].x - states[iobj].x;
                 double dy = states[jobj].y - states[iobj].y;
 
                 double r = std::sqrt(dx * dx + dy * dy + SMALL);
 
-                dudt += G_const * states[jobj].mass * dx / std::pow(r, 3);
-                dvdt += G_const * states[jobj].mass * dy / std::pow(r, 3);
+                double ax = G_const * dx / (r * r * r);
+                double ay = G_const * dy / (r * r * r);
 
+                ydots[iobj].u += states[jobj].mass * ax;
+                ydots[iobj].v += states[jobj].mass * ay;
+
+                ydots[jobj].u += -states[iobj].mass * ax;
+                ydots[jobj].v += -states[iobj].mass * ay;
             }
-
-            ydots.emplace_back(states[iobj].mass, dxdt, dydt, dudt, dvdt);
         }
 
         return ydots;
@@ -293,10 +295,7 @@ int main() {
         for (const auto& object : states) {
             of << object;
         }
-        of.precision(10);
-
         of << std::endl;
-
     }
 
 }
