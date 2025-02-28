@@ -13,8 +13,8 @@ ax.scatter([1.25], [1.25], marker="x")
 eps = 0.075
 
 ax.text(1+eps, 1-eps, r"$\lambda((\rho Y_e)_i, T_j)$")
-ax.text(2+eps, 1-eps, r"$\lambda((\rho Y_e)_{i+1}, T_j)$")
-ax.text(1+eps, 2+eps, r"$\lambda((\rho Y_e)_i, T_{j+1})$")
+ax.text(2+eps, 1-eps, r"$\lambda((\rho Y_e)_i, T_{j+1})$")
+ax.text(1+eps, 2+eps, r"$\lambda((\rho Y_e)_{i+1}, T_j)$")
 ax.text(2+eps, 2+eps, r"$\lambda((\rho Y_e)_{i+1}, T_{j+1})$")
 
 ax.plot([0.5, 2.5], [1, 1], color="0.5", ls=":")

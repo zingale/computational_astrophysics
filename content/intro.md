@@ -117,11 +117,21 @@ A demonstration of using Newton's method to find
 the [stationary states of the Lorenz system](https://zingale.github.io/computational_astrophysics/basics/linear-algebra/application-lorenz.html).
 :::
 
+:::{grid-item-card} Interpolating Reaction Rates
+{bdg-info-line}`interp`
+Using bilinear interpolation to [evaluate tabulated electron-capture rates](https://zingale.github.io/computational_astrophysics/interpolation/application-interpolating-reaction-rates.html).
+:::
+
 :::{grid-item-card} Hubble's Constant
 {bdg-info-line}`fitting`
 Using linear regression to [estimate $H_0$ from
 Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html).
 :::
+
+::::
+
+::::{grid}
+:gutter: 3
 
 :::{grid-item-card} X-ray timing
 {bdg-info-line}`FFTs`
