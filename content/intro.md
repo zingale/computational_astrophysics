@@ -118,7 +118,7 @@ the [stationary states of the Lorenz system](https://zingale.github.io/computati
 :::
 
 :::{grid-item-card} Hubble's Constant
-{bdg-info-line}`interp`
+{bdg-info-line}`fitting`
 Using linear regression to [estimate $H_0$ from
 Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html).
 :::
