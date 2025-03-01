@@ -142,7 +142,7 @@ then adding or subtracting this from the other two, our system becomes:
 
 \begin{alignat*}{4}
  \epsilon x &+ y                             &+ z                            &= 6 \\
-            &+ (2 + \tfrac{1}{\epsilon} )y   &+  \frac{1}{\epsilon} z        &= 3 + \tfrac{6}{\epsilon} \\
+            &+ (2 + \tfrac{1}{\epsilon} )y   &+  \tfrac{1}{\epsilon} z        &= 3 + \tfrac{6}{\epsilon} \\
             &-\tfrac{2}{\epsilon}y           &+ (1 - \tfrac{2}{\epsilon}) z  &= 5 - \tfrac{12}{\epsilon}
 \end{alignat*}
 
@@ -154,7 +154,7 @@ so, we can rewrite the system approximating the roundoff as:
 
 \begin{alignat*}{4}
  \epsilon x &+ y                             &+ z                            &= 6 \\
-            &+ \tfrac{1}{\epsilon} y   &+  \frac{1}{\epsilon} z        &= \tfrac{6}{\epsilon} \\
+            &+ \tfrac{1}{\epsilon} y   &+  \tfrac{1}{\epsilon} z        &= \tfrac{6}{\epsilon} \\
             &-\tfrac{2}{\epsilon}y           &- \tfrac{2}{\epsilon} z  &= -\tfrac{12}{\epsilon}
 \end{alignat*}
 
