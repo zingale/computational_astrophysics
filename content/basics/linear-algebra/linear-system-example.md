@@ -1,6 +1,10 @@
 Solving A System of Linear Equations
 ====================================
 
+```{admonition} reference
+This example come from *Numerical Methods for Physics* by Garcia.
+```
+
 Consider the system:
 
 \begin{alignat*}{4}
