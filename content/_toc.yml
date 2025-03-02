@@ -107,7 +107,7 @@ parts:
       - file: ffts/dft
       - file: ffts/dft-tests
       - file: ffts/inclass-filter
-      - file: ffts/inclass-pendulum
+      #- file: ffts/inclass-pendulum
       - file: ffts/fft
       - file: ffts/application-lightcurves
       - file: ffts/fft-multid
