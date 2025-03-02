@@ -1,3 +1,6 @@
+// this driver is used to create a sample radial velocity
+// curve for an FFT example
+
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -26,18 +29,17 @@ int main() {
     double max_P = std::sqrt(std::pow(a_planets[0], 3) / M_star);
     std::cout << "maximum period = " << max_P << std::endl;
 
-    s.integrate(0.005, 15 * max_P);
+    // observe twice a month
+    s.integrate(1.0/24.0, 15 * max_P);
 
-    std::ofstream of("planetary_stability.dat");
+    std::ofstream of("radial_velocity.dat");
 
     for (std::size_t n = 0; n < s.history.size(); ++n) {
         const auto& states = s.history[n];
 
+        // only output the radial velocity of the star
+        // (which we'll take as just the x-velocity)
         of << std::setw(14) << s.times[n];
-        for (const auto& object : states) {
-            of << object;
-        }
-        of << std::endl;
+        of << std::setw(14) << states[0].u << std::endl;
     }
-
 }
