@@ -1,7 +1,7 @@
 Gaussian Elimination
 ====================
 
-We are now ready to write out the algorithm for Gaussian elimination.
+We are now ready to write out the algorithm for [Gaussian elimination](https://en.wikipedia.org/wiki/Gaussian_elimination).
 The basic idea is to get the matrix ${\bf A}$ into row-echelon form.
 If the matrix is square, and non-singular ($\mbox{det}\{\bf A\} \ne 0$), then a
 row-echelon matrix is an upper-trangular matrix.  The process of

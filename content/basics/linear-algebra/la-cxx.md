@@ -15,8 +15,14 @@ To initialize a 2-d array.  We can then get the number of rows and
 columns via ``A.nrows()`` and ``A.ncols()``.  We can also index the
 array using ``A(i,j)`` to get the ``i``-th row and ``j``-th column.
 
+```{note}
 Some details of this class can be found here: https://zingale.github.io/phy504/contiguous_array.html
 (Although the implementation here is slightly different).
+```
+```{tip}
+C++23 introduces [std::mdspan](https://en.cppreference.com/w/cpp/container/mdspan) which will make multi-dimensional indexing
+easier in the future.
+```
 
 Here's the class header ``array.H``:
 
