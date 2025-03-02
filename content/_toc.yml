@@ -110,6 +110,7 @@ parts:
       #- file: ffts/inclass-pendulum
       - file: ffts/fft
       - file: ffts/application-lightcurves
+      - file: ffts/application-planets-fft.ipynb
       - file: ffts/fft-multid
       - file: ffts/non-periodic
     - file: interpolation/interpolation

@@ -29,8 +29,8 @@ int main() {
     double max_P = std::sqrt(std::pow(a_planets[0], 3) / M_star);
     std::cout << "maximum period = " << max_P << std::endl;
 
-    // observe twice a month
-    s.integrate(1.0/24.0, 15 * max_P);
+    // observe once a week
+    s.integrate(1.0/52.0, 25 * max_P);
 
     std::ofstream of("radial_velocity.dat");
 
