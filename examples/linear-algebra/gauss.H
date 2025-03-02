@@ -2,11 +2,12 @@
 #define GAUSS_H
 
 #include <algorithm>
-#include <array.H>
 #include <vector>
 #include <limits>
 #include <iostream>
 #include <iomanip>
+
+#include "array.H"
 
 inline
 void print_Ab(const Array& A, const std::vector<double>& b) {

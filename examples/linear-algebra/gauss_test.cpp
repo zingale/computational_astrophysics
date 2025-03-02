@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include <array.H>
-#include <gauss.H>
+#include "array.H"
+#include "gauss.H"
 
 int main() {
 
