@@ -243,9 +243,9 @@ $$x = \frac{1}{3}$$
 
 We see that pivoting made this system solvable even in the presence of roundoff.
 
-
+```{tip}
 A further refinement on this is [scaled
 pivoting](https://en.wikipedia.org/wiki/Pivot_element#Scaled_pivoting)
 which is when we first scale each row by its largest element, and then
 we consider which row to pivot with.
-
+```
