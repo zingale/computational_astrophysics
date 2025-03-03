@@ -198,3 +198,6 @@ parts:
     - file: homework/homework2
     - file: homework/homework3
 
+  - caption: Project
+    chapters:
+    - file: homework/project 
