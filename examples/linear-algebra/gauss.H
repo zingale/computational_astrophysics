@@ -68,18 +68,6 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
 
     std::vector<double> x(N, 0.0);
 
-    // find the scale factors for each row -- this is used when pivoting
-
-    std::vector<double> scales(N, std::numeric_limits<double>::lowest());
-
-    for (int irow = 0; irow < N; ++irow) {
-        for (int jcol = 0; jcol < N; ++jcol) {
-            scales[irow] = std::max(scales[irow], std::abs(A(irow, jcol)));
-        }
-    }
-
-    // keep track of the number of times we swapped rows
-
     if (!quiet) {
         print_Ab(A, b);
     }
@@ -94,34 +82,25 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
         int row_max{krow};
         double col_max = std::numeric_limits<double>::lowest();
         for (int kk = krow; kk < N; ++kk) {
-            double scaled_col_val = std::abs(A(kk, krow)) / scales[kk];
-            if (scaled_col_val > col_max) {
-                col_max = scaled_col_val;
+            if (std::abs(A(kk, krow)) > col_max) {
+                col_max = std::abs(A(kk, krow));
                 row_max = kk;
             }
         }
 
-        // swap the row with the largest scaled element in the current column
+        // swap the row with the largest element in the current column
         // with the current row (pivot) -- do this with b too!
 
         if (row_max != krow) {
 
-            // swap row krow with row row_max
-
             for (int jcol = 0; jcol < N; ++jcol) {
                 std::swap(A(krow, jcol), A(row_max, jcol));
             }
-
             std::swap(b[krow], b[row_max]);
-
-            // finally swap the scales
-
-            std::swap(scales[krow], scales[row_max]);
 
             if (!quiet) {
                 std::cout << "pivoted" << std::endl;
             }
-
         }
 
         // do the forward-elimination for all rows below the current
