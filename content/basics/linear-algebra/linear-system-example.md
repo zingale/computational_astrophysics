@@ -112,7 +112,7 @@ $$
 ({\bf A}|{\bf b}) = \left ( \begin{array}{ccc|c}
                      1  &  1  &  1 & 6 \\
                      0  &  3  &  1 & 9 \\
-                     0  &  0  &  \tfrac{1}{3} & -1 \end{array} \right )
+                     0  &  0  &  -\tfrac{1}{3} & -1 \end{array} \right )
 $$
 
 At this point, the matrix is in [row echelon](https://en.wikipedia.org/wiki/Row_echelon_form), and it
