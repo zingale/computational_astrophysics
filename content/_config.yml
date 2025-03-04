@@ -9,7 +9,6 @@ copyright: "2021-2025"
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-   execute_notebooks: force
    allow_errors: true
 
 # Define the name of the latex output file for PDF builds
