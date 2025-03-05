@@ -12,8 +12,9 @@
 inline
 void print_Ab(const Array& A, const std::vector<double>& b) {
 
-    // printout the matrix A and vector b in a pretty fashion.  We don't use the
-    // numpy print here, because we want to make them side by side
+    // printout the matrix A and vector b in a pretty fashion.  We
+    // don't use the numpy print here, because we want to make them
+    // side by side
 
     const int N = b.size();
 
@@ -122,8 +123,6 @@ std::vector<double> gauss_elim(Array& A, std::vector<double>& b,
     }
 
     // back-substitution
-
-    // last solution is easy
 
     x[N-1] = b[N-1] / A(N-1, N-1);
 

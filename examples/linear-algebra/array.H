@@ -21,13 +21,7 @@ struct Array {
           _cols{cols},
           _data(rows * cols, val)
     {
-        // we do the asserts here after the initialization of _data
-        // in the initialization list, but if the size is zero, we'll
-        // abort here anyway.
-
-        assert (rows > 0);
-        assert (cols > 0);
-
+        assert (rows > 0 && cols > 0);
     }
 
     // constructor that allows us to initialize array
@@ -70,6 +64,7 @@ struct Array {
 
 // the << operator is not part of the of the class, so it is not a member
 
+inline
 std::ostream& operator<< (std::ostream& os, const Array& a) {
 
     for (std::size_t row = 0; row < a.nrows(); ++row) {
@@ -78,7 +73,6 @@ std::ostream& operator<< (std::ostream& os, const Array& a) {
         }
         os << std::endl;
     }
-
     return os;
 }
 

@@ -51,7 +51,7 @@ Finally, a test driver ``gauss_test.cpp`` is here:
 To run this, we would do:
 
 ```bash
-g++ -I . --std=c++17 -o gauss_test gauss_test.cpp
+g++ --std=c++17 -o gauss_test gauss_test.cpp
 ./gauss_test
 ```
 

@@ -2,12 +2,12 @@
 #define MATMUL_H
 
 #include <vector>
-#include <array.H>
+#include "array.H"
 
 inline
 std::vector<double> matmul(const Array& A, const std::vector<double>& x) {
 
-    assert (A.ncols() == static_cast<int>(x.size()));
+    assert (A.ncols() == x.size());
 
     std::vector<double> b(A.nrows(), 0.0);
 
@@ -18,7 +18,5 @@ std::vector<double> matmul(const Array& A, const std::vector<double>& x) {
     }
 
     return b;
-
 }
-
 #endif

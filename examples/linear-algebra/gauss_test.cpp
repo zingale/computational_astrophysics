@@ -17,8 +17,7 @@ int main() {
         std::cout << e << std::endl;
     }
 
-    std::cout << std::endl;
-    std::cout << std::endl;
+    std::cout << std::endl << std::endl;
 
     // next example
 
@@ -36,7 +35,5 @@ int main() {
     }
 
     std::cout << std::endl;
-    std::cout << std::endl;
-
 
 }
