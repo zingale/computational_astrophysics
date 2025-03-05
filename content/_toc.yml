@@ -190,6 +190,10 @@ parts:
       - file: machine-learning/keras-clustering
     - file: machine-learning/machine-learning-in-astro
 
+  - caption: Additional examples (for in-class)
+    chapters:
+    - file: in_class/in-class-ode-projectile
+
   - caption: Homework
     chapters:
     - file: homework/homework1
