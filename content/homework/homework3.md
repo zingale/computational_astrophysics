@@ -58,7 +58,9 @@ Pick $L = 10$ m and $g = 10$ m/s$^2$ for all runs.
 You may use the code from class as your starting point.
 
 1. Run twice with each solver with different initial values for
-   $\theta$: $\theta_0 = 10^\circ$ and $\theta_0 = 100^\circ$.
+   $\theta$: $\theta_0 = 10^\circ$ and $\theta_0 = 100^\circ$,
+   and $\omega_0 = 0 \mathrm{radians/s}$.
+
    Choose your timestep, $\tau$, so you have at least 20 steps
    in a period (the small-angle approximate period would be $2\pi~\mathrm{s}$).
    Run for at least 10 periods.
