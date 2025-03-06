@@ -44,7 +44,7 @@ $$\Psi = \left ( \begin{array}{c} p(\rho, T) - p_\star \\
 and imagine that we have an initial guess for density, $\rho_0$, and temperature, $T_0$.  We then want to find the corrections, $\delta \rho$
 and $\delta T$, such that:
 
-$$\Psi(\rho_0 + \delta_\rho, T_0 + \delta T) = 0$$
+$$\Psi(\rho_0 + \delta\rho, T_0 + \delta T) = 0$$
 
 Tayloring expanding, we get:
 
