@@ -27,7 +27,7 @@ struct Array {
     // constructor that allows us to initialize array
     // via an initializer list of rows
 
-    Array (std::vector<std::vector<double>> v)
+    explicit Array (std::vector<std::vector<double>>&& v)
         : _rows{v.size()},
           _cols{v[0].size()},
           _data(_rows * _cols, 0.0)
