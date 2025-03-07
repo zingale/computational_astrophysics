@@ -34,7 +34,9 @@ The discrete Fourier transform (DFT) works on discrete data, e.g.:
 * a time-series from an experiment
 * simulation data for a velocity field
 
+```{important}
 We'll work on the assumption that our data is evenly-spaced.
+```
 
 The discrete analogue of the Fourier transform is:
 
