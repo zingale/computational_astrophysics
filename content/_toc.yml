@@ -112,6 +112,7 @@ parts:
       - file: ffts/application-lightcurves
       - file: ffts/application-planets-fft.ipynb
       - file: ffts/fft-multid
+      - file: ffts/example-turbulent-power-spectrum
       - file: ffts/non-periodic
     - file: interpolation/interpolation
       sections:
