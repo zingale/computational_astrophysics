@@ -15,7 +15,7 @@ You can think of $F(k)$ as being the amount of the function $f$ represented by a
 
 If we think of it in terms of time, then $f(t)$ is the time-domain function and the transform is:
 
-$$F(\nu) = \int_{-\infty}^{\infty} f(t) e^{-2\pi i \nu t} dx$$
+$$F(\nu) = \int_{-\infty}^{\infty} f(t) e^{-2\pi i \nu t} dt$$
 
 and $\nu$ is now a frequency (units of 1/time).
 
@@ -104,7 +104,7 @@ $$ f(x) = 1 \Longleftrightarrow F(k) = \delta(k)$$
 If we look at the discrete transform then:
 
 $$F_k = \sum_{n=0}^{N-1} 1 \cdot e^{-2\pi i k n /N}
-= \sum_{n=0}^{N-1} \left [ \cos \left (\frac{2\pi kn}{N}\right) + i \sin \left (\frac{2\pi kn}{N}\right ) \right ]$$
+= \sum_{n=0}^{N-1} \left [ \cos \left (\frac{2\pi kn}{N}\right) - i \sin \left (\frac{2\pi kn}{N}\right ) \right ]$$
 
 * For $k = 0$: $\cos(0) = 1$ and $\sin(0) = 0$, so $F_0 = N$
 * For $k > 0$: we are essentially doing a sum over the cosine and sine using equally spaced points, and the sum is always over a multiple of a full wavelength $\rightarrow$ $F_k = 0$
