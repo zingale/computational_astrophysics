@@ -18,7 +18,7 @@ Here we will consider an ideal gas and radiation EOS:
 
 \begin{align*}
 p &= \frac{\rho k T}{\mu m_u} + \frac{1}{3} a T^4 \\
-e &= \frac{3}{2} \frac{k T}{\mu m_u} + a T^4
+e &= \frac{3}{2} \frac{k T}{\mu m_u} + \frac{a T^4}{\rho}
 \end{align*}
 
 where $e$ is the specific internal energy (energy / mass)
