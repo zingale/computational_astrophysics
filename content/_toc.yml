@@ -194,6 +194,7 @@ parts:
   - caption: Additional examples (for in-class)
     chapters:
     - file: in_class/in-class-ode-projectile
+    - file: in_class/in-class-hilbert-matrix
 
   - caption: Homework
     chapters:
