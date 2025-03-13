@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <format>
 #include <ranges>
 #include <vector>
 #include <print>
@@ -51,18 +52,27 @@ int main() {
 
     std::ofstream of2("planet_positions.dat");
 
-    for (std::size_t n = 0; n < s.history.size(); ++n) {
-        const auto& states = s.history[n];
+    for (int n = 0; n < s.n_objects; ++n) {
+        if (n == 0) {
+            of2 << "#"
+                << std::setw(14) << "time" << " " 
+                << std::setw(14) << "x_star" << " "
+                << std::setw(14) << "y_star" << " ";
+        } else {
+            auto labelx = std::format("x_p{}", n);
+            auto labely = std::format("y_p{}", n);
+            of2 << std::setw(14) << labelx << " "
+                << std::setw(14) << labely << " ";
+        }
+    }
+    of2 << std::endl;
+
+    for (const auto [n, states] : s.history | std::views::enumerate) {
 
         // only output the radial velocity of the star
         // (which we'll take as just the x-velocity)
-        of2 << std::setw(14) << s.times[n];
-        for (const auto [n, p] : states | std::views::enumerate) {
-            if (n == 0) {
-                // skip the star
-                continue;
-            }
-
+        of2 << std::setw(14) << s.times[n] << " ";
+        for (const auto &p : states) {
             of2 << std::setw(14) << p.x << " ";
             of2 << std::setw(14) << p.y << " ";
         }
