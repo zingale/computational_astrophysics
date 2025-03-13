@@ -69,8 +69,6 @@ int main() {
 
     for (const auto [n, states] : s.history | std::views::enumerate) {
 
-        // only output the radial velocity of the star
-        // (which we'll take as just the x-velocity)
         of2 << std::setw(14) << s.times[n] << " ";
         for (const auto &p : states) {
             of2 << std::setw(14) << p.x << " ";
