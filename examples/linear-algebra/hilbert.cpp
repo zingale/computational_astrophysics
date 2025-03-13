@@ -10,7 +10,7 @@
 int main() {
 
     // loop over N
-    for (int n = 4; n < 100; ++n) {
+    for (int n = 2; n < 100; ++n) {
 
         // create Hilbert matrix of size NxN
         Array H(n, n);
