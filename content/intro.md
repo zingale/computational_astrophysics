@@ -122,11 +122,11 @@ the [stationary states of the Lorenz system](https://zingale.github.io/computati
 Using bilinear interpolation to [evaluate tabulated electron-capture rates](https://zingale.github.io/computational_astrophysics/interpolation/application-interpolating-reaction-rates.html).
 :::
 
-:::{grid-item-card} Hubble's Constant
-{bdg-info-line}`fitting`
-Using linear regression to [estimate $H_0$ from
-Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html).
+:::{grid-item-card} Radial Velocity in Frequency Space
+{bdg-info-line}`FFTs`
+Using FFTs to [find planets from stellar radial velocity curves](https://zingale.github.io/computational_astrophysics/ffts/application-planets-fft.html).
 :::
+
 
 ::::
 
@@ -137,6 +137,12 @@ Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/
 {bdg-info-line}`FFTs`
 Using FFTs on time-series data to
 [study low mass X-ray binaries](https://zingale.github.io/computational_astrophysics/ffts/application-lightcurves.html).
+:::
+
+:::{grid-item-card} Hubble's Constant
+{bdg-info-line}`fitting`
+Using linear regression to [estimate $H_0$ from
+Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html).
 :::
 
 ::::
