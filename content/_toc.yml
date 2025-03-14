@@ -169,9 +169,11 @@ parts:
   - caption: ✱ Hydrodynamics
     chapters:
     - file: euler/euler
-    - file: euler/euler-eigen
+      sections:
+      - file: euler/euler-eigen
     - file: euler/euler-riemann
-    - file: euler/euler-riemann-sampling
+      sections:
+      - file: euler/euler-riemann-sampling
     - file: euler/euler-solver
 
   - caption: Machine Learning
