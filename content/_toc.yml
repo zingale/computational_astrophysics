@@ -77,6 +77,7 @@ parts:
       - file: ODEs/ODEs-timereverse
       - file: ODEs/application-planetary-stability
     - file: ODEs/boundary-value-problems
+      title: ✱ Boundary Value Problems
       sections:
       - file: ODEs/application-lane-emden
     - file: ODEs/ODEs-implicit
@@ -140,6 +141,7 @@ parts:
       - file: advection/advection/advection-finite-volumes
       - file: advection/advection/advection-second-order
     - file: advection/burgers/burgers
+      title: ✱ Burgers' Equation
       sections:
       - file: advection/burgers/burgers-riemann
       - file: advection/burgers/burgers-methods
