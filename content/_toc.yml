@@ -126,6 +126,7 @@ parts:
       sections:
       - file: fitting/fitting-to-a-line
       - file: fitting/generalized-linear-least-squares
+      - file: fitting/generalized-linear-least-squares-tests
       - file: fitting/fitting-nonlinear
       - file: fitting/fitting-scipy
       - file: fitting/application-snia-h0
