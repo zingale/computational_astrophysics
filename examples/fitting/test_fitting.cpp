@@ -7,7 +7,7 @@
 
 
 std::pair<std::vector<double>, std::vector<double>>
-y_experiment(double a1, double a2, double a3, double sigma,
+y_experiment(const std::vector<double>& av, double sigma,
              const std::vector<double>& x) {
 
     auto N = x.size();
@@ -23,7 +23,7 @@ y_experiment(double a1, double a2, double a3, double sigma,
 
     for (std::size_t n = 0; n < N; ++n) {
         auto r = randn(generator);
-        y[n] = a1 + a2 * x[n] + a3 * x[n] * x[n] + r;
+        y[n] = av[0] + av[1] * x[n] + av[2] * x[n] * x[n] + r;
         yerr[n] = sigma;
     }
 
@@ -44,7 +44,7 @@ int main() {
     }
 
     double sigma{8.0};
-    auto [y, yerr] = y_experiment(2.0, 1.50, -0.02, sigma, x);
+    auto [y, yerr] = y_experiment({2.0, 1.50, -0.02}, sigma, x);
 
     std::ofstream of("experiment.dat");
     for (std::size_t n = 0; n < N; ++n) {
