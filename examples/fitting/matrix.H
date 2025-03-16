@@ -24,21 +24,39 @@ struct Matrix {
         assert (rows > 0 && cols > 0);
     }
 
+    // Constructor for list initialization
+    // e.g., Matrix A{{1, 2}, {3, 4}};
+
+    Matrix(std::initializer_list<std::initializer_list<double>> values)
+        : _rows(values.size()),
+          _cols(values.begin()->size()),
+          _data()
+    {
+        assert(_rows > 0);
+        for (const auto& row : values) {
+            // Ensure all rows have the same number of columns
+            assert(row.size() == _cols);
+            _data.insert(_data.end(), row.begin(), row.end());
+        }
+    }
+
     // note the "const" after the argument list here -- this means
     // that this can be called on a const Matrix
 
     inline std::size_t ncols() const { return _cols;}
     inline std::size_t nrows() const { return _rows;}
 
-    inline double& operator()(int row, int col) {
-        assert (row >= 0 && row < static_cast<int>(_rows));
-        assert (col >= 0 && col < static_cast<int>(_cols));
+    inline double& operator()(std::size_t row, std::size_t col) {
+        // size_t is unsigned, so will always be >= 0
+        assert (row < _rows);
+        assert (col < _cols);
         return _data[row*_cols + col];
     }
 
-    inline const double& operator()(int row, int col) const {
-        assert (row >= 0 && row < static_cast<int>(_rows));
-        assert (col >= 0 && col < static_cast<int>(_cols));
+    inline const double& operator()(std::size_t row, std::size_t col) const {
+        // size_t is unsigned, so will always be >= 0
+        assert (row < _rows);
+        assert (col < _cols);
         return _data[row*_cols + col];
     }
 

@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "matrix.H"
-
+#include "gauss.H"
 
 int main() {
 
@@ -25,6 +25,28 @@ int main() {
 
     auto b = A * x;
     for (auto e : b) {
+        std::cout << e << " ";
+    }
+    std::cout << std::endl;
+
+    // try solvig A x = b
+    Matrix A_new{{1, 4, -2},
+                 {9, 12, 3},
+                 {-1, 3, 8}};
+
+    std::cout << "A_new = \n" << A_new <<std::endl;
+
+    std::vector<double> x3{0, 1, 2};
+    auto b_new = A_new * x3;
+
+    std::cout << "b_new = ";
+    for (auto e : b_new) {
+        std::cout << e << " ";
+    }
+    std::cout << std::endl;
+
+    auto x_new = gauss_elim(A_new, b_new);
+    for (auto e : x_new) {
         std::cout << e << " ";
     }
     std::cout << std::endl;
