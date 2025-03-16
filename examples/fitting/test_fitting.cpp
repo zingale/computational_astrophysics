@@ -17,14 +17,14 @@ y_experiment(double a1, double a2, double a3, double sigma,
     // compute Gaussian random numbers that will represent
     // the error for each point
     std::mt19937 generator(12345);
-    std::normal_distribution<double> randn(0.0, 1.0);
+    std::normal_distribution<double> randn(0.0, sigma);
 
     std::vector<double> yerr(N, 0.0);
 
     for (std::size_t n = 0; n < N; ++n) {
-        auto r = sigma * randn(generator);
+        auto r = randn(generator);
         y[n] = a1 + a2 * x[n] + a3 * x[n] * x[n] + r;
-        yerr[n] = std::abs(r);
+        yerr[n] = sigma;
     }
 
     return {y, yerr};
