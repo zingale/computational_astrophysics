@@ -32,20 +32,24 @@ The discussion in Garcia, _Numerical Methods for Physics_, gives a nice overview
 
 Our $\chi^2$ is:
 
-$$\chi^2(\{a_j\}) = \sum_{i=1}^N \frac{(Y(x_i; \{a_j\}) - y_i)^2}{\sigma_i^2} =
-\sum_{i=1}^N \frac{1}{\sigma_i^2} \left [\left (\sum_{j=1}^M a_j \varphi_j(x_i)\right ) - y_i \right ]^2$$
+\begin{align*}
+\chi^2(\{a_j\}) &= \sum_{i=1}^N \frac{(Y(x_i; \{a_j\}) - y_i)^2}{\sigma_i^2} \\
+    &= \sum_{i=1}^N \frac{1}{\sigma_i^2} \left [
+          \left (\sum_{j=1}^M a_j \varphi_j(x_i)\right ) - y_i \right ]^2
+\end{align*}
 
 We can differentiate it with respect to one of the parameters, $a_k$:
 
 \begin{align*}
-\frac{\partial \chi^2}{\partial a_k} 
-    &= \frac{\partial}{\partial a_k} 
+\frac{\partial \chi^2}{\partial a_k}
+    &= \frac{\partial}{\partial a_k}
           \sum_{i=1}^N \frac{1}{\sigma_i^2} \left [\left (\sum_{j=1}^M a_j \varphi_j(x_i)\right ) - y_i \right ]^2 \\
-    &= \sum_{i=1}^N \frac{1}{\sigma_i^2} 
+    &= \sum_{i=1}^N \frac{1}{\sigma_i^2}
           \frac{\partial}{\partial a_k} \left [\left (\sum_{j=1}^M a_j \varphi_j(x_i)\right ) - y_i \right ]^2 \\
     &= 2 \sum_{i=1}^N \frac{1}{\sigma_i^2} \left [\left (\sum_{j=1}^M a_j \varphi_j(x_i)\right ) - y_i \right ] \varphi_k(x_i) = 0
 \end{align*}
 
+or rewriting:
 
 $$\sum_{i=1}^N \sum_{j=1}^M a_j \frac{\varphi_j(x_i) \varphi_k(x_i)}{\sigma_i^2} =
    \sum_{i=1}^N \frac{y_i \varphi_k(x_i)}{\sigma_i^2}$$
@@ -95,11 +99,13 @@ and the source is:
 
 $${\bf b} = \left (\begin{array}{c} y_1 / \sigma_1 \\
                                     y_2 / \sigma_2 \\
-                                    \vdots
-                                    y_N / \sigma_N \end{array} \right )$$ 
-                                    
+                                    \vdots \\
+                                    y_N / \sigma_N \end{array} \right )$$
+
 
 ### Linear system
+
+We can now use this design matrix and source to find the underlying linear system.
 
 ${\bf A}^\intercal {\bf A}$ is:
 
@@ -120,7 +126,7 @@ ${\bf A}^\intercal {\bf A}$ is:
 and ${\bf A}^\intercal {\bf A} {\bf a}$ is:
 
 \begin{align*}
-{\bf A}^\intercal {\bf A} {\bf a} &= 
+{\bf A}^\intercal {\bf A} {\bf a} &=
    \left ( \begin{array}{cc} \sum_i 1/\sigma_i^2 & \sum_i x_i / \sigma_i^2 \\
                              \sum_i x_i/\sigma_i^2 & \sum_i x_i^2 / \sigma_i^2 \end{array} \right )
    \left ( \begin{array}{c} a_1 \\ a_2 \end{array} \right ) \\
@@ -145,12 +151,11 @@ ${\bf A}^\intercal {\bf b}$ is:
                                            \sum_i x_i y_i / \sigma_i^2 \end{array} \right )
 \end{align*}
 
-Finally, this gives us 2 equations with 2 unknowns ($a_1$, $a_2$):
+Putting these together, this gives us 2 equations with 2 unknowns ($a_1$, $a_2$):
 
 \begin{align*}
 a_1 \sum_i \frac{1}{\sigma_i^2} + a_2 \sum_i \frac{x_i}{\sigma_i^2} &= \sum_i \frac{y_i}{\sigma_i^2} \\
-a_1 \sum_i \frac{x_i}{\sigma_i^2} + a_2 \sum_i \frac{x_i^2}{\sigma_i^2} &= \sum_i \frac{x_i y_i}{\sigma_i^2} 
+a_1 \sum_i \frac{x_i}{\sigma_i^2} + a_2 \sum_i \frac{x_i^2}{\sigma_i^2} &= \sum_i \frac{x_i y_i}{\sigma_i^2}
 \end{align*}
 
 This is precisely the system we saw before.
-
