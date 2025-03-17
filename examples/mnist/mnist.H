@@ -78,7 +78,7 @@ public:
     // value as the guess for the digit and compare to the correct
     // answer
 
-    bool validate(const Matrix& categorical_guess) {
+    int interpret(const Matrix& categorical_guess) {
         assert (categorical_guess.nrows() == 10);
 
         double max_val{std::numeric_limits<double>::lowest()};
@@ -89,8 +89,14 @@ public:
                 idx = n;
             }
         }
-        return idx == num;
+        return static_cast<int>(idx);
+
     }
+
+    bool validate(const Matrix& categorical_guess) {
+        return interpret(categorical_guess) == num;
+    }
+
 };
 
 std::vector<MNISTDigit> read_training_set() {
