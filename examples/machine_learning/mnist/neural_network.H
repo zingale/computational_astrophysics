@@ -17,7 +17,6 @@ double g(double xi) {
 
 class NeuralNetwork {
 
-
     int nin{};
     int nout{};
     int nhidden{};
@@ -31,7 +30,6 @@ public:
         : nin(input_size), nout(output_size), nhidden(hidden_layer_size),
           A(nout, nhidden), B(nhidden, nin)
     {
-
 
         // initialize matrix elements to random values
         {
