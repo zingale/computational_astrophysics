@@ -188,6 +188,7 @@ parts:
       sections:
       - file: machine-learning/last-number-hidden
       - file: machine-learning/neural-net-mnist
+      - file: machine-learning/mnist-cxx
       - file: machine-learning/neural-net-improvements
     - file: machine-learning/machine-learning-libraries
       sections:
