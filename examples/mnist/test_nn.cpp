@@ -8,14 +8,14 @@ int main() {
 
     // train the network using the training set
 
-    auto training_set = read_training_set();
+    auto training_set = mnist::read_training_set();
 
     auto n = NeuralNetwork(784, 10, 50);
     n.train(training_set, 5);
 
     // now assess how well we did using the test set
 
-    auto test_set = read_test_set();
+    auto test_set = mnist::read_test_set();
 
     int n_correct{0};
     for (auto model : test_set) {

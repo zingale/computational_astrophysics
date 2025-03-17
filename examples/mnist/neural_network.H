@@ -51,7 +51,7 @@ public:
 
     };
 
-    void train(const std::vector<MNISTDigit>& training_data,
+    void train(const std::vector<mnist::MNISTDigit>& training_data,
                int n_epochs, double learning_rate=0.1) {
 
         std::random_device rd;
@@ -82,7 +82,7 @@ public:
     }
 
     Matrix
-    predict(const MNISTDigit& model) {
+    predict(const mnist::MNISTDigit& model) {
         auto ztilde = B * model.scaled;
         ztilde.apply(g);
         auto z = A * ztilde;
