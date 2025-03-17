@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cassert>
+#include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -24,7 +25,7 @@ public:
     int num{-1};
 
     MNISTDigit(const std::string& raw_string)
-        : out(10, 0.01), scaled(DIGIT_ROWS * DIGIT_COLS, 0.0)
+        : scaled(DIGIT_ROWS * DIGIT_COLS, 0.0), out(10, 0.01)
     {
         // loop over the raw string and split it up.  The first number
         // is the answer, the rest are the digit
@@ -55,16 +56,17 @@ public:
             }
 
             if (e > 0.8) {
-                std::cout << "#";
+                std::cout << "█";
             } else if (e > 0.6) {
-                std::cout << "X";
+                std::cout << "▓";
             } else if (e > 0.4) {
-                std::cout << ":";
+                std::cout << "▒";
             } else if (e > 0.2) {
-                std::cout << ".";
+                std::cout << "░";
             } else {
                 std::cout << " ";
             }
+
         }
         std::cout << std::endl;
     }
@@ -83,5 +85,29 @@ public:
         return static_cast<int>(index) == num;
     }
 };
+
+std::vector<MNISTDigit> read_training_set() {
+
+    std::vector<MNISTDigit> digits;
+
+    std::ifstream mf("mnist_train.csv");
+    std::string line;
+    while (std::getline(mf, line)) {
+        digits.emplace_back(line);
+    }
+    return digits;
+}
+
+std::vector<MNISTDigit> read_test_set() {
+
+    std::vector<MNISTDigit> digits;
+
+    std::ifstream mf("mnist_test.csv");
+    std::string line;
+    while (std::getline(mf, line)) {
+        digits.emplace_back(line);
+    }
+    return digits;
+}
 
 #endif
