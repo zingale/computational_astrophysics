@@ -5,10 +5,13 @@
 #include <cassert>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <sstream>
 #include <string>
 #include <ranges>
 #include <vector>
+
+#include "matrix.H"
 
 constexpr int DIGIT_ROWS{28};
 constexpr int DIGIT_COLS{28};
@@ -20,12 +23,12 @@ class MNISTDigit {
 
 public:
 
-    std::vector<double> scaled;
-    std::vector<double> out;
+    Matrix scaled;
+    Matrix out;
     int num{-1};
 
     MNISTDigit(const std::string& raw_string)
-        : scaled(DIGIT_ROWS * DIGIT_COLS, 0.0), out(10, 0.01)
+        : scaled(DIGIT_ROWS * DIGIT_COLS, 1), out(10, 1, 0.01)
     {
         // loop over the raw string and split it up.  The first number
         // is the answer, the rest are the digit
@@ -37,19 +40,19 @@ public:
             if (n == 0) {
                 num = std::stoi(value);
             } else {
-                scaled[n-1] = std::stod(value) / 255.0 * 0.99 + 0.01;
+                scaled(n-1, 0) = std::stod(value) / 255.0 * 0.99 + 0.01;
             }
             n++;
         }
 
         // set the categorical data
-        out[num] = 0.99;
+        out(num, 0) = 0.99;
 
     }
 
     void display() {
 
-        for (auto [n, e] : scaled | std::views::enumerate) {
+        for (auto [n, e] : scaled._data | std::views::enumerate) {
 
             if (n % DIGIT_COLS == 0) {
                 std::cout << std::endl;
@@ -75,14 +78,18 @@ public:
     // value as the guess for the digit and compare to the correct
     // answer
 
-    bool validate(const std::vector<double>& categorical_guess) {
-        assert (categorical_guess.size() == 10);
+    bool validate(const Matrix& categorical_guess) {
+        assert (categorical_guess.nrows() == 10);
 
-        auto max_iter = std::max_element(categorical_guess.cbegin(),
-                                         categorical_guess.cend());
-        std::size_t index = std::distance(categorical_guess.cbegin(), max_iter);
-
-        return static_cast<int>(index) == num;
+        double max_val{std::numeric_limits<double>::lowest()};
+        int idx{-1};
+        for (std::size_t n = 0; n < categorical_guess.nrows(); ++n) {
+            if (categorical_guess(n, 0) > max_val) {
+                max_val = categorical_guess(n, 0);
+                idx = n;
+            }
+        }
+        return idx == num;
     }
 };
 

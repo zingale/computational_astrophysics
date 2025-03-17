@@ -17,12 +17,15 @@ double g(double xi) {
 
 class NeuralNetwork {
 
+
     int nin{};
     int nout{};
     int nhidden{};
 
     Matrix A;
     Matrix B;
+
+public:
 
     NeuralNetwork(int input_size, int output_size, int hidden_layer_size)
         : nin(input_size), nout(output_size), nhidden(hidden_layer_size),
@@ -55,16 +58,38 @@ class NeuralNetwork {
         std::mt19937 gen(rd());
 
         for (int i = 0; i < n_epochs; ++i) {
-            for (const auto& model : std::ranges::shuffle(training_data, gen)) {
+            std::cout << "epoch " << i << std::endl;
+
+            for (const auto& model : training_data) { //std::ranges::shuffle(training_data, gen)) {
                 auto z_tilde = B * model.scaled;
                 z_tilde.apply(g);
 
-                
+                auto z = A * z_tilde;
+                z.apply(g);
+
+                auto e = z - model.out;
+                auto e_tilde = A.transpose() * (e % z % (1.0 - z));
+
+                // corrections
+                auto dA = ((-2 * learning_rate * e) % z % (1.0 - z)) *
+                    z_tilde.transpose();
+                auto dB = ((-2 * learning_rate * e_tilde) % z_tilde % (1.0 - z_tilde)) * model.scaled.transpose();
+
+                A += dA;
+                B += dB;
             }
         }
     }
+
+    Matrix
+    predict(const MNISTDigit& model) {
+        auto ztilde = B * model.scaled;
+        ztilde.apply(g);
+        auto z = A * ztilde;
+        z.apply(g);
+
+        return z;
+    }
 };
-
-
 
 #endif

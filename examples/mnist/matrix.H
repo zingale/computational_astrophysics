@@ -62,7 +62,7 @@ struct Matrix {
         return _data[row*_cols + col];
     }
 
-    Matrix transpose() {
+    Matrix transpose() const {
         Matrix A_T(_cols, _rows);
         for (std::size_t irow = 0; irow < _rows; ++irow) {
             for (std::size_t jcol = 0; jcol < _cols; ++jcol) {
@@ -148,6 +148,17 @@ struct Matrix {
         return C;
     }
 
+    Matrix
+    operator+ (double a) {
+        Matrix C(_rows, _cols);
+
+        for (std::size_t n = 0; n < _rows * _cols; ++n) {
+            C._data[n] = _data[n] + a;
+        }
+
+        return C;
+    }
+
     // subtraction
 
     Matrix
@@ -160,6 +171,39 @@ struct Matrix {
         }
 
         return C;
+    }
+
+    Matrix
+    operator- (double a) {
+        Matrix C(_rows, _cols);
+
+        for (std::size_t n = 0; n < _rows * _cols; ++n) {
+            C._data[n] = _data[n] - a;
+        }
+
+        return C;
+    }
+
+    // compound operators
+
+    Matrix&
+    operator+= (const Matrix& B) {
+        assert(_rows == B.nrows() && _cols == B.ncols());
+
+        for (std::size_t n = 0; n < _rows * _cols; ++n) {
+            _data[n] += B._data[n];
+        }
+        return *this;
+    }
+
+    Matrix&
+    operator-= (const Matrix& B) {
+        assert(_rows == B.nrows() && _cols == B.ncols());
+
+        for (std::size_t n = 0; n < _rows * _cols; ++n) {
+            _data[n] -= B._data[n];
+        }
+        return *this;
     }
 
     // apply a function on element-by-element basis
@@ -180,6 +224,28 @@ operator* (double a, const Matrix& A) {
     for (std::size_t n = 0; n < A._rows * A._cols; ++n) {
         C._data[n] = a * A._data[n];
     }
+    return C;
+}
+
+Matrix
+operator- (double a, const Matrix& A) {
+    Matrix C(A.nrows(), A.ncols());
+
+    for (std::size_t n = 0; n < A.nrows() * A.ncols(); ++n) {
+        C._data[n] = a - A._data[n];
+    }
+
+    return C;
+}
+
+Matrix
+operator+ (double a, const Matrix& A) {
+    Matrix C(A.nrows(), A.ncols());
+
+    for (std::size_t n = 0; n < A.nrows() * A.ncols(); ++n) {
+        C._data[n] = a + A._data[n];
+    }
+
     return C;
 }
 

@@ -12,12 +12,12 @@ int main() {
 
     t.display();
 
-    std::cout << t.validate({0, 0, 0, 0, 0, 0, 0.6, 0.4, 0.0, 0.0}) << std::endl;
+    Matrix test_out{{0}, {0}, {0}, {0}, {0},
+                    {0}, {0.4}, {0.6}, {0}, {0}};
 
+    std::cout << t.validate(test_out) << std::endl;
 
     auto training_set = read_training_set();
     training_set[0].display();
 
-    
 }
-
