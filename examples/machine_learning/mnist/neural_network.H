@@ -55,10 +55,16 @@ public:
         std::random_device rd;
         std::mt19937 gen(rd());
 
+        // vector of indices for randomly iterating over data
+        std::vector<std::size_t> indices(training_data.size());
+        std::iota(indices.begin(), indices.end(), 0);
+
         for (int i = 0; i < n_epochs; ++i) {
             std::cout << "epoch " << i << std::endl;
+            std::shuffle(indices.begin(), indices.end(), gen);
 
-            for (const auto& model : training_data) { //std::ranges::shuffle(training_data, gen)) {
+            for (auto i : indices) {
+                const auto& model = training_data[i];
                 auto z_tilde = B * model.scaled;
                 z_tilde.apply(g);
 

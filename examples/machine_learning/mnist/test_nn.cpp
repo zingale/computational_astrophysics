@@ -46,4 +46,25 @@ int main() {
         }
     }
 
+    // now explore the size of the hidden layer
+    for (auto hidden_layer_size : {25, 50, 100, 150}) {
+        auto n = NeuralNetwork(784, 10, hidden_layer_size);
+        n.train(training_set, 5);
+
+        // now assess how well we did using the test set
+
+        int n_correct{0};
+        for (auto model : test_set) {
+            auto res = n.predict(model);
+            if (model.validate(res)) {
+                n_correct += 1;
+            }
+        }
+
+        std::cout << "hidden layer size = " << hidden_layer_size
+                  << " accuracy = "
+                  << static_cast<double>(n_correct) /
+                     static_cast<double>(test_set.size())
+                  << std::endl;
+    }
 }
