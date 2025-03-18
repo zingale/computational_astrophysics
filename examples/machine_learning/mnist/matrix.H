@@ -12,11 +12,13 @@
 // managed as a vector.  We overload () to allow us to index this as
 // a(irow, icol)
 
-struct Matrix {
+class Matrix {
 
     std::size_t _rows;
     std::size_t _cols;
     std::vector<double> _data;
+
+public:
 
     Matrix (std::size_t rows, std::size_t cols, double val=0.0)
         : _rows{rows},
@@ -42,11 +44,13 @@ struct Matrix {
         }
     }
 
+    inline std::vector<double>& flat() {return _data;}
+
     // note the "const" after the argument list here -- this means
     // that this can be called on a const Matrix
 
-    inline std::size_t ncols() const { return _cols;}
-    inline std::size_t nrows() const { return _rows;}
+    [[nodiscard]] inline std::size_t ncols() const { return _cols;}
+    [[nodiscard]] inline std::size_t nrows() const { return _rows;}
 
     inline double& operator()(std::size_t row, std::size_t col) {
         // size_t is unsigned, so will always be >= 0
@@ -62,7 +66,7 @@ struct Matrix {
         return _data[row*_cols + col];
     }
 
-    Matrix transpose() const {
+    [[nodiscard]] Matrix transpose() const {
         Matrix A_T(_cols, _rows);
         for (std::size_t irow = 0; irow < _rows; ++irow) {
             for (std::size_t jcol = 0; jcol < _cols; ++jcol) {
@@ -120,6 +124,9 @@ struct Matrix {
         return C;
     }
 
+    friend Matrix
+    operator* (double a, const Matrix& A);
+
     // element-by-element multiplication
 
     Matrix
@@ -159,6 +166,9 @@ struct Matrix {
         return C;
     }
 
+    friend Matrix
+    operator+ (double a, const Matrix& A);
+
     // subtraction
 
     Matrix
@@ -184,6 +194,9 @@ struct Matrix {
         return C;
     }
 
+    friend Matrix
+    operator- (double a, const Matrix& A);
+
     // compound operators
 
     Matrix&
@@ -208,7 +221,7 @@ struct Matrix {
 
     // apply a function on element-by-element basis
 
-    void apply(std::function<double(double)> f) {
+    void apply(const std::function<double(double)>& f) {
         for (auto& e : _data) {
             e = f(e);
         }
@@ -218,7 +231,8 @@ struct Matrix {
 
 // right-multiply by a scalar, C = a * A
 
-Matrix
+
+inline Matrix
 operator* (double a, const Matrix& A) {
     Matrix C(A._rows, A._cols);
     for (std::size_t n = 0; n < A._rows * A._cols; ++n) {
@@ -227,23 +241,23 @@ operator* (double a, const Matrix& A) {
     return C;
 }
 
-Matrix
-operator- (double a, const Matrix& A) {
-    Matrix C(A.nrows(), A.ncols());
-
-    for (std::size_t n = 0; n < A.nrows() * A.ncols(); ++n) {
-        C._data[n] = a - A._data[n];
-    }
-
-    return C;
-}
-
-Matrix
+inline Matrix
 operator+ (double a, const Matrix& A) {
     Matrix C(A.nrows(), A.ncols());
 
     for (std::size_t n = 0; n < A.nrows() * A.ncols(); ++n) {
         C._data[n] = a + A._data[n];
+    }
+
+    return C;
+}
+
+inline Matrix
+operator- (double a, const Matrix& A) {
+    Matrix C(A.nrows(), A.ncols());
+
+    for (std::size_t n = 0; n < A.nrows() * A.ncols(); ++n) {
+        C._data[n] = a - A._data[n];
     }
 
     return C;

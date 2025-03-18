@@ -15,8 +15,8 @@
 
 namespace mnist {
 
-    constexpr int DIGIT_ROWS{28};
-    constexpr int DIGIT_COLS{28};
+    constexpr std::size_t DIGIT_ROWS{28};
+    constexpr std::size_t DIGIT_COLS{28};
 
 
     // a single digit from MNIST
@@ -54,7 +54,7 @@ namespace mnist {
 
         void display() {
 
-            for (auto [n, e] : scaled._data | std::views::enumerate) {
+            for (auto [n, e] : scaled.flat() | std::views::enumerate) {
 
                 if (n % DIGIT_COLS == 0) {
                     std::cout << std::endl;
@@ -88,10 +88,10 @@ namespace mnist {
             for (std::size_t n = 0; n < categorical_guess.nrows(); ++n) {
                 if (categorical_guess(n, 0) > max_val) {
                     max_val = categorical_guess(n, 0);
-                    idx = n;
+                    idx = static_cast<int>(n);
                 }
             }
-            return static_cast<int>(idx);
+            return idx;
 
         }
 
@@ -101,6 +101,7 @@ namespace mnist {
 
     };
 
+    inline
     std::vector<MNISTDigit> read_training_set() {
 
         std::vector<MNISTDigit> digits;
@@ -113,6 +114,7 @@ namespace mnist {
         return digits;
     }
 
+    inline
     std::vector<MNISTDigit> read_test_set() {
 
         std::vector<MNISTDigit> digits;

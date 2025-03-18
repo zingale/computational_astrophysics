@@ -25,7 +25,10 @@ int main() {
         }
     }
 
-    std::cout << "accuracy = " << static_cast<double>(n_correct) / test_set.size() << std::endl;
+    std::cout << "accuracy = "
+              << static_cast<double>(n_correct) /
+                 static_cast<double>(test_set.size())
+              << std::endl;
 
     // output the first 10 we get wrong
 
