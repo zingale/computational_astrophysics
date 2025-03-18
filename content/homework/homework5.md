@@ -43,3 +43,36 @@ You are free to use my homework 3 solutions for the integration if you had diffi
 with the assignment originally.
 
 ## 2. Git practice
+
+Let's get some practice with git.  Here is a git repository
+on github that we looked at in class.
+
+https://github.com/ast390-sbu/test-repo
+
+You should make sure that you have a github account.
+
+
+```{admonition} Your task
+* *Fork* this repository: https://github.com/ast390-sbu/test-repo
+
+  This will create a version of the git repo under your account.
+
+* Clone your fork
+
+* Create a change to the repo, for example, add your
+  name to the `README.md` file or add a file of your own
+  to the repo.  Whatever you wish.
+
+* *add* and *commit* your change and *push* your change back
+  to your fork.
+
+* From the github page for your fork, create a pull request
+  to the original repository.
+```
+
+```{tip}
+We are essentially doing this sequence from class:
+https://zingale.github.io/computational_astrophysics/git/pull-requests.html
+
+If you did it in class while following along then you are done.
+```
