@@ -95,8 +95,6 @@ parts:
     - file: git/version-control
     - file: git/git
     - file: git/git-branches
-      sections:
-      - file: git/git-remotes
     - file: git/github
       sections:
       - file: git/pull-requests

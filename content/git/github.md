@@ -77,7 +77,7 @@ Here's how we will set things up:
    Click on the *New SSH key* button and:
 
    * give a *title* which is descriptive of the machine you are using, like
-     ``MathLab``
+     ``laptop``
 
    * copy and paste the contents of `id_ed25519.pub` into the *key*
      text box.  You can see the contents by doing:

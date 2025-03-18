@@ -99,7 +99,7 @@ project.
 
    ```
    commit 2001a0e996110926a576dcb5fc13fc8022864d0b (HEAD -> main)
-   Author: Michael Zingale <michael.zingake@stonybrook.edu>
+   Author: Michael Zingale <michael.zingale@stonybrook.edu>
    Date:   Sun Jan 30 13:11:24 2022 -0500
 
        my first change
@@ -116,24 +116,24 @@ project.
    ```bash
    nano README
    ```
-   
+
    Here's my file:
 
    ```bash
    cat README
    ```
-   
+
    ```
    this is the start of my awesome new project
    this is now under version control!
    ```
-  
+
    What does git think about our changes?
 
    ```bash
    git status
    ```
-   
+
    you should see something like:
 
    ```
@@ -146,7 +146,7 @@ project.
 
    no changes added to commit (use "git add" and/or "git commit -a")
    ```
-   
+
    This is telling you that you have local changes but you haven't yet told git to care about them.
 
    Let's `add` the changes:
@@ -165,8 +165,7 @@ project.
            modified:   README
    ```
 
-   ```{note}
-   **What is add really doing?**
+   ```{admonition} What is add really doing?
 
    Git has a concept call the *staging area*.  When we ``add`` a
    file, git puts the changes into the staging area.  We can add
@@ -176,14 +175,14 @@ project.
    Once we do `git commit`, git will record the all of the
    changes that are staged into a "commit".
    ```
-   
+
    To have git track these changes, we can now just do:
 
    ```bash
    git commit
    ```
-   
-   Notice that we didn't specify the file here -- all the changes that
+
+   Notice that we didn't specify the file here---all the changes that
    were staged were part of that commit.
 
    If we now do `git log`, we'll see that there is a second commit
@@ -191,13 +190,13 @@ project.
 
    ```
    commit 78b6925752e8388dddb3d65b6355bfeeb87b87a7 (HEAD -> main)
-   Author: Michael Zingale <michael.zingake@stonybrook.edu>
+   Author: Michael Zingale <michael.zingale@stonybrook.edu>
    Date:   Sun Jan 30 14:23:09 2022 -0500
 
        make some modifications
 
    commit 2001a0e996110926a576dcb5fc13fc8022864d0b
-   Author: Michael Zingale <michael.zingake@stonybrook.edu>
+   Author: Michael Zingale <michael.zingale@stonybrook.edu>
    Date:   Sun Jan 30 13:11:24 2022 -0500
 
        my first change
