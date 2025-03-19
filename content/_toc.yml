@@ -212,6 +212,7 @@ parts:
       sections:
       - file: homework/homework3-solutions
     - file: homework/homework4
+    - file: homework/homework5
 
   - caption: Project
     chapters:
