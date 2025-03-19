@@ -57,7 +57,7 @@ You should make sure that you have a github account.
 
   This will create a version of the git repo under your account.
 
-* Clone your fork
+* *Clone* your fork.
 
 * Create a change to the repo, for example, add your
   name to the `README.md` file or add a file of your own
@@ -66,7 +66,7 @@ You should make sure that you have a github account.
 * *add* and *commit* your change and *push* your change back
   to your fork.
 
-* From the github page for your fork, create a pull request
+* From the github page for your fork, create a *pull request*
   to the original repository.
 ```
 
