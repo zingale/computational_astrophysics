@@ -124,7 +124,9 @@ git clone git@github.com:zingale/mz_class_repo.git
 (replacing my repo and username with your own).
 
 Now we can go into our repo and look around.  Notice that there is a
-`.git/` directory.  Also look at the remotes:
+`.git/` directory.
+
+We can also see that there are "remotes":
 
 ```bash
 git remote -v
@@ -135,8 +137,8 @@ origin	git@github.com:zingale/mz_class_repo.git (fetch)
 origin	git@github.com:zingale/mz_class_repo.git (push)
 ```
 
-This is just like the example or remotes we did previously, except now
-github is acting as our remote.
+This tells us that our local repository is connected to the remote repository
+on github, and referred to as `origin` here.
 
 This means that we call push to github and pull from there.
 

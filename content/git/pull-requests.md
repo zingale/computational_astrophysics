@@ -20,7 +20,7 @@ managing who can do different things to the repos under its control.
 Let's clone this repo:
 
 ```bash
-git clone git@github.com:phy504-sbu/test-repo.git
+git clone git@github.com:ast390-sbu/test-repo.git
 cd test-repo
 ```
 
@@ -118,9 +118,10 @@ The overall workflow that we did: fork, push to our fork, issue a PR, looks like
 
 ## Our class notes github
 
-Let's take a tour of our class notes on github: https://github.com/zingale/phy504
+Let's take a tour of our class notes on github: https://github.com/zingale/computational_astrophysics
 
-There are a lot of other features that github provides that we will explore later in the semester, including:
+There are a lot of other features that github provides that we can
+explore later in the semester, including:
 
 * github actions : automating some workflows (like testing) on our code
 

@@ -2,6 +2,26 @@
 
 We'll do a walkthrough on git.
 
+````{important}
+You should install `git` on your laptop to follow along.
+For:
+
+* Windows: follow the [Software Carpentry bash install](https://carpentries.github.io/workshop-template/install_instructions/#shell) instructions.  This will install `git`.
+
+* Mac: try doing
+
+  ```
+  git --version
+  ```
+
+  in a terminal.  If it is not found, then the terminal should tell you
+  how to install the "command line developer tools".  Do not install XCode---we
+  don't need it.
+
+* Linux: `git` is likely already installed.  If not, you can install it using your
+  distribution's package manager.
+````
+
 ```{note}
 An alternate walkthrough is provided by the [Software
 Carpentry](https://software-carpentry.org/) lesson [_Version Control

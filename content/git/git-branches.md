@@ -104,9 +104,10 @@ To get more practice, we'll start a new project and initialize it.
 
    now if you do `git status`, that file will not appear, but `.gitignore` does!
 
-   Be sure to add `.gitignore` to git by doing `git add` followed
+   ```{important}
+   Be sure to add `.gitignore` to your git repo by doing `git add` followed
    by `git commit`.
-
+   ```
 
 
 ## A Feature Branch

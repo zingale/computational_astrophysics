@@ -13,7 +13,7 @@ time.  And you will find yourself in the following situations:
 * *Your research group is all working on the same code* and you need to sync up with
   everyone's changes and make sure that no one breaks the code.
 
-This is what version control does for us.
+This is what [version control](https://en.wikipedia.org/wiki/Version_control) does for us.
 
 
 ```{note}
@@ -40,7 +40,7 @@ In particular:
   into the main version.
 
 
-```{note}
+```{tip}
 Even for a single developer, version control is a great asset.
 
 Common task: you notice your code is giving different answers than you've
