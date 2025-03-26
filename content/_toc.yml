@@ -188,6 +188,7 @@ parts:
       - file: machine-learning/neural-net-mnist
       - file: machine-learning/mnist-cxx
       - file: machine-learning/neural-net-improvements
+      - file: machine-learning/application-galaxies
     - file: machine-learning/machine-learning-libraries
       sections:
       - file: machine-learning/keras-mnist

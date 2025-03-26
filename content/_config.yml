@@ -10,6 +10,8 @@ copyright: "2021-2025"
 # See https://jupyterbook.org/content/execute.html
 execute:
    allow_errors: true
+   exclude_patterns:
+     - "*application-galaxies.ipynb"
 
 # Define the name of the latex output file for PDF builds
 latex:
