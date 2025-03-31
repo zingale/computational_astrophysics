@@ -119,6 +119,7 @@ parts:
       - file: interpolation/lagrange-interpolation
       - file: interpolation/application-interpolating-reaction-rates
       - file: interpolation/conservative-interpolation
+        title: ✱ Conservative Interpolation
       - file: interpolation/going-further
     - file: fitting/least_squares
       sections:
