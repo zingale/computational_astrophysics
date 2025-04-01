@@ -200,6 +200,7 @@ parts:
     chapters:
     - file: in_class/in-class-ode-projectile
     - file: in_class/in-class-hilbert-matrix
+    - file: in_class/in-class-fft
 
   - caption: Homework
     chapters:
