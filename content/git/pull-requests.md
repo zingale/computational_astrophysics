@@ -126,5 +126,3 @@ explore later in the semester, including:
 * github actions : automating some workflows (like testing) on our code
 
 * github pages : building and hosting web pages for our project
-
-
