@@ -99,6 +99,9 @@ and 3 on the other.
   * Construct the Lagrange polynomial passing through those 4 data points,
     $((\log T)_j, (\log\lambda)_j), \ldots, ((\log T)_{j+3}, (\log\lambda)_{j+3})$.
     and evaluate $\log\lambda_0$ corresponding to $\log T_0$.
+
+    You can use the code from class as a starting point, but don't use a library
+    (e.g. scipy).
   
   * Now compute the value of $\lambda_0$ from the original expression and compute
     the error 
