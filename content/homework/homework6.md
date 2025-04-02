@@ -42,12 +42,14 @@ concern ourselves with 3 columns:
 
   $$\sigma_j = \sqrt{C_{jj}}$$
 
-  This will require that you compute the inverse of ${\bf A}^\intercal {\bf A}$.
-  If you are using python, you can use `np.linalg.inv()`.  If you are using a
-  different language, I can provide you with a function if you let me know.
+  This will require that you compute the inverse of ${\bf A}^\intercal {\bf A}$:
 
-  
+  * If you are using python, you can use `np.linalg.inv()`.
+
+  * If you are using C++, I've added a function in `inverse.H` to the regression code
+    from class that contains a function to compute the inverse.  See:
+    https://github.com/zingale/computational_astrophysics/tree/main/examples/fitting
+
 ```
 
 ## 2. Tabulating Reaction Rates
-
