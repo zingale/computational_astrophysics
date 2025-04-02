@@ -12,7 +12,7 @@ Many types of interpolation exists:
 
 * Some ensure that no new extrema a introduced.
 
-* Some ensure a physical constraint (like thermodynamic consistency) is satisfied/
+* Some ensure a physical constraint (like thermodynamic consistency) is satisfied.
 
 * Some ensure smoothness of the fit.
 
