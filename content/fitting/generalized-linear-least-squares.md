@@ -66,7 +66,7 @@ our system is:
 
 $$\sum_{i=1}^N \sum_{j=1}^M A_{ik} A_{ij} a_j = \sum_{i=1}^N A_{ik} b_i$$
 
-which, by looking at which indices contract, gives us the linear system:
+which, by looking at which indices contract, gives us row $k$ of the linear system:
 
 $${\bf A}^\intercal {\bf A} {\bf a} = {\bf A}^\intercal {\bf b}$$
 
