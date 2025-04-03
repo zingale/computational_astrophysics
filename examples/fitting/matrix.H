@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <iomanip>
 #include <cassert>
 
 // a 2-d matrix with contiguous storage
@@ -111,9 +112,11 @@ struct Matrix {
 inline
 std::ostream& operator<< (std::ostream& os, const Matrix& a) {
 
+    std::cout << std::setprecision(4) << std::fixed;
+
     for (std::size_t row = 0; row < a.nrows(); ++row) {
         for (std::size_t col = 0; col < a.ncols(); ++col) {
-            os << a(row, col) << " ";
+            os << std::setw(8) << a(row, col) << " ";
         }
         os << std::endl;
     }
