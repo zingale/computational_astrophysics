@@ -1,4 +1,4 @@
-# C++ Implemntation of MNIST
+# C++ Implementation of MNIST
 
 Here we describe a C++ implementation of the neural network (with
 hidden layer) for the MNIST digits.
