@@ -1,7 +1,7 @@
 #ifndef INITIAL_CONDITIONS_H
 #define INITIAL_CONDITIONS_H
 
-#include <fdgrid.H>
+#include "fdgrid.H"
 
 inline
 void tophat(Grid& g) {

@@ -12,8 +12,8 @@ class Grid {
 
     int nx;
     int ng;
-    int xmin;
-    int xmax;
+    double xmin;
+    double xmax;
 
     int nq;
 

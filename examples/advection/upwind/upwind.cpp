@@ -1,11 +1,12 @@
 #include <iostream>
 #include <functional>
+#include <vector>
 
-#include <fdgrid.H>
-#include <initial_conditions.H>
+#include "fdgrid.H"
+#include "initial_conditions.H"
 
 Grid upwind(const int nx, const double u, const double C_in,
-            const int num_periods, std::function<void(Grid&)> init_cond) {
+            const int num_periods, const std::function<void(Grid&)>& init_cond) {
 
     double C = C_in;
 
