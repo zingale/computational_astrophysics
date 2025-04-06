@@ -1,8 +1,10 @@
 #include <iostream>
 #include <functional>
+#include <vector>
+#include <cmath>
 
-#include <fvgrid.H>
-#include <initial_conditions.H>
+#include "fvgrid.H"
+#include "initial_conditions.H"
 
 std::vector<double> flux_update(const FVGrid& g, const double u, const std::vector<double>& a) {
     // compute -div{F} for linear advection
@@ -48,7 +50,7 @@ std::vector<double> flux_update(const FVGrid& g, const double u, const std::vect
 }
 
 FVGrid advection_mol(const int nx, const double u, const double C,
-                     const int num_periods, std::function<void(FVGrid&)> init_cond) {
+                     const int num_periods, const std::function<void(FVGrid&)>& init_cond) {
 
     FVGrid g(nx, 2, 0.0, 1.0);
 
@@ -62,8 +64,6 @@ FVGrid advection_mol(const int nx, const double u, const double C,
     init_cond(g);
 
     // evolution loop
-
-    std::vector<double> a_new(g.nq, 0.0);
 
     while (t < tmax) {
 
