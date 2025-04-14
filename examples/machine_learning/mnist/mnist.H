@@ -105,8 +105,11 @@ namespace mnist {
     std::vector<MNISTDigit> read_training_set() {
 
         std::vector<MNISTDigit> digits;
-
         std::ifstream mf("mnist_train.csv");
+        if (mf.fail()) {
+            std::cout << "Error: training file does not exist" << std::endl;
+            std::exit(1);
+        }
         std::string line;
         while (std::getline(mf, line)) {
             digits.emplace_back(line);
@@ -120,6 +123,10 @@ namespace mnist {
         std::vector<MNISTDigit> digits;
 
         std::ifstream mf("mnist_test.csv");
+        if (mf.fail()) {
+            std::cout << "Error: test file does not exist" << std::endl;
+            std::exit(1);
+        }
         std::string line;
         while (std::getline(mf, line)) {
             digits.emplace_back(line);
