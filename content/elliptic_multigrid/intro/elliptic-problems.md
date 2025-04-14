@@ -6,9 +6,11 @@ $$\nabla^2 \phi = f$$
 
 This is a second-order elliptic equation, and therefore requires 2 boundary conditions.
 
+```{note}
 There is no time-dependence in this equation.  The potential $\phi$
 responds instantaneously to the source $f$ and the boundary
 conditions.
+```
 
 Consider the one-dimensional Poisson equation:
 
@@ -55,4 +57,4 @@ If we have homogeneous Neumann BCs on all sides, $\nabla \phi \cdot
 
 $$\int_\Omega f d\Omega = 0$$
 
-The same condition will apply, if the boundary conditions are periodic.
+The same condition will apply if the boundary conditions are periodic.
