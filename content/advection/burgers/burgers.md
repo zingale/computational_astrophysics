@@ -6,9 +6,11 @@ hydrodynamics.
 
 $$u_t + u u_x = 0$$
 
+```{important}
 This looks like the linear advection equation, except the quantity
 being advected is the velocity itself.  This means that $u$ is no
 longer a constant, but can vary in space and time.
+```
 
 Written in conservative form, 
 
@@ -27,6 +29,12 @@ $$\frac{\partial \langle u \rangle_i}{\partial t} = - \frac{1}{\Delta x} (F_{i+1
 
 To second order accuracy, as we saw previously, $\langle u \rangle_i
 \approx u_i$, so we'll drop the $\langle \rangle$ here.
+
+```{important}
+By solving Burgers' equation in integral form (which is what the finite-volume
+approach does), we avoid needing to discretize $\partial u/\partial x$ directly,
+which may be undefined if $u$ is discontinuous.
+```
 
 ## Nonlinear behavior
 
@@ -78,10 +86,13 @@ Now we see that, for these initial conditions, at some point in the
 future the characteristics intersect.  This means that there is not a
 unique curve that we can trace back along to find the value of
 $u(x,t)$.  The information about where the solution was coming from
-was lost.  This is the situation of a *shock*.  The correct solution
-here is to put a discontinuous jump between the left and right states
+was lost.  This is the situation of a *shock*.  
+
+```{tip}
+The correct solution at a shock is to put a discontinuous jump between the left and right states
 where the characteristics intersect.  The speed of the shock can be
-found from the Rankine-Hugoniot conditions.
+found from the [Rankine-Hugoniot conditions](https://en.wikipedia.org/wiki/Rankine%E2%80%93Hugoniot_conditions).
+```
 
 It is also possible to get a *rarefaction* if the characteristics diverge:
 

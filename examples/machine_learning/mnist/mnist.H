@@ -17,7 +17,7 @@ namespace mnist {
 
     constexpr std::size_t DIGIT_ROWS{28};
     constexpr std::size_t DIGIT_COLS{28};
-
+    constexpr std::size_t DIGIT_CATEGORIES{10};
 
     // a single digit from MNIST
 
@@ -30,7 +30,7 @@ namespace mnist {
         int num{-1};
 
         MNISTDigit(const std::string& raw_string)
-            : scaled(DIGIT_ROWS * DIGIT_COLS, 1), out(10, 1, 0.01)
+            : scaled(DIGIT_ROWS * DIGIT_COLS, 1), out(DIGIT_CATEGORIES, 1, 0.01)
         {
             // loop over the raw string and split it up.  The first number
             // is the answer, the rest are the digit
@@ -81,7 +81,7 @@ namespace mnist {
         // answer
 
         int interpret(const Matrix& categorical_guess) {
-            assert (categorical_guess.nrows() == 10);
+            assert (categorical_guess.nrows() == DIGIT_CATEGORIES);
 
             double max_val{std::numeric_limits<double>::lowest()};
             int idx{-1};
@@ -105,8 +105,11 @@ namespace mnist {
     std::vector<MNISTDigit> read_training_set() {
 
         std::vector<MNISTDigit> digits;
-
         std::ifstream mf("mnist_train.csv");
+        if (mf.fail()) {
+            std::cout << "Error: training file does not exist" << std::endl;
+            std::exit(1);
+        }
         std::string line;
         while (std::getline(mf, line)) {
             digits.emplace_back(line);
@@ -120,6 +123,10 @@ namespace mnist {
         std::vector<MNISTDigit> digits;
 
         std::ifstream mf("mnist_test.csv");
+        if (mf.fail()) {
+            std::cout << "Error: test file does not exist" << std::endl;
+            std::exit(1);
+        }
         std::string line;
         while (std::getline(mf, line)) {
             digits.emplace_back(line);

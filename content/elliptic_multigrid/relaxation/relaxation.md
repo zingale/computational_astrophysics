@@ -4,7 +4,9 @@ A second-order accurate discretization of the second derivative is:
 
 $$\phi_i^{\prime\prime} = \frac{\phi_{i+1} - 2\phi_i + \phi_{i-1}}{\Delta x^2}$$
 
+```{tip}
 This is true on finite-difference and finite-volume grids (to second-order in $\Delta x$).
+```
 
 We'll work in 1-d.  Our
 Poisson equation
@@ -24,7 +26,7 @@ We could solve this by writing it as a linear system,
 ${\bf A}{\bf x} = {\bf b}$, with ${\bf A}$ a triadiagonal matrix with
 diagonals $1, -2, 1$ and $b$ corresponding to $f_i$.  This approach is a
 "direct solve" of the coupled system.  But this can be expensive in
-multi-dimensions and harder to parallelize if domain decomposition is used.
+multi-dimensions and harder to parallelize if [domain decomposition](https://en.wikipedia.org/wiki/Domain_decomposition_methods) is used.
 ```
 
 Instead of directly solving the linear system, we can use
@@ -106,7 +108,7 @@ For a finite difference (node-centered) grid:
 we have a point exactly on each boundary, so we only need to iterate
 over the interior points.
 
-In contracts, for a finite-volume or cell-centered finite-difference grid:
+In contrast, for a finite-volume or cell-centered finite-difference grid:
 
 ![finite-volume grid](ccfd_grid_bnd.png)
 

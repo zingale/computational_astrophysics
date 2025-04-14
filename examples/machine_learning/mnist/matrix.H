@@ -221,10 +221,19 @@ public:
 
     // apply a function on element-by-element basis
 
-    void apply(const std::function<double(double)>& f) {
+    void apply_inplace(const std::function<double(double)>& f) {
         for (auto& e : _data) {
             e = f(e);
         }
+    }
+
+    Matrix
+    apply_new(const std::function<double(double)>& f) {
+        Matrix C(_rows, _cols);
+        for (std::size_t n = 0; n < _rows * _cols; ++n) {
+            C._data[n] = f(_data[n]);
+        }
+        return C;
     }
 
 };

@@ -54,7 +54,7 @@ Using $S = \Delta x/\Delta t$, we see:
 
 $$S = \frac{f(u_r) - f(u_l)}{u_r - u_l}$$
 
-and taking $f(u) = u^2 / 2$, we get:
+and taking $f(u) = u^2 / 2$, we get the shock speed:
 
 $$S = \frac{1}{2} (u_l + u_r)$$
 

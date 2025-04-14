@@ -20,7 +20,7 @@ int main() {
 
     Matrix B{{1, 2}, {3, 4}};
 
-    B.apply([](double x) -> double {return 2*x+1;});
+    B.apply_inplace([](double x) -> double {return 2*x+1;});
     std::cout << B << std::endl;
 
     Matrix C{{1, 2, 3}, {4, 5, 6}};

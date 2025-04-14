@@ -59,7 +59,7 @@ public:
     ///
     /// set the source term, f, in L phi = f
     ///
-    void set_source(std::function<double(double)> func) {
+    void set_source(const std::function<double(double)>& func) {
 
         for (int i = 0; i < N; ++i) {
             f[i] = func(x[i]);

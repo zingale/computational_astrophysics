@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "poisson.H"
 
 const double TOL = 1.e-10;

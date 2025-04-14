@@ -11,7 +11,7 @@ int main() {
     std::random_device rd;
     std::mt19937 generator(rd());
     std::normal_distribution<double> randn(0.0, 1.0 / std::sqrt(4));
-    std::generate(A._data.begin(), A._data.end(),
+    std::generate(A.flat().begin(), A.flat().end(),
                   [&]() -> double {return randn(generator);});
 
     std::cout << A << std::endl;
