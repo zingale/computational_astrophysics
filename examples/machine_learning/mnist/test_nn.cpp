@@ -8,14 +8,22 @@ int main() {
 
     // train the network using the training set
 
-    auto training_set = mnist::read_training_set();
+    std::cout << "reading in the data...";
 
-    auto n = NeuralNetwork(784, 10, 50);
-    n.train(training_set, 5);
+    auto training_set = mnist::read_training_set();
+    auto test_set = mnist::read_test_set();
+
+    std::cout << "done\n" << std::endl;
+
+    constexpr int hidden_layer_size{50};
+    constexpr int n_epochs{10};
+    constexpr double learning_rate{0.1};
+
+    auto n = NeuralNetwork(mnist::DIGIT_ROWS * mnist::DIGIT_COLS,
+                           mnist::DIGIT_CATEGORIES, hidden_layer_size);
+    n.train(training_set, test_set, n_epochs, learning_rate);
 
     // now assess how well we did using the test set
-
-    auto test_set = mnist::read_test_set();
 
     int n_correct{0};
     for (auto model : test_set) {
@@ -25,11 +33,13 @@ int main() {
         }
     }
 
-    std::cout << "accuracy = "
+    std::cout << "finished training!" << std::endl;
+    std::cout << "final test set accuracy = "
               << static_cast<double>(n_correct) /
                  static_cast<double>(test_set.size())
-              << std::endl;
+              << std::endl << std::endl;
 
+#if 0
     // output the first 10 we get wrong
 
     int n_wrong{0};
@@ -45,11 +55,17 @@ int main() {
             break;
         }
     }
+#endif
+
+    std::cout << "Exploring hidden layer size:" << std::endl;
 
     // now explore the size of the hidden layer
-    for (auto hidden_layer_size : {25, 50, 100, 150}) {
-        auto n = NeuralNetwork(784, 10, hidden_layer_size);
-        n.train(training_set, 5);
+    for (auto hl_size : {25, 50, 100, 150}) {
+        auto n = NeuralNetwork(mnist::DIGIT_ROWS * mnist::DIGIT_COLS,
+                               mnist::DIGIT_CATEGORIES, hl_size);
+        constexpr bool verbose{false};
+        n.train(training_set, test_set, n_epochs,
+                learning_rate, verbose);
 
         // now assess how well we did using the test set
 
@@ -61,10 +77,11 @@ int main() {
             }
         }
 
-        std::cout << "hidden layer size = " << hidden_layer_size
+        std::cout << "hidden layer size = " << hl_size
                   << " accuracy = "
                   << static_cast<double>(n_correct) /
                      static_cast<double>(test_set.size())
                   << std::endl;
     }
+
 }

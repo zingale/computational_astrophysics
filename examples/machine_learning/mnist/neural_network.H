@@ -11,8 +11,15 @@
 
 // our sigmoid function
 
-double g(double xi) {
+double sigmoid(double xi) {
+    // the sigmoid activation function
     return 1.0 / (1.0 + std::exp(-xi));
+}
+
+double sigmoid_deriv(double z) {
+    // this is the derivative of the sigmoid in terms of the
+    // sigmoid, z = sigmoid(xi)
+    return z * (1.0 - z);
 }
 
 class NeuralNetwork {
@@ -50,7 +57,8 @@ public:
     };
 
     void train(const std::vector<mnist::MNISTDigit>& training_data,
-               int n_epochs, double learning_rate=0.1) {
+               const std::vector<mnist::MNISTDigit>& test_data,
+               int n_epochs, double learning_rate, bool verbose=true) {
 
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -60,37 +68,55 @@ public:
         std::iota(indices.begin(), indices.end(), 0);
 
         for (int i = 0; i < n_epochs; ++i) {
-            std::cout << "epoch " << i << std::endl;
+            if (verbose) {
+                std::cout << "epoch " << i << " ... ";
+            }
             std::shuffle(indices.begin(), indices.end(), gen);
 
             for (auto i : indices) {
                 const auto& model = training_data[i];
                 auto z_tilde = B * model.scaled;
-                z_tilde.apply(g);
+                z_tilde.apply_inplace(sigmoid);
 
                 auto z = A * z_tilde;
-                z.apply(g);
+                z.apply_inplace(sigmoid);
 
                 auto e = z - model.out;
-                auto e_tilde = A.transpose() * (e % z % (1.0 - z));
+                auto e_tilde = A.transpose() * (e % z.apply_new(sigmoid_deriv));
 
                 // corrections
                 auto dA = ((-2 * learning_rate * e) % z % (1.0 - z)) *
                     z_tilde.transpose();
-                auto dB = ((-2 * learning_rate * e_tilde) % z_tilde % (1.0 - z_tilde)) * model.scaled.transpose();
+                auto dB = ((-2 * learning_rate * e_tilde) % z_tilde.apply_new(sigmoid_deriv)) * model.scaled.transpose();
 
                 A += dA;
                 B += dB;
             }
+
+            // finished an epoch -- see how we are doing so far
+            int n_correct{0};
+            for (auto model : test_data) {
+                auto res = predict(model);
+                if (model.validate(res)) {
+                    n_correct += 1;
+                }
+            }
+            if (verbose) {
+                std::cout << "accuracy = "
+                          << static_cast<double>(n_correct) /
+                             static_cast<double>(test_data.size())
+                          << std::endl;
+            }
         }
+
     }
 
     Matrix
     predict(const mnist::MNISTDigit& model) {
         auto ztilde = B * model.scaled;
-        ztilde.apply(g);
+        ztilde.apply_inplace(sigmoid);
         auto z = A * ztilde;
-        z.apply(g);
+        z.apply_inplace(sigmoid);
 
         return z;
     }

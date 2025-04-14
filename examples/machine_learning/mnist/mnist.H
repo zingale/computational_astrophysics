@@ -17,7 +17,7 @@ namespace mnist {
 
     constexpr std::size_t DIGIT_ROWS{28};
     constexpr std::size_t DIGIT_COLS{28};
-
+    constexpr std::size_t DIGIT_CATEGORIES{10};
 
     // a single digit from MNIST
 
@@ -30,7 +30,7 @@ namespace mnist {
         int num{-1};
 
         MNISTDigit(const std::string& raw_string)
-            : scaled(DIGIT_ROWS * DIGIT_COLS, 1), out(10, 1, 0.01)
+            : scaled(DIGIT_ROWS * DIGIT_COLS, 1), out(DIGIT_CATEGORIES, 1, 0.01)
         {
             // loop over the raw string and split it up.  The first number
             // is the answer, the rest are the digit
@@ -81,7 +81,7 @@ namespace mnist {
         // answer
 
         int interpret(const Matrix& categorical_guess) {
-            assert (categorical_guess.nrows() == 10);
+            assert (categorical_guess.nrows() == DIGIT_CATEGORIES);
 
             double max_val{std::numeric_limits<double>::lowest()};
             int idx{-1};
