@@ -46,6 +46,13 @@ derivations, notes, etc.
 
      These are the initial conditions for a shock that we explored in class.
 
+     ```{important}
+     While you can base your solution on the [first-order advection
+     example from class](https://zingale.github.io/computational_astrophysics/advection/advection/advection-upwind.html),
+     you need to be sure to compute the timestep inside of the
+     evolution, for each step, since $u$ changes as we evolve.
+     ```
+   
    * Now difference the conservative form as:
 
      $$u_{i}^{n+1} = u_i^n - \frac{\Delta t}{\Delta x} \left ( \frac{1}{2} (u_i^n)^2
