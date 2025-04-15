@@ -145,6 +145,7 @@ parts:
       sections:
       - file: advection/burgers/burgers-riemann
       - file: advection/burgers/burgers-methods
+    - file: advection/advection-more
     - file: elliptic_multigrid/intro/elliptic-problems
       sections:
       - file: elliptic_multigrid/relaxation/relaxation
