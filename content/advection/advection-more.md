@@ -36,7 +36,7 @@ $$\frac{\partial a}{\partial t} + \frac{\partial F^{(x)}(a)}{\partial x} +
 
 Now defining the average in two-dimensions as:
 
-$$\langle a \rangle_{i,j} = \int_{x_{i-1/2}}^{x_{i+1/2}} \int_{y_{j-1/2}}^{y_{j+1/2}} a(x, y) dx dy$$
+$$\langle a \rangle_{i,j} = \frac{1}{\Delta x \Delta y} \int_{x_{i-1/2}}^{x_{i+1/2}} \int_{y_{j-1/2}}^{y_{j+1/2}} a(x, y) dx dy$$
 
 and integrating the conservative form of the advection equation over a cell,
 we have:
