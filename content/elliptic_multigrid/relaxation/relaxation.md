@@ -48,7 +48,11 @@ the solution smoother as we iterate.
 Generally relaxation requires that the matrix be [*diagonally
 dominant*](https://en.wikipedia.org/wiki/Diagonally_dominant_matrix),
 which we are just shy of, but nevertheless, relaxation works quite
-well for this system.  There are a few popular approaches we can
+well for this system.
+
+## Smoothing types
+
+There are a few popular approaches we can
 consider:
 
 * [*Jacobi iteration*](https://en.wikipedia.org/wiki/Jacobi_method) :
@@ -129,10 +133,12 @@ Consider the following boundary conditions:
 
   $$\phi(a) = A$$
 
+  ```{caution}
   A naive guess would be to set $\phi_{\mathrm{lo}-1} = A$, but this
   is only first order accurate.
+  ```
 
-  Instead we recognize that we can average across the boundary to be
+  We recognize that we can average across the boundary to be
   second-onder on the boundary:
 
   $$A = \frac{\phi_\mathrm{lo} + \phi_\mathrm{lo-1}}{2}$$
