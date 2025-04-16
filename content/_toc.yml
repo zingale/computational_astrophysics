@@ -222,6 +222,8 @@ parts:
       sections:
       - file: homework/homework5-solutions
     - file: homework/homework6
+      sections:
+      - file: homework/homework6-solutions
     - file: homework/homework7
 
   - caption: Project
