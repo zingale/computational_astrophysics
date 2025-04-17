@@ -8,7 +8,7 @@ Overviews:
 
 * [Machine Learning and Cosmology](https://arxiv.org/pdf/2203.08056.pdf) by C. Dvorkin et al.
 
-* [Maching Learning Opportunities for Nucleosynthesis Studies](https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1494439/full) by Smith & Lu.
+* [Machine Learning Opportunities for Nucleosynthesis Studies](https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1494439/full) by Smith & Lu.
 
 Some observational examples:
 
