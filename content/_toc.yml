@@ -190,13 +190,15 @@ parts:
       - file: machine-learning/neural-net-mnist
       - file: machine-learning/mnist-cxx
       - file: machine-learning/neural-net-improvements
-      - file: machine-learning/application-galaxies
     - file: machine-learning/machine-learning-libraries
       sections:
       - file: machine-learning/keras-mnist
       - file: machine-learning/keras-last-number
       - file: machine-learning/keras-clustering
     - file: machine-learning/machine-learning-in-astro
+    - file: machine-learning/application-galaxies-intro
+      sections:
+      - file: machine-learning/application-galaxies
 
   - caption: Additional examples (for in-class)
     chapters:

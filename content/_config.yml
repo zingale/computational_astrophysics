@@ -11,7 +11,7 @@ copyright: "2021-2025"
 execute:
    allow_errors: true
    exclude_patterns:
-     - "*application-galaxies.ipynb"
+     - "*application-galaxies*.ipynb"
 
 # Define the name of the latex output file for PDF builds
 latex:

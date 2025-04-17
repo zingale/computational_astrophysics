@@ -145,4 +145,9 @@ Using linear regression to [estimate $H_0$ from
 Type Ia supernova](https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html).
 :::
 
+:::{grid-item-card} Galaxy Classification
+{bdg-info-line}`ML/NN`
+Using machine learning / neural networks to [classify galaxy images](https://zingale.github.io/computational_astrophysics/machine-learning/application-galaxies-intro.html).
+:::
+
 ::::
