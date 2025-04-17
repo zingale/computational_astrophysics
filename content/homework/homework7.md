@@ -35,7 +35,7 @@ derivations, notes, etc.
 
    We will run for a maximum time of $t = 0.2$.
 
-   ```{admonition} Your task
+   ````{admonition} Your task
    * Using first-order upwinding, we can difference the first form of Burgers' equation
      as:
 
@@ -72,3 +72,4 @@ derivations, notes, etc.
      Which method gets the shock speed correct?  Why?
 
      Present your results at two different grid resolutions.
+   ````
