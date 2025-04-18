@@ -199,6 +199,7 @@ parts:
     - file: machine-learning/application-galaxies-intro
       sections:
       - file: machine-learning/application-galaxies
+      - file: machine-learning/application-galaxies-keras-cnn
 
   - caption: Additional examples (for in-class)
     chapters:
