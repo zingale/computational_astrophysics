@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="385pt" height="300pt" viewBox="0.00 0.00 426.00 332.00">
+<g id="graph0" class="graph" transform="scale(0.9 0.9) rotate(0) translate(4 328)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-328 422,-328 422,4 -4,4"/>
+<!-- 140711275491152 -->
+<g id="node1" class="node">
+<title>140711275491152</title>
+<polygon fill="none" stroke="black" points="5,-240.5 5,-323.5 413,-323.5 413,-240.5 5,-240.5"/>
+<polygon fill="black" stroke="transparent" points="5,-240.5 5,-323.5 413,-323.5 413,-240.5 5,-240.5"/>
+<polygon fill="black" stroke="transparent" points="7,-281 7,-321 411,-321 411,-281 7,-281"/>
+<polygon fill="none" stroke="black" points="7,-281 7,-321 411,-321 411,-281 7,-281"/>
+<text text-anchor="start" x="148" y="-298.2" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="16.00" fill="white">dense</text>
+<text text-anchor="start" x="202" y="-298.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="white"> (Dense)</text>
+<polygon fill="white" stroke="transparent" points="7,-242 7,-279 197,-279 197,-242 7,-242"/>
+<polygon fill="none" stroke="black" points="7,-242 7,-279 197,-279 197,-242 7,-242"/>
+<text text-anchor="start" x="18" y="-257.8" font-family="Helvetica,sans-Serif" font-size="14.00">Input shape: </text>
+<text text-anchor="start" x="111" y="-257.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(None, 2)</text>
+<polygon fill="white" stroke="transparent" points="199,-242 199,-279 411,-279 411,-242 199,-242"/>
+<polygon fill="none" stroke="black" points="199,-242 199,-279 411,-279 411,-242 199,-242"/>
+<text text-anchor="start" x="210" y="-257.8" font-family="Helvetica,sans-Serif" font-size="14.00">Output shape: </text>
+<text text-anchor="start" x="315" y="-257.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(None, 50)</text>
+</g>
+<!-- 140711275093072 -->
+<g id="node2" class="node">
+<title>140711275093072</title>
+<polygon fill="none" stroke="black" points="0,-120.5 0,-203.5 418,-203.5 418,-120.5 0,-120.5"/>
+<polygon fill="black" stroke="transparent" points="0,-120.5 0,-203.5 418,-203.5 418,-120.5 0,-120.5"/>
+<polygon fill="black" stroke="transparent" points="2,-161 2,-201 416,-201 416,-161 2,-161"/>
+<polygon fill="none" stroke="black" points="2,-161 2,-201 416,-201 416,-161 2,-161"/>
+<text text-anchor="start" x="138.5" y="-178.2" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="16.00" fill="white">dense_1</text>
+<text text-anchor="start" x="211.5" y="-178.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="white"> (Dense)</text>
+<polygon fill="white" stroke="transparent" points="2,-122 2,-159 202,-159 202,-122 2,-122"/>
+<polygon fill="none" stroke="black" points="2,-122 2,-159 202,-159 202,-122 2,-122"/>
+<text text-anchor="start" x="13" y="-137.8" font-family="Helvetica,sans-Serif" font-size="14.00">Input shape: </text>
+<text text-anchor="start" x="106" y="-137.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(None, 50)</text>
+<polygon fill="white" stroke="transparent" points="204,-122 204,-159 416,-159 416,-122 204,-122"/>
+<polygon fill="none" stroke="black" points="204,-122 204,-159 416,-159 416,-122 204,-122"/>
+<text text-anchor="start" x="215" y="-137.8" font-family="Helvetica,sans-Serif" font-size="14.00">Output shape: </text>
+<text text-anchor="start" x="320" y="-137.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(None, 20)</text>
+</g>
+<!-- 140711275491152&#45;&gt;140711275093072 -->
+<g id="edge1" class="edge">
+<title>140711275491152-&gt;140711275093072</title>
+<path fill="none" stroke="black" stroke-width="2" d="M209,-240.37C209,-240.37 209,-213.56 209,-213.56"/>
+<polygon fill="black" stroke="black" stroke-width="2" points="212.5,-213.56 209,-203.56 205.5,-213.56 212.5,-213.56"/>
+</g>
+<!-- 140711130816528 -->
+<g id="node3" class="node">
+<title>140711130816528</title>
+<polygon fill="none" stroke="black" points="5,-0.5 5,-83.5 413,-83.5 413,-0.5 5,-0.5"/>
+<polygon fill="black" stroke="transparent" points="5,-0.5 5,-83.5 413,-83.5 413,-0.5 5,-0.5"/>
+<polygon fill="black" stroke="transparent" points="7,-41 7,-81 411,-81 411,-41 7,-41"/>
+<polygon fill="none" stroke="black" points="7,-41 7,-81 411,-81 411,-41 7,-41"/>
+<text text-anchor="start" x="138.5" y="-58.2" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="16.00" fill="white">dense_2</text>
+<text text-anchor="start" x="211.5" y="-58.2" font-family="Helvetica,sans-Serif" font-size="16.00" fill="white"> (Dense)</text>
+<polygon fill="white" stroke="transparent" points="7,-2 7,-39 207,-39 207,-2 7,-2"/>
+<polygon fill="none" stroke="black" points="7,-2 7,-39 207,-39 207,-2 7,-2"/>
+<text text-anchor="start" x="18" y="-17.8" font-family="Helvetica,sans-Serif" font-size="14.00">Input shape: </text>
+<text text-anchor="start" x="111" y="-17.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(None, 20)</text>
+<polygon fill="white" stroke="transparent" points="209,-2 209,-39 411,-39 411,-2 209,-2"/>
+<polygon fill="none" stroke="black" points="209,-2 209,-39 411,-39 411,-2 209,-2"/>
+<text text-anchor="start" x="220" y="-17.8" font-family="Helvetica,sans-Serif" font-size="14.00">Output shape: </text>
+<text text-anchor="start" x="325" y="-17.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">(None, 1)</text>
+</g>
+<!-- 140711275093072&#45;&gt;140711130816528 -->
+<g id="edge2" class="edge">
+<title>140711275093072-&gt;140711130816528</title>
+<path fill="none" stroke="black" stroke-width="2" d="M209,-120.37C209,-120.37 209,-93.56 209,-93.56"/>
+<polygon fill="black" stroke="black" stroke-width="2" points="212.5,-93.56 209,-83.56 205.5,-93.56 212.5,-93.56"/>
+</g>
+</g>
+</svg>
