@@ -16,7 +16,7 @@ diffusing:
 
 $$F = -k \nabla \phi$$
 
-where the $-$ sign indicates that diffusion flows from high concentration
+where the "$-$" sign indicates that diffusion flows from high concentration
 to low concentration.
 
 
