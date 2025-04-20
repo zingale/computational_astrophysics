@@ -1,12 +1,13 @@
 # Diffusion
 
-The diffusion equation is
+The [diffusion equation](https://en.wikipedia.org/wiki/Diffusion_equation) is
 
 $$\phi_t = k \phi_{xx}$$
 
 In astrophysics, this can describe thermal diffusion, where $\phi$
 is temperature, diffusion of photons, where $\phi$ is the photon
-energy density, or viscosity, where $\phi$ is velocity.
+energy density, mass diffusion, where $\phi$ is the concentration
+of a particular species, or viscosity, where $\phi$ is velocity.
 
 Physically, diffusion takes a strongly-peaked concentration of $\phi$
 and spreads it out.  And initial discontinuities are quickly smeared out.
@@ -27,7 +28,9 @@ as:
 
 $$\phi_t = \left [ -k \phi_x \right ]_x$$
 
-We'll assume that $k$ is constant here.
+We'll assume that $k$ is constant here.  In this form, this is also
+called the
+[heat equation](https://en.wikipedia.org/wiki/Heat_equation).
 ```
 
 Solving the diffusion equation requires initial conditions and two
