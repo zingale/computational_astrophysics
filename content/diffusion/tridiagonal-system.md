@@ -10,7 +10,7 @@ $$
        &     & \ddots & \ddots & \ddots \\
        &     &        & \ddots & \ddots & \ddots \\
        &     &        &        & a_{N-2} & b_{N-2} & c_{N-2} \\
-       &     &        &        &         & a_{N-1} & b_{N=1} \\
+       &     &        &        &         & a_{N-1} & b_{N-1} \\
 \end{array}
 \right )
 \left (
