@@ -1,7 +1,8 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
 
-#include <tridiag.H>
+#include "tridiag.H"
 
 int main() {
 
