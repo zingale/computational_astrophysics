@@ -88,4 +88,60 @@ The discretized diffusion equation with this method appears as:
 
 ## Option 2: FFTs for Poisson
 
+Consider the 1d Poisson equation:
+
+$$\phi^{\prime\prime} = 2 (1 - 3 x)$$
+
+on $[0, 1]$ with periodic boundary conditions.  This
+has the solution:
+
+$$\phi(x) = x^2 (1 - x)$$
+
+We'll call the righthand side of the equation $f$,
+
+$$f = 2 (1 - 3 x)$$
+
+Now, we can express $\phi$ and $f$ in terms of their Fourier transforms:
+
+$$\phi(x) = \int \Phi(k) e^{-2\pi i kx} dk$$
+
+$$f(x) = \int F(k) e^{-2\pi i k x} dk$$
+
+
+Note that:
+
+$$\frac{d^2 \phi(x)}{dx^2} = - 4 \pi^2 k^2 \int \Phi(k) e^{2\pi i kx}dk$$
+
+and since the Poisson equation is linear, the different
+modes will not mix.  
+
+Putting these into our Poisson equation we have:
+
+$$-4\pi^2 k^2 \Phi(k) = F(k)$$
+
+This allows us to easily solve for the Fourier transform
+of $\phi(x)$, $\Phi(k)$, algebraically:
+
+$$\Phi(k) = - \frac{F(k)}{4\pi^2 k^2}$$
+
+We can then transform back to get the solution to the
+original Poisson equation in real space.
+
+```{admonition} Your task
+Write a code to solve our Poisson equation using Fourier
+transforms.  You will do the following:
+
+* Compute the FFT of $f(x)$
+* Compute the Fourier components of $\Phi(k)$ using
+  our algebraic expreession: $\Phi(k) = - {F(k)}/(4\pi^2 k^2)$
+
+* Compute the *inverse* FFT of $\Phi(k)$ to get $\phi(x)$
+* Compute the error with respect to the exact solution.
+
+Do this for several grid sizes, $N = 32, 64, 128$ and
+measure the convergence.
+
+```
+
+
 
