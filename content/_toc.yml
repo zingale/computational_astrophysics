@@ -179,6 +179,7 @@ parts:
 
   - caption: Machine Learning
     chapters:
+    - file: machine-learning/machine-learning-types
     - file: machine-learning/neural-net-basics
       sections:
       - file: machine-learning/gradient-descent

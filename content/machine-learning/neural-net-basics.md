@@ -2,12 +2,17 @@
 
 ## Neural networks
 
-When we talk about machine learning, we often mean an [_artifical
+An [_artifical
 neural
-network_](https://en.wikipedia.org/wiki/Artificial_neural_network).  A
-neural network mimics the action of neurons in your brain.  We'll
+network_](https://en.wikipedia.org/wiki/Artificial_neural_network)
+mimics the action of neurons in your brain to form connections
+between nodes (neurons) that link the input to the output.
+
+```{note}
+We'll loosely 
 follow the notation from _Computational Methods for Physics_ by
 Franklin.
+```
 
 Basic idea:
 
