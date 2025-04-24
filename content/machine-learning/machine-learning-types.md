@@ -6,7 +6,7 @@ about a dataset to allow the algorithm to make predictions.
 
 Some popular methods (see the [Wikipedia page for nice descriptions](https://en.wikipedia.org/wiki/Machine_learning#Models)) include:
 
-* artifical neural networks : these mimic neurons and their
+* artificial neural networks : these mimic neurons and their
   connections in the brain and are trained on data to set weights
   that then allow us to make predictions.
 
