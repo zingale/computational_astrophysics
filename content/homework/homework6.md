@@ -28,7 +28,7 @@ read in the file you will need to deal with these.
 ```
 
 ```{admonition} Your task
-* Use the generalized linear least squares method we did [in class](https://zingale.github.io/computational_astrophysics/fitting/generalized-linear-least-squares-tests.htm) to fit the data to a line of the form:
+* Use the generalized linear least squares method we did [in class](https://zingale.github.io/computational_astrophysics/fitting/generalized-linear-least-squares-tests.html) to fit the data to a line of the form:
 
   $$M = a (\log_{10}(P) - 1.0) + b$$
 
