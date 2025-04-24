@@ -44,7 +44,8 @@ which gives us:
    
 where we used the fact that the $\delta_{ip}$ means that only a single term contributes to the sum.
 
-Note that:
+```{note}
+Observe that:
 
 * $e_p^k \equiv (z_p - y_p^k)$ is the error on the output layer,
   and the correction is proportional to the error (as we would
@@ -52,7 +53,8 @@ Note that:
 
 * The $k$ superscripts here remind us that this is the result of
   only a single pair of data from the training set.
-  
+```
+
 Now ${\bf z}$ and ${\bf y}^k$ are all vectors of size $N_\mathrm{out} \times 1$ and ${\bf x}^k$ is a vector of size $N_\mathrm{in} \times 1$, so we can write this expression for the matrix as a whole as:
 
 $$\frac{\partial f}{\partial {\bf A}} = 2 ({\bf z} - {\bf y}^k) \circ {\bf z} \circ (1 - {\bf z}) \cdot ({\bf x}^k)^\intercal$$
