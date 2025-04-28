@@ -29,29 +29,31 @@ of their project to the class
 
 1. You code
 
-     * This can be a Jupyter notebook, C++ code, etc. if your wrote your own
-       implementation of a method.
+   * This can be a Jupyter notebook, C++ code, etc. if your wrote your
+     own implementation of a method.
 
-       Make sure I can build your code easily.
+     Make sure I can build your code easily.
 
-     * This may also be detailed instructions on how to obtain,
-       modify, and reproduce your results using an external code if
-       you chose to use that.
+   * This may also be detailed instructions on how to obtain, modify,
+     and reproduce your results using an external code if you chose to
+     use that.
 
 2. A PDF write-up (abstract, introduction, description of what you did
-     / results, figures, references).  This is something that you can use
-     for the upper-level writing requirement, if desired.
+   / results, figures, references).  This is something that you can use
+   for the upper-level writing requirement, if desired.
 
-     This should include:
+   This should include:
 
-     * An Explanation of how the algorithm works, referring to the
-       topics we learned in class.
+   * An Explanation of how the algorithm works, referring to the
+     topics we learned in class.
 
-     * A demonstration of convergence (if applicable) or controlling
-       the error.
+   * A demonstration of convergence (if applicable) or controlling
+     the error.
 
-     * Some example tests where we know the right behavior (if applicable)
+   * Some example tests where we know the right behavior (if applicable)
 
+   You should aim for 10 pages (including figures and references).
+   
 3. 1-2 slides for the in-class presentation (details will be shared
    toward the end of the semester).
 
