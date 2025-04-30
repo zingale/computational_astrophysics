@@ -22,18 +22,6 @@ double sigmoid_deriv(double z) {
     return z * (1.0 - z);
 }
 
-// our sigmoid function
-
-double relu(double xi) {
-    // the sigmoid activation function
-    return xi < 0.0 ? 0.0 : xi;
-}
-
-double relu_deriv(double z) {
-    // this is the derivative of the sigmoid in terms of the
-    // sigmoid, z = sigmoid(xi)
-    return z < 0.0 ? 0.0 : 1.0;
-}
 
 class NeuralNetwork {
 
@@ -89,7 +77,7 @@ public:
             for (auto i : indices) {
                 const auto& model = training_data[i];
                 auto z_tilde = B * model.scaled;
-                z_tilde.apply_inplace(relu);
+                z_tilde.apply_inplace(sigmoid);
 
                 auto z = A * z_tilde;
                 z.apply_inplace(sigmoid);
@@ -100,7 +88,7 @@ public:
                 // corrections
                 auto dA = ((-2 * learning_rate * e) % z % (1.0 - z)) *
                     z_tilde.transpose();
-                auto dB = ((-2 * learning_rate * e_tilde) % z_tilde.apply_new(relu_deriv)) * model.scaled.transpose();
+                auto dB = ((-2 * learning_rate * e_tilde) % z_tilde.apply_new(sigmoid_deriv)) * model.scaled.transpose();
 
                 A += dA;
                 B += dB;
@@ -127,7 +115,7 @@ public:
     Matrix
     predict(const mnist::MNISTDigit& model) {
         auto ztilde = B * model.scaled;
-        ztilde.apply_inplace(relu);
+        ztilde.apply_inplace(sigmoid);
         auto z = A * ztilde;
         z.apply_inplace(sigmoid);
 
