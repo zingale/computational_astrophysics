@@ -44,6 +44,10 @@ derivations, notes, etc.
      This is valid as long as $u_i^n > 0$.  Write a program to solve this
      equation with the above shock initial conditions:
 
+     $$u(x,t=0) = \left \{ \begin{array}{cc} 2 & \mathrm{if~} x < 0.5 \\
+                                          1 & \mathrm{if~} x \ge 0.5 \\
+                        \end{array} \right .$$
+
      These are the initial conditions for a shock that we explored in class.
 
      ```{important}
@@ -52,7 +56,13 @@ derivations, notes, etc.
      you need to be sure to compute the timestep inside of the
      evolution, for each step, since $u$ changes as we evolve.
      ```
-   
+
+     ```{tip}
+     If you use the advection code from class, be sure to change the
+     boundary conditions.  There we did periodic.  For this problem
+     we want outflow / zero-gradient.
+     ```
+
    * Now difference the conservative form as:
 
      $$u_{i}^{n+1} = u_i^n - \frac{\Delta t}{\Delta x} \left ( \frac{1}{2} (u_i^n)^2
