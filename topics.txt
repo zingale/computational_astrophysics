@@ -84,6 +84,12 @@
 
   we can pass in the `.data()` of the underlying vector.
 
+  ---
+
+  get real lightcurve data from TESS using lightkurve 
+  https://lightkurve.github.io/lightkurve/tutorials/3-science-examples/exoplanets-recover-first-tess-candidate.html
+
+
 * Fitting an orbit:
 
   See this paper for grid search: https://ui.adsabs.harvard.edu/abs/1989AJ.....98.1014H/abstract
