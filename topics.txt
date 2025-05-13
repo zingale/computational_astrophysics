@@ -1,3 +1,12 @@
+final project:
+
+* use last 2 classes for presentations
+* have project plan assignment turned in 3 weeks before the end of the
+  semester, for 2 pts.
+
+
+-----
+
 * few body problem
 
   * energy conservation
