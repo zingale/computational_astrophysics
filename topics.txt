@@ -49,9 +49,9 @@
 
 * machine learning
 
-  instead of MNIST, try Cifar10
+  * instead of MNIST, try Cifar10
 
-  sample dataset: 
+  * sample dataset: 
 
      * galaxies: https://zenodo.org/record/4288837#.YYTamy2l1Z0
 
@@ -61,21 +61,24 @@
 
        * https://zenodo.org/record/4573248
 
-       * better is galaxy10 from astroNN:
+  * better is galaxy10 from astroNN:
   
-         * https://astronn.readthedocs.io/en/latest/galaxy10.html
-         * https://towardsdatascience.com/galaxy-multi-image-classification-with-lenet-5-1bc2f66d3cfc
+      * https://astronn.readthedocs.io/en/latest/galaxy10.html
+      * https://towardsdatascience.com/galaxy-multi-image-classification-with-lenet-5-1bc2f66d3cfc
 
+  * stellar classification from kaggle: https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17/data
 
-     See also: https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research#Astronomy
+   This has properties for ~ 100k stars (and other objects)  
 
-     Also the AstroML sample datasets: https://www.astroml.org/examples/datasets/index.html
+  * See also: https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research#Astronomy
 
-  hello universe:
+  * Also the AstroML sample datasets: https://www.astroml.org/examples/datasets/index.html
+
+  * hello universe:
 
     https://archive.stsci.edu/hello-universe
 
-  Emily Hunt: https://github.com/emilyhunt/machine-learning-tutorial-MWGaia-DN
+  * Emily Hunt: https://github.com/emilyhunt/machine-learning-tutorial-MWGaia-DN
 
 * FFT
 
