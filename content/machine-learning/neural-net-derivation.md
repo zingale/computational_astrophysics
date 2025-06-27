@@ -57,7 +57,7 @@ Observe that:
 
 Now ${\bf z}$ and ${\bf y}^k$ are all vectors of size $N_\mathrm{out} \times 1$ and ${\bf x}^k$ is a vector of size $N_\mathrm{in} \times 1$, so we can write this expression for the matrix as a whole as:
 
-$$\frac{\partial f}{\partial {\bf A}} = 2 ({\bf z} - {\bf y}^k) \circ {\bf z} \circ (1 - {\bf z}) \cdot ({\bf x}^k)^\intercal$$
+$$\frac{\partial \mathcal{L}}{\partial {\bf A}} = 2 ({\bf z} - {\bf y}^k) \circ {\bf z} \circ (1 - {\bf z}) \cdot ({\bf x}^k)^\intercal$$
 
 where the operator $\circ$ represents _element-by-element_ multiplication (the [Hadamard product](https://en.wikipedia.org/wiki/Hadamard_product_(matrices))).
 
@@ -76,7 +76,7 @@ descent suggests, scaled by a _learning rate_ $\eta$.
 
 The overall minimization appears as:
 
-<div style="border: solid; padding: 10px; width: 80%; margin: 0 auto; background: #eeeeee">
+```{card}
 * Loop over epochs
 
   * Loop over the training data, $\{ ({\bf x}^0, {\bf y}^0), ({\bf x}^1, {\bf y}^1), \ldots \}$.  We'll refer to the current training
@@ -90,5 +90,5 @@ The overall minimization appears as:
     * Update the matrix ${\bf A}$ according to:
     
       $${\bf A} \leftarrow {\bf A} - 2 \,\eta\, {\bf e}^k \circ {\bf z} \circ (1 - {\bf z}) \cdot ({\bf x}^k)^\intercal$$
-</div>
+```
 
