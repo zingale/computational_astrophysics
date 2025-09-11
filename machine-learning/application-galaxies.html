@@ -1,0 +1,1455 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Galaxy Classification with a Neural Net from Scratch &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'machine-learning/application-galaxies';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Application: Galaxy Classification with Keras" href="application-galaxies-keras-cnn.html" />
+    <link rel="prev" title="Application: Galaxy Classification" href="application-galaxies-intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/numpy.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-advanced.html">NumPy Copying and Indexing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/floating-point/floating-point-details.html">Floating Point Format</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/differentiation.html">Differentiation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/example-second-deriv.html">In-class Example: Second Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-rate-temperature-sensitivity.html">Application: Reaction Rate Temperature Sensitivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/example-lorenz.html">Example: Lorenz system</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-planetary-stability.html">Application: Stability of Planetary Systems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/boundary-value-problems.html">✱ Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-implicit.html">✱ Stiff ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-CNO-network.html">Application: Reaction Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/more-applications.html">More Applications</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-xrb-one-zone.html">Application: One-zone X-ray burst</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interlude Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../git/github.html">github</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../git/pull-requests.html">Pull requests</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffts/fourier.html">Fourier Transforms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-planets-fft.html">Application: Recovering Planetary Periods from Radial Velocity Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/example-turbulent-power-spectrum.html">Example: Turbulent Power Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/application-interpolating-reaction-rates.html">Application: Interpolating Weak Reaction Rate Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/conservative-interpolation.html">✱ Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fitting/least_squares.html">Least Squares Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares-tests.html">Testing Our Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/burgers/burgers.html">✱ Burgers' Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../advection/advection-more.html">More on Advection and Burgers’ Equation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid.html">✱ Multigrid</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">✱ Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler.html">Euler Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler-riemann.html">Euler Riemann Problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="machine-learning-types.html">Types of Machine Learning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mnist-cxx.html">C++ Implementation of MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="application-galaxies-intro.html">Application: Galaxy Classification</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Galaxy Classification with a Neural Net from Scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-galaxies-keras-cnn.html">Application: Galaxy Classification with Keras</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional examples (for in-class)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-ode-projectile.html">ODE Review: Projectile Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-hilbert-matrix.html">Linear Algebra Review: Hilbert Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-fft.html">FFT Review: Cleaning a Signal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework1-solutions.html">Homework 1 solutions</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework4.html">Homework 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework4-solutions.html">Homework 4 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework5.html">Homework 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework5-solutions.html">Homework 5 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework6.html">Homework 6</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework6-solutions.html">Homework 6 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework7.html">Homework 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework7-solutions.html">Homework 7 solutions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/machine-learning/application-galaxies.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/machine-learning/application-galaxies.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Fmachine-learning/application-galaxies.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/machine-learning/application-galaxies.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Galaxy Classification with a Neural Net from Scratch</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-manager-class">A manager class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">Batching</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-input-recap">Single input recap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-batching-approach">A batching approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-our-neural-network">Implementing our neural network</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="galaxy-classification-with-a-neural-net-from-scratch">
+<h1>Galaxy Classification with a Neural Net from Scratch<a class="headerlink" href="#galaxy-classification-with-a-neural-net-from-scratch" title="Link to this heading">#</a></h1>
+<p>Here we implement a neural network from scratch with a single hidden layer, using only NumPy and use
+it to classify galaxies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need the <code class="docutils literal notranslate"><span class="pre">Galaxy</span></code> class we previously defined</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">galaxy_types</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;disturbed galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;merging galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;round smooth galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;in-between round smooth galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;cigar shaped smooth galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;barred spiral galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;unbarred tight spiral galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;unbarred loose spiral galaxies&quot;</span><span class="p">,</span>
+                <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;edge-on galaxies without bulge&quot;</span><span class="p">,</span>
+                <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;edge-on galaxies with bulge&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Galaxy</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">index</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">+</span> <span class="mf">0.01</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.01</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">answer</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.99</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.025</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;answer: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prediction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;check if a categorical prediction matches the answer&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">answer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a-manager-class">
+<h2>A manager class<a class="headerlink" href="#a-manager-class" title="Link to this heading">#</a></h2>
+<p>We’ll create a class to manage access to the data.  This will do the following:</p>
+<ul class="simple">
+<li><p>open the file and store the handles to access the data</p></li>
+<li><p>partition the data into test and training sets</p></li>
+<li><p>provide a means to shuffle the data</p></li>
+<li><p>provide methods to get the next dataset (either training or test)</p></li>
+<li><p>allow us to coarsen the images to a reduced resolution to reduce the memory requirements and make the training easier.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Since every input node is connected to every hidden layer node (a dense network), there are a lot
+of weights to train.  By using smaller images, it is easier to train.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DataManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+                 <span class="n">datafile</span><span class="o">=</span><span class="s2">&quot;Galaxy10_DECals.h5&quot;</span><span class="p">,</span>
+                 <span class="n">include_transformation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">coarsen</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;manage access to the data</span>
+
+<span class="sd">        partition: fraction that should be training</span>
+<span class="sd">        datafile: name of the hdf5 file with the data</span>
+<span class="sd">        coarsen: reduce the number of pixels by this factor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ds</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;ans&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ds</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">coarsen</span> <span class="o">=</span> <span class="n">coarsen</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">include_transformation</span> <span class="o">=</span> <span class="n">include_transformation</span>
+        
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ans</span><span class="p">)</span>
+
+        <span class="c1"># create a set of indices for the galaxies and randomize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">)</span>
+
+        <span class="c1"># partition into training and test sets</span>
+        <span class="c1"># these indices will always refer to the index in the original</span>
+        <span class="c1"># unsplit dataset</span>
+        <span class="n">n_cut</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">partition</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">training_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">n_cut</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="n">n_cut</span><span class="p">:</span><span class="n">N</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_training</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">training_indices</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_transformation</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_training</span> <span class="o">*=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_galaxy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_galaxy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;return a numpy array containing a single galaxy image, coarsened</span>
+<span class="sd">        if necessary by averaging&quot;&quot;&quot;</span>
+        <span class="n">_tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">coarsen</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">_tmp</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">_tmp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">coarsen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coarsen</span><span class="p">,</span>
+                                        <span class="n">_tmp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">//</span><span class="bp">self</span><span class="o">.</span><span class="n">coarsen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coarsen</span><span class="p">,</span>
+                                        <span class="n">_tmp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">_tmp</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">training_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_training</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">training_indices</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">Galaxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_galaxy</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">include_transformation</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">Galaxy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_galaxy</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+                             <span class="bp">self</span><span class="o">.</span><span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>                
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_training</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;prepare for the next epoch: shuffle the training data and</span>
+<span class="sd">        reset the index to point to the start&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">training_indices</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_images</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_indices</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">Galaxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_galaxy</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">ans</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">training_images()</span></code> and <code class="docutils literal notranslate"><span class="pre">testing_images()</span></code> are generators (like <code class="docutils literal notranslate"><span class="pre">range()</span></code>), so we can iterate like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">DataManager</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">training_images</span><span class="p">():</span>
+    <span class="c1"># do stuff with g</span>
+</pre></div>
+</div>
+<p>and <code class="docutils literal notranslate"><span class="pre">g</span></code> is only converted to 32-bit float as needed.</p>
+</div>
+<p>We can now work with the data as follows.  Here we create a <code class="docutils literal notranslate"><span class="pre">DataManager</span></code> that will coarsen the images by a factor of 4 (so they will be 64x64 pixels with 3 colors).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">DataManager</span><span class="p">(</span><span class="n">coarsen</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">include_transformation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>we can see how many images there are in the training and test sets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">n_training</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">n_test</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(28376, 3548)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then get the first few training galaxies and look at them.  Note that with transformations enabled, the should be pairs with one rotated 90 degrees compared to the previous.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">training_images</span><span class="p">()):</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6ead1c46cb6fda90ff98fc287988d71686f199d9a5e6964ed3a2ce318314dc6c.png" src="../_images/6ead1c46cb6fda90ff98fc287988d71686f199d9a5e6964ed3a2ce318314dc6c.png" />
+<img alt="../_images/b3f95410a9c6bf993215c817e784b373994be0d64304910268c332b4cac0b307.png" src="../_images/b3f95410a9c6bf993215c817e784b373994be0d64304910268c332b4cac0b307.png" />
+<img alt="../_images/988f63804d6e9c2a52755470461f994cdd400f90f93409b9f5e695e6dfccf3bf.png" src="../_images/988f63804d6e9c2a52755470461f994cdd400f90f93409b9f5e695e6dfccf3bf.png" />
+<img alt="../_images/436680ecac885bf46137e98bed12dbd8080a14a0b11b4bf4dc4d016c57df6eb8.png" src="../_images/436680ecac885bf46137e98bed12dbd8080a14a0b11b4bf4dc4d016c57df6eb8.png" />
+</div>
+</div>
+<p>We’ll need a 1-d representation of the data, which the <code class="docutils literal notranslate"><span class="pre">DataManager</span></code> will provide</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">input_size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12288
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="batching">
+<h2>Batching<a class="headerlink" href="#batching" title="Link to this heading">#</a></h2>
+<p>Training with this data will be very slow.  We can speed it up more by using batching and aggregating the linear algebra.  Here’s how this works.</p>
+<section id="single-input-recap">
+<h3>Single input recap<a class="headerlink" href="#single-input-recap" title="Link to this heading">#</a></h3>
+<p>Our basic network does:</p>
+<div class="math notranslate nohighlight">
+\[\tilde{\bf z}^k = g({\bf B} {\bf x}^k)\]</div>
+<div class="math notranslate nohighlight">
+\[{\bf z}^k = g({\bf A} \tilde{\bf z}^k)\]</div>
+<p>where the sizes of the matrices and vectors are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({\bf x}^k\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{in} \times 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({\bf B}\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{hidden} \times N_\mathrm{in}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{\bf z}^k\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{hidden}\times 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({\bf A}\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{out} \times N_\mathrm{hidden}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({\bf z}^k\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{out} \times 1\)</span></p></li>
+</ul>
+<p>we also have the known output, <span class="math notranslate nohighlight">\({\bf y}^k\)</span> corresponding to input <span class="math notranslate nohighlight">\({\bf x}^k\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({\bf y}^k\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{out} \times 1\)</span></p></li>
+</ul>
+<p>we then compute the errors:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({\bf e}^k = {\bf z}^k - {\bf y}^k\)</span> (the error on the output layer) : <span class="math notranslate nohighlight">\(N_\mathrm{out} \times 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{\bf e}^k = {\bf A}^\intercal \cdot [{\bf e}^k \circ {\bf z} \circ (1 - {\bf z})]\)</span> (the error backpropagated to the hidden layer) : <span class="math notranslate nohighlight">\(N_\mathrm{hidden} \times 1\)</span></p></li>
+</ul>
+<p>and finally the corrections due to this single piece of training data, <span class="math notranslate nohighlight">\(({\bf x}^k, {\bf y}^k)\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta {\bf A} = -2\eta \,{\bf e}^k \circ {\bf z}^k \circ (1 - {\bf z}^k) \cdot (\tilde{\bf z}^k)^\intercal\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{out} \times N_\mathrm{hidden}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta {\bf B} = -2\eta \,\tilde{\bf e}^k \circ \tilde{\bf z}^k \circ (1 - \tilde{\bf z}^k) \cdot ({\bf x}^k)^\intercal\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{hidden} \times N_\mathrm{in}\)</span></p></li>
+</ul>
+</section>
+<section id="a-batching-approach">
+<h3>A batching approach<a class="headerlink" href="#a-batching-approach" title="Link to this heading">#</a></h3>
+<p>We now want to batch the inputs, by extending <span class="math notranslate nohighlight">\({\bf x}\)</span> to be of size <span class="math notranslate nohighlight">\(N_\mathrm{in} \times S\)</span>, where <span class="math notranslate nohighlight">\(S\)</span> is the batch size.  This means that each column is a unique
+input vector <span class="math notranslate nohighlight">\({\bf x}^k\)</span>, and <span class="math notranslate nohighlight">\(S\)</span> of them are sandwiched together:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}{\bf x}_b = \left ( \begin{array}{ccccc}
+                      | &amp; | &amp; | &amp;  &amp; | \\
+                      {\bf x}^0 &amp; {\bf x}^1 &amp; {\bf x}^2 &amp; ... &amp; {\bf x}^{S-1} \\
+                      | &amp; | &amp; | &amp;  &amp; | 
+                      \end{array} \right )\end{split}\]</div>
+<p>Similarly, we create a batched <span class="math notranslate nohighlight">\({\bf y}_b\)</span> that contains the <span class="math notranslate nohighlight">\({\bf y}^k\)</span> corresponding
+to the <span class="math notranslate nohighlight">\({\bf x}^k\)</span> in <span class="math notranslate nohighlight">\({\bf x}_b\)</span>.</p>
+<p>We can propagate this through the network, getting</p>
+<div class="math notranslate nohighlight">
+\[{\bf z}_b = g({\bf A} g({\bf B}{\bf x}_b))\]</div>
+<p>where <span class="math notranslate nohighlight">\({\bf z}_b\)</span> is now of size <span class="math notranslate nohighlight">\(N_\mathrm{out} \times S\)</span>.</p>
+<p>Now, we compute the errors from the batched inputs</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({\bf e}_b = {\bf z}_b - {\bf y}_b\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{out} \times S\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\tilde{\bf e}_b =\underbrace{{\bf A}^\intercal}_{N_\mathrm{hidden} \times N_\mathrm{out}} \cdot \underbrace{[{\bf e}_b \circ {\bf z}_b \circ (1 - {\bf z})]}_{N_\mathrm{out} \times S}\)</span> : <span class="math notranslate nohighlight">\(N_\mathrm{hidden} \times S\)</span></p></li>
+</ul>
+<p>and the accumulated corrections:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Delta {\bf A} = -\frac{2\eta}{S} \,\underbrace{{\bf e}_b \circ {\bf z}_b \circ (1 - {\bf z}_b)}_{N_\mathrm{out}\times S} \cdot \underbrace{(\tilde{\bf z}_b)^\intercal}_{S\times N_\mathrm{hidden}}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Delta {\bf B} = -\frac{2\eta}{S} \,\underbrace{\tilde{\bf e}_b \circ \tilde{\bf z}_b \circ (1 - \tilde{\bf z}_b)}_{N_\mathrm{hidden} \times S} \cdot \underbrace{({\bf x}_b)^\intercal}_{S \times N_\mathrm{in}}\)</span></p></li>
+</ul>
+<p>In these accumulated corrections, the <span class="math notranslate nohighlight">\(S\)</span> dimensions contract.  In essence, this means
+that each element in <span class="math notranslate nohighlight">\(\Delta {\bf A}\)</span> and <span class="math notranslate nohighlight">\(\Delta {\bf B}\)</span> is the sum of the corrections for each of the <span class="math notranslate nohighlight">\(S\)</span> training data pairs in the batch.  For this reason, we normalize by <span class="math notranslate nohighlight">\(S\)</span> to create the average of the gradient.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Batching also stabilizes the gradient descent, making it easier to find
+the minimum and allowing us to use a larger learning rate.</p>
+</div>
+</section>
+</section>
+<section id="momentum">
+<h2>Momentum<a class="headerlink" href="#momentum" title="Link to this heading">#</a></h2>
+<p>The other feature we need for this application is <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Momentum">momentum</a> in the gradient descent weight updates.</p>
+<p>A popular form of momentum (see, e.g., <a class="reference external" href="https://medium.com/analytics-vidhya/momentum-a-simple-yet-efficient-optimizing-technique-ef76834e4423">Momentum: A simple, yet efficient optimizing technique</a>) builds off of the idea of the <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_smoothing">exponential moving average</a>.</p>
+<p>For our gradient descent update, we usually do:</p>
+<div class="math notranslate nohighlight">
+\[{\bf A} = {\bf A} - \eta \frac{\partial \mathcal{L}}{\partial {\bf A}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is our loss function and <span class="math notranslate nohighlight">\(\eta\)</span> is the learning rate.</p>
+<p>The basic idea of momentum begins with defining a “velocity”, <span class="math notranslate nohighlight">\({\bf v}^{(0)} = 0\)</span> (no momentum has been built up yet).
+Then each iteration of training we do the following:</p>
+<ul>
+<li><p>construct the gradient from the current set of training, <span class="math notranslate nohighlight">\(\partial \mathcal{L}/\partial {\bf A}\)</span></p></li>
+<li><p>blend this with the previous momentum using an exponential moving average:</p>
+<div class="math notranslate nohighlight">
+\[{\bf v}^{(i)} = \beta {\bf v}^{(i-1)} + (1 - \beta) \frac{\partial \mathcal{L}}{\partial {\bf A}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta \in [0, 1]\)</span> is the smoothing parameter.  It seems like <span class="math notranslate nohighlight">\(\beta = 0.9\)</span> is used often.</p>
+<p>Since every gradient is always multiplied by <span class="math notranslate nohighlight">\((1-\beta)\)</span>,
+and each previous gradient picks up a factor of <span class="math notranslate nohighlight">\(\beta\)</span>
+each iteration, this construction weights the most recent gradients most.</p>
+</li>
+<li><p>update the weights:</p>
+<div class="math notranslate nohighlight">
+\[{\bf A} = {\bf A} - \eta {\bf v}^{(i)}\]</div>
+</li>
+</ul>
+<p>We would do the same with the other weights, <span class="math notranslate nohighlight">\({\bf B}\)</span>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Momentum greatly reduces the swings in the “fraction correct” metric from one epoch to the next.</p>
+</div>
+</section>
+<section id="implementing-our-neural-network">
+<h2>Implementing our neural network<a class="headerlink" href="#implementing-our-neural-network" title="Link to this heading">#</a></h2>
+<p>We’ll write our network to take a <code class="docutils literal notranslate"><span class="pre">DataManager</span></code>—it can get everything that it needs from there.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>We also have our network do the validation against the test set each epoch so we can see how well we are doing.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NeuralNetwork</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A neural network class with a single hidden layer.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_manager</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_manager</span> <span class="o">=</span> <span class="n">data_manager</span>
+
+        <span class="c1"># the number of nodes/neurons on the output layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N_out</span> <span class="o">=</span> <span class="mi">10</span>
+
+        <span class="c1"># the number of nodes/neurons on the input layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N_in</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">input_size</span>
+
+        <span class="c1"># the number of nodes/neurons on the hidden layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N_hidden</span> <span class="o">=</span> <span class="n">hidden_layer_size</span>
+
+        <span class="c1"># we will initialize the weights with Gaussian normal random</span>
+        <span class="c1"># numbers centered on 0 with a width of 1/sqrt(n), where n is</span>
+        <span class="c1"># the length of the input state</span>
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+
+        <span class="c1"># A is the set of weights between the hidden layer and output layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N_out</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_hidden</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N_hidden</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+        <span class="c1"># B is the set of weights between the input layer and hidden layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">N_hidden</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_in</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N_in</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        
+        <span class="c1"># reset the training</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_manager</span><span class="o">.</span><span class="n">reset_training</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_trained</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">training_time</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xi</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;our sigmoid function that operates on the hidden layer&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">xi</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_batch_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">):</span>
+
+        <span class="c1"># batch size</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_batch</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># propagate the input through the network</span>
+        <span class="n">z_tilde</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">@</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">@</span> <span class="n">z_tilde</span><span class="p">)</span>
+
+        <span class="c1"># compute the errors (backpropagate to the hidden layer)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="n">y</span>
+        <span class="n">e_tilde</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">e</span> <span class="o">*</span> <span class="n">z</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">))</span>
+
+        <span class="c1"># corrections</span>
+        <span class="n">grad_A</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="n">e</span> <span class="o">*</span> <span class="n">z</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">@</span> <span class="n">z_tilde</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">grad_B</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="n">e_tilde</span> <span class="o">*</span> <span class="n">z_tilde</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z_tilde</span><span class="p">)</span> <span class="o">@</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_trained</span> <span class="o">+=</span> <span class="n">S</span>
+        
+        <span class="k">return</span> <span class="n">grad_A</span><span class="p">,</span> <span class="n">grad_B</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">assess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run through the test data and return the fraction correct</span>
+<span class="sd">        with the currently trained network&quot;&quot;&quot;</span>
+             
+        <span class="n">n_correct</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_manager</span><span class="o">.</span><span class="n">test_images</span><span class="p">():</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">ans</span><span class="p">):</span>
+                <span class="n">n_correct</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">n_correct</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_manager</span><span class="o">.</span><span class="n">n_test</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+              <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">beta_momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+              <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Train the neural network by doing gradient descent with back</span>
+<span class="sd">        propagation to set the matrix elements in B (the weights</span>
+<span class="sd">        between the input and hidden layer) and A (the weights between</span>
+<span class="sd">        the hidden layer and output layer)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">v_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">v_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_epochs</span><span class="p">):</span>
+
+            <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_manager</span><span class="o">.</span><span class="n">reset_training</span><span class="p">()</span>
+
+            <span class="c1"># storage for our batches</span>
+            <span class="n">x_batch</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">y_batch</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_manager</span><span class="o">.</span><span class="n">training_images</span><span class="p">():</span>
+
+                <span class="c1"># make a 1-d representation of the input, called x, and call</span>
+                <span class="c1"># the output y</span>
+                <span class="n">x_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+                <span class="n">y_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span> <span class="o">==</span> <span class="n">batch_size</span><span class="p">:</span>
+                    <span class="c1"># batch is full -- do the training</span>
+                    <span class="n">grad_A</span><span class="p">,</span> <span class="n">grad_B</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_update</span><span class="p">(</span><span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+
+                    <span class="n">v_A</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta_momentum</span> <span class="o">*</span> <span class="n">v_A</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta_momentum</span><span class="p">)</span> <span class="o">*</span> <span class="n">grad_A</span>
+                    <span class="n">v_B</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta_momentum</span> <span class="o">*</span> <span class="n">v_B</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta_momentum</span><span class="p">)</span> <span class="o">*</span> <span class="n">grad_B</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">v_A</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">v_B</span>
+
+                    <span class="n">x_batch</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">y_batch</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># we may have run out of data without filling up the</span>
+            <span class="c1"># last batch, so take care of that now</span>
+            <span class="k">if</span> <span class="n">x_batch</span><span class="p">:</span>
+                <span class="n">grad_A</span><span class="p">,</span> <span class="n">grad_B</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_update</span><span class="p">(</span><span class="n">x_batch</span><span class="p">,</span> <span class="n">y_batch</span><span class="p">)</span>
+
+                <span class="n">v_A</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta_momentum</span> <span class="o">*</span> <span class="n">v_A</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta_momentum</span><span class="p">)</span> <span class="o">*</span> <span class="n">grad_A</span>
+                <span class="n">v_B</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">beta_momentum</span> <span class="o">*</span> <span class="n">v_B</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta_momentum</span><span class="p">)</span> <span class="o">*</span> <span class="n">grad_B</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">v_A</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">learning_rate</span> <span class="o">*</span> <span class="n">v_B</span>
+
+            <span class="n">epoch_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">training_time</span> <span class="o">+=</span> <span class="n">epoch_time</span>
+
+            <span class="n">frac_correct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">assess</span><span class="p">()</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;epoch </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2"> | &quot;</span> <span class="o">+</span>
+                  <span class="sa">f</span><span class="s2">&quot;test set correct: </span><span class="si">{</span><span class="n">frac_correct</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="s2">; &quot;</span> <span class="o">+</span>
+                  <span class="sa">f</span><span class="s2">&quot;training time: </span><span class="si">{</span><span class="n">epoch_time</span><span class="si">:</span><span class="s2">7.3f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; predict the outcome using our trained matrix A &quot;&quot;&quot;</span>
+        <span class="n">x_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">data</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">@</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">@</span> <span class="n">x_in</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">n_epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch   1 | test set correct: 0.218; training time:  88.857 s
+epoch   2 | test set correct: 0.249; training time:  88.301 s
+epoch   3 | test set correct: 0.247; training time:  87.362 s
+epoch   4 | test set correct: 0.284; training time:  88.089 s
+epoch   5 | test set correct: 0.298; training time:  90.645 s
+epoch   6 | test set correct: 0.292; training time:  87.503 s
+epoch   7 | test set correct: 0.279; training time:  87.990 s
+epoch   8 | test set correct: 0.316; training time:  86.374 s
+epoch   9 | test set correct: 0.340; training time:  85.021 s
+epoch  10 | test set correct: 0.330; training time:  85.287 s
+epoch  11 | test set correct: 0.337; training time:  87.456 s
+epoch  12 | test set correct: 0.349; training time:  87.930 s
+epoch  13 | test set correct: 0.350; training time:  86.271 s
+epoch  14 | test set correct: 0.367; training time:  86.661 s
+epoch  15 | test set correct: 0.418; training time:  86.392 s
+epoch  16 | test set correct: 0.439; training time:  85.699 s
+epoch  17 | test set correct: 0.433; training time:  86.352 s
+epoch  18 | test set correct: 0.467; training time:  86.084 s
+epoch  19 | test set correct: 0.464; training time:  86.821 s
+epoch  20 | test set correct: 0.477; training time:  87.450 s
+epoch  21 | test set correct: 0.486; training time:  87.922 s
+epoch  22 | test set correct: 0.510; training time:  85.032 s
+epoch  23 | test set correct: 0.523; training time:  85.034 s
+epoch  24 | test set correct: 0.513; training time:  86.037 s
+epoch  25 | test set correct: 0.530; training time:  85.105 s
+epoch  26 | test set correct: 0.534; training time:  84.961 s
+epoch  27 | test set correct: 0.554; training time:  85.264 s
+epoch  28 | test set correct: 0.556; training time:  84.924 s
+epoch  29 | test set correct: 0.561; training time:  84.933 s
+epoch  30 | test set correct: 0.549; training time:  84.974 s
+epoch  31 | test set correct: 0.576; training time:  84.933 s
+epoch  32 | test set correct: 0.568; training time:  84.871 s
+epoch  33 | test set correct: 0.560; training time:  84.858 s
+epoch  34 | test set correct: 0.585; training time:  85.089 s
+epoch  35 | test set correct: 0.582; training time:  84.917 s
+epoch  36 | test set correct: 0.602; training time:  85.025 s
+epoch  37 | test set correct: 0.602; training time:  85.122 s
+epoch  38 | test set correct: 0.589; training time:  84.805 s
+epoch  39 | test set correct: 0.597; training time:  84.848 s
+epoch  40 | test set correct: 0.611; training time:  84.915 s
+epoch  41 | test set correct: 0.604; training time:  84.851 s
+epoch  42 | test set correct: 0.604; training time:  84.903 s
+epoch  43 | test set correct: 0.601; training time:  85.303 s
+epoch  44 | test set correct: 0.610; training time:  84.957 s
+epoch  45 | test set correct: 0.611; training time:  84.869 s
+epoch  46 | test set correct: 0.621; training time:  85.166 s
+epoch  47 | test set correct: 0.618; training time:  84.979 s
+epoch  48 | test set correct: 0.622; training time:  85.065 s
+epoch  49 | test set correct: 0.622; training time:  84.990 s
+epoch  50 | test set correct: 0.608; training time:  84.812 s
+epoch  51 | test set correct: 0.628; training time:  84.703 s
+epoch  52 | test set correct: 0.624; training time:  85.105 s
+epoch  53 | test set correct: 0.631; training time:  84.797 s
+epoch  54 | test set correct: 0.614; training time:  84.879 s
+epoch  55 | test set correct: 0.631; training time:  85.378 s
+epoch  56 | test set correct: 0.605; training time:  85.004 s
+epoch  57 | test set correct: 0.630; training time:  84.770 s
+epoch  58 | test set correct: 0.626; training time:  85.042 s
+epoch  59 | test set correct: 0.628; training time:  85.109 s
+epoch  60 | test set correct: 0.636; training time:  84.769 s
+epoch  61 | test set correct: 0.641; training time:  84.964 s
+epoch  62 | test set correct: 0.623; training time:  84.955 s
+epoch  63 | test set correct: 0.637; training time:  84.880 s
+epoch  64 | test set correct: 0.629; training time:  85.018 s
+epoch  65 | test set correct: 0.621; training time:  84.983 s
+epoch  66 | test set correct: 0.636; training time:  84.863 s
+epoch  67 | test set correct: 0.630; training time:  84.935 s
+epoch  68 | test set correct: 0.635; training time:  85.023 s
+epoch  69 | test set correct: 0.643; training time:  84.901 s
+epoch  70 | test set correct: 0.638; training time:  85.076 s
+epoch  71 | test set correct: 0.629; training time:  88.719 s
+epoch  72 | test set correct: 0.638; training time:  86.641 s
+epoch  73 | test set correct: 0.645; training time:  88.793 s
+epoch  74 | test set correct: 0.646; training time:  89.424 s
+epoch  75 | test set correct: 0.634; training time:  87.913 s
+epoch  76 | test set correct: 0.651; training time:  88.441 s
+epoch  77 | test set correct: 0.641; training time:  90.710 s
+epoch  78 | test set correct: 0.640; training time:  88.557 s
+epoch  79 | test set correct: 0.638; training time:  87.761 s
+epoch  80 | test set correct: 0.634; training time:  89.230 s
+epoch  81 | test set correct: 0.641; training time:  85.444 s
+epoch  82 | test set correct: 0.642; training time:  86.295 s
+epoch  83 | test set correct: 0.627; training time:  85.040 s
+epoch  84 | test set correct: 0.641; training time:  85.026 s
+epoch  85 | test set correct: 0.647; training time:  85.176 s
+epoch  86 | test set correct: 0.644; training time:  85.164 s
+epoch  87 | test set correct: 0.648; training time:  84.880 s
+epoch  88 | test set correct: 0.640; training time:  85.174 s
+epoch  89 | test set correct: 0.648; training time:  84.877 s
+epoch  90 | test set correct: 0.651; training time:  85.140 s
+epoch  91 | test set correct: 0.643; training time:  85.141 s
+epoch  92 | test set correct: 0.647; training time:  84.879 s
+epoch  93 | test set correct: 0.649; training time:  85.001 s
+epoch  94 | test set correct: 0.648; training time:  85.033 s
+epoch  95 | test set correct: 0.653; training time:  84.965 s
+epoch  96 | test set correct: 0.648; training time:  85.094 s
+epoch  97 | test set correct: 0.653; training time:  85.139 s
+epoch  98 | test set correct: 0.634; training time:  84.995 s
+epoch  99 | test set correct: 0.647; training time:  84.836 s
+epoch 100 | test set correct: 0.649; training time:  84.896 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We are able to get about 65% correct here, when using the coarsened data.  It does appear that more training
+would help—there are a lot of weights and (relatively) few training images.</p>
+<p>Ultimately, a major issue is that the
+backpropagated errors get really small when using the sigmoid (this is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Vanishing_gradient_problem">vanishing gradient problem</a>).
+Our network is just too simple for this problem.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./machine-learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="application-galaxies-intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Application: Galaxy Classification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="application-galaxies-keras-cnn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Application: Galaxy Classification with Keras</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-manager-class">A manager class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">Batching</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-input-recap">Single input recap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-batching-approach">A batching approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-our-neural-network">Implementing our neural network</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2025; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
