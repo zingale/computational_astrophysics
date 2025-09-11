@@ -146,7 +146,11 @@ We then define the characteristic variables via:
 $$d{\bf w} = {\bf L} d{\bf q}$$
 
 Since we are nonlinear, we cannot simply integrate this.  Using this definition, we can
-rewrite our system as:
+rewrite our system as by multiplying the primitive variable system by {\bf L}:
+
+$${\bf L q}_t + {\bf L A}\, \underbrace{{\bf RL}}_{{\bf I}}\, {\bf q}_x = 0$$
+
+and then using ${\bf} d{\bf w} = {\bf L} d{\bf q}$:
 
 $${\bf w}_t + {\bf \Lambda} {\bf w}_x = 0$$
 
