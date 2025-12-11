@@ -58,3 +58,4 @@ by a system of ODEs.  Here are some suggestions to explore.
      The orbit of Mercury precesses due to general relativistic effects.  This is
      nicely worked out in [Körber et al. 2018](https://arxiv.org/pdf/1803.01678.pdf).
      
+     Also see the derivation in [Balbus 2025](https://doi.org/10.1119/5.0273160).
