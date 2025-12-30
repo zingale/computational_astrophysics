@@ -21,3 +21,6 @@ cd content
 jupyter-book build --toc _toc_all.yml --path-output all .
 ```
 
+## Jupyter Book
+
+Note: this currently uses `jupyter-book` 1.x.
