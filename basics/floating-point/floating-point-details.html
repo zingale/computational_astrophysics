@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Floating Point Format &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'basics/floating-point/floating-point-details';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Numerical Errors: Roundoff and Truncation" href="numerical_error.html" />
+    <link rel="prev" title="matplotlib" href="../../python/matplotlib-basics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/numpy.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/numpy-advanced.html">NumPy Copying and Indexing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Floating Point Format</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diff-int/differentiation.html">Differentiation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/example-second-deriv.html">In-class Example: Second Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/application-rate-temperature-sensitivity.html">Application: Reaction Rate Temperature Sensitivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/example-lorenz.html">Example: Lorenz system</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-planetary-stability.html">Application: Stability of Planetary Systems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/boundary-value-problems.html">✱ Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-implicit.html">✱ Stiff ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-CNO-network.html">Application: Reaction Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/more-applications.html">More Applications</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-xrb-one-zone.html">Application: One-zone X-ray burst</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interlude Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../git/github.html">github</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../git/pull-requests.html">Pull requests</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffts/fourier.html">Fourier Transforms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/application-planets-fft.html">Application: Recovering Planetary Periods from Radial Velocity Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/example-turbulent-power-spectrum.html">Example: Turbulent Power Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/application-interpolating-reaction-rates.html">Application: Interpolating Weak Reaction Rate Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/conservative-interpolation.html">✱ Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fitting/least_squares.html">Least Squares Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/generalized-linear-least-squares-tests.html">Testing Our Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advection/burgers/burgers.html">✱ Burgers' Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advection/advection-more.html">More on Advection and Burgers’ Equation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid.html">✱ Multigrid</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">✱ Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../euler/euler.html">Euler Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../euler/euler-riemann.html">Euler Riemann Problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../machine-learning/machine-learning-types.html">Types of Machine Learning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/mnist-cxx.html">C++ Implementation of MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../machine-learning/machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/application-galaxies-intro.html">Application: Galaxy Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/application-galaxies.html">Galaxy Classification with a Neural Net from Scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/application-galaxies-keras-cnn.html">Application: Galaxy Classification with Keras</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional examples (for in-class)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../in_class/in-class-ode-projectile.html">ODE Review: Projectile Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../in_class/in-class-hilbert-matrix.html">Linear Algebra Review: Hilbert Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../in_class/in-class-fft.html">FFT Review: Cleaning a Signal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework1-solutions.html">Homework 1 solutions</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework4.html">Homework 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework4-solutions.html">Homework 4 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework5.html">Homework 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework5-solutions.html">Homework 5 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework6.html">Homework 6</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework6-solutions.html">Homework 6 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework7.html">Homework 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework7-solutions.html">Homework 7 solutions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Fbasics/floating-point/floating-point-details.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/basics/floating-point/floating-point-details.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Floating Point Format</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-overview">Storage overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#range">Range</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-properties">Accessing Properties</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="floating-point-format">
+<h1>Floating Point Format<a class="headerlink" href="#floating-point-format" title="Link to this heading">#</a></h1>
+<p>In numerical calculations, we need to worry about several sources of
+error including floating point and truncation error.  Here we will describe
+these concepts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Reading: <a class="reference external" href="https://dl.acm.org/doi/10.1145/103162.103163">What Every Computer Scientist Should Know About Floating-Point Arithmetic</a></p>
+</div>
+<section id="storage-overview">
+<h2>Storage overview<a class="headerlink" href="#storage-overview" title="Link to this heading">#</a></h2>
+<p>We can think of a floating point number as having the form:</p>
+<div class="math notranslate nohighlight">
+\[
+   \mbox{significand} \times 10^\mbox{exponent}
+\]</div>
+<p>Most computers follow the IEEE 754 standard for floating point, and we commonly work
+with 32-bit and 64-bit floating point numbers (single and double precision).  These bits
+are split between the signifcand and exponent as well as a single bit for the sign:</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../../_images/1024px-IEEE_754_Double_Floating_Point_Format.svg.png"><img alt="../../_images/1024px-IEEE_754_Double_Floating_Point_Format.svg.png" src="../../_images/1024px-IEEE_754_Double_Floating_Point_Format.svg.png" style="width: 80%;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">(source: wikipedia)</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Since the number is stored in binary, we can think about expanding a number in powers of 2:</p>
+<div class="math notranslate nohighlight">
+\[
+   0.1 \sim (1 +
+             1 \cdot 2^{-1} +
+             0 \cdot 2^{-2} +
+             0 \cdot 2^{-3} +
+             1 \cdot 2^{-4} +
+             1 \cdot 2^{-5} + \ldots) \times 2^{-4}
+\]</div>
+<p>In fact, <code class="docutils literal notranslate"><span class="pre">0.1</span></code> cannot be exactly represented in floating point:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mf">0.1</span><span class="si">:</span><span class="s2">30.20f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+C++</label><div class="sd-tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setprecision</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can interactively explore the floating-point formats at this nice website:
+<a class="reference external" href="https://float.exposed/0x4630e9c60554875f">float.exposed</a></p>
+</div>
+</section>
+<section id="precision">
+<h2>Precision<a class="headerlink" href="#precision" title="Link to this heading">#</a></h2>
+<p>With 52 bits for the significand, the smallest number compared to <code class="docutils literal notranslate"><span class="pre">1</span></code> we can represent is</p>
+<div class="math notranslate nohighlight">
+\[
+   2^{-52} \approx 2.22\times 10^{-16}
+\]</div>
+<p>but the IEEE 754 format always expresses the significant such that the
+first bit is <code class="docutils literal notranslate"><span class="pre">1</span></code> (by adjusting the exponent) and then doesn’t need
+to store that <code class="docutils literal notranslate"><span class="pre">1</span></code>, giving us an extra bit of precision, so the
+machine epsilon is</p>
+<div class="math notranslate nohighlight">
+\[
+   2^{-53} \approx 1.11\times 10^{-16}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a relative error, so for a number like <code class="docutils literal notranslate"><span class="pre">1000</span></code> we could only add
+<code class="docutils literal notranslate"><span class="pre">1.1e-13</span></code> to it before it became indistinguishable from <code class="docutils literal notranslate"><span class="pre">1000</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[
+   \mbox{relative roundoff error} = \frac{|\mbox{true number} - \mbox{computer representation} |}
+      {|\mbox{true number}|} \le \epsilon
+\]</div>
+</div>
+<p>There are <a class="reference external" href="https://en.wikipedia.org/wiki/Machine_epsilon#Alternative_definitions_for_epsilon">varying definitions of machine epsilon</a> which differ by a factor of 2.</p>
+</section>
+<section id="range">
+<h2>Range<a class="headerlink" href="#range" title="Link to this heading">#</a></h2>
+<p>Now consider the exponent, we use 11 bits to store it in double
+precision.  Two are reserved for special numbers, so out of the 2048
+possible exponent values, one is 0, and 2 are reserved, leaving 2045
+to split between positive and negative exponents.  These are set as:</p>
+<div class="math notranslate nohighlight">
+\[ 2^{-1022} \mbox{ to } 2^{1023} \]</div>
+<p>converting to base 10, this is</p>
+<div class="math notranslate nohighlight">
+\[ \sim 10^{-308} \mbox{ to } \sim 10^{308} \]</div>
+</section>
+<section id="accessing-properties">
+<h2>Accessing Properties<a class="headerlink" href="#accessing-properties" title="Link to this heading">#</a></h2>
+<p>Most languages have functions that return the basic properties / limits
+of floating point</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+  <span class="n">sys</span><span class="o">.</span><span class="n">float_info</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+C++</label><div class="sd-tab-content docutils">
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;maximum double = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;maximum double base-10 exponent = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">max_exponent10</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;smallest (abs) double = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;minimum double base-10 exponent = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">min_exponent10</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;machine epsilon (double) = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">epsilon</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./basics/floating-point"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../python/matplotlib-basics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">matplotlib</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="numerical_error.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Numerical Errors: Roundoff and Truncation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#storage-overview">Storage overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">Precision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#range">Range</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-properties">Accessing Properties</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2025; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

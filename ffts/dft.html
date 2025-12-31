@@ -1,0 +1,1167 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Discrete Fourier Transform &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ffts/dft';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing our DFT" href="dft-tests.html" />
+    <link rel="prev" title="Fourier Transforms" href="fourier.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/numpy.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-advanced.html">NumPy Copying and Indexing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/floating-point/floating-point-details.html">Floating Point Format</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/differentiation.html">Differentiation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/example-second-deriv.html">In-class Example: Second Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-rate-temperature-sensitivity.html">Application: Reaction Rate Temperature Sensitivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/example-lorenz.html">Example: Lorenz system</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-planetary-stability.html">Application: Stability of Planetary Systems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/boundary-value-problems.html">✱ Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-implicit.html">✱ Stiff ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-CNO-network.html">Application: Reaction Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/more-applications.html">More Applications</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-xrb-one-zone.html">Application: One-zone X-ray burst</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interlude Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../git/github.html">github</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../git/pull-requests.html">Pull requests</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="fourier.html">Fourier Transforms</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-planets-fft.html">Application: Recovering Planetary Periods from Radial Velocity Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-turbulent-power-spectrum.html">Example: Turbulent Power Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/application-interpolating-reaction-rates.html">Application: Interpolating Weak Reaction Rate Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/conservative-interpolation.html">✱ Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fitting/least_squares.html">Least Squares Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares-tests.html">Testing Our Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/burgers/burgers.html">✱ Burgers' Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../advection/advection-more.html">More on Advection and Burgers’ Equation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid.html">✱ Multigrid</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">✱ Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler.html">Euler Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler-riemann.html">Euler Riemann Problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-types.html">Types of Machine Learning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/mnist-cxx.html">C++ Implementation of MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/application-galaxies-intro.html">Application: Galaxy Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/application-galaxies.html">Galaxy Classification with a Neural Net from Scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/application-galaxies-keras-cnn.html">Application: Galaxy Classification with Keras</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional examples (for in-class)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-ode-projectile.html">ODE Review: Projectile Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-hilbert-matrix.html">Linear Algebra Review: Hilbert Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-fft.html">FFT Review: Cleaning a Signal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework1-solutions.html">Homework 1 solutions</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework4.html">Homework 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework4-solutions.html">Homework 4 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework5.html">Homework 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework5-solutions.html">Homework 5 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework6.html">Homework 6</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework6-solutions.html">Homework 6 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework7.html">Homework 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework7-solutions.html">Homework 7 solutions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/ffts/dft.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/ffts/dft.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Fffts/dft.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ffts/dft.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Discrete Fourier Transform</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency">Frequency</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nyquist-frequency">Nyquist frequency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-2-peaks">Why 2 peaks?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-interpret-the-amplitude">How do we interpret the amplitude?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-spectrum">Power spectrum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-implementation">C++ Implementation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="discrete-fourier-transform">
+<h1>Discrete Fourier Transform<a class="headerlink" href="#discrete-fourier-transform" title="Link to this heading">#</a></h1>
+<p>Let’s implement a discrete Fourier transform.</p>
+<p>We essentially want to code up:</p>
+<div class="math notranslate nohighlight">
+\[F_k = \sum_{n = 0}^{N-1} f_n e^{-2\pi i n k / N}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This requires a double sum: for each wavenumber, <span class="math notranslate nohighlight">\(k\)</span>, we sum over all the spatial points.
+This means that the amount of work scales as <span class="math notranslate nohighlight">\(\mathcal{O}(N^2)\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dft</span><span class="p">(</span><span class="n">f_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;perform a discrete Fourier transform&quot;&quot;&quot;</span>
+    
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f_n</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    
+    <span class="n">f_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">f_k</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f_n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">k</span> <span class="o">/</span> <span class="n">N</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">f_k</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In python, the complex unit, <span class="math notranslate nohighlight">\(\sqrt{-1}\)</span> is denoted by <code class="docutils literal notranslate"><span class="pre">j</span></code> immediately following the number.</p>
+</div>
+<p>Now let’s try this out.  Let’s compute the transform of</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \sin(2 \pi \nu_0 x)\]</div>
+<p>We would expect to see all of the power at a single frequency <span class="math notranslate nohighlight">\(\nu_0\)</span>, and since our function is a <span class="math notranslate nohighlight">\(\sin()\)</span>, we would expect for all of the power to be in the imaginary component.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">nu_0</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mf">50.0</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">f_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">nu_0</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f5d4547d7f0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/dd798790bc3918070004ce1e8f0564d723cc502aaabc33dd3337f16e1e6a9ba8.png" src="../_images/dd798790bc3918070004ce1e8f0564d723cc502aaabc33dd3337f16e1e6a9ba8.png" />
+</div>
+</div>
+<p>Now the DFT</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f_k</span> <span class="o">=</span> <span class="n">dft</span><span class="p">(</span><span class="n">f_n</span><span class="p">)</span>
+<span class="n">nu_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="n">xmax</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu_k</span><span class="p">,</span> <span class="n">f_k</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Re($F_k$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu_k</span><span class="p">,</span> <span class="n">f_k</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Im($F_k$)&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nu_k$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$F_k$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5d452d7770&gt;
+</pre></div>
+</div>
+<img alt="../_images/cd70425c4b5be6ea1a4245fd99341a1b72e8cf23bfd727505387135397ddbc25.png" src="../_images/cd70425c4b5be6ea1a4245fd99341a1b72e8cf23bfd727505387135397ddbc25.png" />
+</div>
+</div>
+<p>As expected, all of the power is in the imaginary part, and it looks like it is at a frequency of <span class="math notranslate nohighlight">\(\nu = 0.2\)</span>, as we expected.  But there are 2 peaks.</p>
+<p>We now need to discuss this following:</p>
+<ul class="simple">
+<li><p>How did we compute the physical frequency, <span class="math notranslate nohighlight">\(\nu_k\)</span>, corresponding to each frequency sample?</p></li>
+<li><p>Why are there 2 peaks in our transform?</p></li>
+<li><p>What is the significance of the amplitudes in this plot?</p></li>
+</ul>
+<section id="frequency">
+<h2>Frequency<a class="headerlink" href="#frequency" title="Link to this heading">#</a></h2>
+<p>We want to understand how to get a physical frequency from the data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the DFT, the physical coordinate value, <span class="math notranslate nohighlight">\(x_n\)</span>, does not enter—instead we just look at the index <code class="docutils literal notranslate"><span class="pre">n</span></code> itself.</p>
+</div>
+<p>Consider our single-mode sine wave.  We can express it as:</p>
+<div class="math notranslate nohighlight">
+\[\sin(2\pi \nu x) =  \sin \left ( \frac{2\pi k x}{L} \right ) = \sin \left ( \frac{2\pi k n}{N} \right )\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> is the maximum extent of the coordinate <span class="math notranslate nohighlight">\(x\)</span> (if <span class="math notranslate nohighlight">\(x\)</span> represents time, then this would be the maximum time for the data), and <span class="math notranslate nohighlight">\(n\)</span> is the index of the discrete data.
+They are related via</p>
+<div class="math notranslate nohighlight">
+\[x_n = \frac{n L}{N}\]</div>
+<p><img alt="various single mode sine waves" src="../_images/sine-k.png" /></p>
+<p>From this plot, we see that if there is a single mode in the domain, associated with the wavenumber <code class="docutils literal notranslate"><span class="pre">1</span></code>, then the physical frequency is <span class="math notranslate nohighlight">\(1/L\)</span>.</p>
+<p>And in general, <span class="math notranslate nohighlight">\(\nu = k/L\)</span> for <span class="math notranslate nohighlight">\(k = 0, 1, 2, \ldots N-1\)</span>.</p>
+<p>Most DFT routines will return frequencies in index space, e.g.,</p>
+<div class="math notranslate nohighlight">
+\[k_\mathrm{freq} = 0, 1/N, 2/N, 3/N, \ldots\]</div>
+<p>In this index space, the shortest wavelength is from one cell to the next, and the corresponding frequency is <span class="math notranslate nohighlight">\(1/\Delta x\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As we add points to our data, then we open up higher-and-higher frequencies (in terms of index space)</p>
+</div>
+<p>Clearly then the physical scale for the frequency is:</p>
+<div class="math notranslate nohighlight">
+\[\nu_k = \underbrace{\left ( \frac{k}{N} \right )}_{k_\mathrm{freq}} \cdot \frac{1}{\Delta x} = \left (\frac{k}{N} \right ) \cdot \frac{N}{L} = \frac{k}{L}\]</div>
+<ul class="simple">
+<li><p>lowest frequency: <span class="math notranslate nohighlight">\(1/L\)</span>, corresponds to the largest wavelength, e.g., the entire domain</p></li>
+<li><p>highest frequency: <span class="math notranslate nohighlight">\(N/L \sim 1/\Delta x\)</span>, corresponds to the shortest wavelength, one sample to the next</p></li>
+</ul>
+<p>Following this procedure, the physical frequency for our DFT above is found simply via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="n">xmax</span>
+</pre></div>
+</div>
+<section id="nyquist-frequency">
+<h3>Nyquist frequency<a class="headerlink" href="#nyquist-frequency" title="Link to this heading">#</a></h3>
+<p>The highest meaningful frequnecy is <span class="math notranslate nohighlight">\(1/(2 \Delta x)\)</span> which is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist frequency</a>.</p>
+<p>Consider a timeseries with 10 samples that goes for 10 s.  So <span class="math notranslate nohighlight">\(\Delta t = 1 s\)</span>.  The Nyquist frequency would be <span class="math notranslate nohighlight">\(\nu_\mbox{Nyquist} = 1/(2 \Delta t) = 0.5~\mbox{Hz}\)</span>.</p>
+<p>Using our prescription above, the frequencies are:</p>
+<div class="math notranslate nohighlight">
+\[\nu_k = 0, \frac{1}{10~\mbox{s}}, \frac{2}{10~\mbox{s}}, \frac{3}{10~\mbox{s}}, \frac{4}{10~\mbox{s}}, {\color{red}\frac{5}{10~\mbox{s}}}, \frac{6}{10~\mbox{s}}, \frac{7}{10~\mbox{s}}, \frac{8}{10~\mbox{s}}, \frac{9}{10~\mbox{s}}\]</div>
+<p>where we highlight the Nyquist frequency in red.</p>
+<p>These are equivalent to</p>
+<div class="math notranslate nohighlight">
+\[\nu_k = 0, 0.1~\mbox{Hz}, 0.2~\mbox{Hz}, 0.3~\mbox{Hz}, 0.4~\mbox{Hz}, {\color{red} 0.5~\mbox{Hz}}, 0.6~\mbox{Hz}, 0.7~\mbox{Hz}, 0.8~\mbox{Hz}, 0.9~\mbox{Hz}\]</div>
+<p>Let’s look at what happens when we try to represent a sine wave with 10 points at these different frequencies:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f_sin</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axs</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">n</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f_sin</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">nu</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;nu = </span><span class="si">{</span><span class="n">nu</span><span class="si">:</span><span class="s2">4.2f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">f_sin</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span> <span class="n">nu</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s2">&quot;small&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="o">=</span><span class="s2">&quot;time (s)&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f8226a0de3c1f5bd5404a9d079b7fc3822bbba9e913cd1e87de89a0e5441912a.png" src="../_images/f8226a0de3c1f5bd5404a9d079b7fc3822bbba9e913cd1e87de89a0e5441912a.png" />
+</div>
+</div>
+<p>We see that once we go past the Nyquist frequency, we no longer resolve the correct number of wave peaks.  This is an example of <a class="reference external" href="https://en.wikipedia.org/wiki/Aliasing"><em>aliasing</em></a></p>
+</section>
+</section>
+<section id="why-2-peaks">
+<h2>Why 2 peaks?<a class="headerlink" href="#why-2-peaks" title="Link to this heading">#</a></h2>
+<p>Both the real-space and frequency-space forms of the function contain the same information.  In our <code class="docutils literal notranslate"><span class="pre">dft()</span></code> function above, we had N real values and return N complex values,
+but each complex number has twice the amount of information as a single real number.  This means that half of the complex numbers we return are not independent.</p>
+<p>This is a consequence of the fact that for an analytic Fourier transform of a real function, <span class="math notranslate nohighlight">\(f(x)\)</span>, <span class="math notranslate nohighlight">\(F(-k) = F^*(k)\)</span>.  In the discrete transform, this shows itself as:</p>
+<div class="math notranslate nohighlight">
+\[F_{N-k} = F_k^\star\]</div>
+<p>we can see this as:</p>
+<div class="math notranslate nohighlight">
+\[F_{N-k} = \sum_{n=0}^{N-1} f_n e^{-2\pi i n (N-k)/N} = \sum_{n=0}^{N-1} f_n e^{+2\pi i n k/N} \underbrace{e^{-2\pi i n}}_{= 1} = F_k^\star\]</div>
+<p>So only the first <span class="math notranslate nohighlight">\(N/2\)</span> points we get from our DFT routine are important.  The others don’t add any new information.  This will also affect the normalization (as discussed below).</p>
+<p>The also means that the maximum frequency is <span class="math notranslate nohighlight">\(1/(2\Delta x)\)</span>.</p>
+</section>
+<section id="how-do-we-interpret-the-amplitude">
+<h2>How do we interpret the amplitude?<a class="headerlink" href="#how-do-we-interpret-the-amplitude" title="Link to this heading">#</a></h2>
+<p>When plotting, we want to put the physical scale back in, as well as make the correspondence to the continuous representation.</p>
+<p>We can rewrite the inverse DFT expression as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_n = \frac{1}{N} \sum_{n=0}^{N-1} F_k e^{2\pi i n k /N} 
+= \underbrace{\sum_{n=0}^{N-1} \overbrace{\left (\frac{F_k}{N} \right )}^{\substack{\mbox{this is what}\\ \mbox{we plot}}}
+e^{2\pi i n k /N}}_{\mbox{this looks like the continuous form}} \end{split}\]</div>
+<ul class="simple">
+<li><p>This suggests that we should normalize the <span class="math notranslate nohighlight">\(F_k\)</span> by the number of points, <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+<li><p>Another interpretation relates to the continuous form of the Fourier transform: <span class="math notranslate nohighlight">\(F_k / N \Longleftrightarrow F_k dk\)</span></p></li>
+</ul>
+</section>
+<section id="power-spectrum">
+<h2>Power spectrum<a class="headerlink" href="#power-spectrum" title="Link to this heading">#</a></h2>
+<p>The power spectrum is defined simply as</p>
+<div class="math notranslate nohighlight">
+\[P(k) = |F(k)|^2 = F(k) F^\star(k)\]</div>
+<p>This is a single number that shows the importance / weight of a given frequency</p>
+</section>
+<section id="c-implementation">
+<h2>C++ Implementation<a class="headerlink" href="#c-implementation" title="Link to this heading">#</a></h2>
+<p>A C++ implementation is available as:</p>
+<ul>
+<li><p><a class="reference download internal" download="" href="../_downloads/2eee8001f2c35b46dd74b45dc29fbead/dft.H"><span class="xref download myst">dft.H</span></a> : a header containing the main implementation</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef DFT_H</span>
+<span class="cp">#define DFT_H</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;complex&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">dft</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// compute the discrete Fourier transform of the real-valued function f</span>
+
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">complex_literals</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">complex</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">f_k</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">     </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">f_k</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exp</span><span class="p">(</span><span class="mf">-2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="n">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">     </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">f_k</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</li>
+<li><p><a class="reference download internal" download="" href="../_downloads/7d493131961f20917891622721b0d4c5/dft_test.cpp"><span class="xref download myst">dft_test.cpp</span></a> : a driver</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iomanip&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;dft.H&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// test our DFT implementation by taking the transform of a single-mode sine</span>
+<span class="w">    </span><span class="c1">// wave</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">nu_0</span><span class="p">{</span><span class="mf">0.2</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">xmax</span><span class="p">{</span><span class="mf">50.0</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// number of points in our sample</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">{</span><span class="mi">128</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xmax</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// this will create evenly spaced bins from [0, xmax) -- i.e. xmax is</span>
+<span class="w">    </span><span class="c1">// excluded.</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dx</span><span class="p">;</span>
+<span class="w">        </span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nu_0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// take the FFT</span>
+
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">f_k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dft</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// compute frequency</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nu_k</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">nu_k</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">xmax</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// output</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">n</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nu_k</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">f</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">real</span><span class="p">(</span><span class="n">f_k</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+<span class="w">                  </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">setw</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">imag</span><span class="p">(</span><span class="n">f_k</span><span class="p">[</span><span class="n">n</span><span class="p">])</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ffts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="fourier.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Fourier Transforms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="dft-tests.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Testing our DFT</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency">Frequency</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nyquist-frequency">Nyquist frequency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-2-peaks">Why 2 peaks?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-interpret-the-amplitude">How do we interpret the amplitude?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-spectrum">Power spectrum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-implementation">C++ Implementation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2025; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1374 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>V-Cycles &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'elliptic_multigrid/multigrid/multigrid-vcycles';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Diffusion" href="../../diffusion/diffusion.html" />
+    <link rel="prev" title="Two Grid Correction" href="multigrid-two-grid.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/numpy.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/numpy-advanced.html">NumPy Copying and Indexing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/floating-point/floating-point-details.html">Floating Point Format</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/diff-int/differentiation.html">Differentiation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/example-second-deriv.html">In-class Example: Second Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/application-rate-temperature-sensitivity.html">Application: Reaction Rate Temperature Sensitivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../basics/linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/example-lorenz.html">Example: Lorenz system</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-planetary-stability.html">Application: Stability of Planetary Systems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/boundary-value-problems.html">✱ Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/ODEs-implicit.html">✱ Stiff ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-CNO-network.html">Application: Reaction Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ODEs/more-applications.html">More Applications</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ODEs/application-xrb-one-zone.html">Application: One-zone X-ray burst</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interlude Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../git/github.html">github</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../git/pull-requests.html">Pull requests</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffts/fourier.html">Fourier Transforms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/application-planets-fft.html">Application: Recovering Planetary Periods from Radial Velocity Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/example-turbulent-power-spectrum.html">Example: Turbulent Power Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffts/non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/application-interpolating-reaction-rates.html">Application: Interpolating Weak Reaction Rate Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/conservative-interpolation.html">✱ Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../fitting/least_squares.html">Least Squares Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/generalized-linear-least-squares-tests.html">Testing Our Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advection/burgers/burgers.html">✱ Burgers' Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../advection/advection-more.html">More on Advection and Burgers’ Equation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="multigrid.html">✱ Multigrid</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">✱ Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../euler/euler.html">Euler Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../euler/euler-riemann.html">Euler Riemann Problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../machine-learning/machine-learning-types.html">Types of Machine Learning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/mnist-cxx.html">C++ Implementation of MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../machine-learning/machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../machine-learning/application-galaxies-intro.html">Application: Galaxy Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/application-galaxies.html">Galaxy Classification with a Neural Net from Scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../machine-learning/application-galaxies-keras-cnn.html">Application: Galaxy Classification with Keras</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional examples (for in-class)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../in_class/in-class-ode-projectile.html">ODE Review: Projectile Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../in_class/in-class-hilbert-matrix.html">Linear Algebra Review: Hilbert Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../in_class/in-class-fft.html">FFT Review: Cleaning a Signal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework1-solutions.html">Homework 1 solutions</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework4.html">Homework 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework4-solutions.html">Homework 4 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework5.html">Homework 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework5-solutions.html">Homework 5 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework6.html">Homework 6</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework6-solutions.html">Homework 6 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../homework/homework7.html">Homework 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../homework/homework7-solutions.html">Homework 7 solutions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/elliptic_multigrid/multigrid/multigrid-vcycles.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/elliptic_multigrid/multigrid/multigrid-vcycles.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Felliptic_multigrid/multigrid/multigrid-vcycles.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/elliptic_multigrid/multigrid/multigrid-vcycles.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>V-Cycles</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="v-cycles">
+<h1>V-Cycles<a class="headerlink" href="#v-cycles" title="Link to this heading">#</a></h1>
+<p>We now have what we need to apply this two-grid solver recursively.  Instead of solving the coarse grid directly via smoothing, we instead treat it like a new Poisson problem to solve and create an even coarser grid to do the correction, and so on…</p>
+<p>Eventually, we will have a tower of grids spanning from our original fine grid resolution down to something suitably coarse that we can relax the solution there with only a few iterations:</p>
+<p><img alt="multgrid tower" src="../../_images/mgtower.png" /></p>
+<p>To make things simpler, we’ll work with grids that are a power of 2 in size.  Then we will coarsen all the way down until we have a grid with only 2 zones (because of how we implement our boundary conditions, we can’t go all the way down to a single zone).</p>
+<p>On that 2 zone coarsest grid, just a few smoothing iterations will solve the problem.  We call this the <em>bottom solver</em>.</p>
+<p>Here’s a multigrid class that implements this recursive structure.  It is currently implemented only for homogeneous boundary conditions.</p>
+<p>The main data structure is a list of grids, <code class="docutils literal notranslate"><span class="pre">Multigrid.grids</span></code>, which holds the hierarchy of grids at the different resolutions.</p>
+<p>Our two-grid correction code that we previously implemented is now called <code class="docutils literal notranslate"><span class="pre">vcycle()</span></code>, and it will apply the two-grid correction on all grids except the very coarsest, on which it instead just smooths.</p>
+<p>Finally, there is one new function here, <code class="docutils literal notranslate"><span class="pre">solve()</span></code>.  This calls <code class="docutils literal notranslate"><span class="pre">vcycle()</span></code> repeatedly until the error is below our desired tolerance.</p>
+<p>The overall flow looks like:</p>
+<p><img alt="vcycle" src="../../_images/vcycle.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">multigrid</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">cat</span> multigrid.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>import numpy as np
+
+import grid
+
+
+class Multigrid:
+    &quot;&quot;&quot;
+    The main multigrid class for cell-centered data.
+
+    We require that nx be a power of 2 for simplicity
+    &quot;&quot;&quot;
+
+    def __init__(self, nx, xmin=0.0, xmax=1.0,
+                 bc_left_type=&quot;dirichlet&quot;, bc_right_type=&quot;dirichlet&quot;,
+                 nsmooth=10, nsmooth_bottom=50,
+                 verbose=0,
+                 true_function=None):
+
+        self.nx = nx
+        self.ng = 1
+
+        self.xmin = xmin
+        self.xmax = xmax
+
+        self.nsmooth = nsmooth
+        self.nsmooth_bottom = nsmooth_bottom
+
+        self.max_cycles = 100
+
+        self.verbose = verbose
+
+        self.bc_left_type = bc_left_type
+        self.bc_right_type = bc_right_type
+
+        # a function that gives the analytic solution (if available)
+        # for diagnostics only
+        self.true_function = true_function
+
+        # assume that self.nx = 2^(nlevels-1)
+        # this defines nlevels such that we end exactly on a 2 zone grid
+        self.nlevels = int(np.log(self.nx)/np.log(2.0))
+
+        # a multigrid object will be a list of grids
+        self.grids = []
+
+        # create the grids.  Here, self.grids[0] will be the coarsest
+        # grid and self.grids[nlevel-1] will be the finest grid we
+        # store the solution, v, the rhs, f.
+
+        nx_t = 2
+        for _ in range(self.nlevels):
+
+            # add a grid for this level
+            self.grids.append(grid.Grid(nx_t, xmin=self.xmin, xmax=self.xmax,
+                                        bc_left_type=self.bc_left_type,
+                                        bc_right_type=self.bc_right_type))
+
+            nx_t *= 2
+
+        # provide coordinate and indexing information for the solution mesh
+        self.soln_grid = self.grids[self.nlevels-1]
+
+        self.ilo = self.soln_grid.ilo
+        self.ihi = self.soln_grid.ihi
+
+        self.x = self.soln_grid.x
+        self.dx = self.soln_grid.dx
+
+        # store the source norm
+        self.source_norm = 0.0
+
+        # after solving, keep track of the number of cycles taken and
+        # the residual error (normalized to the source norm)
+
+        self.num_cycles = 0
+        self.residual_error = 1.e33
+
+    def get_solution(self):
+        return self.grids[self.nlevels-1].v.copy()
+
+    def get_solution_object(self):
+        return self.grids[self.nlevels-1]
+
+    def init_solution(self):
+        &quot;&quot;&quot;
+        initialize the solution to the elliptic problem as zero
+        &quot;&quot;&quot;
+        self.soln_grid.v[:] = 0.0
+
+    def init_rhs(self, data):
+        self.soln_grid.f[:] = data.copy()
+
+        # store the source norm
+        self.source_norm = self.soln_grid.norm(self.soln_grid.f)
+
+    def smooth(self, level, nsmooth):
+        &quot;&quot;&quot; use Gauss-Seidel iterations to smooth &quot;&quot;&quot;
+
+        myg = self.grids[level]
+
+        myg.fill_bcs()
+
+        # do red-black G-S
+        for _ in range(nsmooth):
+
+            myg.v[myg.ilo:myg.ihi+1:2] = 0.5 * (
+                -myg.dx * myg.dx * myg.f[myg.ilo:myg.ihi+1:2] +
+                myg.v[myg.ilo+1:myg.ihi+2:2] + myg.v[myg.ilo-1:myg.ihi:2])
+
+            myg.fill_bcs()
+
+            myg.v[myg.ilo+1:myg.ihi+1:2] = 0.5 * (
+                -myg.dx * myg.dx * myg.f[myg.ilo+1:myg.ihi+1:2] +
+                myg.v[myg.ilo+2:myg.ihi+2:2] + myg.v[myg.ilo:myg.ihi:2])
+
+            myg.fill_bcs()
+
+    def solve(self, rtol=1.e-11):
+        &quot;&quot;&quot;do V-cycles util the L2 norm of the relative solution difference is
+        &lt; rtol
+
+        &quot;&quot;&quot;
+
+        if self.verbose:
+            print(&quot;source norm = &quot;, self.source_norm)
+
+        residual_error = 1.e33
+        cycle = 1
+
+        # diagnostics that are returned -- residual error norm and true
+        # error norm (if possible) for each cycle
+        rlist = []
+        elist = []
+
+        while residual_error &gt; rtol and cycle &lt;= self.max_cycles:
+
+            # zero out the solution on all but the finest grid
+            for level in range(self.nlevels-1):
+                self.grids[level].v[:] = 0.0
+
+            # descending part
+            if self.verbose:
+                print(f&quot;&lt;&lt;&lt; beginning V-cycle (cycle {cycle}) &gt;&gt;&gt;\n&quot;)
+
+            self.v_cycle(self.nlevels-1)
+
+            # compute the residual error, relative to the source norm
+            self.soln_grid.compute_residual()
+            residual_error = self.soln_grid.norm(self.soln_grid.r)
+            if self.source_norm != 0.0:
+                residual_error /= self.source_norm
+
+            if residual_error &lt; rtol:
+                self.num_cycles = cycle
+                self.residual_error = residual_error
+                self.soln_grid.fill_bcs()
+
+            if self.verbose:
+                print(f&quot;cycle {cycle}: residual err / source norm = {residual_error:11.6g}\n&quot;)
+
+            rlist.append(residual_error)
+
+            if self.true_function is not None:
+                elist.append(self.soln_grid.norm(self.soln_grid.v - self.true_function(self.soln_grid.x)))
+
+            cycle += 1
+
+        return elist, rlist
+
+    def v_cycle(self, level):
+
+        if level &gt; 0:
+            fp = self.grids[level]
+            cp = self.grids[level-1]
+
+            if self.verbose:
+                fp.compute_residual()
+                old_res_norm = fp.norm(fp.r)
+
+            # smooth on the current level
+            self.smooth(level, self.nsmooth)
+
+            # compute the residual
+            fp.compute_residual()
+
+            if self.verbose:
+                print(f&quot;  level = {level}, nx = {fp.nx:4}, residual change: {old_res_norm:11.6g} -&gt; {fp.norm(fp.r):11.6g}&quot;)
+
+            # restrict the residual down to the RHS of the coarser level
+            cp.f[:] = fp.restrict(fp.r)
+
+            # solve the coarse problem
+            self.v_cycle(level-1)
+
+            # prolong the error up from the coarse grid
+            fp.v += cp.prolong(cp.v)
+
+            if self.verbose:
+                fp.compute_residual()
+                old_res_norm = fp.norm(fp.r)
+
+            # smooth
+            self.smooth(level, self.nsmooth)
+
+            if self.verbose:
+                fp.compute_residual()
+                print(f&quot;  level = {level}, nx = {fp.nx:4}, residual change: {old_res_norm:11.6g} -&gt; {fp.norm(fp.r):11.6g}&quot;)
+
+        else:
+            # solve the discrete coarse problem just via smoothing
+            if self.verbose:
+                print(&quot;  bottom solve&quot;)
+
+            bp = self.grids[0]
+
+            self.smooth(0, self.nsmooth_bottom)
+
+            bp.fill_bcs()
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try this out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">true</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># the analytic solution</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># the righthand side</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="c1"># create the multigrid object</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">multigrid</span><span class="o">.</span><span class="n">Multigrid</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span>
+                        <span class="n">bc_left_type</span><span class="o">=</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span> <span class="n">bc_right_type</span><span class="o">=</span><span class="s2">&quot;dirichlet&quot;</span><span class="p">,</span>
+                        <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">true_function</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+
+<span class="c1"># initialize the RHS using the function f</span>
+<span class="n">a</span><span class="o">.</span><span class="n">init_rhs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># solve to a relative tolerance of 1.e-11</span>
+<span class="n">elist</span><span class="p">,</span> <span class="n">rlist</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">rtol</span><span class="o">=</span><span class="mf">1.e-11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>source norm =  0.5221813198632965
+&lt;&lt;&lt; beginning V-cycle (cycle 1) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change:    0.522181 -&gt;    0.700617
+  level = 5, nx =   64, residual change:    0.495162 -&gt;    0.649824
+  level = 4, nx =   32, residual change:    0.459083 -&gt;    0.549621
+  level = 3, nx =   16, residual change:    0.387872 -&gt;    0.351795
+  level = 2, nx =    8, residual change:    0.247396 -&gt;   0.0731208
+  level = 1, nx =    4, residual change:   0.0502257 -&gt; 4.11445e-05
+  bottom solve
+  level = 1, nx =    4, residual change: 3.04921e-05 -&gt; 3.62431e-09
+  level = 2, nx =    8, residual change:   0.0618107 -&gt; 0.000937419
+  level = 3, nx =   16, residual change:     0.37581 -&gt;  0.00791276
+  level = 4, nx =   32, residual change:    0.769146 -&gt;   0.0206557
+  level = 5, nx =   64, residual change:     1.23875 -&gt;   0.0291926
+  level = 6, nx =  128, residual change:      1.8559 -&gt;   0.0338419
+cycle 1: residual err / source norm =   0.0648087
+
+&lt;&lt;&lt; beginning V-cycle (cycle 2) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change:   0.0338419 -&gt;   0.0317092
+  level = 5, nx =   64, residual change:   0.0224078 -&gt;   0.0270913
+  level = 4, nx =   32, residual change:   0.0191314 -&gt;   0.0186129
+  level = 3, nx =   16, residual change:   0.0131391 -&gt;  0.00837232
+  level = 2, nx =    8, residual change:  0.00591933 -&gt;  0.00171262
+  level = 1, nx =    4, residual change:  0.00117663 -&gt; 9.64214e-07
+  bottom solve
+  level = 1, nx =    4, residual change: 7.14503e-07 -&gt; 8.49423e-11
+  level = 2, nx =    8, residual change:  0.00144876 -&gt; 2.21026e-05
+  level = 3, nx =   16, residual change:  0.00932633 -&gt; 0.000317085
+  level = 4, nx =   32, residual change:   0.0209894 -&gt;   0.0011109
+  level = 5, nx =   64, residual change:   0.0339925 -&gt;  0.00188769
+  level = 6, nx =  128, residual change:   0.0499314 -&gt;  0.00240723
+cycle 2: residual err / source norm =  0.00460995
+
+&lt;&lt;&lt; beginning V-cycle (cycle 3) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change:  0.00240723 -&gt;   0.0022994
+  level = 5, nx =   64, residual change:  0.00162566 -&gt;  0.00208879
+  level = 4, nx =   32, residual change:  0.00147695 -&gt;  0.00170259
+  level = 3, nx =   16, residual change:  0.00120312 -&gt;  0.00103128
+  level = 2, nx =    8, residual change: 0.000724769 -&gt; 0.000211595
+  level = 1, nx =    4, residual change: 0.000145338 -&gt; 1.19054e-07
+  bottom solve
+  level = 1, nx =    4, residual change: 8.82319e-08 -&gt; 1.04871e-11
+  level = 2, nx =    8, residual change:  0.00017885 -&gt; 2.71041e-06
+  level = 3, nx =   16, residual change:  0.00108812 -&gt; 2.33868e-05
+  level = 4, nx =   32, residual change:  0.00218287 -&gt; 8.87994e-05
+  level = 5, nx =   64, residual change:  0.00308115 -&gt; 0.000153082
+  level = 6, nx =  128, residual change:  0.00390778 -&gt; 0.000198049
+cycle 3: residual err / source norm = 0.000379272
+
+&lt;&lt;&lt; beginning V-cycle (cycle 4) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 0.000198049 -&gt; 0.000191664
+  level = 5, nx =   64, residual change: 0.000135525 -&gt;  0.00017191
+  level = 4, nx =   32, residual change:  0.00012151 -&gt; 0.000116464
+  level = 3, nx =   16, residual change: 8.21779e-05 -&gt;  3.9485e-05
+  level = 2, nx =    8, residual change: 2.79117e-05 -&gt; 7.43198e-06
+  level = 1, nx =    4, residual change: 5.10658e-06 -&gt;  4.1854e-09
+  bottom solve
+  level = 1, nx =    4, residual change: 3.10131e-09 -&gt; 3.68729e-13
+  level = 2, nx =    8, residual change: 6.28922e-06 -&gt; 9.62323e-08
+  level = 3, nx =   16, residual change: 4.31702e-05 -&gt; 1.83078e-06
+  level = 4, nx =   32, residual change: 0.000115963 -&gt; 7.33731e-06
+  level = 5, nx =   64, residual change: 0.000191138 -&gt; 1.32008e-05
+  level = 6, nx =  128, residual change: 0.000260099 -&gt; 1.72097e-05
+cycle 4: residual err / source norm = 3.29573e-05
+
+&lt;&lt;&lt; beginning V-cycle (cycle 5) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 1.72097e-05 -&gt; 1.65319e-05
+  level = 5, nx =   64, residual change: 1.16888e-05 -&gt; 1.45261e-05
+  level = 4, nx =   32, residual change: 1.02693e-05 -&gt; 1.06983e-05
+  level = 3, nx =   16, residual change: 7.56435e-06 -&gt; 6.40215e-06
+  level = 2, nx =    8, residual change: 4.50194e-06 -&gt; 1.32103e-06
+  level = 1, nx =    4, residual change: 9.07381e-07 -&gt;   7.433e-10
+  bottom solve
+  level = 1, nx =    4, residual change: 5.50861e-10 -&gt; 6.54748e-14
+  level = 2, nx =    8, residual change: 1.11663e-06 -&gt; 1.69267e-08
+  level = 3, nx =   16, residual change: 6.78716e-06 -&gt; 1.47246e-07
+  level = 4, nx =   32, residual change: 1.31085e-05 -&gt;  6.2776e-07
+  level = 5, nx =   64, residual change: 1.73065e-05 -&gt; 1.16723e-06
+  level = 6, nx =  128, residual change: 2.07958e-05 -&gt; 1.54144e-06
+cycle 5: residual err / source norm = 2.95193e-06
+
+&lt;&lt;&lt; beginning V-cycle (cycle 6) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 1.54144e-06 -&gt; 1.48598e-06
+  level = 5, nx =   64, residual change: 1.05075e-06 -&gt; 1.32109e-06
+  level = 4, nx =   32, residual change: 9.34071e-07 -&gt; 8.83384e-07
+  level = 3, nx =   16, residual change: 6.23446e-07 -&gt; 2.31782e-07
+  level = 2, nx =    8, residual change: 1.63401e-07 -&gt; 3.53382e-08
+  level = 1, nx =    4, residual change:  2.4286e-08 -&gt; 1.99112e-11
+  bottom solve
+  level = 1, nx =    4, residual change: 1.47525e-11 -&gt; 1.75429e-15
+  level = 2, nx =    8, residual change: 2.99243e-08 -&gt; 4.60355e-10
+  level = 3, nx =   16, residual change: 2.38669e-07 -&gt; 1.29896e-08
+  level = 4, nx =   32, residual change: 8.26216e-07 -&gt; 5.65267e-08
+  level = 5, nx =   64, residual change:  1.3865e-06 -&gt; 1.05798e-07
+  level = 6, nx =  128, residual change: 1.81761e-06 -&gt; 1.40268e-07
+cycle 6: residual err / source norm = 2.68619e-07
+
+&lt;&lt;&lt; beginning V-cycle (cycle 7) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 1.40268e-07 -&gt; 1.34754e-07
+  level = 5, nx =   64, residual change: 9.52817e-08 -&gt; 1.16914e-07
+  level = 4, nx =   32, residual change: 8.26508e-08 -&gt; 8.00411e-08
+  level = 3, nx =   16, residual change: 5.65961e-08 -&gt;  4.7816e-08
+  level = 2, nx =    8, residual change: 3.36554e-08 -&gt; 9.97506e-09
+  level = 1, nx =    4, residual change: 6.85178e-09 -&gt; 5.61298e-12
+  bottom solve
+  level = 1, nx =    4, residual change: 4.15975e-12 -&gt; 4.94433e-16
+  level = 2, nx =    8, residual change: 8.43232e-09 -&gt; 1.27905e-10
+  level = 3, nx =   16, residual change: 5.12193e-08 -&gt; 1.12547e-09
+  level = 4, nx =   32, residual change: 9.52837e-08 -&gt; 4.96598e-09
+  level = 5, nx =   64, residual change:  1.2275e-07 -&gt; 9.63633e-09
+  level = 6, nx =  128, residual change: 1.45577e-07 -&gt; 1.28961e-08
+cycle 7: residual err / source norm = 2.46965e-08
+
+&lt;&lt;&lt; beginning V-cycle (cycle 8) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 1.28961e-08 -&gt;  1.2395e-08
+  level = 5, nx =   64, residual change: 8.76447e-09 -&gt; 1.08791e-08
+  level = 4, nx =   32, residual change: 7.69259e-09 -&gt; 7.17337e-09
+  level = 3, nx =   16, residual change: 5.06449e-09 -&gt;  1.5655e-09
+  level = 2, nx =    8, residual change: 1.09623e-09 -&gt; 1.28153e-10
+  level = 1, nx =    4, residual change: 8.81273e-11 -&gt; 7.23224e-14
+  bottom solve
+  level = 1, nx =    4, residual change: 5.35688e-14 -&gt; 6.37363e-18
+  level = 2, nx =    8, residual change: 1.08749e-10 -&gt; 1.70162e-12
+  level = 3, nx =   16, residual change: 1.40942e-09 -&gt;  9.9182e-11
+  level = 4, nx =   32, residual change: 6.53672e-09 -&gt; 4.61658e-10
+  level = 5, nx =   64, residual change:  1.1048e-08 -&gt; 8.88393e-10
+  level = 6, nx =  128, residual change: 1.42054e-08 -&gt; 1.19231e-09
+cycle 8: residual err / source norm = 2.28332e-09
+
+&lt;&lt;&lt; beginning V-cycle (cycle 9) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 1.19231e-09 -&gt; 1.14391e-09
+  level = 5, nx =   64, residual change: 8.08857e-10 -&gt; 9.85038e-10
+  level = 4, nx =   32, residual change: 6.96384e-10 -&gt; 6.43751e-10
+  level = 3, nx =   16, residual change: 4.55092e-10 -&gt; 3.80371e-10
+  level = 2, nx =    8, residual change: 2.67995e-10 -&gt; 8.01385e-11
+  level = 1, nx =    4, residual change: 5.50479e-11 -&gt; 4.50973e-14
+  bottom solve
+  level = 1, nx =    4, residual change: 3.34209e-14 -&gt; 3.97256e-18
+  level = 2, nx =    8, residual change: 6.77507e-11 -&gt; 1.02848e-12
+  level = 3, nx =   16, residual change: 4.12047e-10 -&gt; 9.35298e-12
+  level = 4, nx =   32, residual change: 7.47687e-10 -&gt; 4.11344e-11
+  level = 5, nx =   64, residual change: 9.62859e-10 -&gt; 8.19452e-11
+  level = 6, nx =  128, residual change: 1.14364e-09 -&gt; 1.10707e-10
+cycle 9: residual err / source norm = 2.12009e-10
+
+&lt;&lt;&lt; beginning V-cycle (cycle 10) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change: 1.10707e-10 -&gt; 1.06183e-10
+  level = 5, nx =   64, residual change: 7.50834e-11 -&gt; 9.22324e-11
+  level = 4, nx =   32, residual change: 6.52181e-11 -&gt; 6.00174e-11
+  level = 3, nx =   16, residual change: 4.23901e-11 -&gt; 1.28587e-11
+  level = 2, nx =    8, residual change: 8.94185e-12 -&gt; 2.23329e-13
+  level = 1, nx =    4, residual change: 1.52558e-13 -&gt; 1.23793e-16
+  bottom solve
+  level = 1, nx =    4, residual change: 9.19761e-17 -&gt; 1.08809e-20
+  level = 2, nx =    8, residual change: 1.85396e-13 -&gt; 2.38713e-15
+  level = 3, nx =   16, residual change: 1.01041e-11 -&gt; 7.80254e-13
+  level = 4, nx =   32, residual change: 5.45635e-11 -&gt; 3.87589e-12
+  level = 5, nx =   64, residual change: 9.16104e-11 -&gt; 7.60695e-12
+  level = 6, nx =  128, residual change:  1.1637e-10 -&gt;  1.0298e-11
+cycle 10: residual err / source norm =  1.9721e-11
+
+&lt;&lt;&lt; beginning V-cycle (cycle 11) &gt;&gt;&gt;
+
+  level = 6, nx =  128, residual change:  1.0298e-11 -&gt; 9.87413e-12
+  level = 5, nx =   64, residual change: 6.97734e-12 -&gt; 8.45531e-12
+  level = 4, nx =   32, residual change: 5.97782e-12 -&gt; 5.37496e-12
+  level = 3, nx =   16, residual change: 3.79861e-12 -&gt; 3.07967e-12
+  level = 2, nx =    8, residual change: 2.17194e-12 -&gt; 6.52951e-13
+  level = 1, nx =    4, residual change: 4.48533e-13 -&gt; 3.67473e-16
+  bottom solve
+  level = 1, nx =    4, residual change: 2.72325e-16 -&gt; 3.23706e-20
+  level = 2, nx =    8, residual change: 5.52076e-13 -&gt; 8.38793e-15
+  level = 3, nx =   16, residual change: 3.37089e-12 -&gt; 8.09049e-14
+  level = 4, nx =   32, residual change: 6.08043e-12 -&gt; 3.48793e-13
+  level = 5, nx =   64, residual change: 7.95466e-12 -&gt; 7.06031e-13
+  level = 6, nx =  128, residual change: 9.52594e-12 -&gt; 9.61779e-13
+cycle 11: residual err / source norm = 1.84185e-12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that it did 11 V-cycles.</p>
+<p>We also see that each V-cycle reduces the residual error by about an order of magnitude—this is a good rule-of-thumb for multigrid.</p>
+<p>We can also compute the error with respect to the analytic solution (since we know that for this case):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the solution </span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_solution</span><span class="p">()</span>
+
+<span class="c1"># compute the error from the analytic solution</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="n">true</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;L2 error from true solution = </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">soln_grid</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L2 error from true solution = 3.8905913165725256e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s plot the solution and how the error changes as a function of cycle</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">a</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">true</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">a</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">]),</span>
+        <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;analytic solution&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">a</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">ilo</span><span class="p">:</span><span class="n">a</span><span class="o">.</span><span class="n">ihi</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+           <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;multigrid solution&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\phi$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb19e702a50&gt;
+</pre></div>
+</div>
+<img alt="../../_images/a59b61271a14c4d1b9e25496a51d3965a4413c9ca8857bd3b913b98c4027db4a.png" src="../../_images/a59b61271a14c4d1b9e25496a51d3965a4413c9ca8857bd3b913b98c4027db4a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">ncycle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">elist</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ncycle</span><span class="p">,</span> <span class="n">elist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\| e\|$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ncycle</span><span class="p">,</span> <span class="n">rlist</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\| r\|$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;# of V-cycles&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;L2 norm of error&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb19e7ba660&gt;
+</pre></div>
+</div>
+<img alt="../../_images/b4c3604f9d910915aec0b1c179be1663225159060c3f49b7cc4dd1b16442f294.png" src="../../_images/b4c3604f9d910915aec0b1c179be1663225159060c3f49b7cc4dd1b16442f294.png" />
+</div>
+</div>
+<p>We see the same behavior as we did with smoothing: the true error, <span class="math notranslate nohighlight">\(\| e \|\)</span> stalls because of the truncation error of our discretization, but the residual error, <span class="math notranslate nohighlight">\(\| r \|\)</span> keeps
+decreasing (at least until it reaches roundoff error).</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./elliptic_multigrid/multigrid"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="multigrid-two-grid.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Two Grid Correction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../diffusion/diffusion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Diffusion</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2025; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

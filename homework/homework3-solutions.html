@@ -1,0 +1,1385 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Homework 3 solutions &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'homework/homework3-solutions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Homework 4" href="homework4.html" />
+    <link rel="prev" title="Homework 3" href="homework3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/numpy.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-advanced.html">NumPy Copying and Indexing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/floating-point/floating-point-details.html">Floating Point Format</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/differentiation.html">Differentiation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/example-second-deriv.html">In-class Example: Second Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-rate-temperature-sensitivity.html">Application: Reaction Rate Temperature Sensitivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/example-lorenz.html">Example: Lorenz system</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-timereverse.html">Time Symmetric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-planetary-stability.html">Application: Stability of Planetary Systems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/boundary-value-problems.html">✱ Boundary Value Problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-lane-emden.html">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/ODEs-implicit.html">✱ Stiff ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-CNO-network.html">Application: Reaction Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ODEs/more-applications.html">More Applications</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ODEs/application-xrb-one-zone.html">Application: One-zone X-ray burst</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interlude Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../git/github.html">github</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../git/pull-requests.html">Pull requests</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffts/fourier.html">Fourier Transforms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-planets-fft.html">Application: Recovering Planetary Periods from Radial Velocity Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/example-turbulent-power-spectrum.html">Example: Turbulent Power Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/application-interpolating-reaction-rates.html">Application: Interpolating Weak Reaction Rate Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/conservative-interpolation.html">✱ Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fitting/least_squares.html">Least Squares Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares-tests.html">Testing Our Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/burgers/burgers.html">✱ Burgers' Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../advection/advection-more.html">More on Advection and Burgers’ Equation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid.html">✱ Multigrid</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">✱ Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler.html">Euler Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler-riemann.html">Euler Riemann Problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-types.html">Types of Machine Learning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/mnist-cxx.html">C++ Implementation of MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/application-galaxies-intro.html">Application: Galaxy Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/application-galaxies.html">Galaxy Classification with a Neural Net from Scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/application-galaxies-keras-cnn.html">Application: Galaxy Classification with Keras</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional examples (for in-class)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-ode-projectile.html">ODE Review: Projectile Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-hilbert-matrix.html">Linear Algebra Review: Hilbert Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-fft.html">FFT Review: Cleaning a Signal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="homework1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework1-solutions.html">Homework 1 solutions</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="homework2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="homework3.html">Homework 3</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Homework 3 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="homework4.html">Homework 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework4-solutions.html">Homework 4 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="homework5.html">Homework 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework5-solutions.html">Homework 5 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="homework6.html">Homework 6</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework6-solutions.html">Homework 6 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="homework7.html">Homework 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework7-solutions.html">Homework 7 solutions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/homework/homework3-solutions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/homework/homework3-solutions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2Fhomework/homework3-solutions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/homework/homework3-solutions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Homework 3 solutions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-1-theta-0-10-circ">Case 1: <span class="math notranslate nohighlight">\(\theta_0 = 10^\circ\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-2-theta-0-100-circ">Case 2: <span class="math notranslate nohighlight">\(\theta_0 = 100^\circ\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence">Convergence</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-3-solutions">
+<h1>Homework 3 solutions<a class="headerlink" href="#homework-3-solutions" title="Link to this heading">#</a></h1>
+<p>We want to integrate the simple pendulum without the small angle approximation and compare different integration schemes.
+Our system is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+   \dot{\theta} &amp;= \omega \\
+   \dot{\omega} &amp;= -\frac{g}{L} \sin \theta
+\end{align*}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is the angular displacement from vertical and
+<span class="math notranslate nohighlight">\(\omega\)</span> is the angular velocity.  The angular acceleration in this
+case is <span class="math notranslate nohighlight">\(\alpha = -(g/L) \sin\theta\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Just like with the orbits, the angular acceleration, <span class="math notranslate nohighlight">\(\alpha\)</span>, does not depend on (angular) velocity, <span class="math notranslate nohighlight">\(\omega\)</span>.
+This means that we can use the symplectic integrators we looked at.</p>
+</div>
+<p>Our initial conditions are:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+  \theta(t = 0) &amp;= \theta_0 \\
+  \omega(t = 0) &amp;= 0
+\end{align*}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll do everything in a single class, <code class="docutils literal notranslate"><span class="pre">SimplePendulum</span></code>, which will only store the initial conditions.
+The actual integration history will be created and returned by the integration methods contained
+in <code class="docutils literal notranslate"><span class="pre">SimplePendulum</span></code>, which allows us to create a single object and then run each of the 3 integration
+methods from it for comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimplePendulum</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; manage and integrate a simple pendulum &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta0</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span><span class="mf">9.81</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">9.81</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;we&#39;ll take theta0 in degrees and assume that the angular</span>
+<span class="sd">        velocity is initially 0&quot;&quot;&quot;</span>
+        
+        <span class="c1"># initial condition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">theta0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="n">g</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta_vec</span><span class="p">,</span> <span class="n">omega_vec</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; given a solution, return the energy (per unit mass) &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">omega_vec</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta_vec</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">period</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; return an estimate of the period, up to the theta**2 term &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span> <span class="o">*</span>
+                <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mf">16.0</span> <span class="o">+</span>
+                 <span class="mf">11.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="o">**</span><span class="mi">4</span> <span class="o">/</span> <span class="mf">3072.0</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; equations of motion for a pendulum</span>
+<span class="sd">              dtheta/dt = omega</span>
+<span class="sd">              domega/dt = - (g/L) sin theta &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">omega</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate_ec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;integrate the equations of motion using the Euler-Cromer method&quot;&quot;&quot;</span>
+
+        <span class="c1"># initial conditions</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">t_s</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">theta_s</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="p">]</span>
+        <span class="n">omega_s</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+
+        <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tmax</span><span class="p">:</span>
+
+            <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+            
+            <span class="c1"># initial state</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">theta_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">omega</span> <span class="o">=</span> <span class="n">omega_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># get the RHS</span>
+            <span class="n">thetadot</span><span class="p">,</span> <span class="n">omegadot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+
+            <span class="c1"># advance</span>
+            <span class="n">omega_new</span> <span class="o">=</span> <span class="n">omega</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omegadot</span>
+            <span class="n">theta_new</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omega_new</span>
+
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+
+            <span class="c1"># store</span>
+            <span class="n">t_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">theta_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta_new</span><span class="p">)</span>
+            <span class="n">omega_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">omega_new</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">theta_s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">omega_s</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate_vv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;integrate the equations of motion using velocity Verlet method&quot;&quot;&quot;</span>
+
+        <span class="c1"># initial conditions</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">t_s</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">theta_s</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="p">]</span>
+        <span class="n">omega_s</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+
+        <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tmax</span><span class="p">:</span>
+
+            <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+            
+            <span class="c1"># initial state</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">theta_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">omega</span> <span class="o">=</span> <span class="n">omega_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># get the RHS at time-level n</span>
+            <span class="n">thetadot</span><span class="p">,</span> <span class="n">omegadot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+
+            <span class="n">omega_half</span> <span class="o">=</span> <span class="n">omega</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omegadot</span>
+                
+            <span class="n">theta_new</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omega_half</span>
+
+            <span class="c1"># get the RHS with the updated theta -- omega doesn&#39;t matter</span>
+            <span class="c1"># here, since we only need thetadot and omega doesn&#39;t affect</span>
+            <span class="c1"># that.</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">omegadot_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta_new</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+            <span class="n">omega_new</span> <span class="o">=</span> <span class="n">omega_half</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omegadot_new</span>
+
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+
+            <span class="c1"># store</span>
+            <span class="n">t_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">theta_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta_new</span><span class="p">)</span>
+            <span class="n">omega_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">omega_new</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">theta_s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">omega_s</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrate_rk4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;integrate the equations of motion using 4th order Runge Kutta&quot;&quot;&quot;</span>
+
+        <span class="c1"># initial conditions</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">t_s</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">theta_s</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">theta0</span><span class="p">]</span>
+        <span class="n">omega_s</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span>
+
+        <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tmax</span><span class="p">:</span>
+
+            <span class="n">dt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+            
+            <span class="c1"># initial state</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">theta_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">omega</span> <span class="o">=</span> <span class="n">omega_s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># get the RHS at time-level n</span>
+            <span class="n">thetadot1</span><span class="p">,</span> <span class="n">omegadot1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+
+            <span class="n">theta_tmp</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">thetadot1</span>
+            <span class="n">omega_tmp</span> <span class="o">=</span> <span class="n">omega</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omegadot1</span>
+
+            <span class="n">thetadot2</span><span class="p">,</span> <span class="n">omegadot2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta_tmp</span><span class="p">,</span> <span class="n">omega_tmp</span><span class="p">)</span>
+
+            <span class="n">theta_tmp</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">thetadot2</span>
+            <span class="n">omega_tmp</span> <span class="o">=</span> <span class="n">omega</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omegadot2</span>
+
+            <span class="n">thetadot3</span><span class="p">,</span> <span class="n">omegadot3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta_tmp</span><span class="p">,</span> <span class="n">omega_tmp</span><span class="p">)</span>
+
+            <span class="n">theta_tmp</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">thetadot3</span>
+            <span class="n">omega_tmp</span> <span class="o">=</span> <span class="n">omega</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">omegadot3</span>
+
+            <span class="n">thetadot4</span><span class="p">,</span> <span class="n">omegadot4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rhs</span><span class="p">(</span><span class="n">theta_tmp</span><span class="p">,</span> <span class="n">omega_tmp</span><span class="p">)</span>
+
+            <span class="n">theta_new</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">/</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">thetadot1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">thetadot2</span> <span class="o">+</span>
+                                            <span class="mf">2.0</span> <span class="o">*</span> <span class="n">thetadot3</span> <span class="o">+</span> <span class="n">thetadot4</span><span class="p">)</span>
+            <span class="n">omega_new</span> <span class="o">=</span> <span class="n">omega</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">/</span> <span class="mf">6.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">omegadot1</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">omegadot2</span> <span class="o">+</span>
+                                            <span class="mf">2.0</span> <span class="o">*</span> <span class="n">omegadot3</span> <span class="o">+</span> <span class="n">omegadot4</span><span class="p">)</span>
+
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+
+            <span class="c1"># store</span>
+            <span class="n">t_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="n">theta_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta_new</span><span class="p">)</span>
+            <span class="n">omega_s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">omega_new</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t_s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">theta_s</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">omega_s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try it out</p>
+<section id="case-1-theta-0-10-circ">
+<h2>Case 1: <span class="math notranslate nohighlight">\(\theta_0 = 10^\circ\)</span><a class="headerlink" href="#case-1-theta-0-10-circ" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initial angle in degrees -- the class converts to radians</span>
+<span class="n">theta0</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">p10</span> <span class="o">=</span> <span class="n">SimplePendulum</span><span class="p">(</span><span class="n">theta0</span><span class="p">)</span>
+<span class="n">period</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">period</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>period=np.float64(6.295168481931661)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Euler-Cromer method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fixed timestep</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">period</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">period</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_ec</span><span class="p">,</span> <span class="n">theta_ec</span><span class="p">,</span> <span class="n">omega_ec</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">integrate_ec</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_ec</span><span class="p">,</span> <span class="n">theta_ec</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler-Cromer&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t [s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/95994240b6a3a8ddeb732ac3493445e66b9d22b31bcc441b9277361cb17413b6.png" src="../_images/95994240b6a3a8ddeb732ac3493445e66b9d22b31bcc441b9277361cb17413b6.png" />
+</div>
+</div>
+<p>now velocity-Verlet</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_vv</span><span class="p">,</span> <span class="n">theta_vv</span><span class="p">,</span> <span class="n">omega_vv</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">integrate_vv</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vv</span><span class="p">,</span> <span class="n">theta_vv</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;velocity-Verlet&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c821efdf52e6af26b66deec73c8e8c89c17143ad49e6b9e35cbd6b97cd566b0b.png" src="../_images/c821efdf52e6af26b66deec73c8e8c89c17143ad49e6b9e35cbd6b97cd566b0b.png" />
+</div>
+</div>
+<p>and finally 4th-order Runge-Kutta</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_rk4</span><span class="p">,</span> <span class="n">theta_rk4</span><span class="p">,</span> <span class="n">omega_rk4</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">integrate_rk4</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rk4</span><span class="p">,</span> <span class="n">theta_rk4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/53af3773f671e04c91430ee12c4e4bf8e908354af84c9943cc1c34cbcf362f0d.png" src="../_images/53af3773f671e04c91430ee12c4e4bf8e908354af84c9943cc1c34cbcf362f0d.png" />
+</div>
+</div>
+<p>All the curves are quite close, but we see by the end there are some differences.</p>
+<p>Let’s run for 100 periods and look at the last 10</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmax</span> <span class="o">*=</span> <span class="mi">10</span>
+<span class="n">t_ec2</span><span class="p">,</span> <span class="n">theta_ec2</span><span class="p">,</span> <span class="n">omega_ec2</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">integrate_ec</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_vv2</span><span class="p">,</span> <span class="n">theta_vv2</span><span class="p">,</span> <span class="n">omega_vv2</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">integrate_vv</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_rk42</span><span class="p">,</span> <span class="n">theta_rk42</span><span class="p">,</span> <span class="n">omega_rk42</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">integrate_rk4</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_ec2</span><span class="p">,</span> <span class="n">theta_ec2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler-Cromer&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vv2</span><span class="p">,</span> <span class="n">theta_vv2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;velocity-Verlet&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rk42</span><span class="p">,</span> <span class="n">theta_rk42</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t [s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">90</span><span class="o">*</span><span class="n">period</span><span class="p">,</span> <span class="mi">100</span><span class="o">*</span><span class="n">period</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c1e042aee2e9457bb63f3a14b4182f62a339dc8ced0cf10f72f95bc0b799468f.png" src="../_images/c1e042aee2e9457bb63f3a14b4182f62a339dc8ced0cf10f72f95bc0b799468f.png" />
+</div>
+</div>
+<p>So we see that after a while, the two symplectic integrators stay in phase, but the RK4 integrator is completely out of phase.</p>
+<p>Let’s look at energy for the original (10 periods) runs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E_ec</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta_ec</span><span class="p">,</span> <span class="n">omega_ec</span><span class="p">)</span>
+<span class="n">E_vv</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta_vv</span><span class="p">,</span> <span class="n">omega_vv</span><span class="p">)</span>
+<span class="n">E_rk4</span> <span class="o">=</span> <span class="n">p10</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta_rk4</span><span class="p">,</span> <span class="n">omega_rk4</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_ec</span><span class="p">,</span> <span class="n">E_ec</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler-Cromer&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vv</span><span class="p">,</span> <span class="n">E_vv</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;velocity-Verlet&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rk4</span><span class="p">,</span> <span class="n">E_rk4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;E/m&#39;)
+</pre></div>
+</div>
+<img alt="../_images/8f6de7a6967d3f9fd45a5bb5ac5095a08f1358bec79f3914c1787ecd802f0872.png" src="../_images/8f6de7a6967d3f9fd45a5bb5ac5095a08f1358bec79f3914c1787ecd802f0872.png" />
+</div>
+</div>
+<p>These are plotted on different scales since the Euler-Cromer method has much larger swings in the energy.  But note that for both the Euler-Cromer and velocity-Verlet methods, the energy stays bounded and returns back to its original value each period.</p>
+<p>For the 4th-order Runge-Kutta, there is a steady drift in the total energy.</p>
+</section>
+<section id="case-2-theta-0-100-circ">
+<h2>Case 2: <span class="math notranslate nohighlight">\(\theta_0 = 100^\circ\)</span><a class="headerlink" href="#case-2-theta-0-100-circ" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theta0</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">p100</span> <span class="o">=</span> <span class="n">SimplePendulum</span><span class="p">(</span><span class="n">theta0</span><span class="p">)</span>
+<span class="n">period</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">period</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">period</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>period=np.float64(7.688181618459404)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that the period here is very different than the classic small-angle approximation period.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fixed timestep</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">period</span> <span class="o">/</span> <span class="mi">20</span>
+<span class="n">tmax</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">period</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_ec</span><span class="p">,</span> <span class="n">theta_ec</span><span class="p">,</span> <span class="n">omega_ec</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">integrate_ec</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_vv</span><span class="p">,</span> <span class="n">theta_vv</span><span class="p">,</span> <span class="n">omega_vv</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">integrate_vv</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+<span class="n">t_rk4</span><span class="p">,</span> <span class="n">theta_rk4</span><span class="p">,</span> <span class="n">omega_rk4</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">integrate_rk4</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">tmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_ec</span><span class="p">,</span> <span class="n">theta_ec</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler-Cromer&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vv</span><span class="p">,</span> <span class="n">theta_vv</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;velocity-Verlet&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rk4</span><span class="p">,</span> <span class="n">theta_rk4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;t [s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/782f10e16a3529992541228f338bc3055df2bd3ce67a92d414f5dd0e80901abe.png" src="../_images/782f10e16a3529992541228f338bc3055df2bd3ce67a92d414f5dd0e80901abe.png" />
+</div>
+</div>
+<p>Again, the Euler-Cromer and velocity-Verlet methods track nicely</p>
+<p>We’ll split the energy plot into 2 so we can better see the trends</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E_ec</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta_ec</span><span class="p">,</span> <span class="n">omega_ec</span><span class="p">)</span>
+<span class="n">E_vv</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta_vv</span><span class="p">,</span> <span class="n">omega_vv</span><span class="p">)</span>
+<span class="n">E_rk4</span> <span class="o">=</span> <span class="n">p100</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta_rk4</span><span class="p">,</span> <span class="n">omega_rk4</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_ec</span><span class="p">,</span> <span class="n">E_ec</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Euler-Cromer&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_vv</span><span class="p">,</span> <span class="n">E_vv</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;velocity-Verlet&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_rk4</span><span class="p">,</span> <span class="n">E_rk4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RK4&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;E/m&#39;)
+</pre></div>
+</div>
+<img alt="../_images/80c0d14f2a660e88b05f899fb1c7242ccd0768f5005440c8410109f5e4f15e68.png" src="../_images/80c0d14f2a660e88b05f899fb1c7242ccd0768f5005440c8410109f5e4f15e68.png" />
+</div>
+</div>
+<p>We see that, again, the two sympletic integrators seem to conserve energy over the period, but the 4th order Runge-Kutta has a steady drift just like we saw in the earlier case.</p>
+</section>
+<section id="convergence">
+<h2>Convergence<a class="headerlink" href="#convergence" title="Link to this heading">#</a></h2>
+<p>We’ll focus just on the larger amplitude.  In addition to making a plot, we’ll also print out the difference between the minimum and maximum energy over the integration duration.  This will be our metric for assessing convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">SimplePendulum</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">()</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">integrate_ec</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">())</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">E</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">E</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 : 37.873464677642545
+40 : 18.69023944326237
+80 : 9.314754417201456
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;E/m&#39;)
+</pre></div>
+</div>
+<img alt="../_images/0a569cb7c41c338e1fa26a9915cda01d0a7fcd764d58dd00d9a6af14bc8b9ff1.png" src="../_images/0a569cb7c41c338e1fa26a9915cda01d0a7fcd764d58dd00d9a6af14bc8b9ff1.png" />
+</div>
+</div>
+<p>Notice that when we print out the amplitude of the energy, it decreases by a factor of 2 each time we double <span class="math notranslate nohighlight">\(N\)</span>—this is first-order convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">SimplePendulum</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">()</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">integrate_vv</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">())</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">E</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">E</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 : 3.4088291065175973
+40 : 0.8483208900033361
+80 : 0.21185146597349913
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;E/m&#39;)
+</pre></div>
+</div>
+<img alt="../_images/bf16146371f0a16503b3a440df7b9d04dbd581d8713dfb3543b96dc74be7fed5.png" src="../_images/bf16146371f0a16503b3a440df7b9d04dbd581d8713dfb3543b96dc74be7fed5.png" />
+</div>
+</div>
+<p>Now notice that when we print out the amplitude of the energy change over the integration, it decreases by a factor of 4 each time we double <span class="math notranslate nohighlight">\(N\)</span>—this is 2nd-order convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">SimplePendulum</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">]:</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">()</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">integrate_rk4</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">p</span><span class="o">.</span><span class="n">period</span><span class="p">())</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">energy</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N = </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">E</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">E</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;E/m&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20 : 0.5346620582999186
+40 : 0.017873506652158255
+80 : 0.0005985955513878594
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;E/m&#39;)
+</pre></div>
+</div>
+<img alt="../_images/1bc784a72e241874d383cb162a7be34abd11fa461b1422523c050792ea2ce2b5.png" src="../_images/1bc784a72e241874d383cb162a7be34abd11fa461b1422523c050792ea2ce2b5.png" />
+</div>
+</div>
+<p>This now seems to be converging better than 4th order, even though the solution is clearly not as good as the other methods.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./homework"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="homework3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework 3</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="homework4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Homework 4</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-1-theta-0-10-circ">Case 1: <span class="math notranslate nohighlight">\(\theta_0 = 10^\circ\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-2-theta-0-100-circ">Case 2: <span class="math notranslate nohighlight">\(\theta_0 = 100^\circ\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence">Convergence</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2025; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

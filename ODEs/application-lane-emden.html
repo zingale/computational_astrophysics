@@ -1,0 +1,1262 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Application: Stellar Structure &#8212; AST 390: Computational Astrophysics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/myfile.css?v=359afcf4" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-M0EDGYM350"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-M0EDGYM350');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ODEs/application-lane-emden';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stiff ODEs / Implicit Methods" href="ODEs-implicit.html" />
+    <link rel="prev" title="Two Point Boundary Value Problems" href="boundary-value-problems.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/rt_small.png" class="logo__image only-light" alt="AST 390: Computational Astrophysics - Home"/>
+    <script>document.write(`<img src="../_static/rt_small.png" class="logo__image only-dark" alt="AST 390: Computational Astrophysics - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    AST 390: Computational Astrophysics
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Logistics and Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">Course Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/using.html">Using These Notes</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tour of Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../python/jupyter.html">Jupyter</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-basics.html">Python Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-datatypes.html">Basic Python Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-advanced-datatypes.html">Advanced Datatypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-control-flow.html">Control Flow</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/python-functions-classes.html">Functions and Classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-functions.html">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/python-classes.html">Classes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../python/numpy.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-basics.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../python/numpy-advanced.html">NumPy Copying and Indexing</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/matplotlib-basics.html">matplotlib</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/floating-point/floating-point-details.html">Floating Point Format</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/floating-point/numerical_error.html">Numerical Errors: Roundoff and Truncation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/differentiation.html">Differentiation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/example-second-deriv.html">In-class Example: Second Derivative</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-rate-temperature-sensitivity.html">Application: Reaction Rate Temperature Sensitivity</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/diff-int/integration.html">Integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-simpsons.html">Simpson’s Rule Derived</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-composite.html">Composite Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/application-blackbody.html">Application: Blackbody Radiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/integration-scipy.html">SciPy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/diff-int/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/roots/root-finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/roots-scipy.html">SciPy Root Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-wiens.html">Application: Wien’s law</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/roots/application-degeneracy.html">Application: Degenerate Electrons</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../basics/linear-algebra/la-overview.html">Linear Algebra</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/la-basics.html">Review of Matrices</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/linear-system-example.html">Solving A System of Linear Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination.html">Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/gaussian_elimination_python.html">Implementing Gaussian Elimination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/la-cxx.html">C++ Implementation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/linear-algebra-libraries.html">Libraries for Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/condition-number.html">Condition Number</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../basics/linear-algebra/multivariate-roots.html">Multivariate Root Finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../basics/linear-algebra/application-lorenz.html">Application: Stationary State of Lorenz System</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics/linear-algebra/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ordinary Differential Equations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="ODEs-euler.html">Basic Methods for ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ODEs-midpoint.html">2nd Order Runge-Kutta / Midpoint Method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ODEs-rk4.html">4th-order Runge-Kutta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example-lorenz.html">Example: Lorenz system</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="adaptive_stepping.html">Adaptive Timesteps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="adaptive-orbits.html">Adaptive RK4 Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ODEs-scipy.html">SciPy ODE Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-few-body.html">Application: Few Body Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ODEs-conservation.html">ODEs and Conservation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ODEs-timereverse.html">Time Symmetric Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-planetary-stability.html">Application: Stability of Planetary Systems</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="boundary-value-problems.html">✱ Boundary Value Problems</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Application: Stellar Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="ODEs-implicit.html">✱ Stiff ODEs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ODEs-implicit-systems.html">Implicit Methods for Systems of ODEs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ODEs-implicit-nonlinear-systems.html">Implicit Methods and Nonlinear Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application-CNO-network.html">Application: Reaction Networks</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="more-applications.html">More Applications</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="application-xrb-one-zone.html">Application: One-zone X-ray burst</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Interlude Git and Github</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../git/version-control.html">Version Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../git/git.html">A Git Walkthrough</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../git/git-branches.html">Git Branches</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../git/github.html">github</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../git/pull-requests.html">Pull requests</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Working with Data Samples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffts/fourier.html">Fourier Transforms</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/dft-tests.html">Testing our DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/inclass-filter.html">In-class Example: A Frequency Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-lightcurves.html">Application: X-ray Burst Timing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/application-planets-fft.html">Application: Recovering Planetary Periods from Radial Velocity Curves</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/fft-multid.html">FFT in Multiple Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/example-turbulent-power-spectrum.html">Example: Turbulent Power Spectrum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffts/non-periodic.html">Non-uniform Data</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../interpolation/interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/linear-interpolation.html">Linear Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/lagrange-interpolation.html">Lagrange Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/application-interpolating-reaction-rates.html">Application: Interpolating Weak Reaction Rate Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/conservative-interpolation.html">✱ Conservative Interpolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interpolation/going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../fitting/least_squares.html">Least Squares Regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-to-a-line.html">Fitting to a Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares.html">General Linear Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/generalized-linear-least-squares-tests.html">Testing Our Least Squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-nonlinear.html">Nonlinear Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/fitting-scipy.html">Fitting Function in SciPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting/application-snia-h0.html">Application: Estimating <span class="math notranslate nohighlight">\(H_0\)</span> from Type Ia Supernovae</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Partial Differential Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../advection/pdes.html">Partial Differential Equations</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/advection-intro.html">Advection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-partI.html">Linear Advection Equation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-upwind.html">Upwinding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-convergence.html">Measuring Convergence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-finite-volumes.html">Finite-Volume Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/advection/advection-second-order.html">Second-order advection</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../advection/burgers/burgers.html">✱ Burgers' Equation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-riemann.html">Burgers’ Riemann Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../advection/burgers/burgers-methods.html">Solving Burgers’ equation</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../advection/advection-more.html">More on Advection and Burgers’ Equation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/intro/elliptic-problems.html">Poisson problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/relaxation.html">Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-relaxation.html">Implementing Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-residual.html">Residual</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/relaxation/elliptic-modes.html">Behavior of Single Modes</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid.html">✱ Multigrid</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-restrict-prolong.html">Restriction and Prolongation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-two-grid.html">Two Grid Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../elliptic_multigrid/multigrid/multigrid-vcycles.html">V-Cycles</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../diffusion/diffusion.html">Diffusion</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-explicit.html">Explicit Discretization of Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-intro.html">Implicit Methods for Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/tridiagonal-system.html">Solving a Tridiagonal System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-direct.html">Direct Solve for Implicit Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-implicit-relax.html">Implicit Diffusion via Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../diffusion/diffusion-going-further.html">Going Further</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">✱ Hydrodynamics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler.html">Euler Equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-eigen.html">Euler equations eigensystem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../euler/euler-riemann.html">Euler Riemann Problem</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../euler/euler-riemann-sampling.html">Sampling the Riemann Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../euler/euler-solver.html">Second-order Euler solver</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-types.html">Types of Machine Learning</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-basics.html">Artificial Neural Network Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/gradient-descent.html">Gradient Descent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-derivation.html">Deriving the Learning Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number.html">A First Example</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/neural-net-hidden.html">Hidden Layers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/last-number-hidden.html">Last Number Revisited with a Hidden Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-mnist.html">Example: Character Recognition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/mnist-cxx.html">C++ Implementation of MNIST</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/neural-net-improvements.html">Improvements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/machine-learning-libraries.html">Diving Deeper into Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-mnist.html">KERAS and MNIST</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-last-number.html">Keras and the Last Number Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/keras-clustering.html">Clustering</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../machine-learning/machine-learning-in-astro.html">Machine Learning in Astronomy</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../machine-learning/application-galaxies-intro.html">Application: Galaxy Classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/application-galaxies.html">Galaxy Classification with a Neural Net from Scratch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../machine-learning/application-galaxies-keras-cnn.html">Application: Galaxy Classification with Keras</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Additional examples (for in-class)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-ode-projectile.html">ODE Review: Projectile Motion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-hilbert-matrix.html">Linear Algebra Review: Hilbert Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../in_class/in-class-fft.html">FFT Review: Cleaning a Signal</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework1.html">Homework 1</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework1-solutions.html">Homework 1 solutions</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework2.html">Homework 2</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework2-solutions.html">Homework 2 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework3.html">Homework 3</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework3-solutions.html">Homework 3 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework4.html">Homework 4</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework4-solutions.html">Homework 4 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework5.html">Homework 5</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework5-solutions.html">Homework 5 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework6.html">Homework 6</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework6-solutions.html">Homework 6 solutions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../homework/homework7.html">Homework 7</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../homework/homework7-solutions.html">Homework 7 solutions</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../homework/project.html">Course Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/zingale/computational_astrophysics/main?urlpath=tree/content/ODEs/application-lane-emden.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/zingale/computational_astrophysics/blob/main/content/ODEs/application-lane-emden.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/zingale/computational_astrophysics/issues/new?title=Issue%20on%20page%20%2FODEs/application-lane-emden.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ODEs/application-lane-emden.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Application: Stellar Structure</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polytropes">Polytropes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-lane-emden-equation">Solving the Lane-Emden equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="application-stellar-structure">
+<h1>Application: Stellar Structure<a class="headerlink" href="#application-stellar-structure" title="Link to this heading">#</a></h1>
+<p>During most of their lifetimes, stars are in hydrostatic and thermal equilibrium, and the structure of a star is well-described by the <a class="reference external" href="https://en.wikipedia.org/wiki/Stellar_structure">equations of stellar structure</a>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{dP}{dm} &amp;= -\frac{Gm}{4\pi r^4} \\
+\frac{dr}{dm} &amp;= \frac{1}{4\pi r^2 \rho} \\
+\frac{dT}{dm} &amp;= -\frac{3}{4ac} \frac{\kappa}{T^3} \frac{F}{16\pi^2 r^4} \\
+\frac{dF}{dm} &amp;=  q
+\end{align*}\]</div>
+<p>with an equation of state, opacity, and energy generation rate of the form:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p &amp;= \frac{\rho k T}{\mu_I m_u} + p_e + \frac{1}{3} a T^4 \\
+\kappa &amp;= \kappa(\rho, T, \{X_k\}) \\
+q &amp;= q(\rho, T, \{X_k\})
+\end{align*}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(p\)</span> is the pressure, <span class="math notranslate nohighlight">\(m\)</span> is the mass enclosed inside a radius <span class="math notranslate nohighlight">\(r\)</span>, <span class="math notranslate nohighlight">\(T\)</span> is the temperature, where we assume radiative equilibrium with <span class="math notranslate nohighlight">\(F\)</span> describing an energy flux through a shell of radius <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\kappa\)</span> the opacity of the material, which depends on density, temperature, and composition, <span class="math notranslate nohighlight">\(\{X_k\}\)</span> (mass fractions).  Finally <span class="math notranslate nohighlight">\(q\)</span> is the energy generation rate from nuclear processes.</p>
+<p>To solve these, we specify the mass of the star, <span class="math notranslate nohighlight">\(M_\star\)</span>, and the composition in the interior, <span class="math notranslate nohighlight">\(\{X_k\}\)</span>.</p>
+<p>This is a 2-point boundary value problem, with boundary conditions:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+r(m=0) &amp;= 0 \\
+F(m=0) &amp;= 0
+\end{align*}\]</div>
+<p>at the center and</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+p(m=M_\star) &amp;= 0 \\
+T(m=M_\star) &amp;= T_\mathrm{eff} 
+\end{align*}\]</div>
+<p>at the surface.</p>
+<p>We’ll look at a simplified model here.</p>
+<section id="polytropes">
+<h2>Polytropes<a class="headerlink" href="#polytropes" title="Link to this heading">#</a></h2>
+<p>If we consider just the first 2 equations, hydrostatic equilibrium and mass continuity, we can close the system of equations if we have an equation of state of the form <span class="math notranslate nohighlight">\(p = p(\rho)\)</span>.  This eliminates the need for the energy equations, simplifying the model and its solution.</p>
+<p>We’ll assume an equation of state of the form:</p>
+<div class="math notranslate nohighlight">
+\[p = K \rho^{1+1/n}\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is called the <em>polytropic index</em>.</p>
+<p>With a bit of algebra, we can combine these equations into a single second-order ODE for density:</p>
+<div class="math notranslate nohighlight">
+\[\left ( \frac{n+1}{n} \right ) \frac{K}{4\pi G} \frac{1}{r^2} \frac{d}{dr} \left ( \frac{r^2}{\rho^{(n-1)/n}} \frac{d\rho}{dr} \right ) = -\rho\]</div>
+<p>and then make it dimensionless, but expressing the density in terms of the central density, <span class="math notranslate nohighlight">\(\rho_c\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\rho(r) = \rho_c \theta^n(r)\]</div>
+<p>where we note that <span class="math notranslate nohighlight">\(0 \le \theta \le 1\)</span>, and a lenghtscale <span class="math notranslate nohighlight">\(\alpha\)</span> such that <span class="math notranslate nohighlight">\(r = \alpha \xi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\alpha^2 = \frac{(n+1)p_c}{4\pi G\rho_c^2}\]</div>
+<p>Giving</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{\xi^2}\frac{d}{d\xi} \left ( \xi^2 \frac{d\theta}{d\xi} \right ) = -\theta^n\]</div>
+<p>The boundary conditions are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta(\xi=0) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(d\theta / d\xi |_{\xi=0} = 0\)</span> (<span class="math notranslate nohighlight">\(g = 0\)</span> at the center, so <span class="math notranslate nohighlight">\(dp/dr = d\rho/dr = 0\)</span>)</p></li>
+</ul>
+<p>but we don’t know where the surface lies.  It is defined as <span class="math notranslate nohighlight">\(\xi_1\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[\xi_1 : \, \theta(\xi_1) = 0\]</div>
+<p>This is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Lane%E2%80%93Emden_equation">Lane-Emden equation</a>, and it has analytic solutions for <span class="math notranslate nohighlight">\(n = 0, 1, 5\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once you have the solution, you can get back physical quantities, including the mass of the star, the central pressure, average density, etc.  For example, the mass is related to the solution as:</p>
+<div class="math notranslate nohighlight">
+\[M_\star = -4\pi \alpha^3 \rho_c  \left . {\xi_1}^2 \left (\frac{d\theta}{d\xi} \right ) \right |_{\xi=\xi_1}\]</div>
+<p>A large number of <a class="reference external" href="https://en.wikipedia.org/wiki/Polytrope#Example_models_by_polytropic_index">stellar systems are well-represented by polytropes</a>.</p>
+</div>
+</section>
+<section id="solving-the-lane-emden-equation">
+<h2>Solving the Lane-Emden equation<a class="headerlink" href="#solving-the-lane-emden-equation" title="Link to this heading">#</a></h2>
+<p>There are a variety of ways to solve this equation.</p>
+<p>We could just integrate from <span class="math notranslate nohighlight">\(\xi = 0\)</span> and keep integrating until the solution goes negative.  If we make the stepsize small at the end, then we can identify <span class="math notranslate nohighlight">\(\xi_1\)</span> as the location where <span class="math notranslate nohighlight">\(\theta(\xi) &lt; 0\)</span>.</p>
+<p>However, we are going to take an approach built on the shooting example we just saw.  This is because the full system of the 4 stellar structure equations needs a method like this, so we’d like to understand it based on the Lane-Emden equation.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Unlike our previous example, we have 2 unknowns here: a boundary condition and the location of the surface of the star.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We’ll use 4th order RK integration and we’ll integrate both inward from the surface and outward from the center and meet at some point in the middle, <span class="math notranslate nohighlight">\(\xi_\mathrm{f}\)</span>.</p>
+</div>
+<p>We rewrite our system by defining:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+y &amp;= \theta \\
+z &amp;= d\theta/d\xi = dy/d\xi
+\end{align*}\]</div>
+<p>then our system is:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\frac{dy}{d\xi} &amp;= z \\
+\frac{dz}{d\xi} &amp;= -y^n - \frac{2}{\xi} z
+\end{align*}\]</div>
+<p>At <span class="math notranslate nohighlight">\(\xi = 0\)</span>, the righthand side of <span class="math notranslate nohighlight">\(dz/d\xi\)</span> looks like it blows up, but in the limit <span class="math notranslate nohighlight">\(\xi \rightarrow 0\)</span>, the solution takes the form:</p>
+<div class="math notranslate nohighlight">
+\[\theta(\xi) = 1 - \frac{1}{6}\xi^2 + \frac{n}{120} \xi^4 + \ldots\]</div>
+<p>which allows us to simply the <span class="math notranslate nohighlight">\(dz/d\xi\)</span> near <span class="math notranslate nohighlight">\(\xi = 0\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dz}{d\xi} \approx -\frac{1}{3}\]</div>
+<p>We’re going to integrate outward from the center and inward from the surface and meet in the middle.</p>
+<p>At the center, our boundary conditions are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y(0) = 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(z(0) = 0\)</span></p></li>
+</ul>
+<p>and at the surface, <span class="math notranslate nohighlight">\(\xi_s\)</span>, they are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y(\xi_s) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(z(\xi_s) = \eta\)</span></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Initially, we don’t know either <span class="math notranslate nohighlight">\(\eta\)</span> or <span class="math notranslate nohighlight">\(\xi_s\)</span>.</p>
+</div>
+<p>Our algorithm will proceed as follows:</p>
+<ul>
+<li><p>Take an initial guess for <span class="math notranslate nohighlight">\(\eta\)</span> and <span class="math notranslate nohighlight">\(\xi_s\)</span>.  Pick <span class="math notranslate nohighlight">\(\xi_f = \xi_s/2\)</span>.</p></li>
+<li><p>Integrate from the center outward to the fit point, <span class="math notranslate nohighlight">\(\xi_f\)</span>, getting the solution: <span class="math notranslate nohighlight">\(y_\mathrm{out}(\xi_f)\)</span>, <span class="math notranslate nohighlight">\(z_\mathrm{out}(\xi_f)\)</span>.</p></li>
+<li><p>Integrate from the surface (starting at the guess <span class="math notranslate nohighlight">\(\xi_s\)</span> inward to the fit point, getting the
+solution <span class="math notranslate nohighlight">\(y_\mathrm{in}(\xi_f)\)</span>, <span class="math notranslate nohighlight">\(z_\mathrm{in}(\xi_f)\)</span></p></li>
+<li><p>Constrain the solution to match at the fit point by finding the zero of:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+Y(\eta, \xi_s) &amp;\equiv y_\mathrm{in}(\xi_f) - y_\mathrm{out}(\xi_f) = 0 \\
+Z(\eta, \xi_s) &amp;\equiv z_\mathrm{in}(\xi_f) - z_\mathrm{out}(\xi_f) = 0
+\end{align*}\]</div>
+<p>we will do this via the secant method.  This will yield a new guess for <span class="math notranslate nohighlight">\(\eta\)</span> and <span class="math notranslate nohighlight">\(\xi_s\)</span>.</p>
+</li>
+<li><p>Iterate over this procedure until the <span class="math notranslate nohighlight">\(\eta\)</span> and <span class="math notranslate nohighlight">\(\xi_s\)</span> converge.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">solve_ivp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here’s our RHS function.  We will pass in the unknown state as <span class="math notranslate nohighlight">\(H = (y, z)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rhs</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    
+    <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">H</span>
+    
+    <span class="n">f0</span> <span class="o">=</span> <span class="n">z</span>
+
+    <span class="k">if</span> <span class="n">xi</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="n">xi</span> <span class="o">-</span> <span class="n">y</span><span class="o">**</span><span class="n">n</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f0</span><span class="p">,</span> <span class="n">f1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use SciPy’s implementation of 4th order Runge-Kutta here.  We need to pass through the polytropic index, <span class="math notranslate nohighlight">\(n\)</span>,
+which we do via the <code class="docutils literal notranslate"><span class="pre">args=</span></code> keyword argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">le_integrate</span><span class="p">(</span><span class="n">xi_start</span><span class="p">,</span> <span class="n">xi_end</span><span class="p">,</span> <span class="n">H0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="p">(</span><span class="n">xi_start</span><span class="p">,</span> <span class="n">xi_end</span><span class="p">),</span> <span class="n">H0</span><span class="p">,</span>
+                    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;RK45&quot;</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1.e-8</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1.e-8</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,))</span>
+
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">t</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">xi</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we still need to understand how to solve for 2 roots from 2 equations (so far, we’ve only done the scalar case).</p>
+<p>Let’s Taylor expand our functions <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(Z\)</span> about a guess <span class="math notranslate nohighlight">\(\eta_0\)</span>, <span class="math notranslate nohighlight">\(\xi_{s,0}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+Y(\eta_0 +\Delta \eta, \xi_{s,0} + \Delta \xi_s) &amp;= Y(\eta_0, \xi_{s,0}) + \frac{\partial Y}{\partial \eta} \Delta \eta + \frac{\partial Y}{\partial \xi_s} \Delta \xi_s \sim 0 \\
+Z(\eta_0 +\Delta \eta, \xi_{s,0} + \Delta \xi_s) &amp;= Z(\eta_0, \xi_{s,0}) + \frac{\partial Z}{\partial \eta} \Delta \eta + \frac{\partial Z}{\partial \xi_s} \Delta \xi_s \sim 0 
+\end{align*}\]</div>
+<p>We want to solve for the corrections, <span class="math notranslate nohighlight">\(\Delta \eta\)</span> and <span class="math notranslate nohighlight">\(\Delta \xi_s\)</span> that zero this—this is Newton’s method, but now for a system of equations.</p>
+<p>We can solve the first equation for <span class="math notranslate nohighlight">\(\Delta \eta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Delta \eta = -\left ( \frac{\partial Y}{\partial\eta} \right )^{-1} \left ( \frac{\partial Y}{\partial \xi_s} \Delta \xi_s + Y \right )\]</div>
+<p>and then substitute this into the second equation and solve for <span class="math notranslate nohighlight">\(\Delta \xi_s\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Delta \xi_s = \frac{-Z + \frac{\partial Z}{\partial \eta} \left ( \frac{\partial Y}{\partial \eta} \right )^{-1} Y}{\frac{\partial Z}{\partial \xi_s} + \frac{\partial Z}{\partial \eta} \left ( \frac{\partial Y}{\partial \eta} \right)^{-1} \frac{\partial Y}{\partial \xi_s}}\]</div>
+<p>We still need the derivatives, which we will compute via differencing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_le</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+
+    <span class="c1"># initial guesses for the unknowns -- if we aren&#39;t careful with the</span>
+    <span class="c1"># guess at the outer boundary, we can get 2 roots.  Here we know that</span>
+    <span class="c1"># n = 1 has xi_s = pi</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">:</span>
+        <span class="n">xi_s</span> <span class="o">=</span> <span class="mf">8.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xi_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="n">eta</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.01</span>
+
+    <span class="c1"># for numerical differentiation</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1.e-8</span>
+
+    <span class="c1"># main iteration loop</span>
+    <span class="nb">iter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">converged</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">converged</span> <span class="ow">and</span> <span class="nb">iter</span> <span class="o">&lt;</span> <span class="n">max_iter</span><span class="p">:</span>
+
+        <span class="c1"># fitting point</span>
+        <span class="n">xi_fit</span> <span class="o">=</span> <span class="n">xi_s</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+        <span class="c1"># baseline integration</span>
+
+        <span class="c1"># outward from the center</span>
+        <span class="n">xi_out</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">z_out</span> <span class="o">=</span> <span class="n">le_integrate</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">xi_fit</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="c1"># inward from xi_s</span>
+        <span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">z_in</span> <span class="o">=</span> <span class="n">le_integrate</span><span class="p">(</span><span class="n">xi_s</span><span class="p">,</span> <span class="n">xi_fit</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">eta</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="c1"># the two functions we want to zero</span>
+        <span class="n">Ybase</span> <span class="o">=</span> <span class="n">y_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Zbase</span> <span class="o">=</span> <span class="n">z_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">z_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># now do eta + eps*eta, xi_s</span>
+        <span class="c1"># inward from xi_s</span>
+        <span class="n">H0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">eta</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">eps</span><span class="p">)])</span>
+        <span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">z_in</span> <span class="o">=</span> <span class="n">le_integrate</span><span class="p">(</span><span class="n">xi_s</span><span class="p">,</span> <span class="n">xi_fit</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)],</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="n">Ya</span> <span class="o">=</span> <span class="n">y_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Za</span> <span class="o">=</span> <span class="n">z_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">z_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># our derivatives</span>
+        <span class="n">dYdeta</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ya</span> <span class="o">-</span> <span class="n">Ybase</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">eta</span> <span class="o">*</span> <span class="n">eps</span><span class="p">)</span>
+        <span class="n">dZdeta</span> <span class="o">=</span> <span class="p">(</span><span class="n">Za</span> <span class="o">-</span> <span class="n">Zbase</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">eta</span> <span class="o">*</span> <span class="n">eps</span><span class="p">)</span>
+
+        <span class="c1"># now do alpha, xi_s + eps*xi_s</span>
+        <span class="c1"># inward from xi_s</span>
+        <span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">z_in</span> <span class="o">=</span> <span class="n">le_integrate</span><span class="p">(</span><span class="n">xi_s</span>  <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">eps</span><span class="p">),</span> <span class="n">xi_fit</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">eta</span><span class="p">],</span> <span class="n">n</span><span class="p">)</span>
+
+        <span class="n">Yxi</span> <span class="o">=</span> <span class="n">y_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Zxi</span> <span class="o">=</span> <span class="n">z_in</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">z_out</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># our derivatives</span>
+        <span class="n">dYdxi_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">Yxi</span> <span class="o">-</span> <span class="n">Ybase</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">xi_s</span> <span class="o">*</span> <span class="n">eps</span><span class="p">)</span>
+        <span class="n">dZdxi_s</span> <span class="o">=</span> <span class="p">(</span><span class="n">Zxi</span> <span class="o">-</span> <span class="n">Zbase</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">xi_s</span> <span class="o">*</span> <span class="n">eps</span><span class="p">)</span>
+
+        <span class="c1"># compute the correction for our two parameters</span>
+        <span class="n">dxi_s</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">Zbase</span> <span class="o">-</span> <span class="n">dZdeta</span> <span class="o">*</span> <span class="n">Ybase</span> <span class="o">/</span> <span class="n">dYdeta</span><span class="p">)</span> <span class="o">/</span> \
+                    <span class="p">(</span><span class="n">dZdxi_s</span> <span class="o">-</span> <span class="n">dZdeta</span> <span class="o">*</span> <span class="n">dYdxi_s</span> <span class="o">/</span> <span class="n">dYdeta</span><span class="p">)</span>
+
+        <span class="n">deta</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">Ybase</span> <span class="o">+</span> <span class="n">dYdxi_s</span> <span class="o">*</span> <span class="n">dxi_s</span><span class="p">)</span> <span class="o">/</span> <span class="n">dYdeta</span>
+
+        <span class="c1"># limit the changes per iteration</span>
+        <span class="n">deta</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">deta</span><span class="p">),</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">eta</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">copysign</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">deta</span><span class="p">)</span>
+        <span class="n">dxi_s</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dxi_s</span><span class="p">),</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xi_s</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">copysign</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">dxi_s</span><span class="p">)</span>
+                    
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;corrections:  </span><span class="si">{</span><span class="n">deta</span><span class="si">:</span><span class="s2">13.10f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">dxi_s</span><span class="si">:</span><span class="s2">13.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">eta</span> <span class="o">+=</span> <span class="n">deta</span>
+        <span class="n">xi_s</span> <span class="o">+=</span> <span class="n">dxi_s</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">deta</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dxi_s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">eps</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xi_s</span><span class="p">):</span>
+            <span class="n">converged</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="nb">iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="k">return</span> <span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">z_in</span><span class="p">,</span> <span class="n">xi_out</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">z_out</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="running">
+<h2>Running<a class="headerlink" href="#running" title="Link to this heading">#</a></h2>
+<p>We’ll run this for <span class="math notranslate nohighlight">\(n = 3\)</span>, which does not have an analytic solution.  Our solver will return the state for both halves of
+the shooting so we can see how things match up.</p>
+<p>Let’s start by running just for a single iteration to see what the problem looks like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">z_in</span><span class="p">,</span> <span class="n">xi_out</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">z_out</span> <span class="o">=</span> <span class="n">solve_le</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>corrections:  -0.0010000000, -0.8000000000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll plot the inward and outward solutions with different linestyles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_out</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_in</span><span class="p">,</span> <span class="n">z_in</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\theta&#39;$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_out</span><span class="p">,</span> <span class="n">z_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\xi$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta,\, \theta&#39;$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/23d155b566a44d5ad1a95f22f18028f4d0473ab3c831ffb136d5f4b38f2f8077.png" src="../_images/23d155b566a44d5ad1a95f22f18028f4d0473ab3c831ffb136d5f4b38f2f8077.png" />
+</div>
+</div>
+<p>We see that there is a large gap in both <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\theta'\)</span>.  This is what our method
+will try to zero.</p>
+<p>Now we rerun until convergence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">z_in</span><span class="p">,</span> <span class="n">xi_out</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">z_out</span> <span class="o">=</span> <span class="n">solve_le</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>corrections:  -0.0010000000, -0.8000000000
+corrections:  -0.0011000000,  0.1041147613
+corrections:  -0.0012100000, -0.4023120836
+corrections:  -0.0013310000,  0.6901802678
+corrections:  -0.0014641000, -0.7591982946
+corrections:  -0.0016105100,  0.6832784651
+corrections:  -0.0017715610, -0.7516063116
+corrections:  -0.0019487171,  0.6764456804
+corrections:  -0.0021435888, -0.7440902485
+corrections:  -0.0023579477,  0.6696812236
+corrections:  -0.0025937425, -0.6416966814
+corrections:  -0.0028531167,  0.5277816202
+corrections:  -0.0031384284, -0.4366105184
+corrections:  -0.0034522712,  0.1755129920
+corrections:  -0.0037974983, -0.0987626124
+corrections:  -0.0006486268,  0.0046186454
+corrections:  -0.0000086425, -0.0004880736
+corrections:  -0.0000000003,  0.0000000612
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_in</span><span class="p">,</span> <span class="n">y_in</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_out</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_in</span><span class="p">,</span> <span class="n">z_in</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\theta&#39;$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi_out</span><span class="p">,</span> <span class="n">z_out</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\xi$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta,\, \theta&#39;$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/750e7ee3e6be81aaa322313073b5b30db5207edf1ad9706750ae635b6049fcb2.png" src="../_images/750e7ee3e6be81aaa322313073b5b30db5207edf1ad9706750ae635b6049fcb2.png" />
+</div>
+</div>
+<p>Now we can get the surface of the polytrope, <span class="math notranslate nohighlight">\(\xi_1\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi1</span> <span class="o">=</span> <span class="n">xi_in</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">xi1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(6.896848900808395)
+</pre></div>
+</div>
+</div>
+</div>
+<p>and <span class="math notranslate nohighlight">\(\theta^\prime\)</span> at the surface:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dthetadxi_1</span> <span class="o">=</span> <span class="n">z_in</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A common quantity needed in finding physical values is <span class="math notranslate nohighlight">\(-\xi_1^2 \theta^\prime |_{\xi=\xi_1}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">xi1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dthetadxi_1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(2.0182358018073927)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ODEs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="boundary-value-problems.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Two Point Boundary Value Problems</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ODEs-implicit.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Stiff ODEs / Implicit Methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polytropes">Polytropes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-lane-emden-equation">Solving the Lane-Emden equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running">Running</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <a href="https://zingale.github.io">Michael Zingale</a>
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+&copy; 2021-2025; CC-BY-NC-SA 4.0
+<p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
