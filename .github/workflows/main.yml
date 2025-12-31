@@ -14,7 +14,8 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v6
       with:
-        python-version: "3.11"
+        python-version: "3.14"
+        cache: "pip"
     - name: Install Python dependencies
       run: |
         sudo apt-get install python3-pip graphviz
@@ -29,7 +30,7 @@ jobs:
 
     - name: Build book HTML
       run: |
-        jupyter-book build --all ./content
+        KERAS_BACKEND="torch" jupyter-book build --all ./content
 
     - name: Push _build/html to gh-pages
       run: |
