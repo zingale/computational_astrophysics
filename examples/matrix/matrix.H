@@ -6,6 +6,7 @@
 #include <cassert>
 #include <functional>
 #include <algorithm>
+#include <ranges>
 
 // a simple matrix class that supports matrix-matrix multiplication
 // addition of matrices, and multiplication by a scalar.
@@ -175,7 +176,7 @@ struct Matrix {
 
     inline Matrix transform(std::function<double(double)> f) const {
         Matrix A(nrows(), ncols());
-        std::transform(_data.cbegin(), _data.cend(), A._data.begin(), f);
+        std::ranges::transform(_data, A._data.begin(), f);
         return A;
     }
 

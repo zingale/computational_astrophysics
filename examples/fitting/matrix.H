@@ -44,8 +44,8 @@ struct Matrix {
     // note the "const" after the argument list here -- this means
     // that this can be called on a const Matrix
 
-    inline std::size_t ncols() const { return _cols;}
-    inline std::size_t nrows() const { return _rows;}
+    [[nodiscard]] inline std::size_t ncols() const { return _cols;}
+    [[nodiscard]] inline std::size_t nrows() const { return _rows;}
 
     inline double& operator()(std::size_t row, std::size_t col) {
         // size_t is unsigned, so will always be >= 0

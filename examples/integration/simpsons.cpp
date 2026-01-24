@@ -23,7 +23,7 @@ double I_analytic() {
 // implement the composite simpsons rule.  Here N is the number
 // of intervals, so there will be N+1 points from xmin to xmax
 double simpsons(const double xmin, const double xmax, const int N,
-                std::function<double(const double)> func) {
+                const std::function<double(const double)>& func) {
 
     assert(N % 2 == 0);
 
