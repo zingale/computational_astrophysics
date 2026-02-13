@@ -1,4 +1,5 @@
 jupyter-book<2
+git+https://github.com/executablebooks/sphinx-book-theme.git
 matplotlib
 numpy
 numba
@@ -6,10 +7,7 @@ scipy
 sympy
 pynucastro
 sphinx_design
-sphinx-book-theme>=1.0.1
-pydata-sphinx-theme>=0.13.3
 keras
-tensorflow
 pydot
 graphviz
 scikit-learn

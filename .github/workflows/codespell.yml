@@ -18,14 +18,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
-          cache: "pip"
-
-      - name: Install dependencies
-        run: pip install -r ./requirements.txt
+          python-version: '3.14'
 
       - name: Install codespell
-        run: pip install codespell
+        run: pip install codespell jupyter nbconvert
 
       - name: Preprocess notebooks
         run: for i in $(find . -name "*.ipynb"); do jupyter nbconvert --clear-output --inplace $i; done
