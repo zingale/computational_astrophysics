@@ -41,14 +41,10 @@ sphinx:
     nbsphinx_timeout: 300
     nb_execution_timeout: 300
     linkcheck_ignore: "https://ieeexplore.ieee.org/document/9994215"
-    html_js_files:
-      - download.js
 
 launch_buttons:
    binderhub_url: "https://mybinder.org"
    colab_url: "https://colab.research.google.com"
-
-
 
 parse:
   extensions:
@@ -62,5 +58,3 @@ parse:
     - dollarmath
     - linkify
     - colon_fence
-
-

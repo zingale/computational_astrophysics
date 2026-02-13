@@ -66,7 +66,7 @@ public:
 
         // vector of indices for randomly iterating over data
         std::vector<std::size_t> indices(training_data.size());
-        std::iota(indices.begin(), indices.end(), 0);
+        std::ranges::iota(indices, 0);
 
         for (int i = 0; i < n_epochs; ++i) {
             if (verbose) {

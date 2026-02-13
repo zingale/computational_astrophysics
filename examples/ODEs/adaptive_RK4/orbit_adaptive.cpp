@@ -1,12 +1,13 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <iomanip>
 #include <cmath>
-#include <numeric>
 #include <limits>
 #include <fstream>
+#include <numbers>
 
-const double GM = 4.0 * M_PI * M_PI;
+constexpr double GM = 4.0 * std::numbers::pi * std::numbers::pi;
 
 struct OrbitState {
     // a container to hold the star positions
@@ -19,7 +20,7 @@ struct OrbitState {
         : x{x0}, y{y0}, u{u0}, v{v0}
     {}
 
-    OrbitState() {}
+    OrbitState() = default;
 
     OrbitState operator+(const OrbitState& other) const {
         return OrbitState(x + other.x, y + other.y, u + other.u, v + other.v);
