@@ -16,6 +16,7 @@ jobs:
       with:
         python-version: "3.14"
         cache: "pip"
+
     - name: Install Python dependencies
       run: |
         sudo apt-get install python3-pip graphviz

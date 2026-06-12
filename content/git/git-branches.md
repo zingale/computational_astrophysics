@@ -359,7 +359,7 @@ Date:   Tue Feb 1 10:18:02 2022 -0500
 
 Imagine that our current code is not working, but we remember that it
 was before we did our branching and added the `hello.cpp`.  Looking
-at the log or the graph shows that that change came in with the commit
+at the log or the graph shows that change came in with the commit
 `22e1d58cee38021da961516b24dde689d3b8a66e`.  We can checkout the
 state of the code before that commit by using the hash from the
 previous commit:
