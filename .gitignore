@@ -1,7 +1,8 @@
-_build
+build
 *~
 \#*
 
+Untitled*.ipynb
 .ipynb_checkpoints
 
 __pycache__
