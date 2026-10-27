@@ -159,7 +159,7 @@ html_theme_options = {
     "repository_branch": "main",
     "path_to_docs": "docs/source",
     "logo": {
-        "text": f"computational astrophysics {version}",
+        "text": f"Computational Astrophysics\n{version}",
         "image_light": "rt_small.png",
         "image_dark": "rt_small.png",
     },
