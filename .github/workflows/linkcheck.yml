@@ -10,25 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
+
     - name: Set up Python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
-        python-version: "3.13"
+        python-version: "3.14"
         cache: "pip"
 
     - name: Install Python dependencies
       run: |
         sudo apt-get install python3-pip
         pip install -r requirements.txt
-        pip install ghp-import
-        PATH="${PATH}:${HOME}/.local/bin"
-
-    - name: version list
-      run: |
-        jupyter-book --version
-        pip list | grep -i docutils
 
     - name: run link check
       run: |
-        jupyter-book build ./content --builder linkcheck
+        cd docs
+        make SKIP_EXECUTE=TRUE linkcheck
+
