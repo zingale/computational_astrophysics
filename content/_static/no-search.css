@@ -1,4 +1,0 @@
-/* Hide the search bar in the LEFT (primary) sidebar only */
-button.search-button-field.pst-js-only {
-  display: none !important;
-}
