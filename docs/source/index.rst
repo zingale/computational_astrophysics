@@ -80,7 +80,7 @@
    :hidden:
 
    euler/euler
-   euler/euler-riemann
+   euler/euler-riemann-intro
    euler/euler-solver
 
 .. toctree::
