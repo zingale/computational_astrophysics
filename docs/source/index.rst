@@ -35,7 +35,7 @@
    :caption: Ordinary Differential Equations
    :hidden:
 
-   ODEs/ODEs-euler
+   ODEs/ODEs-basics
    ODEs/adaptive_stepping
    ODEs/ODEs-conservation-intro
    ✱ Boundary Value Problems <ODEs/boundary-value-problems>
