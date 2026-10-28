@@ -93,7 +93,7 @@
    machine-learning/neural-net-hidden
    machine-learning/machine-learning-libraries
    machine-learning/machine-learning-in-astro
-   machine-learning/application-galaxies-intro
+   machine-learning/galaxy-classification-intro
 
 .. toctree::
    :maxdepth: 3
