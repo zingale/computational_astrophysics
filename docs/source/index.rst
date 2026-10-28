@@ -27,7 +27,7 @@
    basics/floating-point/floating-point-details
    basics/diff-int/differentiation-intro
    basics/diff-int/integration-intro
-   basics/roots/root-finding
+   basics/roots/root-finding-intro
    basics/linear-algebra/la-overview
 
 .. toctree::
