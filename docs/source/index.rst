@@ -37,7 +37,7 @@
 
    ODEs/ODEs-euler
    ODEs/adaptive_stepping
-   ODEs/ODEs-conservation
+   ODEs/ODEs-conservation-intro
    ✱ Boundary Value Problems <ODEs/boundary-value-problems>
    ✱ Stiff ODEs <ODEs/ODEs-implicit>
    ODEs/more-applications

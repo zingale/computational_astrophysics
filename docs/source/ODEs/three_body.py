@@ -1,1 +1,1 @@
-../../examples/few_body/three_body.py
+../../../examples/few_body/three_body.py
