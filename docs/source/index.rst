@@ -25,7 +25,7 @@
    :hidden:
 
    basics/floating-point/floating-point-details
-   basics/diff-int/differentiation
+   basics/diff-int/differentiation-intro
    basics/diff-int/integration
    basics/roots/root-finding
    basics/linear-algebra/la-overview
