@@ -5,6 +5,7 @@ sphinx_design
 sphinx_mdinclude
 sphinx-copybutton
 sphinx-prompt
+sphinx-math-dollar
 
 matplotlib
 numpy
