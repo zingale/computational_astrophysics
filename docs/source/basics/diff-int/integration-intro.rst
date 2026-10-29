@@ -10,4 +10,5 @@ Integration
    integration-composite
    application-blackbody
    integration-scipy
+   application-stellar-colors
    going-further
