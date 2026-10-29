@@ -54,16 +54,21 @@ to some of them:
       An example of integrating to infinity by
       `integrating the Planck function over wavelength <https://zingale.github.io/computational_astrophysics/basics/diff-int/application-blackbody.html>`_.
 
+   .. grid-item-card:: Stellar Colors
+
+      :bdg-info-line:`int`
+      An example of
+      `computing B-V stellar colors <https://zingale.github.io/computational_astrophysics/basics/diff-int/application-stellar-colors.html>`_.
+
+
+.. grid::
+   :gutter: 3
 
    .. grid-item-card:: Wien's Law
 
       :bdg-info-line:`roots`
       Demonstrating root finding by
       `numerically deriving Wien's law <https://zingale.github.io/computational_astrophysics/basics/roots/application-wiens.html>`_.
-
-
-.. grid::
-   :gutter: 3
 
    .. grid-item-card:: Degeneracy
 
@@ -79,17 +84,17 @@ to some of them:
       to `solve the few-body problem <https://zingale.github.io/computational_astrophysics/ODEs/application-few-body.html>`_.
 
 
+
+
+.. grid::
+   :gutter: 3
+
    .. grid-item-card:: Polytropes
 
       :bdg-info-line:`roots` :bdg-info-line:`ODEs`
       Shooting methods for two-point boundary
       value problelms
       applied to the `Lane-Emden equation for polytropes <https://zingale.github.io/computational_astrophysics/ODEs/application-lane-emden.html>`_.
-
-
-.. grid::
-   :gutter: 3
-
 
    .. grid-item-card:: Stability of Planetary Systems
 
@@ -106,16 +111,15 @@ to some of them:
       `one-zone model of an X-ray burst <https://zingale.github.io/computational_astrophysics/ODEs/application-xrb-one-zone.html>`_
 
 
+
+.. grid::
+   :gutter: 3
+
    .. grid-item-card:: Integrating the CNO Cycle
 
       :bdg-info-line:`ODEs`
       Using stiff-ODE solvers to
       `integrate an CNO reaction network <https://zingale.github.io/computational_astrophysics/ODEs/application-CNO-network.html>`_
-
-
-.. grid::
-   :gutter: 3
-
 
    .. grid-item-card:: Lorenz System Stationary States
 
@@ -130,14 +134,14 @@ to some of them:
       Using bilinear interpolation to `evaluate tabulated electron-capture rates <https://zingale.github.io/computational_astrophysics/interpolation/application-interpolating-reaction-rates.html>`_.
 
 
+
+.. grid::
+   :gutter: 3
+
    .. grid-item-card:: Radial Velocity in Frequency Space
 
       :bdg-info-line:`FFTs`
       Using FFTs to `find planets from stellar radial velocity curves <https://zingale.github.io/computational_astrophysics/ffts/application-planets-fft.html>`_.
-
-
-.. grid::
-   :gutter: 3
 
    .. grid-item-card:: X-ray timing
 
@@ -153,10 +157,10 @@ to some of them:
       `estimate <https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html>`__
       :math:`H_0` from Type Ia supernova.
 
+.. grid::
+   :gutter: 3
 
    .. grid-item-card:: Galaxy Classification
 
       :bdg-info-line:`ML/NN`
       Using machine learning / neural networks to `classify galaxy images <https://zingale.github.io/computational_astrophysics/machine-learning/application-galaxies-intro.html>`_.
-
-
