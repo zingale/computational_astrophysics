@@ -163,3 +163,4 @@ html_static_path = ['_static']
 
 html_css_files = ["myfile.css"]
 
+html_js_files = ["download_patch.js"]
