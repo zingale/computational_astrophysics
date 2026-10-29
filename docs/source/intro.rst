@@ -22,7 +22,13 @@ You should follow the outline in the navigation panel to the left.
 
 .. note::
 
-   This course assumes that you are already familiar with a programming language.
+   This course assumes that you are already familiar with a
+   programming language.
+
+   For a review of C++, you can use my `PHY 277 lecture notes <https://zingale.github.io/phy277/>`_.
+
+   A crash-course in python will be covered in this class, but you
+   can also review my `Python for Scientific Computing lecture notes <https://sbu-python-class.github.io/python-science/Introduction.html>`_.
 
 
 Astrophysical Applications
