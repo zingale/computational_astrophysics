@@ -84,6 +84,14 @@
    euler/euler-solver
 
 .. toctree::
+
+   :maxdepth: 3
+   :caption: Auto-differentiation
+   :hidden:
+
+   autodiff/autodiff
+
+.. toctree::
    :maxdepth: 3
    :caption: Machine Learning
    :hidden:
