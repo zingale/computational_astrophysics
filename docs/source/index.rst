@@ -84,7 +84,6 @@
    euler/euler-solver
 
 .. toctree::
-
    :maxdepth: 3
    :caption: Auto-differentiation
    :hidden:
