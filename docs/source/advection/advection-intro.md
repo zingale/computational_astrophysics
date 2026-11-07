@@ -3,12 +3,12 @@
 In astrophysics, many systems (stars, the ISM, gas in galaxies) is modeled as
 a fluid, following the equations of hydrodynamics:
 
-\begin{align*}
+$$
 \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho {\bf U}) &= 0 \\
 \frac{\partial (\rho {\bf U})}{\partial t} + \nabla \cdot (\rho {\bf U}{\bf U}) + \nabla p 
 &= 0 \\
 \frac{\partial (\rho E)}{\partial t} + \nabla \cdot (\rho {\bf U} E + {\bf U}p) &= 0
-\end{align*}
+$$
 
 These express conservation of mass, momentum, and energy.  If we expand out the diveragence
 in the first equation, we get:

@@ -42,10 +42,9 @@ and integrating the conservative form of the advection equation over a cell,
 we have:
 
 $$
-\begin{align*}\frac{\partial \langle a\rangle_{i,j}}{\partial t} =
+\frac{\partial \langle a\rangle_{i,j}}{\partial t} =
    &-\frac{1}{\Delta x \Delta y} \int_{x_{i-1/2}}^{x_{i+1/2}} \int_{y_{j-1/2}} \frac{\partial F^{(x)}(a)}{\partial x} dx dy \\
    &-\frac{1}{\Delta x \Delta y} \int_{x_{i-1/2}}^{x_{i+1/2}} \int_{y_{j-1/2}} \frac{\partial F^{(y)}(a)}{\partial y} dx dy
-\end{align*}
 $$
 
 Now for each of those double integral terms, the integral in the normal direction
@@ -54,11 +53,11 @@ limits of integration in that direction.  The other integral represents an
 average of the flux over the interface in the transverse direction.  We can
 just represent that average as the flux evaluated in the center (in the transverse direction), giving:
 
-$$\begin{align*}
+$$
 \frac{\partial \langle a\rangle_{i,j}}{\partial t} =
    &- \frac{[F^{(x)}(a)]_{i+1/2,j} - [F^{(x)}(a)]_{i-1/2,j}}{\Delta x} \\
    &- \frac{[F^{(y)}(a)]_{i,j+1/2} - [F^{(y)}(a)]_{i,j-1/2}}{\Delta y} 
-\end{align*}$$
+$$
 
 This can be solved in pretty much the same fashion as we did in one-dimension,
 but now our grid will need to be two-dimensional and we would have to compute
