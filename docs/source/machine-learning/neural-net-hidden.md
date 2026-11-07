@@ -58,11 +58,11 @@ hidden layer&mdash;a process called _backpropagation_.
 
 Let's start with our cost function:
 
-\begin{align*}
+$$
 \mathcal{L}(A_{lm}, B_{ij}) &= \sum_{l=1}^{N_\mathrm{out}} (z_l - y^k_l)^2 \\
                   &= \sum_{l=1}^{N_\mathrm{out}} \Biggl [ g \biggl ( \sum_{m=1}^{N_\mathrm{hidden}} A_{lm} \tilde{z}_m \biggr ) - y_l^k \Biggr ]^2 \\
                   &= \sum_{l=1}^{N_\mathrm{out}} \Biggl [ g \biggl ( \sum_{m=1}^{N_\mathrm{hidden}} A_{lm} \,g \biggl ( \sum_{j=1}^{N_\mathrm{in}} B_{mj} x_j^k \biggr ) \biggr ) - y_l^k \Biggr ]^2
-\end{align*}                  
+$$
 
 Differentiating with respect to an element in matrix ${\bf B}$, we apply the chain rule over and over,
 giving:
@@ -102,10 +102,10 @@ $$\frac{\partial \mathcal{L}}{\partial {\bf B}} = 2 \tilde{\bf e}^k \circ \tilde
 
 Notice the symmetry in the update of each matrix:
 
-\begin{align*}
+$$
 \frac{\partial \mathcal{L}}{\partial {\bf A}} &= 2 {\bf e}^k \circ {\bf z} \circ (1 - {\bf z}) \cdot \tilde{\bf z}^\intercal \\
 \frac{\partial \mathcal{L}}{\partial {\bf B}} &= 2 \tilde{\bf e}^k \circ \tilde{\bf z} \circ (1 - \tilde{\bf z}) \cdot ({\bf x}^k)^\intercal
-\end{align*}
+$$
 
 Adding additional hidden layers would continue the trend, with each hidden layer's matrix update depending
 on the error backpropagated to that layer.

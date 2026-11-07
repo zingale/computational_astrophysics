@@ -16,10 +16,10 @@ or temperature that yields thermodynamic consistency.  This is a root-finding pr
 
 Here we will consider an ideal gas and radiation EOS:
 
-\begin{align*}
+$$
 p &= \frac{\rho k T}{\mu m_u} + \frac{1}{3} a T^4 \\
 e &= \frac{3}{2} \frac{k T}{\mu m_u} + \frac{a T^4}{\rho}
-\end{align*}
+$$
 
 where $e$ is the specific internal energy (energy / mass)
 and the constants are:
@@ -31,10 +31,10 @@ and the constants are:
 
 Imagine that we know the value of $p$, and $e$---we'll call them $p_\star$ and $e_\star$.  We can find the density and temperature that give these by solving the system:
 
-\begin{align*}
+$$
 p(\rho, T) &= p_\star \\
 e(\rho, T) &= e_\star
-\end{align*}
+$$
 
 Let's define $\Psi$ as:
 
@@ -86,10 +86,10 @@ $e_\star$.  The function should do the following:
     
   * Correct your initial guesses:
 
-    \begin{align*}
+    $$
     \rho_0 &\rightarrow \rho_0 + \delta \rho \\
     T_0 &\rightarrow T_0 + \delta T
-    \end{align*}
+    $$
 
 Test this out by finding the $(\rho, T)$ that gives $p_\star = 2.3\times 10^{10}~\mathrm{erg/cm^3}$
 and $e_\star = 3.87\times 10^{13}~\mathrm{erg/g}$.

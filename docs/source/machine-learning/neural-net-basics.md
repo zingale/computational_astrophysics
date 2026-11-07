@@ -127,10 +127,10 @@ allow us to constrain the output of the network and train the weights.
 
       This is a minimization problem, where we are minimizing:
 
-      \begin{align*}
+      $$
       \mathcal{L}(A_{ij}) &= \| g({\bf A x}^k) - {\bf y}^k \|^2 \\
                 &= \sum_{i=1}^{N_\mathrm{out}} \left [ g\left (\sum_{j=1}^{N_\mathrm{in}} A_{ij} x^k_j \right ) - y^k_i \right ]^2
-      \end{align*}
+      $$
 
       We call this function, $\mathcal{L}$, the _cost function_ or [loss function](https://en.wikipedia.org/wiki/Loss_function).
 

@@ -60,8 +60,10 @@ Try it
 
 Let's test this out on the system we used when we introduced pivoting:
 
-\begin{alignat*}{4}
- \epsilon x &+ y    &+ z  &= 6 \\
--x &+ 2y   &     &= 3 \\
-2x &+      &+ z  &= 5
-\end{alignat*}
+$$
+\begin{array}{rcrcrcl}
+\epsilon x &+& y  &+& z &=& 6 \\
+-x         &+& 2y & &   &=& 3 \\
+2x         & &    &+& z &=& 5
+\end{array}
+$$
