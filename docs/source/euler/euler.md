@@ -5,11 +5,9 @@ dissipative effects (like viscosity).  In one-dimension, they appear
 as:
 
 $$
-\begin{align*}
 \frac{\partial \rho}{\partial t} + \frac{\partial (\rho u)}{\partial x} &= 0 \\
 \frac{\partial (\rho u)}{\partial t} + \frac{\partial}{\partial x} (\rho u^2 + p) &= 0 \\
 \frac{\partial (\rho E)}{\partial t} + \frac{\partial}{\partial x} \left [ (\rho E + p) u \right ] &= 0
-\end{align*}
 $$
 
 Here, $E$ is the specific total energy which is related to the specific internal energy as:
@@ -87,11 +85,9 @@ We call a system *hyperbolic* if the eigenvalues are real and finite.
 For our matrix ${\bf A}({\bf q})$ above, the eigenvalues are:
 
 $$
-\begin{align}
 \lambda^{(-)} &= u - c \\
 \lambda^{(0)} &= u \\
 \lambda^{(+)} &= u + c \\
-\end{align}
 $$
 
 These are the speeds at which information propagates in our system.
@@ -117,11 +113,9 @@ $$
 and
 
 $$
-\begin{align*}
 {\bf l}^{(-)} &= \left ( \begin{array}{ccc} 0 & -\frac{\rho}{2c} & \frac{1}{2c^2} \end{array} \right ) \\
 {\bf l}^{(0)} &= \left ( \begin{array}{ccc} 1 & 0 & -\frac{1}{c^2} \end{array} \right ) \\
 {\bf l}^{(+)} &= \left ( \begin{array}{ccc} 0 & \frac{\rho}{2c} & \frac{1}{2c^2} \end{array} \right ) \\
-\end{align*}
 $$
 
 These are normalized such that
@@ -197,21 +191,17 @@ Here's an example of the solution of a Riemann problem for the Euler equations.
 The state on the left is initialized to:
 
 $$
-\begin{align*}
 \rho_L &= 1 \\
 u_L &= 0 \\
 p_L &= 1 \\
-\end{align*}
 $$
 
 and on the right:
 
 $$
-\begin{align*}
 \rho_R &= 1/8 \\
 u_R &= 0 \\
 p_R &= 1/10 \\
-\end{align*}
 $$
 
 ![Riemann Sod problem](riemann-sod.png)

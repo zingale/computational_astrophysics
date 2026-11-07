@@ -7,36 +7,42 @@ This example come from *Numerical Methods for Physics* by Garcia.
 
 Consider the system:
 
-\begin{alignat*}{4}
- x &+ y    &+ z  &= 6 \\
--x &+ 2y   &     &= 3 \\
-2x &+      &+ z  &= 5
-\end{alignat*}
+$$
+\begin{array}{rcrcrcl}
+ x &+& y  &+& z &=& 6 \\
+-x &+& 2y & &   &=& 3 \\
+2x & &    &+& z &=& 5
+\end{array}
+$$
 
 We will solve this in steps.
 
 1. Use the first equation to eliminate $x$ in the second two equations, resulting in:
 
-   \begin{alignat*}{4}
-    x &+ y    &+ z  &= 6 \\
-      &+ 3y   &+ z  &= 9 \\
-      &- 2y   &- z  &= -7
-   \end{alignat*}
+   $$
+   \begin{array}{rcrcrcl}
+   x &+& y  &+& z &=& 6 \\
+     & & 3y &+& z &=& 9 \\
+     &-& 2y &-& z &=& -7
+   \end{array}
+   $$
+   
+3. Use the second equation to eliminate $y$ in the final equation, resulting in:
 
-2. Use the second equation to eliminate $y$ in the final equation, resulting in:
-
-   \begin{alignat*}{4}
-    x &+ y    &+ z  &= 6 \\
-      &+ 3y   &+ z  &= 9 \\
-      &       &- \tfrac{1}{3}z  &= -1
-   \end{alignat*}
+   $$
+   \begin{array}{rcrcrcl}
+   x &+& y  &+& z &=& 6 \\
+     & & 3y &+& z &=& 9 \\
+     & &    &-& \tfrac{1}{3}z &=& -1
+   \end{array}
+   $$
 
    At this point, we completed _forward elimination_ &mdash; the last
    equation has a single unknown, $z$, and once we solve for it, we
    can substitute the value of $z$ in the equation above, leaving it
    with a single unknown, $y$, and so forth.
 
-3. Now we do _back substitution_.
+5. Now we do _back substitution_.
 
    From the last equation, we see $z = 3$. Putting this into the
    equation above, we get $y = 2$.  Putting both of these into the
@@ -126,11 +132,13 @@ The above case worked well because all of the matrix elements were
 roughly the same magnitude.  Consider the same system, with the first
 term in the first equation multiplied by a small number $\epsilon$:
 
-\begin{alignat*}{4}
- \epsilon x &+ y    &+ z  &= 6 \\
--x &+ 2y   &     &= 3 \\
-2x &+      &+ z  &= 5
-\end{alignat*}
+$$
+\begin{array}{rcrcrcl}
+\epsilon x &+& y  &+& z &=& 6 \\
+-x         &+& 2y & &   &=& 3 \\
+2x         & &    &+& z &=& 5
+\end{array}
+$$
 
 We can do the same procedure as before &mdash; use the first equation to
 eliminate $x$ in the other two equations.  We start by rewriting the first
@@ -140,11 +148,17 @@ $$x + \frac{1}{\epsilon}y + \frac{1}{\epsilon}z = \frac{6}{\epsilon}$$
 
 then adding or subtracting this from the other two, our system becomes:
 
-\begin{alignat*}{4}
- \epsilon x &+ y                             &+ z                            &= 6 \\
-            &+ (2 + \tfrac{1}{\epsilon} )y   &+  \tfrac{1}{\epsilon} z        &= 3 + \tfrac{6}{\epsilon} \\
-            &-\tfrac{2}{\epsilon}y           &+ (1 - \tfrac{2}{\epsilon}) z  &= 5 - \tfrac{12}{\epsilon}
-\end{alignat*}
+$$
+\begin{array}{rcrcrcl}
+\epsilon x &+& y &+& z &=& 6 \\
+&+& (2 + \tfrac{1}{\epsilon})y
+&+& \tfrac{1}{\epsilon}z
+&=& 3 + \tfrac{6}{\epsilon} \\
+&-& \tfrac{2}{\epsilon}y
+&+& (1 - \tfrac{2}{\epsilon})z
+&=& 5 - \tfrac{12}{\epsilon}
+\end{array}
+$$
 
 Now, as $\epsilon \rightarrow 0$, roundoff error means that
 
@@ -152,11 +166,17 @@ $$\alpha + \frac{\beta}{\epsilon} \approx \frac{\beta}{\epsilon}$$
 
 so, we can rewrite the system approximating the roundoff as:
 
-\begin{alignat*}{4}
- \epsilon x &+ y                             &+ z                            &= 6 \\
-            &+ \tfrac{1}{\epsilon} y   &+  \tfrac{1}{\epsilon} z        &= \tfrac{6}{\epsilon} \\
-            &-\tfrac{2}{\epsilon}y           &- \tfrac{2}{\epsilon} z  &= -\tfrac{12}{\epsilon}
-\end{alignat*}
+$$
+\begin{array}{rcrcrcl}
+\epsilon x &+& y &+& z &=& 6 \\
+           &+& \tfrac{1}{\epsilon}y
+           &+& \tfrac{1}{\epsilon}z
+           &=& \tfrac{6}{\epsilon} \\
+           &-& \tfrac{2}{\epsilon}y
+           &-& \tfrac{2}{\epsilon}z
+           &=& -\tfrac{12}{\epsilon}
+\end{array}
+$$
 
 But now notice that the last equation is just $-2\times$ the second
 equation &mdash; our system has become _singular_, and no longer has
