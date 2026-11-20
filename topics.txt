@@ -41,6 +41,11 @@ final project:
 
   * orthogonal distance regression: https://docs.scipy.org/doc/scipy/reference/odr.html#module-scipy.odr
 
+* monte carlo
+
+  RV fitting using simulated annealing: https://arxiv.org/abs/1505.04767?utm_source=chatgpt.com
+  we can make up synthetic data for a 2-planet system that is randomly sampled and has Gaussian
+  noise.
 
 * bayesian
 
