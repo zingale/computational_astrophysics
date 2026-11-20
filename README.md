@@ -5,22 +5,15 @@ Computational Astrophysics course notes
 
 ## Course notes
 
+These notes use Sphinx and myst-nb to covert Jupyter notebooks into HTML.
+MyST markdown allows for richer styling in Jupyter.
+
 To build the course notes, do:
 
 ```
-jupyter-book build content
+cd docs
+make html
 ```
 
+The webpages will then be in ``build/html/``.
 
-## All notes
-
-To build all of the notes, including those not intended for this course, do:
-
-```
-cd content
-jupyter-book build --toc _toc_all.yml --path-output all .
-```
-
-## Jupyter Book
-
-Note: this currently uses `jupyter-book` 1.x.
