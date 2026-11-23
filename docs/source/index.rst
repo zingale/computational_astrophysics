@@ -63,6 +63,14 @@
 
 .. toctree::
    :maxdepth: 3
+   :caption: Monte Carlo Methods
+   :hidden:
+
+   monte_carlo/monte_carlo
+   monte_carlo/random-number-generators
+
+.. toctree::
+   :maxdepth: 3
    :caption: Partial Differential Equations
    :hidden:
 

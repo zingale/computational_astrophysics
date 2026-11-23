@@ -154,8 +154,8 @@ to some of them:
 
       :bdg-info-line:`fitting`
       Using linear regression to
-      `estimate <https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html>`__
-      :math:`H_0` from Type Ia supernova.
+      `estimate H₀ <https://zingale.github.io/computational_astrophysics/fitting/application-snia-h0.html>`__
+      from Type Ia supernova.
 
 .. grid::
    :gutter: 3
